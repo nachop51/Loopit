@@ -197,10 +197,6 @@ main {
   html {
     font-size: 50%;
   }
-
-  .left {
-    background-color: red;
-  }
 }
 /* 75 * 16 = 1200px */
 @media only screen and (max-width: 75em) {
