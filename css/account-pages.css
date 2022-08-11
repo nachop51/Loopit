@@ -136,6 +136,10 @@ main {
   padding-left: 2.5rem;
 }
 
+.last {
+  margin-bottom: 2.5rem;
+}
+
 .inputs:focus {
   outline: none;
   outline: #886aea 0.2rem solid;
@@ -164,6 +168,7 @@ main {
   font-weight: 600;
   color: white;
   margin-bottom: 2.5rem;
+  cursor: pointer;
 }
 
 .tag-register {
@@ -195,13 +200,13 @@ main {
 /* 56.25 * 16 = 900px */
 @media only screen and (max-width: 56.25em) {
   html {
-    font-size: 50%;
+    font-size: 40%;
   }
 }
 /* 75 * 16 = 1200px */
 @media only screen and (max-width: 75em) {
   html {
-    font-size: 40%;
+    font-size: 30%;
   }
 }
 /* 112.5 * 16 = 1800px */
