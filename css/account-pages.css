@@ -60,6 +60,15 @@ main {
   height: 7.5rem;
 }
 
+.logo-linked,
+a:link,
+a:visited {
+  outline: none;
+  text-decoration: none;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
 .text {
   position: absolute;
   color: #fff;
