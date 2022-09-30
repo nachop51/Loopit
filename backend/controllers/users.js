@@ -1,14 +1,16 @@
 const conexion = require('../database/db')
+const mpq = require('mysql-query-placeholders')
 const bcrypt = require('bcrypt');
 const key = require('../config').key
 const jwt = require('jsonwebtoken')
 const usuarios = require('../sequelize/models/usuarios')
 
 const login = async (req, res) =>{
-    let { body }= req
-    let { user, pass } = body
+    let { body } = req;
+    let { username, password , email} = body;
+    const queryData = mqp.queryBuilder(query, user);
     // const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query('SELECT id, user, rol,pass FROM users WHERE ?',{user:user}, async (error,results)=>{
+    conexion.query("SELECT id, username, password FROM users WHERE username = :username OR email= :email",{username: username, email: email}, async (error,results)=>{
         if (error){
             throw error;
         }else{
@@ -18,8 +20,8 @@ const login = async (req, res) =>{
                     state:"ese usuario no esta registrado"
                 })
             }else{
-                let passBD = results[0].pass
-                let compare = await bcrypt.compare(pass, passBD);
+                let passBD = results[0].password
+                let compare = await bcrypt.compare(password, passBD);
                 if (!compare){
                     res.status(400).json({
                         state:"contraseña o usuario equivocado"
@@ -27,8 +29,7 @@ const login = async (req, res) =>{
                 }else{
                     token = jwt.sign({
                         id: results[0].id,
-                        name: results[0].user,
-                        rol: results[0].rol
+                        name: results[0].username
                     }, key)
                     res.status(200).header('auth-token',token).json({
                         state:"entraste",
@@ -81,14 +82,14 @@ const regis = async (req, res) =>{
             throw error;
         }else if(results.length == 0){
             const passcrypt = await bcrypt.hash(pass, 8)
-            const create_at = new Date.now()
+            const create_at = (new Date()).toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
             conexion.query('INSERT INTO users SET ?',{ username:username, full_name:fullname, email:email, password:passcrypt, create_at:create_at, update_at:create_at },(error,results)=>{
                 if (error){
                     throw error;
                 }else{
                     res.status(200).json({
                     state:"registrado",
-                    user: user
+                    username: username
                     })
                 }
             });

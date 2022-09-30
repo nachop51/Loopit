@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const conexion = require('../database/db')
 const users = require('../controllers/users')
-const tasks = require('../controllers/Tasks')
 const usuarios = require('../sequelize/models/usuarios')
 
 //end point with sql
@@ -61,5 +60,4 @@ router.post('/register', users.register)
 router.post('/login',users.login)
 router.post('/logins',users.loginSequelize)
 router.post('/updatepass', users.updatePass)
-router.post('/addtasks',tasks.addTasks)
 module.exports = router;
