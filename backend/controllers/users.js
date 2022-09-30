@@ -81,7 +81,8 @@ const regis = async (req, res) =>{
             throw error;
         }else if(results.length == 0){
             const passcrypt = await bcrypt.hash(pass, 8)
-            conexion.query('INSERT INTO users SET ?',{username:username, full_name:fullname, email:email, password:passcrypt},(error,results)=>{
+            const create_at = new Date.now()
+            conexion.query('INSERT INTO users SET ?',{ username:username, full_name:fullname, email:email, password:passcrypt, create_at:create_at, update_at:create_at },(error,results)=>{
                 if (error){
                     throw error;
                 }else{
