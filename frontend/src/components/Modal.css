@@ -1,3 +1,118 @@
 .modal {
+  background-color: #fff;
   border: solid 1px #ccc;
+  width: 35%;
+  border-radius: 25px;
+  padding: 40px 0;
+}
+
+.modal h2 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #1e1e1e;
+}
+
+.modal h4 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.blockContent {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.41);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  animation: modal 1s;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  width: 70%;
+}
+
+.form div label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #121212;
+  margin-bottom: 5px;
+}
+
+.form div input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 10px;
+  background-color: #eee;
+}
+
+.form div input:focus {
+  outline: 2px solid #09203f;
+}
+
+.form button {
+  text-align: center;
+  padding: 10px;
+  background-color: #09203f;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  width: 70%;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.link {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin: 10px;
+  text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+  .modal {
+    width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .modal {
+    width: 80%;
+  }
+}
+
+@keyframes modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
