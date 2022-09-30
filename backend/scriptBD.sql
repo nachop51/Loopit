@@ -35,7 +35,7 @@ create table friends(
     create_at DATETIME,
     update_at DATETIME
 );
-create table lenguages(
+create table languages(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL UNIQUE,
     create_at DATETIME,
