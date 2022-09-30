@@ -3,10 +3,10 @@ const mysql = require('mysql2');
 //pool de conexiones
 const conexion = mysql.createPool({
     connectionLimit : 10,
-    host: 'localhost',
-    user: 'valentin',
-    password: 'valentin',
-    database: 'login'
+    host: '54.94.125.72',
+    user: 'loopit',
+    password: 'loop',
+    database: 'loopit'
 });
 
 module.exports = conexion

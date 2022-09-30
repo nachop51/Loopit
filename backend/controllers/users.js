@@ -8,7 +8,7 @@ const login = async (req, res) =>{
     let { body }= req
     let { user, pass } = body
     // const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query('SELECT id, user, rol,pass FROM usuarios WHERE ?',{user:user}, async (error,results)=>{
+    conexion.query('SELECT id, user, rol,pass FROM users WHERE ?',{user:user}, async (error,results)=>{
         if (error){
             throw error;
         }else{
@@ -75,13 +75,13 @@ const loginSequelize = async(req,res)=>{
 
 const regis = async (req, res) =>{
     const { body }= req
-    const { user, name, lastname, rol, pass } = body
-    conexion.query('SELECT user FROM usuarios WHERE ?',{user:user}, async (error,results)=>{
+    const { username, fullname, rol, pass, email } = body
+    conexion.query('SELECT username FROM users WHERE ?',{username:username}, async (error,results)=>{
         if(error){
             throw error;
         }else if(results.length == 0){
             const passcrypt = await bcrypt.hash(pass, 8)
-            conexion.query('INSERT INTO usuarios SET ?',{user:user, name:name, lastname:lastname, rol:rol, pass:passcrypt},(error,results)=>{
+            conexion.query('INSERT INTO users SET ?',{username:username, full_name:fullname, email:email, password:passcrypt},(error,results)=>{
                 if (error){
                     throw error;
                 }else{
