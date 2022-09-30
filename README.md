@@ -1,1 +1,1 @@
-# Loopit
+# Loopit - MVP Specification
