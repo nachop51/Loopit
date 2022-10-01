@@ -109,13 +109,13 @@
 }
 
 @media (max-width: 1200px) {
-  .modal {
+  .modal-content {
     width: 60%;
   }
 }
 
 @media (max-width: 900px) {
-  .modal {
+  .modal-content {
     width: 80%;
   }
 }
