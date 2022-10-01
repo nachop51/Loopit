@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Modal.css";
 
 const modeOptions = {
@@ -7,17 +7,18 @@ const modeOptions = {
     subtitle: "Log In to your account",
     text: "Username or email",
     link: "Not registered yet?",
+    linkTo: "Sign Up",
   },
   REGISTER: {
     title: "Sign Up",
     subtitle: "Create a new account",
     text: "Email",
     link: "Already have an account?",
+    linkTo: "Log In",
   },
 };
 
-const ModalForm = ({ setModalIsOpen, mode }) => {
-  const modalRef = useRef();
+const ModalForm = ({ show, closeModal, mode }) => {
   const options = modeOptions[mode];
 
   const [username, setUsername] = useState("");
@@ -26,15 +27,15 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (modalRef.current.contains(e.target)) {
-        return;
+    const closeEsc = (e) => {
+      if (e.key === "Escape") {
+        if (!show) return;
+        closeModal();
       }
-      setModalIsOpen(false);
     };
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.body.addEventListener("keydown", closeEsc);
     return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
+      document.body.removeEventListener("keydown", closeEsc);
     };
   });
 
@@ -44,8 +45,8 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
   };
 
   return (
-    <div className="blockContent">
-      <div ref={modalRef} className="modal">
+    <div className={`modal ${show ? "show" : ""}`} onClick={closeModal}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>{options.title}</h2>
         <h4>{options.subtitle}</h4>
         <form className="form" onSubmit={handleSubmit}>
@@ -54,11 +55,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
             <input
               type="text"
               name="email"
-              id="email"
+              value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-              value={email}
               required
             />
           </div>
@@ -68,11 +68,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
               <input
                 type="text"
                 name="username"
-                id="username"
+                value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
-                value={username}
                 required
               />
             </div>
@@ -82,11 +81,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
             <input
               type="password"
               name="password"
-              id="password"
+              value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              value={password}
               required
             />
           </div>
@@ -95,10 +93,11 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
               <label htmlFor="password2">Repeat password</label>
               <input
                 type="password"
+                name="confirmPassword"
+                value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                 }}
-                value={confirmPassword}
                 required
               />
             </div>
@@ -106,7 +105,12 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
           <button type="submit">{options.title}</button>
         </form>
         <div className="link">
-          <p>{options.link}</p>
+          <p>
+            {options.link}{" "}
+            <a className="linkTo" href="/xd">
+              {options.linkTo}
+            </a>
+          </p>
         </div>
       </div>
     </div>
