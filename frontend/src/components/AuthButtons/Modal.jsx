@@ -57,10 +57,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
               type="text"
               name="email"
               id="email"
+              value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-              value={email}
               required
             />
           </div>
@@ -71,10 +71,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
                 type="text"
                 name="username"
                 id="username"
+                value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
-                value={username}
                 required
               />
             </div>
@@ -85,10 +85,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
               type="password"
               name="password"
               id="password"
+              value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              value={password}
               required
             />
           </div>
@@ -97,10 +97,10 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
               <label htmlFor="password2">Repeat password</label>
               <input
                 type="password"
+                value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                 }}
-                value={confirmPassword}
                 required
               />
             </div>

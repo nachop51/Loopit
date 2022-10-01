@@ -1,4 +1,4 @@
-import "./ButtonList.css";
+import "./AuthButtons.css";
 import React, { useState } from "react";
 import Modal from "./Modal";
 
