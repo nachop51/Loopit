@@ -7,62 +7,79 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   let { body } = req;
   let { username, password, email } = body;
+  let query = "";
   if (email !== undefined) {
-    let query = mpq.format("SELECT * FROM users WHERE email = ?", [email]);
+    query = mpq.queryBuilder("SELECT * FROM users WHERE email = :email;", {
+      email: body,
+    });
   } else {
-    let query = mpq.format("SELECT * FROM users WHERE username = ?", [
-      username,
-    ]);
+    query = mpq.queryBuilder(
+      "SELECT * FROM users WHERE username = :username;",
+      {
+        username: username,
+      }
+    );
   }
+  console.log(query);
   conexion.query(query, async (error, results) => {
-    try {
-      if (error) throw error;
-      else if (results.length == 0) {
-        res.status(400).json({
-          state: "ese usuario no esta registrado",
-        });
-      } else {
+    if (error)
+      res.json({
+        state: "error",
+        error: error,
+      });
+    else if (results.length == 0) {
+      res.status(400).json({
+        state: "ese usuario no esta registrado",
+      });
+    } else {
+      try {
         let passBD = results[0].password;
-        let compare = await bcrypt.compare(password, passBD);
+        const compare = await bcrypt.compare(password, passBD);
+        console.log(compare);
         if (!compare) {
           res.status(400).json({
             state: "contraseña o usuario equivocado",
           });
         } else {
-          token = jwt.sign(
-            {
-              id: results[0].id,
-              name: results[0].username,
-            },
-            key
-          );
-          res.status(200).header("auth-token", token).json({
-            state: "entraste",
-            data: user,
-            token: token,
+          const token = jwt.sign({ username: username }, key, {
+            expiresIn: "1h",
           });
+          res.status(200).json({
+            state: "logueado",
+            token: token,
+            data: username,
+          });
+          console.log(token);
         }
+      } catch (error) {
+        res.status(400).json({
+          state: "error",
+        });
       }
-    } catch (error) {
-      res.status(400).json({
-        state: "error",
-        error: error,
-      });
     }
   });
 };
 
 const regis = async (req, res) => {
   const { body } = req;
-  const { username, fullname, rol, pass, email } = body;
+  const { username, fullname, pass, email } = body;
+  if (!username || !fullname || !pass || !email) {
+    res.status(400).json({
+      state: "error",
+      error: "Missing data",
+    });
+  }
   conexion.query(
     "SELECT username FROM users WHERE ?",
     { username: username },
     async (error, results) => {
-      try {
-        if (error) {
-          throw error;
-        } else if (results.length == 0) {
+      if (error) {
+        res.json({
+          state: "error",
+          error: error,
+        });
+      } else if (results.length == 0) {
+        try {
           const passcrypt = await bcrypt.hash(pass, 8);
           const create_at = new Date()
             .toISOString()
@@ -81,7 +98,10 @@ const regis = async (req, res) => {
             },
             (error, results) => {
               if (error) {
-                throw error;
+                res.json({
+                  state: "error",
+                  error: error,
+                });
               } else {
                 res.status(200).json({
                   state: "registrado",
@@ -90,15 +110,14 @@ const regis = async (req, res) => {
               }
             }
           );
-        } else {
-          res.status(401).json({
-            state: "ese user ya esta registrado",
+        } catch {
+          res.status(400).json({
+            state: "error",
           });
         }
-      } catch (error) {
-        res.status(400).json({
-          state: "error",
-          error: error,
+      } else {
+        res.status(401).json({
+          state: "ese user ya esta registrado",
         });
       }
     }
