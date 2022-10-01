@@ -2,7 +2,7 @@ import "./AuthButtons.css";
 import React, { useState } from "react";
 import Modal from "./Modal";
 
-const ButtonList = () => {
+const AuthButtons = () => {
   const [loginIsOpen, setLoginIsOpen] = useState(false);
   const [signIsOpen, setSignIsOpen] = useState(false);
 
@@ -11,21 +11,23 @@ const ButtonList = () => {
       <button className="button" onClick={() => setLoginIsOpen(!loginIsOpen)}>
         Log In
       </button>
-      {loginIsOpen && (
-        <Modal mode="LOGIN" setModalIsOpen={setLoginIsOpen} label="Log In!" />
-      )}
+      <Modal
+        mode="LOGIN"
+        closeModal={() => setLoginIsOpen(false)}
+        show={loginIsOpen}
+      />
+
       <button className="button" onClick={() => setSignIsOpen(!signIsOpen)}>
         Sign Up
       </button>
-      {signIsOpen && (
-        <Modal
-          mode="REGISTER"
-          setModalIsOpen={setSignIsOpen}
-          label="Sign In!"
-        />
-      )}
+
+      <Modal
+        mode="REGISTER"
+        closeModal={() => setSignIsOpen(false)}
+        show={signIsOpen}
+      />
     </div>
   );
 };
 
-export default ButtonList;
+export default AuthButtons;

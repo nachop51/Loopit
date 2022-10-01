@@ -4,7 +4,7 @@ import AuthButtons from "./AuthButtons/";
 
 const App = () => {
   return (
-    <div style={{ display: "relative" }}>
+    <div>
       <AuthButtons />
     </div>
   );

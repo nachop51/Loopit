@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./Modal.css";
 
 const modeOptions = {
@@ -18,8 +18,7 @@ const modeOptions = {
   },
 };
 
-const ModalForm = ({ setModalIsOpen, mode }) => {
-  const modalRef = useRef();
+const ModalForm = ({ show, closeModal, mode }) => {
   const options = modeOptions[mode];
 
   const [username, setUsername] = useState("");
@@ -27,27 +26,14 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (modalRef.current.contains(e.target)) {
-        return;
-      }
-      setModalIsOpen(false);
-    };
-    document.addEventListener("mousedown", checkIfClickedOutside);
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  });
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted");
   };
 
   return (
-    <div className="blockContent">
-      <div ref={modalRef} className="modal">
+    <div className={`modal ${show ? "show" : ""}`} onClick={closeModal}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>{options.title}</h2>
         <h4>{options.subtitle}</h4>
         <form className="form" onSubmit={handleSubmit}>
