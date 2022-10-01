@@ -8,13 +8,15 @@ const usuarios = require('../sequelize/models/usuarios')
 const login = async (req, res) =>{
     let { body } = req;
     let { username, password , email} = body;
-    const queryData = mqp.queryBuilder(query, user);
-    // const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query("SELECT id, username, password FROM users WHERE username = :username OR email= :email",{username: username, email: email}, async (error,results)=>{
+    if (email !== undefined){
+        let query = mpq.format('SELECT * FROM users WHERE email = ?', [email])
+    }else{
+        let query = mpq.format('SELECT * FROM users WHERE username = ?', [username])
+    }
+    conexion.query(query, async (error,results)=>{
         if (error){
             throw error;
         }else{
-            // const data = JSON.parse(results)
             if(results.length == 0){
                 res.status(400).json({
                     state:"ese usuario no esta registrado"
@@ -40,38 +42,6 @@ const login = async (req, res) =>{
             }
         }
     });
-}
-
-const loginSequelize = async(req,res)=>{
-    let { body }= req
-    let { user, pass } = body
-    const usuario = await usuarios.findAll({
-        attributes: ['user', 'pass', 'rol', 'id'],
-        where: { user: user }
-      })
-    if (usuario.length === 0){
-        res.status(400).json({
-            state:"ese usuario no esta registrado"})
-    }else{
-        let passBD = usuario[0].pass
-        let compare = await bcrypt.compare(pass, passBD);
-        if (!compare){
-            res.status(401).json({
-                state:"contraseña o usuario equivocado",
-            })
-        }else{
-            token = jwt.sign({
-                id: usuario[0].id,
-                name: usuario[0].user,
-                rol: usuario[0].rol
-            }, key)
-            res.status(200).header('auth-token',token).json({
-                state:"entraste",
-                data:user,
-                token:token
-            })
-        }
-    }
 }
 
 const regis = async (req, res) =>{
@@ -132,6 +102,5 @@ const updatePass = (req, res) => {
 module.exports = {
     login: login,
     register: regis,
-    updatePass: updatePass,
-    loginSequelize: loginSequelize
+    updatePass: updatePass
 }
