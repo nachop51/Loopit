@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Modal.css";
 
 const modeOptions = {
@@ -7,7 +7,7 @@ const modeOptions = {
     subtitle: "Log In to your account",
     text: "Username or email",
     link: "Not registered yet?",
-    linkTo: "Sing Up",
+    linkTo: "Sign Up",
   },
   REGISTER: {
     title: "Sign Up",
@@ -26,6 +26,19 @@ const ModalForm = ({ show, closeModal, mode }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  useEffect(() => {
+    const closeEsc = (e) => {
+      if (e.key === "Escape") {
+        if (!show) return;
+        closeModal();
+      }
+    };
+    document.body.addEventListener("keydown", closeEsc);
+    return () => {
+      document.body.removeEventListener("keydown", closeEsc);
+    };
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted");
@@ -42,7 +55,6 @@ const ModalForm = ({ show, closeModal, mode }) => {
             <input
               type="text"
               name="email"
-              id="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -56,7 +68,6 @@ const ModalForm = ({ show, closeModal, mode }) => {
               <input
                 type="text"
                 name="username"
-                id="username"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
@@ -70,7 +81,6 @@ const ModalForm = ({ show, closeModal, mode }) => {
             <input
               type="password"
               name="password"
-              id="password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -83,6 +93,7 @@ const ModalForm = ({ show, closeModal, mode }) => {
               <label htmlFor="password2">Repeat password</label>
               <input
                 type="password"
+                name="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);

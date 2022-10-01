@@ -16,11 +16,9 @@ const AuthButtons = () => {
         closeModal={() => setLoginIsOpen(false)}
         show={loginIsOpen}
       />
-
       <button className="button" onClick={() => setSignIsOpen(!signIsOpen)}>
         Sign Up
       </button>
-
       <Modal
         mode="REGISTER"
         closeModal={() => setSignIsOpen(false)}
