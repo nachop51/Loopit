@@ -7,12 +7,14 @@ const modeOptions = {
     subtitle: "Log In to your account",
     text: "Username or email",
     link: "Not registered yet?",
+    linkTo: "Sing Up",
   },
   REGISTER: {
     title: "Sign Up",
     subtitle: "Create a new account",
     text: "Email",
     link: "Already have an account?",
+    linkTo: "Log In",
   },
 };
 
@@ -106,7 +108,12 @@ const ModalForm = ({ setModalIsOpen, mode }) => {
           <button type="submit">{options.title}</button>
         </form>
         <div className="link">
-          <p>{options.link}</p>
+          <p>
+            {options.link}{" "}
+            <a className="linkTo" href="/xd">
+              {options.linkTo}
+            </a>
+          </p>
         </div>
       </div>
     </div>

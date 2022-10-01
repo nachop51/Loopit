@@ -96,6 +96,12 @@
   text-decoration: none;
 }
 
+.linkTo,
+.linkTo:visited,
+.linkTo:active {
+  color: #09203f;
+}
+
 @media (max-width: 1200px) {
   .modal {
     width: 60%;
