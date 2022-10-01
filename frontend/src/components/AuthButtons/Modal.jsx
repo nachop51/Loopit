@@ -55,6 +55,7 @@ const ModalForm = ({ show, closeModal, mode }) => {
             <input
               type="text"
               name="email"
+              placeholder="email@example.com"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -68,6 +69,7 @@ const ModalForm = ({ show, closeModal, mode }) => {
               <input
                 type="text"
                 name="username"
+                placeholder="Username"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
@@ -81,6 +83,7 @@ const ModalForm = ({ show, closeModal, mode }) => {
             <input
               type="password"
               name="password"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -94,6 +97,7 @@ const ModalForm = ({ show, closeModal, mode }) => {
               <input
                 type="password"
                 name="confirmPassword"
+                placeholder="••••••••"
                 value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);

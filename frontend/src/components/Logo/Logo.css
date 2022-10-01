@@ -1,0 +1,7 @@
+.logo {
+  @apply absolute lg:fixed md:absolute sm:absolute top-7 left-7;
+}
+
+.logo-img {
+  @apply w-32 lg:w-48 md:w-40 sm:w-32;
+}

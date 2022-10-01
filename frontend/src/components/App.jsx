@@ -1,12 +1,16 @@
 import "./App.css";
 import React from "react";
-import AuthButtons from "./AuthButtons/";
+import AuthButtons from "./AuthButtons";
+import Logo from "./Logo";
+import Content from "./Content";
 
 const App = () => {
   return (
-    <div>
+    <React.Fragment>
+      <Logo />
       <AuthButtons />
-    </div>
+      <Content />
+    </React.Fragment>
   );
 };
 
