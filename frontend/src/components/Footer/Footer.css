@@ -1,0 +1,15 @@
+footer {
+  background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff;
+}
+
+.footer-container {
+  @apply pb-10;
+}
+
+.footer-container p {
+  @apply text-gray-400 text-center;
+}
+
+.footer-container p a {
+  @apply text-white underline text-2xl p-2;
+}

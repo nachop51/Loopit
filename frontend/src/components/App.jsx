@@ -3,6 +3,7 @@ import React from "react";
 import AuthButtons from "./AuthButtons";
 import Logo from "./Logo";
 import Content from "./Content";
+import Footer from "./Footer";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Logo />
       <AuthButtons />
       <Content />
+      <Footer />
     </React.Fragment>
   );
 };

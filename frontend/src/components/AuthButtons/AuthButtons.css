@@ -1,5 +1,6 @@
 .buttons-container {
   @apply absolute top-5 right-5;
+  @apply sm:flex top-6  right-6;
 }
 
 .button:first-child {
@@ -7,5 +8,12 @@
 }
 
 .button {
-  @apply rounded-lg bg-gray-800 border-none w-32 text-white text-base border-2 border-gray-800 p-2 m-2 cursor-pointer shadow-md font-bold;
+  @apply rounded-lg bg-gray-800 border-none w-20 text-white text-base border-2 border-gray-800 p-2 m-2 cursor-pointer shadow-md font-bold;
+  @apply sm:w-20;
+  @apply md:w-28;
+  @apply lg:w-32;
+}
+
+.button.go {
+  @apply w-56 mt-12 mx-auto text-white font-bold text-lg;
 }
