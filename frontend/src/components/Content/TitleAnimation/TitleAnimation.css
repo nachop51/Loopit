@@ -1,0 +1,36 @@
+.title-animation {
+  @apply text-center text-4xl font-normal my-8 mx-auto;
+  @apply md:text-6xl;
+
+  background: linear-gradient(to left, #09203f 0%, #537895 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-clip: text;
+  display: block;
+  white-space: nowrap;
+  border-right: 4px solid;
+  width: 16ch;
+  opacity: 0;
+}
+
+.animate {
+  opacity: 1;
+  animation: typing 3s steps(40, end), blink 0.75s infinite step-end alternate;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #537895;
+  }
+}

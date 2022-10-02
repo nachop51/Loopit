@@ -3,6 +3,7 @@ import Phone from "../../assets/phone.png";
 import { GrShareOption } from "react-icons/gr";
 import { FiCopy, FiDownload } from "react-icons/fi";
 import Card from "./Card";
+import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
 
 const Content = () => {
@@ -28,7 +29,7 @@ const Content = () => {
         </div>
       </section>
       <section className="features">
-        <h2 className="features-heading">Features!</h2>
+        <TitleAnimation title="Awesome features!" />
         <div className="row">
           <Card
             label="Share your code!"

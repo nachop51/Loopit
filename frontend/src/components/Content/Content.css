@@ -1,9 +1,8 @@
 .intro {
   @apply grid py-12 px-4 grid-cols-1 gap-4;
   @apply sm:px-12;
-  /* @apply md:h-screen md:place-items-center; */ /* This is the line that causes the issue */
-  @apply md:place-items-center;
-  @apply lg:gap-x-8 lg:gap-y-4 lg:py-24 lg:px-14;
+  @apply md:place-items-center md:py-40;
+  @apply lg:gap-x-8 lg:gap-y-4 lg:px-14 lg:py-52;
   @apply xl:grid-cols-2;
   background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff;
 }
@@ -56,17 +55,6 @@
 .features {
   background-color: #e7f5ff;
   @apply pt-8 pb-24;
-}
-
-.features-heading {
-  @apply text-center text-4xl font-bold my-8;
-  @apply md:text-6xl;
-  text-shadow: 0 4px 8px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 / 8%);
-  background: linear-gradient(90deg, #09203f 0%, #537895 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  background-clip: text;
 }
 
 .row {
