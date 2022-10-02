@@ -16,7 +16,7 @@
 
 .animate {
   opacity: 1;
-  animation: typing 3s steps(50, end), blink 0.75s infinite step-end alternate;
+  animation: typing 2s steps(50), blink 0.75s infinite step-end alternate;
 }
 
 @keyframes typing {
@@ -24,7 +24,7 @@
     width: 0;
   }
   to {
-    width: 100%;
+    width: 17ch;
   }
 }
 

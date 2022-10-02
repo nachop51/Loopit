@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { login, register } from "./validations";
 import "./Modal.css";
 
 const modeOptions = {
@@ -18,13 +19,15 @@ const modeOptions = {
   },
 };
 
-const ModalForm = ({ show, closeModal, mode }) => {
+const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
   const options = modeOptions[mode];
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // http://54.94.125.72:3000/login
 
   useEffect(() => {
     const closeEsc = (e) => {
@@ -41,7 +44,11 @@ const ModalForm = ({ show, closeModal, mode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted");
+    if (mode === "LOGIN") {
+      login(email, password);
+    } else {
+      register(email, username, password, confirmPassword);
+    }
   };
 
   return (
@@ -113,9 +120,15 @@ const ModalForm = ({ show, closeModal, mode }) => {
         <div className="link">
           <p>
             {options.link}{" "}
-            <a className="linkTo" href="/xd">
+            <button
+              className="linkTo"
+              onClick={() => {
+                closeModal();
+                openTheOther();
+              }}
+            >
               {options.linkTo}
-            </a>
+            </button>
           </p>
         </div>
       </div>
