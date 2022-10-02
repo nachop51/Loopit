@@ -5,20 +5,20 @@ main {
   background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff;
 }
 
-.content {
+.intro {
   @apply grid-cols-1 grid gap-4;
   @apply lg:gap-x-8 lg:gap-y-4 lg:mt-10;
   @apply xl:grid-cols-2;
 }
 
-.content-text {
+.intro-text {
   @apply flex flex-col justify-center mt-14;
   @apply sm:mt-16;
   @apply md:mt-16;
   @apply lg:justify-start;
 }
 
-.content-title {
+.intro-title {
   @apply px-2 text-3xl;
   @apply md:mb-4 md:text-5xl;
   @apply lg:text-6xl;
@@ -31,20 +31,25 @@ main {
   background-clip: text;
 }
 
-.content-p {
+.intro-p {
   @apply px-2 py-4 sm:text-justify text-gray-400 mb-5;
 }
 
-.content-images {
+.intro-images {
   @apply flex flex-col-reverse justify-center items-center;
   @apply sm:flex sm:flex-row sm:justify-center sm:items-center;
 }
 
-.content-images-laptop {
+.intro-images-laptop {
   @apply mb-4;
-  @apply w-full sm:w-2/3  md:w-2/3 lg:w-2/3; /* xl: for extra large screens */
+  @apply w-full sm:w-2/3  md:w-2/3 lg:w-2/3; /* * xl: for extra large screens */
 }
 
-.content-images-phone {
+.intro-images-phone {
   @apply w-3/5 sm:w-1/3 md:w-1/5 lg:w-1/5;
+}
+
+/* *FEATURES */
+.features {
+  @apply grid-cols-1 grid gap-4;
 }
