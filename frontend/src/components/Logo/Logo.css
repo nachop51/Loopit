@@ -2,7 +2,7 @@
   @apply top-8 left-6 absolute;
   @apply sm:left-12;
   @apply md:left-14;
-  @apply lg:left-16 lg:fixed;
+  @apply lg:left-16;
 }
 
 .logo-img {

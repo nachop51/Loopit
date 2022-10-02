@@ -1,0 +1,15 @@
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  @apply text-xl p-6 text-center rounded-md transition-all duration-200 shadow-2xl w-11/12;
+  @apply md:w-3/5;
+  @apply xl:w-11/12;
+  @apply 2xl:w-3/5;
+}
+
+.feature-icon {
+  @apply text-8xl mb-6 inline-block;
+}
+
+.feature-p {
+  @apply text-gray-500 text-lg;
+}

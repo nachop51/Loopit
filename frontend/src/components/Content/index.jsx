@@ -1,5 +1,8 @@
 import Laptop from "../../assets/laptop.png";
 import Phone from "../../assets/phone.png";
+import { GrShareOption } from "react-icons/gr";
+import { FiCopy, FiDownload } from "react-icons/fi";
+import Card from "./Card";
 import "./Content.css";
 
 const Content = () => {
@@ -17,25 +20,34 @@ const Content = () => {
             suscipit at deleniti architecto labore dicta fugiat, atque aliquam
             id illum. Praesentium reprehenderit dolores asperiores officiis.
           </p>
+          <button className="button go btn">Go to app</button>
         </div>
         <div className="intro-images">
           <img className="intro-images-phone" src={Phone} alt="Phone" />
           <img className="intro-images-laptop" src={Laptop} alt="Laptop" />
         </div>
-        <button className="button go btn">Go to app</button>
       </section>
       <section className="features">
-        <h2 className="features-title">Features</h2>
-        <div className="features-container">
-          <div className="features-card">
-            <div className="features-card-icon">
-              <i className="fas fa-rocket"></i>
-            </div>
-            <h3 className="features-card-title">Fast</h3>
-            <p className="features-card-p">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-            </p>
-          </div>
+        <h2 className="features-heading">Features!</h2>
+        <div className="row">
+          <Card
+            label="Share your code!"
+            text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae omnis ipsa."
+          >
+            <GrShareOption className="feature-icon" />
+          </Card>
+          <Card
+            label="Copy"
+            text="dolore fuga enim sed explicabo iusto nostrum cumque temporibus itaque nesciunt."
+          >
+            <FiCopy className="feature-icon" />
+          </Card>
+          <Card
+            label="Download the code!"
+            text="voluptate dolores ea atque ex. Ab, aut labore?."
+          >
+            <FiDownload className="feature-icon" />
+          </Card>
         </div>
       </section>
     </main>
