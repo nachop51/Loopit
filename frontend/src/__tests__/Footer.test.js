@@ -1,9 +1,8 @@
 import React from "react";
-// import renderer from "react-test-renderer";
 import { render } from "@testing-library/react";
 import Footer from "../components/Footer/index.jsx";
 
-describe("Logo renders correctly", () => {
+describe("Footer renders correctly", () => {
   it("Debe existir un componente Footer en el dom", () => {
     const { container } = render(<Footer />);
     expect(container).toMatchSnapshot();
