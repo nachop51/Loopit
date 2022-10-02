@@ -1,5 +1,6 @@
 .feature-box {
-  background-color: rgba(255, 255, 255, 0.8);
+  background: #ededed;
+  box-shadow: inset 22px 22px 44px #d1d1d1, inset -22px -22px 44px #d1d1d1;
   @apply text-xl p-6 text-center rounded-md transition-all duration-200 shadow-2xl w-11/12;
   @apply md:w-3/5;
   @apply xl:w-11/12;
