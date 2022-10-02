@@ -29,7 +29,7 @@ const Content = () => {
         </div>
       </section>
       <section className="features">
-        <TitleAnimation title="Awesome features!" />
+        <TitleAnimation title="Awesome features!" width={17} />
         <div className="row">
           <Card
             label="Share your code!"

@@ -1,8 +1,8 @@
 .intro {
   @apply grid py-12 px-4 grid-cols-1 gap-4;
   @apply sm:px-12;
-  @apply md:place-items-center md:py-40;
-  @apply lg:gap-x-8 lg:gap-y-4 lg:px-14 lg:py-52;
+  @apply md:place-items-center md:min-h-screen;
+  @apply lg:gap-x-8 lg:gap-y-4 lg:px-14;
   @apply xl:grid-cols-2;
   background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff;
 }
