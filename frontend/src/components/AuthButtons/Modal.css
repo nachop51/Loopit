@@ -1,78 +1,52 @@
 .modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @apply fixed top-0 left-0 w-full h-full opacity-0 pointer-events-none flex items-center justify-center z-50 invisible;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.445);
   transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: visible;
+  @apply opacity-100 visible pointer-events-auto;
 }
 
 .modal-content {
-  background-color: #fff;
-  border: solid 1px #ccc;
-  border-radius: 25px;
-  padding: 40px 0;
-  width: 35%;
+  @apply bg-white border-gray-300 border-2 rounded-3xl py-4 w-11/12;
+  @apply sm:py-10;
+  @apply md:w-4/6;
+  @apply lg:w-3/5;
+  @apply xl:w-2/5;
+  @apply 2xl:w-1/3;
+  background: #ededed;
+  box-shadow: inset 22px 22px 44px #d1d1d1, inset -22px -22px 44px #d1d1d1;
 }
 
 .modal-content h2 {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 20px;
-  color: #1e1e1e;
+  @apply text-center text-3xl font-extrabold mb-2 text-gray-900;
+  @apply sm:text-5xl sm:mb-5;
 }
 
 .modal-content h4 {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #aaa;
-  margin-bottom: 20px;
+  @apply text-center text-lg font-semibold mb-2 text-gray-400;
+  @apply sm:text-xl sm:mb-5;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @apply flex flex-col items-center justify-center;
 }
 
 .form div {
-  display: flex;
-  flex-direction: column;
-  margin: 10px auto;
-  width: 70%;
+  @apply flex flex-col my-1 w-10/12;
+  @apply md:w-8/12;
 }
 
 .form div label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #121212;
-  margin-bottom: 5px;
+  @apply text-sm font-semibold text-gray-900 mb-0;
+  @apply sm:mb-1 sm:text-base;
 }
 
 .form div input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 10px;
-  background-color: #eee;
+  @apply font-semibold p-2 border border-solid border-gray-300 rounded-lg text-gray-600 mb-2 bg-gray-100 text-sm;
+  @apply sm:mb-4 sm:text-base;
 }
 
 .form div input:focus {
@@ -80,42 +54,18 @@
 }
 
 .form button {
-  text-align: center;
-  padding: 10px;
-  background-color: #09203f;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 5px;
-  width: 70%;
-  margin: 20px;
-  cursor: pointer;
+  @apply text-center p-2 text-white font-semibold rounded-md text-sm border-none m-2 cursor-pointer w-10/12;
+  @apply sm:text-base sm:m-5 sm:w-8/12;
 }
 
 .link {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #000;
-  margin: 10px;
-  text-decoration: none;
+  @apply text-center text-xs font-semibold text-black m-3;
+  @apply sm:text-base sm:m-5;
 }
 
 .linkTo,
 .linkTo:visited,
 .linkTo:active {
-  color: #09203f;
-}
-
-@media (max-width: 1200px) {
-  .modal-content {
-    width: 60%;
-  }
-}
-
-@media (max-width: 900px) {
-  .modal-content {
-    width: 80%;
-  }
+  text-decoration: none;
+  @apply text-cyan-900 font-extrabold;
 }

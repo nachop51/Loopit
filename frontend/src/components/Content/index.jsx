@@ -22,7 +22,7 @@ const Content = () => {
           <img className="content-images-phone" src={Phone} alt="Phone" />
           <img className="content-images-laptop" src={Laptop} alt="Laptop" />
         </div>
-        <button className="button go">Go to app</button>
+        <button className="button go btn">Go to app</button>
       </div>
     </main>
   );

@@ -106,7 +106,9 @@ const ModalForm = ({ show, closeModal, mode }) => {
               />
             </div>
           )}
-          <button type="submit">{options.title}</button>
+          <button className="btn" type="submit">
+            {options.title}
+          </button>
         </form>
         <div className="link">
           <p>

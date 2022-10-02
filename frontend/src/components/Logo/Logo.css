@@ -1,7 +1,10 @@
 .logo {
-  @apply absolute lg:fixed md:absolute sm:absolute top-7 left-7;
+  @apply top-8 left-6 absolute;
+  @apply sm:left-12;
+  @apply md:left-14;
+  @apply lg:left-16 lg:fixed;
 }
 
 .logo-img {
-  @apply w-32 lg:w-48 md:w-40 sm:w-32;
+  @apply w-28 lg:w-48 md:w-40 sm:w-32;
 }
