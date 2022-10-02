@@ -7,7 +7,8 @@ footer {
 }
 
 .footer-container p {
-  @apply text-gray-400 text-center;
+  @apply text-gray-400 text-center text-xs;
+  @apply lg:text-xs xl:text-sm;
 }
 
 .footer-container p a {
