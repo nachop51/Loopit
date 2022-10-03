@@ -13,11 +13,15 @@ app.use(cookieParser());
 app.use("/", verifytoken);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //logro que express entienda las request con body en json, ya que express no parsea el body
-app.use(cors()); //permito que mi api pueda usarse por un cliente mas alla del localhost
+app.use(
+  cors({
+    credentials: true,
+  })
+); //permito que mi api pueda usarse por un cliente mas alla del localhost
 
 //rutes
-app.use("/", routeAuth);
-app.use("/", routeUser);
+app.use("/auth", routeAuth);
+app.use("/user", routeUser);
 
 app.get("/", (req, res) => {
   res.render("index");

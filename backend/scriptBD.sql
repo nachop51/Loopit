@@ -13,6 +13,8 @@ create table loops(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(40) NOT NULL,
     description VARCHAR(256) NOT NULL,
+    filename VARCHAR(50),
+    languages VARCHAR(20),
     content TEXT NOT NULL,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),

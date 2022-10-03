@@ -3,7 +3,7 @@ const key = require("../config").key;
 
 const verifytoken = (req, res, next) => {
   console.log(req.cookies.token);
-  if (req.url === "/login" || req.url === "/register") {
+  if (req.url === "/auth/login" || req.url === "/auth/register") {
     next();
   } else {
     const token = req.cookies.token;

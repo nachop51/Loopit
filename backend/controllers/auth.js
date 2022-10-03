@@ -7,9 +7,9 @@ const jwt = require("jsonwebtoken");
 // Authentication method for the login
 const login = async (req, res) => {
   let { body } = req;
-  let { username, password, email } = body;
+  let { user, password } = body;
   // If the user doesnt pass the required data, status code 400 is launched
-  if (!password || (!username && !email)) {
+  if (!password || (!user && !email)) {
     return res.status(400).json({
       state: "error",
       error: "Bad Request - Missing data",
@@ -17,17 +17,17 @@ const login = async (req, res) => {
   }
   let query = "";
   // Here we corroborate if the user passed the email or the username
-  if (email !== undefined) {
+  if (user.includes("@")) {
     // Query format with the email
     query = mpq.queryBuilder("SELECT * FROM users WHERE email = :email;", {
-      email: email,
+      email: user,
     });
   } else {
     // Query format with the username
     query = mpq.queryBuilder(
       "SELECT * FROM users WHERE username = :username;",
       {
-        username: username,
+        username: user,
       }
     );
   }
@@ -40,7 +40,7 @@ const login = async (req, res) => {
         state: "Error",
         error: error,
       });
-      // If the query did not bring data from the database, but there was not an error
+    // If the query did not bring data from the database, but there was not an error
     else if (results.length == 0) {
       res.status(400).json({
         state: "Bad request - This user is not registered",
@@ -56,14 +56,14 @@ const login = async (req, res) => {
           res.status(401).json({
             state: "Authentication Error - Password or user incorrect",
           });
-        // If they match
+          // If they match
         } else {
           const token = jwt.sign({ username: results[0].username }, key, {
             expiresIn: "1h",
           });
           res
             .cookie("token", token, { maxAge: 2592000, httpOnly: true })
-            .json({ status: "logued", username: results[0].username });
+            .json({ status: "logged", username: results[0].username });
         }
       } catch (error) {
         res.status(400).json({
@@ -79,7 +79,7 @@ const login = async (req, res) => {
 const regis = async (req, res) => {
   const { body } = req;
   const { username, fullname, password, email } = body;
-  // If the user did not pass the required information, status code 400 is launched 
+  // If the user did not pass the required information, status code 400 is launched
   if (!username || !fullname || !password || !email) {
     res.status(400).json({
       state: "Error",
@@ -108,7 +108,7 @@ const regis = async (req, res) => {
         res.status(400).json({
           state: "Bad Request - This email already exists",
         });
-      // If the username already exists
+        // If the username already exists
       } else {
         res.status(400).json({
           state: "Bad Request - This username already exists",
@@ -142,7 +142,7 @@ const regis = async (req, res) => {
                 state: "Error",
                 error: error,
               });
-            // If the query was correct
+              // If the query was correct
             } else {
               res.status(200).json({
                 state: "Registered",
