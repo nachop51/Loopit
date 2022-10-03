@@ -23,11 +23,13 @@ const modeOptions = {
 const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
   const options = modeOptions[mode];
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState({ value: "", error: null });
+  const [email, setEmail] = useState({ value: "", error: null });
+  const [password, setPassword] = useState({ value: "", error: null });
+  const [confirmPassword, setConfirmPassword] = useState({
+    value: "",
+    error: null,
+  });
 
   useEffect(() => {
     const closeEsc = (e) => {
@@ -46,12 +48,41 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
     e.preventDefault();
     // let errors = null;
     if (mode === "LOGIN") {
-      setErrors(validateLogin(email, password));
-      console.log(errors);
+      const errors = validateLogin(username.value, password.value);
+      if (errors) {
+        setUsername({ ...username, error: errors.username });
+        setPassword({ ...password, error: errors.password });
+        return;
+      }
+
+      // sino hay entonces se hace el post
+      setUsername({ ...username, error: null });
+      setPassword({ ...password, error: null });
+
       // loopit.post("/login", ! payload here !);
       return;
     }
-    setErrors(validateRegister());
+
+    const errors = validateRegister(
+      username.value,
+      email.value,
+      password.value,
+      confirmPassword.value
+    );
+    if (errors) {
+      setUsername({ ...username, error: errors.username });
+      setEmail({ ...email, error: errors.email });
+      setPassword({ ...password, error: errors.password });
+      setConfirmPassword({ ...confirmPassword, error: errors.confirmPassword });
+      return;
+    }
+
+    // sino hay error entonces se hace el post
+    setConfirmPassword({ ...confirmPassword, error: null });
+    setPassword({ ...password, error: null });
+    setEmail({ ...email, error: null });
+    setUsername({ ...username, error: null });
+
     if (password !== confirmPassword) errors.push("confirm");
     console.log(errors);
     // loopit.post("/register", ! payload here !);
@@ -66,34 +97,49 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
           <div>
             <label htmlFor="email">{options.text}</label>
             <input
-              className="error-validator" //CHANGES COLOR OF INPUT
+              className={email.error ? "error-validator" : "succes-validator"}
               type="text"
               placeholder="email@example.com"
-              value={email}
+              value={email.value}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
               required
             />
+            {/* RENDERIZADO CONDICIONAL si es que existe error para el campo*/}
+            {email.error && (
+              <span className="error-message">Correo invalido</span>
+            )}
           </div>
           {mode === "REGISTER" && (
             <div>
               <label htmlFor="username">Username</label>
               <input
+                className={
+                  !username.error ? "error-validator" : "succes-validator"
+                }
                 type="text"
                 id="username"
                 placeholder="Username"
-                value={username}
+                value={username.value}
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
                 required
               />
+
+              {/* RENDERIZADO CONDICIONAL si es que existe error para el campo*/}
+              {!username.error && ( // si no hay error
+                <span className="error-message">Username invalido</span>
+              )}
             </div>
           )}
           <div>
             <label htmlFor="password">Password</label>
             <input
+              className={
+                !password.error ? "error-validator" : "succes-validator"
+              }
               type="password"
               placeholder="••••••••"
               value={password}
@@ -102,20 +148,35 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
               }}
               required
             />
+            {!password.error && (
+              <span className="error-message">
+                La contraseña debe tener al menos 8 caracteres
+              </span>
+            )}
           </div>
           {mode === "REGISTER" && (
             <div>
               <label htmlFor="confirm">Repeat password</label>
               <input
+                className={
+                  !confirmPassword.error
+                    ? "error-validator"
+                    : "succes-validator"
+                }
                 type="password"
                 id="confirm"
                 placeholder="••••••••"
-                value={confirmPassword}
+                value={confirmPassword.value}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                 }}
                 required
               />
+              {!confirmPassword.error && (
+                <span className="error-message">
+                  Las contraseñas no coinciden
+                </span>
+              )}
             </div>
           )}
           <button className="btn" type="submit">
