@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { login, register } from "./validations";
+import { validateLogin, validateRegister } from "./validations";
 import "./Modal.css";
 
 const modeOptions = {
@@ -44,11 +44,15 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let errors = null;
     if (mode === "LOGIN") {
-      login(email, password);
-    } else {
-      register(email, username, password, confirmPassword);
+      errors = validateLogin(email, password);
+      console.log(errors);
+      return;
     }
+    errors = validateRegister(email, username, password, confirmPassword);
+    if (password !== confirmPassword) errors.push("confirm");
+    console.log(errors);
   };
 
   return (
@@ -61,7 +65,6 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
             <label htmlFor="email">{options.text}</label>
             <input
               type="text"
-              name="email"
               placeholder="email@example.com"
               value={email}
               onChange={(e) => {
@@ -75,7 +78,7 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
               <label htmlFor="username">Username</label>
               <input
                 type="text"
-                name="username"
+                id="username"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => {
@@ -89,7 +92,6 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
             <label htmlFor="password">Password</label>
             <input
               type="password"
-              name="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => {
@@ -100,10 +102,10 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
           </div>
           {mode === "REGISTER" && (
             <div>
-              <label htmlFor="password2">Repeat password</label>
+              <label htmlFor="confirm">Repeat password</label>
               <input
                 type="password"
-                name="confirmPassword"
+                id="confirm"
                 placeholder="••••••••"
                 value={confirmPassword}
                 onChange={(e) => {
