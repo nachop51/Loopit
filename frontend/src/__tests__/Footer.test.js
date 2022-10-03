@@ -1,5 +1,6 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import Footer from "../components/Footer/index.jsx";
 
 describe("Footer renders correctly", () => {
@@ -7,7 +8,16 @@ describe("Footer renders correctly", () => {
     const { container } = render(<Footer />);
     expect(container).toMatchSnapshot();
 
+    // const footer = screen.getByTestId("footer");
     // The following line is not needed, but it is useful to see the output
     console.log(container);
+  });
+
+  test("En el footer debe existir cierto texto", () => {
+    render(<Footer />);
+    const fullMessage = screen.getByTestId("footer-heading");
+
+    expect(fullMessage).toHaveTextContent("©Loopit 2022");
+    expect(fullMessage).toBeInTheDocument();
   });
 });

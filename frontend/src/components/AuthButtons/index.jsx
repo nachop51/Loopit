@@ -14,6 +14,9 @@ const AuthButtons = () => {
       <Modal
         mode="LOGIN"
         closeModal={() => setLoginIsOpen(false)}
+        openTheOther={() => {
+          setSignIsOpen(true);
+        }}
         show={loginIsOpen}
       />
       <button className="button" onClick={() => setSignIsOpen(!signIsOpen)}>
@@ -22,6 +25,9 @@ const AuthButtons = () => {
       <Modal
         mode="REGISTER"
         closeModal={() => setSignIsOpen(false)}
+        openTheOther={() => {
+          setLoginIsOpen(true);
+        }}
         show={signIsOpen}
       />
     </div>

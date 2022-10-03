@@ -9,7 +9,7 @@ exports[`Footer renders correctly Debe existir un componente Footer en el dom 1`
       class="container-icons"
     >
       <a
-        href="#instagram-link"
+        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
       >
         <svg
           fill="currentColor"
@@ -44,7 +44,9 @@ exports[`Footer renders correctly Debe existir un componente Footer en el dom 1`
         </svg>
       </a>
     </p>
-    <p>
+    <p
+      data-testid="footer-heading"
+    >
       All rights reserved ©Loopit 2022
     </p>
   </footer>

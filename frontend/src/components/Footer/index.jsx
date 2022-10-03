@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer className="footer-container">
       <p className="container-icons">
-        <a href="#instagram-link">
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">
           <GrInstagram />
         </a>
         <a href="#twiter">
           <GrTwitter />
         </a>
       </p>
-      <p>All rights reserved &copy;Loopit 2022</p>
+      <p data-testid="footer-heading">All rights reserved &copy;Loopit 2022</p>
     </footer>
   );
 };
