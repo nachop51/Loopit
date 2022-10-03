@@ -27,6 +27,7 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     const closeEsc = (e) => {
@@ -43,14 +44,14 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let errors = null;
+    // let errors = null;
     if (mode === "LOGIN") {
-      errors = validateLogin(email, password);
+      setErrors(validateLogin(email, password));
       console.log(errors);
       // loopit.post("/login", ! payload here !);
       return;
     }
-    errors = validateRegister(email, username, password, confirmPassword);
+    setErrors(validateRegister());
     if (password !== confirmPassword) errors.push("confirm");
     console.log(errors);
     // loopit.post("/register", ! payload here !);
@@ -65,6 +66,7 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
           <div>
             <label htmlFor="email">{options.text}</label>
             <input
+              className="error-validator" //CHANGES COLOR OF INPUT
               type="text"
               placeholder="email@example.com"
               value={email}

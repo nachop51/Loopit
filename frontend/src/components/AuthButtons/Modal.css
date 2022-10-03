@@ -81,6 +81,7 @@
   transform: scale(1.05);
 }
 
-.error {
-  @apply !border !border-red-600;
+/** Alerts form validation */
+.error-validator {
+  @apply !border-2 !border-rose-500 border-solid;
 }
