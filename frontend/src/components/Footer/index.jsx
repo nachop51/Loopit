@@ -12,7 +12,7 @@ const Footer = () => {
           <GrTwitter />
         </a>
       </p>
-      <p>All rights reserved &copy;Loopit 2022</p>
+      <p data-testid="footer-heading">All rights reserved &copy;Loopit 2022</p>
     </footer>
   );
 };
