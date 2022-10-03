@@ -2,10 +2,11 @@ const jwt = require("jsonwebtoken");
 const key = require("../config").key;
 
 const verifytoken = (req, res, next) => {
+  console.log(req.cookies.token);
   if (req.url === "/login" || req.url === "/register") {
     next();
   } else {
-    const token = req.header("auth-token");
+    const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({ error: "Access denied" });
     }

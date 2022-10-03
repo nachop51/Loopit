@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const router = require("./routes/routes");
+const routeAuth = require("./routes/routeAuth");
+const routeUser = require("./routes/routeUser");
 const verifytoken = require("./middleware/verifytoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
@@ -13,7 +14,10 @@ app.use("/", verifytoken);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //logro que express entienda las request con body en json, ya que express no parsea el body
 app.use(cors()); //permito que mi api pueda usarse por un cliente mas alla del localhost
-app.use("/", router);
+
+//rutes
+app.use("/", routeAuth);
+app.use("/", routeUser);
 
 app.get("/", (req, res) => {
   res.render("index");
