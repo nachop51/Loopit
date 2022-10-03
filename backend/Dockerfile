@@ -1,5 +1,9 @@
-FROM node:12
-WORKDIR /api-nodejs
+FROM node:16
+WORKDIR /loopit
+RUN ["cd", "backend"]
+COPY package*.json ./
+RUN npm install
+RUN ["cd","../frontend"]
 COPY package*.json ./
 RUN npm install
 COPY . .

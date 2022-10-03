@@ -7,10 +7,16 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   let { body } = req;
   let { username, password, email } = body;
+  if (!password || (!username && !email)) {
+    return res.status(400).json({
+      state: "error",
+      error: "Missing data",
+    });
+  }
   let query = "";
   if (email !== undefined) {
     query = mpq.queryBuilder("SELECT * FROM users WHERE email = :email;", {
-      email: body,
+      email: email,
     });
   } else {
     query = mpq.queryBuilder(
@@ -24,36 +30,38 @@ const login = async (req, res) => {
   conexion.query(query, async (error, results) => {
     if (error)
       res.json({
-        state: "error",
+        state: "Error",
         error: error,
       });
     else if (results.length == 0) {
       res.status(400).json({
-        state: "ese usuario no esta registrado",
+        state: "This user is not registered",
       });
     } else {
       try {
+        console.log(results);
         let passBD = results[0].password;
         const compare = await bcrypt.compare(password, passBD);
         console.log(compare);
         if (!compare) {
-          res.status(400).json({
-            state: "contraseña o usuario equivocado",
+          res.status(401).json({
+            state: "Password or user incorrect",
           });
         } else {
-          const token = jwt.sign({ username: username }, key, {
+          const token = jwt.sign({ username: results[0].username }, key, {
             expiresIn: "1h",
           });
           res.status(200).json({
-            state: "logueado",
+            state: "Logged",
             token: token,
-            data: username,
+            data: results[0].username,
           });
           console.log(token);
         }
       } catch (error) {
         res.status(400).json({
-          state: "error",
+          state: "Error",
+          error: error,
         });
       }
     }
@@ -62,66 +70,79 @@ const login = async (req, res) => {
 
 const regis = async (req, res) => {
   const { body } = req;
-  const { username, fullname, pass, email } = body;
-  if (!username || !fullname || !pass || !email) {
+  const { username, fullname, password, email } = body;
+  if (!username || !fullname || !password || !email) {
     res.status(400).json({
-      state: "error",
+      state: "Error",
       error: "Missing data",
     });
   }
-  conexion.query(
-    "SELECT username FROM users WHERE ?",
-    { username: username },
-    async (error, results) => {
-      if (error) {
-        res.json({
-          state: "error",
-          error: error,
-        });
-      } else if (results.length == 0) {
-        try {
-          const passcrypt = await bcrypt.hash(pass, 8);
-          const create_at = new Date()
-            .toISOString()
-            .slice(0, 19)
-            .replace(/-/g, "/")
-            .replace("T", " ");
-          conexion.query(
-            "INSERT INTO users SET ?",
-            {
-              username: username,
-              full_name: fullname,
-              email: email,
-              password: passcrypt,
-              create_at: create_at,
-              update_at: create_at,
-            },
-            (error, results) => {
-              if (error) {
-                res.json({
-                  state: "error",
-                  error: error,
-                });
-              } else {
-                res.status(200).json({
-                  state: "registrado",
-                  username: username,
-                });
-              }
-            }
-          );
-        } catch {
-          res.status(400).json({
-            state: "error",
-          });
-        }
-      } else {
-        res.status(401).json({
-          state: "ese user ya esta registrado",
-        });
-      }
+  let query = mpq.queryBuilder(
+    "SELECT * FROM users WHERE username = :username OR email = :email;",
+    {
+      username: username,
+      email: email,
     }
   );
+  conexion.query(query, async (error, results) => {
+    if (error) {
+      res.json({
+        state: "Error",
+        error: error,
+      });
+    } else if (results.length != 0) {
+      if (results[0].email === email) {
+        res.status(400).json({
+          state: "This email already exists",
+        });
+      } else {
+        res.status(400).json({
+          state: "This username already exists",
+        });
+      }
+    } else if (results.length == 0) {
+      try {
+        const passcrypt = await bcrypt.hash(password, 8);
+        const create_at = new Date()
+          .toISOString()
+          .slice(0, 19)
+          .replace(/-/g, "/")
+          .replace("T", " ");
+        conexion.query(
+          "INSERT INTO users SET ?",
+          {
+            username: username,
+            full_name: fullname,
+            email: email,
+            password: passcrypt,
+            create_at: create_at,
+            update_at: create_at,
+          },
+          (error, results) => {
+            if (error) {
+              res.json({
+                state: "Error",
+                error: error,
+              });
+            } else {
+              res.status(200).json({
+                state: "Registered",
+                username: username,
+              });
+            }
+          }
+        );
+      } catch {
+        res.status(400).json({
+          state: "error",
+        });
+      }
+    } else {
+      res.status(401).json({
+        state: "This user or email already exists",
+      });
+    }
+  });
 };
 
 const updatePass = (req, res) => {

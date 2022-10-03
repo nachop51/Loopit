@@ -1,21 +1,12 @@
-Loguearse
+/Login
 	url = http://54.94.125.72:3000/login
 	body = 
-		user [name user]
+		user [name user] or email [user email]
 		pass [your pass]
-register
+/register
 	url = http://54.94.125.72:4000/register
 	body = 
-		name
-		lastname
-		rol
-		user
-		pass
-update pass 
-	url = http://54.94.125.72:4000/updatepass
-	header = 
-		auth-token = token devuelto por el login
-	body = 
-		user
-		pass
-		newpass
+		username
+		fullname
+		password
+		email
