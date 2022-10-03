@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { validateLogin, validateRegister } from "./validations";
+import loopit from "../api/loopit";
 import "./Modal.css";
 
 const modeOptions = {
@@ -27,8 +28,6 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // http://54.94.125.72:3000/login
-
   useEffect(() => {
     const closeEsc = (e) => {
       if (e.key === "Escape") {
@@ -48,11 +47,13 @@ const ModalForm = ({ show, closeModal, mode, openTheOther }) => {
     if (mode === "LOGIN") {
       errors = validateLogin(email, password);
       console.log(errors);
+      // loopit.post("/login", ! payload here !);
       return;
     }
     errors = validateRegister(email, username, password, confirmPassword);
     if (password !== confirmPassword) errors.push("confirm");
     console.log(errors);
+    // loopit.post("/register", ! payload here !);
   };
 
   return (

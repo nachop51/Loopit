@@ -80,3 +80,7 @@
   @apply cursor-pointer underline;
   transform: scale(1.05);
 }
+
+.error {
+  @apply !border !border-red-600;
+}

@@ -21,7 +21,7 @@ const verifyPassword = (password) => {
 export const validateLogin = (username, password) => {
   const errors = [];
   if (!EmailValidator.validate(username) && !verifyUser(username))
-    errors.push("email/username");
+    errors.push("email");
   if (!verifyPassword(password)) errors.push("password");
   return errors;
 };
