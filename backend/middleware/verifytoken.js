@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const key = require("../config").key;
 
 const verifytoken = (req, res, next) => {
-  console.log(req.cookies.token);
   if (req.url === "/auth/login" || req.url === "/auth/register") {
     next();
   } else {

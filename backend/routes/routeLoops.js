@@ -1,7 +1,12 @@
 const routeLoops = require("express").Router();
-const { getLoops, getLoopByLanguage } = require("../controllers/loops");
+const {
+  getAllLoops,
+  getLoopsByLanguage,
+  addLoop,
+} = require("../controllers/loops");
 
-routeUser.get("/getLoops/:lenguage", getLoopByLanguage);
-routeUser.get("/getLoops/", getAllLoops);
+routeLoops.get("/getLoops/:lenguage", getLoopsByLanguage);
+routeLoops.get("/getLoops/", getAllLoops);
+routeLoops.post("/addLoop", addLoop);
 
 module.exports = routeLoops;

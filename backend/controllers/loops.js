@@ -17,29 +17,19 @@ const addLoop = (req, res) => {
         error: errors,
       });
     } else if (results.length !== 0) {
-        res.status(400).json({
-            status: "Error"
-            error: "Already exist a loop with this name"
-        })
-    } else {
-        query = "INSERT"
-    }
-  });
-};
-
-const getAllLoops = (req, res) => {
-  let query = "SELECT * FROM loops";
-  conexion.query(query, (errors, results) => {
-    if (errors) {
-      res.status(500).json({
-        status: "Error - Internal Server Error",
-        error: errors,
+      res.status(400).json({
+        status: "Error",
+        error: "Already exist a loop with this name",
       });
     } else {
-      res.status(200).json({
-        status: "OK",
-        data: results,
-      });
+      (query = "INSERT INTO loops SET ?"),
+        {
+          name: name,
+          description: description,
+          content: content,
+          user_id: user_id,
+          language: language,
+        };
     }
   });
 };
@@ -62,7 +52,32 @@ const getLoopsByLanguage = (req, res) => {
   });
 };
 
+const getAllLoops = (req, res) => {
+  let page = req.params.page;
+  let query = mpq.queryBuilder(
+    "SELECT * FROM users LIMIT :limit OFFSET :offset;",
+    {
+      limit: limit,
+      offset: page * limit,
+    }
+  );
+  conexion.query(query, (error, results) => {
+    if (error) {
+      res.json({
+        state: "Error",
+        error: error,
+      });
+    } else {
+      res.json({
+        state: "Success",
+        data: results,
+      });
+    }
+  });
+};
+
 module.exports = {
   getAllLoops: getAllLoops,
-  getAllLoops: getAllLoops,
+  getLoopsByLanguage: getLoopsByLanguage,
+  addLoop: addLoop,
 };
