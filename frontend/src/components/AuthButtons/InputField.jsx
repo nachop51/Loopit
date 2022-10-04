@@ -18,9 +18,11 @@ const InputField = ({
         placeholder={ph}
         name={name}
         type={type}
-        className="form-control"
+        className={`${hasError ? "error-validator" : "ELPEPE"}`}
       />
-      <span className={`error-message ${hasError ? "show" : ""}`}>{error}</span>
+      <span className={`error-message ${hasError ? "show-span" : ""}`}>
+        {error}
+      </span>
     </div>
   );
 };

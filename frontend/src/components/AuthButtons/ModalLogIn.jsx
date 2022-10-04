@@ -24,9 +24,11 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const hasErrors = validateLogin(input, password);
-    setErrors(hasErrors);
-    if (hasErrors) return;
-    logIn(input, password);
+    setTimeout(() => {
+      setErrors(hasErrors);
+      if (hasErrors) return;
+      logIn(input, password);
+    }, 500);
   };
 
   const logIn = async (input, password) => {
@@ -61,7 +63,7 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
           <div>
             <label htmlFor="pass">Password</label>
             <input
-              type="text"
+              type="password"
               id="pass"
               placeholder="••••••••"
               onChange={(e) => setPassword(e.target.value)}
@@ -69,9 +71,9 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
               required
             />
           </div>
-          {errors && (
-            <span className="error-message">Invalid username or password</span>
-          )}
+          <span className={`${errors ? "show-span" : ""} error-message`}>
+            Invalid username or password
+          </span>
           <button className="btn" type="submit">
             Log In
           </button>

@@ -35,25 +35,32 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
       confirmPassword
     );
     setErrors(hasErrors);
+    console.log(hasErrors);
     if (hasErrors.length > 0) return;
-    console.log("PASO LA PRUEBA");
     register(username, email, fullname, password);
   };
 
-  const register = (username, email, fullname, password) => {
-    console.log(username);
-    console.log(email);
-    console.log(fullname);
-    console.log(password);
+  const register = async (username, email, fullname, password) => {
     try {
-      loopit.post("/auth/register", {
+      const response = await loopit.post("/auth/register", {
         email: email,
         username: username,
         fullname: fullname,
         password: password,
       });
-    } catch {
-      console.log("SO MANY ERRORS");
+      console.log(response);
+    } catch (error) {
+      console.log(error.response.data);
+      switch (error.response.data.state) {
+        case "Bad Request - This email already exists":
+          setErrors(["email"]);
+          break;
+        case "Bad Request - This username already exists":
+          setErrors([...errors, "username"]);
+          break;
+        default:
+          setErrors(["email", "username"]);
+      }
     }
   };
 
