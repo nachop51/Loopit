@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const { sequelize } = require("../database/db");
 
-class User extends Model {}
-User.init(
+class Loop extends Model {}
+Loop.init(
   {
     id: {
       type: Sequelize.UUID,
@@ -10,29 +10,30 @@ User.init(
       primaryKey: true,
     },
     // Model attributes are defined here
-    username: {
-      type: DataTypes.STRING(20),
+    name: {
+      type: DataTypes.STRING(40),
       allowNull: false,
-      unique: true,
     },
-    password: {
+    description: {
       type: DataTypes.STRING(256),
       allowNull: false,
     },
-    email: {
+    content: {
+      type: DataTypes.TEXT((length = "long")),
+      allowNull: false,
+    },
+    languages: {
       type: DataTypes.STRING(50),
       allowNull: false,
-      unique: true,
     },
-    full_name: {
+    filename: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: "User",
+    modelName: "Loop",
   }
 );
-
-module.exports = User;
+module.exports = Loop;

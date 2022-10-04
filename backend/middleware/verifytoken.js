@@ -5,7 +5,8 @@ const verifytoken = (req, res, next) => {
   if (
     req.url === "/auth/login" ||
     req.url === "/auth/register" ||
-    req.url === "/auth/loginWithSequelize"
+    req.url === "/auth/loginWithSequelize" ||
+    req.url === "/auth/registerWithSequelize"
   ) {
     next();
   } else {

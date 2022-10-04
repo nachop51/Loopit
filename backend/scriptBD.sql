@@ -29,7 +29,7 @@ create table favourites(
     createdAt DATETIME,
     updatedAt DATETIME
 );
-create table friends(
+create table followers(
     user_id INT NOT NULL,
     friend_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),

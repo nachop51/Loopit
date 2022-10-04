@@ -7,6 +7,12 @@ const routeLoop = require("./routes/routeLoops");
 const verifytoken = require("./middleware/verifytoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
+//imports models
+const { sequelize } = require("./database/db");
+require("./models/asociations");
+const { User } = require("./models/users");
+const { Loop } = require("./models/loops");
+
 const port = process.env.PORT;
 
 //middlewares
@@ -23,8 +29,11 @@ app.use(
 //rutes
 app.use("/auth", routeAuth);
 app.use("/user", routeUser);
-app.use("/user", routeLoop);
+app.use("/loop", routeLoop);
 
 app.listen(3000, () => {
+  sequelize.sync({ force: false }).then(() => {
+    console.log("base de datos creada");
+  });
   console.log("andando");
 });
