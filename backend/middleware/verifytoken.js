@@ -2,7 +2,11 @@ const jwt = require("jsonwebtoken");
 const key = require("../config").key;
 
 const verifytoken = (req, res, next) => {
-  if (req.url === "/auth/login" || req.url === "/auth/register") {
+  if (
+    req.url === "/auth/login" ||
+    req.url === "/auth/register" ||
+    req.url === "/auth/loginWithSequelize"
+  ) {
     next();
   } else {
     const token = req.cookies.token;

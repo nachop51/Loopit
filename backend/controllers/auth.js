@@ -1,8 +1,9 @@
-const conexion = require("../database/db");
+const { conexion } = require("../database/db");
 const mpq = require("mysql-query-placeholders");
 const bcrypt = require("bcrypt");
 const key = require("../config").key;
 const jwt = require("jsonwebtoken");
+const User = require("../models/users");
 
 // Authentication method for the login
 const login = async (req, res) => {
@@ -165,40 +166,61 @@ const regis = async (req, res) => {
   });
 };
 
-// Authentication method for the password - Not finished yet
-const updatePass = (req, res) => {
-  const user = req.body.user;
-  const pass = req.body.pass;
-  const newpass = req.body.newpass;
-  conexion.query(
-    "SELECT pass FROM usuarios WHERE ?",
-    { user: user },
-    async (error, results) => {
-      const passBD = results[0].pass;
-      const compare = await bcrypt.compare(pass, passBD);
-      if (!compare) {
-        res.status(401).json({
-          state: "error",
-          error: "Invalid password",
+const loginWithSequelize = (req, res) => {
+  const { user, password } = req.body;
+  if (!user || !password) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - Missing data",
+    });
+  }
+  User.findOne({
+    where: {
+      username: user,
+    },
+  })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({
+          status: "Error",
+          error: "Bad request - This user is not registered",
         });
-      } else {
-        newpasscrypt = await bcrypt.hash(newpass, 8);
-        conexion.query(
-          "UPDATE usuarios SET pass = ? WHERE user = ?",
-          [newpasscrypt, user],
-          (error, results) => {
-            if (error) {
-              throw error;
-            } else {
-              res.status(200).json({
-                state: "Update password",
-              });
-            }
-          }
-        );
       }
-    }
-  );
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            status: "Error",
+            error: err,
+          });
+        }
+        if (result) {
+          const token = jwt.sign(
+            {
+              username: user.username,
+              userId: user.id,
+            },
+            process.env.JWT_KEY,
+            {
+              expiresIn: "1h",
+            }
+          );
+          return res.status(200).json({
+            status: "OK",
+            message: "logged",
+            token: token,
+          });
+        }
+        res
+          .cookie("token", token, { maxAge: 2592000, httpOnly: true })
+          .json({ status: "logged", username: result.username });
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: "Error",
+        error: err,
+      });
+    });
 };
 
 const verifyTokenUser = async (req, res) => {
@@ -223,5 +245,5 @@ const verifyTokenUser = async (req, res) => {
 module.exports = {
   login: login,
   register: regis,
-  updatePass: updatePass,
+  loginWithSequelize: loginWithSequelize,
 };

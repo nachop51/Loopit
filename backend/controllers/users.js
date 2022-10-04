@@ -1,4 +1,4 @@
-const conexion = require("../database/db");
+const { conexion } = require("../database/db");
 const mpq = require("mysql-query-placeholders");
 
 const getUser = (req, res) => {
@@ -14,7 +14,7 @@ const getUser = (req, res) => {
           status: "Error - Internal Server Error",
           error: errors,
         });
-      // In this case, the result brought data from the database - Status 200
+        // In this case, the result brought data from the database - Status 200
       } else if (results.length !== 0) {
         res.status(200).json({
           status: "OK",
@@ -28,7 +28,7 @@ const getUser = (req, res) => {
         });
       }
     });
-  // From here, we work the case that users wants all users data.
+    // From here, we work the case that users wants all users data.
   } else {
     query = "SELECT * FROM users";
     // Query

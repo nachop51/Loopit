@@ -1,4 +1,4 @@
-const conexion = require("../database/db");
+const { conexion } = require("../database/db");
 const mpq = require("mysql-query-placeholders");
 
 const addLoop = (req, res) => {
