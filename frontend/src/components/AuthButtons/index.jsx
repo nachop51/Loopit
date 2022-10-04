@@ -1,6 +1,7 @@
 import "./AuthButtons.css";
 import React, { useState } from "react";
-import Modal from "./Modal";
+import ModalLogIn from "./ModalLogIn";
+import ModalSignUp from "./ModalSignUp";
 
 const AuthButtons = () => {
   const [loginIsOpen, setLoginIsOpen] = useState(false);
@@ -11,8 +12,7 @@ const AuthButtons = () => {
       <button className="button" onClick={() => setLoginIsOpen(!loginIsOpen)}>
         Log In
       </button>
-      <Modal
-        mode="LOGIN"
+      <ModalLogIn
         closeModal={() => setLoginIsOpen(false)}
         openTheOther={() => {
           setSignIsOpen(true);
@@ -22,8 +22,7 @@ const AuthButtons = () => {
       <button className="button" onClick={() => setSignIsOpen(!signIsOpen)}>
         Sign Up
       </button>
-      <Modal
-        mode="REGISTER"
+      <ModalSignUp
         closeModal={() => setSignIsOpen(false)}
         openTheOther={() => {
           setLoginIsOpen(true);
