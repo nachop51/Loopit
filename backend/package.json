@@ -12,7 +12,8 @@
     "mysql-query-placeholders": "^0.2.2",
     "mysql2": "^2.3.3",
     "pm2": "^5.2.0",
-    "sequelize": "^6.21.3",
+    "sequelize": "^6.23.2",
+    "sqlite3": "^5.1.2",
     "uuid": "^7.0.3"
   }
 }

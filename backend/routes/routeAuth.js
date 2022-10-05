@@ -1,8 +1,6 @@
 const routeAuth = require("express").Router();
-const conexion = require("../database/db");
-const auth = require("../controllers/auth");
+const { register, login } = require("../controllers/auth");
 
-routeAuth.post("/register", auth.register);
-routeAuth.post("/login", auth.login);
-routeAuth.post("/updatepass", auth.updatePass);
+routeAuth.post("/register", register);
+routeAuth.post("/login", login);
 module.exports = routeAuth;
