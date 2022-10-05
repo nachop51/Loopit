@@ -1,8 +1,9 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../database/db");
 
-class Loop extends Model {}
-Loop.init(
+// class Loop extends Model {}
+const Loop = sequelize.define(
+  "Loops",
   {
     id: {
       type: Sequelize.UUID,
@@ -32,8 +33,10 @@ Loop.init(
     },
   },
   {
-    sequelize,
-    modelName: "Loop",
+    // Other model options go here
+    timestamps: true,
+    createdAt: "create_at",
+    updatedAt: "update_at",
   }
 );
 module.exports = Loop;
