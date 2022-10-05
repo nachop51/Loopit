@@ -9,6 +9,13 @@ User.hasMany(Loop, {
 });
 // Loop.belongsTo(User, { as: "user" });
 
+User.hasMany(Blog, {
+  foreignKey: "user_id",
+});
+Blog.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
 // Loop.belongsToMany(User, { through: "favourites" });
 // User.belongsToMany(Loop, { through: "favourites" });
 
