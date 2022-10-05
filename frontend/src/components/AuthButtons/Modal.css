@@ -87,7 +87,7 @@
 
 /** Alerts form validation */
 .error-validator {
-  @apply !border-2 !border-rose-500 border-solid !bg-rose-100;
+  @apply !border !border-rose-500 border-solid !bg-rose-100;
 }
 
 .error-message {
