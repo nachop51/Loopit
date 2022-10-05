@@ -1,65 +1,64 @@
-import React, { useState, useEffect } from "react";
-import { validateRegister } from "./validations";
-import InputField from "./InputField";
-import loopit from "../../api/loopit";
 import "./Modal.css";
+import { Form, Field } from "react-final-form";
+import useEsc from "../../hooks/useEsc";
+
+import {
+  validateFullname,
+  validateUserRegister,
+  validatePassword,
+  validateEmail,
+  validatePasswordConfirmation,
+} from "./validations";
+import loopit from "../../api/loopit";
 
 const ModalForm = ({ show, closeModal, openTheOther }) => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  useEsc(show, closeModal);
 
-  useEffect(() => {
-    const closeEsc = (e) => {
-      if (e.key === "Escape") {
-        if (!show) return;
-        closeModal();
-      }
-    };
-    document.body.addEventListener("keydown", closeEsc);
-    return () => {
-      document.body.removeEventListener("keydown", closeEsc);
-    };
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const hasErrors = validateRegister(
-      fullname,
-      username,
-      email,
-      password,
-      confirmPassword
+  const renderErrors = ({ error, touched }) => {
+    return (
+      <span className={`error-message ${error && touched ? "show-span" : ""}`}>
+        {error ? error : <br />}
+      </span>
     );
-    setErrors(hasErrors);
-    console.log(hasErrors);
-    if (hasErrors.length > 0) return;
-    register(username, email, fullname, password);
   };
 
-  const register = async (username, email, fullname, password) => {
+  const buildInput = ({ input, meta, label, placeholder }) => {
+    return (
+      <div>
+        <label htmlFor={input.name}>{label}</label>
+        <input
+          className={meta.error && meta.touched ? "error-validator" : ""}
+          {...input}
+          placeholder={placeholder}
+          id={input.name}
+          autoComplete="off"
+        />
+        {renderErrors(meta)}
+      </div>
+    );
+  };
+
+  const onSubmit = async ({ fullname, user, email, pass }) => {
     try {
       const response = await loopit.post("/auth/register", {
         email: email,
-        username: username,
+        username: user,
         fullname: fullname,
-        password: password,
+        password: pass,
       });
       console.log(response);
     } catch (error) {
       console.log(error.response.data);
       switch (error.response.data.state) {
         case "Bad Request - This email already exists":
-          setErrors(["email"]);
+          console.log("This email already exists");
           break;
         case "Bad Request - This username already exists":
-          setErrors([...errors, "username"]);
+          console.log("This username already exists");
           break;
         default:
-          setErrors(["email", "username"]);
+          console.log("Server error, try again later");
+          break;
       }
     }
   };
@@ -69,65 +68,56 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Sign Up</h2>
         <h4>Create a new account</h4>
-        <form className="form" onSubmit={handleSubmit}>
-          <InputField
-            label="Full Name"
-            name="fullname"
-            type="text"
-            ph="John Doe"
-            hasError={errors.includes("fullname")}
-            error={"A valid full name is required"}
-            value={fullname}
-            onChanged={setFullname}
-          />
 
-          <InputField
-            label="Username"
-            name="username"
-            type="text"
-            ph="Example"
-            hasError={errors.includes("username")}
-            error={"A valid username is required"}
-            value={username}
-            onChanged={setUsername}
-          />
-
-          <InputField
-            label="Email"
-            name="email"
-            type="email"
-            ph="example@email.com"
-            hasError={errors.includes("email")}
-            error={"A valid email is required"}
-            value={email}
-            onChanged={setEmail}
-          />
-
-          <InputField
-            label="Password"
-            name="password"
-            type="password"
-            ph="••••••••"
-            hasError={errors.includes("password")}
-            error={"A valid password is required"}
-            value={password}
-            onChanged={setPassword}
-          />
-
-          <InputField
-            label="Repeat password"
-            name="confirm"
-            type="password"
-            ph="••••••••"
-            hasError={errors.includes("confirm")}
-            error={"Passwords must match"}
-            value={confirmPassword}
-            onChanged={setConfirmPassword}
-          />
-          <button className="btn" type="submit">
-            Sign Up
-          </button>
-        </form>
+        <Form
+          onSubmit={onSubmit}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit} className="form">
+              <Field
+                name="fullname"
+                component={buildInput}
+                label="Full Name"
+                placeholder="John Code"
+                validate={validateFullname}
+              />
+              <Field
+                name="user"
+                component={buildInput}
+                label="Username"
+                placeholder="Looper"
+                validate={validateUserRegister}
+              />
+              <Field
+                name="email"
+                component={buildInput}
+                label="Email"
+                placeholder="email@example.com"
+                validate={validateEmail}
+              />
+              <Field
+                name="pass"
+                component={buildInput}
+                label="Password"
+                placeholder="••••••••"
+                type="password"
+                validate={validatePassword}
+              />
+              <Field
+                name="confirmPass"
+                component={buildInput}
+                label="Confirm Password"
+                placeholder="••••••••"
+                type="password"
+                validate={(value, props) => {
+                  return validatePasswordConfirmation(value, props);
+                }}
+              />
+              <button className="btn" type="submit">
+                Sign Up
+              </button>
+            </form>
+          )}
+        />
         <div className="link">
           <p>
             Already have an account?&nbsp;
