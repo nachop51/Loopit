@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const { sequelize } = require("../database/db");
 
-class User extends Model {}
-User.init(
+// class User extends Model {}
+const User = sequelize.define(
+  "Users",
   {
     id: {
       type: Sequelize.UUID,
@@ -30,8 +31,10 @@ User.init(
     },
   },
   {
-    sequelize,
-    modelName: "User",
+    // Other model options go here
+    timestamps: true,
+    createdAt: "create_at",
+    updatedAt: "update_at",
   }
 );
 

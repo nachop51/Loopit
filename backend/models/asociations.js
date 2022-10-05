@@ -4,8 +4,13 @@ const Loop = require("./loops");
 User.hasMany(Loop, {
   as: "loops",
   foreignKey: "user_id",
+  sourceKey: "id",
   onDelete: "cascade",
-  hooks: true,
+});
+Loop.belongsTo(User, {
+  as: "user",
+  foreignKey: "user_id",
+  targetId: "id",
 });
 // Loop.belongsTo(User, { as: "user" });
 
