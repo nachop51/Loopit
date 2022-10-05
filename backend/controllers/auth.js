@@ -111,19 +111,19 @@ const login = (req, res) => {
 
 const verifyTokenUser = async (req, res) => {
   try {
-    const token = req.header("auth-token");
+    const token = req.cookies.token;
     if (!token)
       return res.status(401).json({
-        error: "Access denied",
+        status: "Error",
+        error: "token not found",
       });
     const verified = jwt.verify(token, key);
-    req.user = verified;
     res.status(200).json({
-      state: "autorizado",
+      status: "autorizado",
     });
   } catch (error) {
-    res.status(400).json({
-      state: "no autorizado",
+    res.status(401).json({
+      status: "no autorizado",
     });
   }
 };
@@ -131,6 +131,7 @@ const verifyTokenUser = async (req, res) => {
 module.exports = {
   login: login,
   register: register,
+  verifyTokenUser: verifyTokenUser,
 };
 
 // const regis = async (req, res) => {
