@@ -18,7 +18,7 @@ const InputField = ({
         placeholder={ph}
         name={name}
         type={type}
-        className={`${hasError ? "error-validator" : "ELPEPE"}`}
+        className={`${hasError ? "error-validator" : ""}`}
       />
       <span className={`error-message ${hasError ? "show-span" : ""}`}>
         {error}
