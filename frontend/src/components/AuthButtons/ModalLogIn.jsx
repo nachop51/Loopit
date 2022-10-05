@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { validateLogin } from "./validations";
-import loopit from "../api/loopit";
+import React, { useEffect } from "react";
+import { Form, Field } from "react-final-form";
+// import { validateLogin } from "./validations";
+// import loopit from "../../api/loopit";
 import "./Modal.css";
 
 const ModalLogIn = ({ show, closeModal, openTheOther }) => {
-  const [input, setInput] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(false);
-
   useEffect(() => {
     const closeEsc = (e) => {
       if (e.key === "Escape") {
@@ -21,26 +18,32 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
     };
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const hasErrors = validateLogin(input, password);
-    setTimeout(() => {
-      setErrors(hasErrors);
-      if (hasErrors) return;
-      logIn(input, password);
-    }, 500);
+  const renderErrors = ({ error, active, touched }) => {
+    return (
+      <span className={`error-message ${error && touched ? "show-span" : ""}`}>
+        {error ? error : <br />}
+      </span>
+    );
   };
 
-  const logIn = async (input, password) => {
-    try {
-      const response = await loopit.post("/auth/login", {
-        user: input,
-        password: password,
-      });
-      console.log(response);
-    } catch {
-      setErrors(true);
-    }
+  const buildInput = ({ input, meta, label, placeholder }) => {
+    return (
+      <div>
+        <label htmlFor={input.name}>{label}</label>
+        <input
+          className={meta.error && meta.touched ? "error-validator" : ""}
+          {...input}
+          placeholder={placeholder}
+          id={input.name}
+          autoComplete="off"
+        />
+        {renderErrors(meta)}
+      </div>
+    );
+  };
+
+  const onSubmit = (formValues) => {
+    console.log(formValues);
   };
 
   return (
@@ -48,36 +51,39 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Log In</h2>
         <h4>To continue to Loopit</h4>
-        <form className="form" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="input">Username or email</label>
-            <input
-              type="text"
-              id="input"
-              placeholder="email@example.com"
-              onChange={(e) => setInput(e.target.value)}
-              value={input}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="pass">Password</label>
-            <input
-              type="password"
-              id="pass"
-              placeholder="••••••••"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-          </div>
-          <span className={`${errors ? "show-span" : ""} error-message`}>
-            Invalid username or password
-          </span>
-          <button className="btn" type="submit">
-            Log In
-          </button>
-        </form>
+        <Form
+          onSubmit={onSubmit}
+          validate={(formValues) => {
+            const errors = {};
+            if (!formValues.username) {
+              errors.username = "You must enter a username";
+            }
+            if (!formValues.password) {
+              errors.password = "You must enter a password";
+            }
+            return errors;
+          }}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit} className="form">
+              <Field
+                name="username"
+                component={buildInput}
+                label="Username or Email"
+                placeholder="email@example.com"
+              />
+              <Field
+                name="password"
+                component={buildInput}
+                label="Password"
+                placeholder="••••••••"
+                type="password"
+              />
+              <button className="btn" type="submit">
+                Log In
+              </button>
+            </form>
+          )}
+        />
         <div className="link">
           <p>
             Not registered yet?&nbsp;

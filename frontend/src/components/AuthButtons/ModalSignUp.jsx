@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { validateRegister } from "./validations";
 import InputField from "./InputField";
-import loopit from "../api/loopit";
+import loopit from "../../api/loopit";
 import "./Modal.css";
 
 const ModalForm = ({ show, closeModal, openTheOther }) => {
