@@ -114,16 +114,15 @@ const verifyTokenUser = async (req, res) => {
     const token = req.cookies.token;
     if (!token)
       return res.status(401).json({
-        status: "Error",
-        error: "token not found",
+        status: "token not found",
       });
     const verified = jwt.verify(token, key);
     res.status(200).json({
-      status: "autorizado",
+      status: "authorized",
     });
   } catch (error) {
     res.status(401).json({
-      status: "no autorizado",
+      status: "no authorized",
     });
   }
 };
