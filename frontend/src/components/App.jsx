@@ -1,18 +1,20 @@
 import "./App.css";
 import React from "react";
-import AuthButtons from "./AuthButtons";
 import Logo from "./Logo";
-import Content from "./Content";
-import Footer from "./Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import LandingPage from "./LandingPage";
+import LoopitApp from "./Loopit";
 
 const App = () => {
   return (
-    <React.Fragment>
+    <BrowserRouter>
       <Logo />
-      <AuthButtons />
-      <Content />
-      <Footer />
-    </React.Fragment>
+      <Routes>
+        <Route path="/home" element={<LandingPage />} />
+        <Route path="/" element={<LoopitApp />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
