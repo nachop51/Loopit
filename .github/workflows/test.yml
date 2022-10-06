@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
+      - name: move to frontend folder
+        run: cd frontend
       - name: install dependencias
         run: npm install
       - name: install jest
