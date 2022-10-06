@@ -8,7 +8,7 @@ import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
 import { checkUserAuth } from "../actions";
 
-const App = ({ checkUserAuth }) => {
+const App = ({ isSignedIn, checkUserAuth }) => {
   useEffect(() => {
     checkUserAuth();
   }, [checkUserAuth]);
@@ -18,10 +18,16 @@ const App = ({ checkUserAuth }) => {
       <Logo />
       <Routes>
         <Route path="/home" element={<LandingPage />} />
-        <Route path="/" element={<LoopitApp />} />
+        <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
       </Routes>
     </>
   );
 };
 
-export default connect(null, { checkUserAuth })(App);
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, { checkUserAuth })(App);

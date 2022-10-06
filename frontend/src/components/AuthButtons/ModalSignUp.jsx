@@ -1,5 +1,6 @@
 import "./Modal.css";
 import { Form, Field } from "react-final-form";
+import { setIn } from "final-form";
 import useEsc from "../../hooks/useEsc";
 
 import {
@@ -14,10 +15,12 @@ import loopit from "../../api/loopit";
 const ModalForm = ({ show, closeModal, openTheOther }) => {
   useEsc(show, closeModal);
 
-  const renderErrors = ({ error, touched }) => {
+  const renderErrors = ({ error, touched, submitError }) => {
+    console.log(submitError);
     return (
       <span className={`error-message ${error && touched ? "show-span" : ""}`}>
         {error ? error : <br />}
+        {submitError ? submitError : <br />}
       </span>
     );
   };
@@ -48,17 +51,25 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
       });
       console.log(response);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response.data.state);
+
+      let errors = {};
+      const setError = (key, value) => {
+        errors = setIn(errors, key, value);
+      };
       switch (error.response.data.state) {
         case "Bad Request - This email already exists":
-          console.log("This email already exists");
+          setError("email", "This email already exists");
           break;
         case "Bad Request - This username already exists":
-          console.log("This username already exists");
+          setError("user", "This username already exists");
           break;
         default:
           console.log("Server error, try again later");
           break;
+      }
+      if (Object.entries(errors).length > 0) {
+        return errors;
       }
     }
   };
