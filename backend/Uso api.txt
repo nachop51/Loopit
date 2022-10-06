@@ -24,3 +24,10 @@ Desarrollo de la API - Metodos creados al momento
 	- /add
 		- Agrega un loop a favoritos { user_id: "", loop_id: ""}
 	
+
+next tasks:
+
+more models
+check slave of mysql
+keep learning sequelize
+keep learning cookies and jwt
