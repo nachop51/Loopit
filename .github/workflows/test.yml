@@ -1,0 +1,25 @@
+name: tests
+on:
+  push:
+    branches:
+      - frontend
+  pull request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: install dependencias
+        run: npm install
+      - name: install jest
+        run: npm install jest
+      - name: correr test
+        run: npm test
