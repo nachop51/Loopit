@@ -9,6 +9,7 @@ const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");
 const routeFavorite = require("./routes/routeFavorites");
 const routeLanguages = require("./routes/routeLanguages");
+const routeFollower = require("./routes/routeFollower");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
@@ -44,6 +45,7 @@ app.use("/user", routeUser);
 app.use("/loop", routeLoop);
 app.use("/favorite", routeFavorite);
 app.use("/language", routeLanguages);
+app.use("/follower", routeFollower);
 
 //sync database and start server
 app.listen(3000, () => {
