@@ -1,17 +1,19 @@
 import "./Modal.css";
 import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
+import { connect } from "react-redux";
 
+import { logIn } from "../../actions";
 import { validateUser } from "./validations";
 import useEsc from "../../hooks/useEsc";
 import loopit from "../../api/loopit";
 
-const ModalLogIn = ({ show, closeModal, openTheOther }) => {
+const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
   const [error, setError] = useState(null);
 
   useEsc(show, closeModal);
 
-  const renderErrors = ({ error, active, touched }) => {
+  const renderErrors = ({ error, touched }) => {
     return (
       <span className={`error-message ${error && touched ? "show-span" : ""}`}>
         {error ? error : <br />}
@@ -44,6 +46,8 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
         password: password,
       });
       setError(false);
+      logIn(response.data.username);
+      closeModal();
       console.log(response.data);
     } catch (error) {
       console.log(error.response.data.error);
@@ -105,4 +109,10 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
   );
 };
 
-export default ModalLogIn;
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, { logIn })(ModalLogIn);

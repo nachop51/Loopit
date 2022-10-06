@@ -1,6 +1,8 @@
 .title-animation {
-  @apply text-center text-4xl font-normal my-8 mx-auto;
+  @apply text-center text-2xl font-semibold my-8 mx-auto;
+  @apply sm:text-3xl;
   @apply md:text-6xl;
+  @apply lg:text-6xl;
 
   background: linear-gradient(to left, #09203f 0%, #537895 100%);
   -webkit-background-clip: text;
