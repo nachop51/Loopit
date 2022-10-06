@@ -3,6 +3,7 @@ const key = require("../config").key;
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
+//function to register a new user
 const register = async (req, res) => {
   const { username, fullname, password, email } = req.body;
   // If the user did not pass the required information, status code 400 is launched
@@ -68,7 +69,7 @@ const login = (req, res) => {
       if (!user) {
         return res.status(404).json({
           status: "Error",
-          error: "Bad request - This user is not registered",
+          error: "Bad request - failed credentials",
         });
       }
       bcrypt.compare(password, user.password, (err, result) => {
@@ -96,7 +97,7 @@ const login = (req, res) => {
         } else {
           res.status(400).json({
             status: "Error",
-            error: "Bad request - Incorrect password",
+            error: "Bad request - failed credentials",
           });
         }
       });
@@ -107,6 +108,10 @@ const login = (req, res) => {
         error: err,
       });
     });
+};
+
+const logout = (req, res) => {
+  res.clearCookie("token").json({ status: "logged out" });
 };
 
 const verifyTokenUser = async (req, res) => {
@@ -131,6 +136,7 @@ module.exports = {
   login: login,
   register: register,
   verifyTokenUser: verifyTokenUser,
+  logout: logout,
 };
 
 // const regis = async (req, res) => {

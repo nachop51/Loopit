@@ -1,12 +1,26 @@
-/Login
-	url = http://54.94.125.72:3000/login
-	body = 
-		user [name user] or email [user email]
-		pass [your pass]
-/register
-	url = http://54.94.125.72:4000/register
-	body = 
-		username
-		fullname
-		password
-		email
+Desarrollo de la API - Metodos creados al momento
+
+/auth
+	- /login
+		- Crear un usuario {user: "", password: ""}
+	- /register
+		- Registra un usuario en la base de datos {username:"", fullname: "", password: "", email: ""}
+	- /verify
+		- verifica un token dado
+/user
+	- /users
+		- Obtener los datos de todos los usuarios de nuestra base de datos
+	- /users/<username>
+	-/update
+	-/delete
+/loop
+	- /add
+		- Agrega un loop a la base de datos {name:"",description:"", content:"",language:"", filename:"" }
+	- /delete
+		- Elimina un loop de la base de datos {id:""}
+	-/update
+		- Updatea el contenido del loop {id:"" y los atributos que quieras modificar}
+/favorite
+	- /add
+		- Agrega un loop a favoritos { user_id: "", loop_id: ""}
+	

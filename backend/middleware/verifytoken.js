@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const key = require("../config").key;
 
+//verify acces token and allow or deny access to the route
 const verifytoken = (req, res, next) => {
   if (
     req.url === "/auth/login" ||

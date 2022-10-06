@@ -7,14 +7,16 @@ const cors = require("cors");
 const routeAuth = require("./routes/routeAuth");
 const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");
+const routeFavorite = require("./routes/routeFavorites");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
 const cookieParser = require("cookie-parser");
 //import detenv to use environment variables
 require("dotenv").config({ path: "./.env" });
-//imports models of sequelize
+//imports config file for database connection and sequelize
 const { sequelize } = require("./database/db");
+//import models from models folder and associate them
 require("./models/asociations.js");
 const { User } = require("./models/users");
 const { Loop } = require("./models/loops");
@@ -25,19 +27,23 @@ const port = process.env.PORT;
 app.use(cookieParser());
 app.use("/", verifytoken);
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); //logro que express entienda las request con body en json, ya que express no parsea el body
+//parse date request to json and append it to req.body
+app.use(express.json());
+//config cors for allow cross origin resource sharing for origin localhost:3001 with credentials
 app.use(
   cors({
     origin: "http://localhost:3001",
     credentials: true,
   })
-); //permito que mi api pueda usarse por un cliente mas alla del localhost
+);
 
 //define routes of the app
 app.use("/auth", routeAuth);
 app.use("/user", routeUser);
 app.use("/loop", routeLoop);
+app.use("/favorite", routeFavorite);
 
+//sync database and start server
 app.listen(3000, () => {
   sequelize.sync().then(() => {
     console.log("base de datos creada");

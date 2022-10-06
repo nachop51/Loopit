@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../database/db");
 
-// class Loop extends Model {}
+//define model for loops
 const Loop = sequelize.define(
   "Loops",
   {

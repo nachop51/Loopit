@@ -1,6 +1,7 @@
 const mysql = require("mysql2");
 const { Sequelize } = require("sequelize");
-//pool de conexiones
+
+//config connection of mysql database with mysql2
 const conexion = mysql.createPool({
   connectionLimit: 10,
   host: "54.94.125.72",
@@ -9,6 +10,7 @@ const conexion = mysql.createPool({
   database: "loopit",
 });
 
+//config sequelize for use mysql database
 const sequelize = new Sequelize("loopit", "loopit", "loop", {
   host: "54.94.125.72",
   dialect: "mysql",

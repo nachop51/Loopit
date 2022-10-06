@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const { sequelize } = require("../database/db");
 
-// class User extends Model {}
+//define model for user
 const User = sequelize.define(
   "Users",
   {
