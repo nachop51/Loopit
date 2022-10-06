@@ -126,7 +126,7 @@ const verifyTokenUser = async (req, res) => {
     const username = tokenInfo.username;
     res.status(200).json({
       status: "authorized",
-      data: username,
+      username: username,
     });
   } catch (error) {
     res.status(401).json({
