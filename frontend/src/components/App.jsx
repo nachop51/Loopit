@@ -13,6 +13,10 @@ const App = ({ isSignedIn, checkUserAuth }) => {
     checkUserAuth();
   }, [checkUserAuth]);
 
+  if (isSignedIn === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Logo />

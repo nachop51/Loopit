@@ -1,9 +1,9 @@
 import loopit from "../api/loopit";
 
-export const logIn = (userName) => {
+export const logIn = (username) => {
   return {
     type: "LOG_IN",
-    payload: userName,
+    payload: username,
   };
 };
 
