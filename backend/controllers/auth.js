@@ -122,8 +122,11 @@ const verifyTokenUser = async (req, res) => {
         status: "token not found",
       });
     const verified = jwt.verify(token, key);
+    const tokenInfo = jwt.decode(token);
+    const username = tokenInfo.username;
     res.status(200).json({
       status: "authorized",
+      data: username,
     });
   } catch (error) {
     res.status(401).json({
