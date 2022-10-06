@@ -1,12 +1,11 @@
 name: tests
 on:
   push:
-    branches:
-      - frontend
-      - test
   pull_request:
     branches:
       - main
+      - test
+      - frontend
 
 jobs:
   test:
