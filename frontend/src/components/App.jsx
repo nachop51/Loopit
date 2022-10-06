@@ -1,21 +1,27 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "./Logo";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
+import { checkUserAuth } from "../actions";
 
-const App = () => {
+const App = ({ checkUserAuth }) => {
+  useEffect(() => {
+    checkUserAuth();
+  }, [checkUserAuth]);
+
   return (
-    <BrowserRouter>
+    <>
       <Logo />
       <Routes>
         <Route path="/home" element={<LandingPage />} />
         <Route path="/" element={<LoopitApp />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
 
-export default App;
+export default connect(null, { checkUserAuth })(App);

@@ -18,6 +18,14 @@ nav {
   z-index: 999;
 }
 
+/* nav {
+  @apply flex flex-col justify-between px-4 py-16 fixed gap-4;
+  left: 5%;
+  bottom: 20%;
+  border-radius: 200px;
+  z-index: 999;
+} */
+
 nav a {
   background: transparent;
   padding: 0.9rem;
@@ -27,6 +35,11 @@ nav a {
   font-size: 2.1rem;
 }
 
+/* nav a {
+  @apply bg-transparent flex text-4xl p-4 text-white;
+  border-radius: 200px;
+} */
+
 nav a:hover {
   background: rgba(225, 225, 225, 0.1);
 }
@@ -35,3 +48,9 @@ nav a.active {
   background: rgba(225, 225, 225, 0.2);
   color: #fff;
 }
+
+/* 
+nav a.active {
+  @apply text-white;
+  background-color: rgba(225, 225, 225, 0.2);
+} */
