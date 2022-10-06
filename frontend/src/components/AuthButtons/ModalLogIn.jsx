@@ -38,8 +38,6 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
   };
 
   const onSubmit = async ({ username, password }) => {
-    console.log(username);
-    console.log(password);
     try {
       const response = await loopit.post("/auth/login", {
         user: username,
