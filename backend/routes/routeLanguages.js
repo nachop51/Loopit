@@ -1,9 +1,13 @@
 const routeLanguages = require("express").Router();
-const addFavorite = require("../controllers/languages");
+const {
+  addLanguage,
+  deleteLanguage,
+  updateLanguage,
+} = require("../controllers/languages");
 
 //define routes for languages
-routeLanguages.post("/addLanguage", addLanguage);
-routeLanguages.delete("/deleteLanguage", deleteLanguage);
-routeLanguages.update("/updateLanguage", updateLanguage);
+routeLanguages.post("/add", addLanguage);
+routeLanguages.delete("/delete", deleteLanguage);
+routeLanguages.put("/update", updateLanguage);
 
 module.exports = routeLanguages;
