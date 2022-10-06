@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
-import { Form, Field } from "react-final-form";
-// import { validateLogin } from "./validations";
-// import loopit from "../../api/loopit";
 import "./Modal.css";
+import React, { useState } from "react";
+import { Form, Field } from "react-final-form";
+
+import { validateUser } from "./validations";
+import useEsc from "../../hooks/useEsc";
+import loopit from "../../api/loopit";
 
 const ModalLogIn = ({ show, closeModal, openTheOther }) => {
-  useEffect(() => {
-    const closeEsc = (e) => {
-      if (e.key === "Escape") {
-        if (!show) return;
-        closeModal();
-      }
-    };
-    document.body.addEventListener("keydown", closeEsc);
-    return () => {
-      document.body.removeEventListener("keydown", closeEsc);
-    };
-  });
+  const [error, setError] = useState(null);
+
+  useEsc(show, closeModal);
 
   const renderErrors = ({ error, active, touched }) => {
     return (
@@ -42,8 +35,20 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
     );
   };
 
-  const onSubmit = (formValues) => {
-    console.log(formValues);
+  const onSubmit = async ({ username, password }) => {
+    console.log(username);
+    console.log(password);
+    try {
+      const response = await loopit.post("/auth/login", {
+        user: username,
+        password: password,
+      });
+      setError(false);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data.error);
+      setError(true);
+    }
   };
 
   return (
@@ -53,16 +58,6 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
         <h4>To continue to Loopit</h4>
         <Form
           onSubmit={onSubmit}
-          validate={(formValues) => {
-            const errors = {};
-            if (!formValues.username) {
-              errors.username = "You must enter a username";
-            }
-            if (!formValues.password) {
-              errors.password = "You must enter a password";
-            }
-            return errors;
-          }}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className="form">
               <Field
@@ -70,6 +65,7 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
                 component={buildInput}
                 label="Username or Email"
                 placeholder="email@example.com"
+                validate={validateUser}
               />
               <Field
                 name="password"
@@ -77,7 +73,13 @@ const ModalLogIn = ({ show, closeModal, openTheOther }) => {
                 label="Password"
                 placeholder="••••••••"
                 type="password"
+                validate={(value) => {
+                  if (!value) return "Password is required";
+                }}
               />
+              <span className={`error-message ${error ? "show-span" : ""}`}>
+                {error ? "Invalid username or password" : <br />}
+              </span>
               <button className="btn" type="submit">
                 Log In
               </button>

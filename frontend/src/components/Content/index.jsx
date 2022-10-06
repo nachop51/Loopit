@@ -6,7 +6,15 @@ import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
 
+import { useNavigate } from "react-router-dom";
+
 const Content = () => {
+  const navigate = useNavigate();
+
+  const goApp = () => {
+    navigate("/");
+  };
+
   return (
     <main>
       <section className="intro">
@@ -21,7 +29,9 @@ const Content = () => {
             suscipit at deleniti architecto labore dicta fugiat, atque aliquam
             id illum. Praesentium reprehenderit dolores asperiores officiis.
           </p>
-          <button className="button go btn">Go to app</button>
+          <button className="button go btn" onClick={goApp}>
+            Go to app
+          </button>
         </div>
         <div className="intro-images">
           <img className="intro-images-phone" src={Phone} alt="Phone" />

@@ -1,0 +1,37 @@
+body {
+  background: #444;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 4rem 1.1rem;
+  /* background-color: rgba(225, 225, 225, 0.01); */
+  position: fixed;
+  left: 5%;
+  bottom: 20%;
+  gap: 1rem;
+  justify-content: space-between;
+  border-radius: 200px;
+  backdrop-filter: blur(15px);
+  z-index: 999;
+}
+
+nav a {
+  background: transparent;
+  padding: 0.9rem;
+  border-radius: 200px;
+  display: flex;
+  color: #fff;
+  font-size: 2.1rem;
+}
+
+nav a:hover {
+  background: rgba(225, 225, 225, 0.1);
+}
+
+nav a.active {
+  background: rgba(225, 225, 225, 0.2);
+  color: #fff;
+}

@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renderizado correcto del contenedor del contenido Debe existir un componente Content en el dom 1`] = `
+<div>
+  <main>
+    <section
+      class="intro"
+    >
+      <div
+        class="intro-text"
+      >
+        <h1
+          class="intro-title"
+        >
+          Learn from the best solutions
+        </h1>
+        <p
+          class="intro-p"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio laboriosam nulla molestias soluta amet ab natus aut corrupti odit quas doloribus dignissimos dicta similique consequuntur neque molestiae, totam cum nobis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate maxime obcaecati iusto quae debitis suscipit at deleniti architecto labore dicta fugiat, atque aliquam id illum. Praesentium reprehenderit dolores asperiores officiis.
+        </p>
+        <button
+          class="button go btn"
+        >
+          Go to app
+        </button>
+      </div>
+      <div
+        class="intro-images"
+      >
+        <img
+          alt="Phone"
+          class="intro-images-phone"
+          src="phone.png"
+        />
+        <img
+          alt="Laptop"
+          class="intro-images-laptop"
+          src="laptop.png"
+        />
+      </div>
+    </section>
+    <section
+      class="features"
+    >
+      <span
+        class="title-animation "
+        style="width: 17ch;"
+      >
+        Awesome features!
+      </span>
+      <div
+        class="row"
+      >
+        <div
+          class="feature-box"
+        >
+          <svg
+            class="feature-icon"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18,8 C19.6568542,8 21,6.65685425 21,5 C21,3.34314575 19.6568542,2 18,2 C16.3431458,2 15,3.34314575 15,5 C15,6.65685425 16.3431458,8 18,8 Z M6,15 C7.65685425,15 9,13.6568542 9,12 C9,10.3431458 7.65685425,9 6,9 C4.34314575,9 3,10.3431458 3,12 C3,13.6568542 4.34314575,15 6,15 Z M18,22 C19.6568542,22 21,20.6568542 21,19 C21,17.3431458 19.6568542,16 18,16 C16.3431458,16 15,17.3431458 15,19 C15,20.6568542 16.3431458,22 18,22 Z M16,18 L8,13 M16,6 L8,11"
+              fill="none"
+              stroke="#000"
+              stroke-width="2"
+            />
+          </svg>
+          <h3
+            class="feature-tertiary"
+          >
+            Share your code!
+          </h3>
+          <p
+            class="feature-p"
+          >
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae omnis ipsa.
+          </p>
+        </div>
+        <div
+          class="feature-box"
+        >
+          <svg
+            class="feature-icon"
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="13"
+              rx="2"
+              ry="2"
+              width="13"
+              x="9"
+              y="9"
+            />
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            />
+          </svg>
+          <h3
+            class="feature-tertiary"
+          >
+            Copy
+          </h3>
+          <p
+            class="feature-p"
+          >
+            dolore fuga enim sed explicabo iusto nostrum cumque temporibus itaque nesciunt.
+          </p>
+        </div>
+        <div
+          class="feature-box"
+        >
+          <svg
+            class="feature-icon"
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+            />
+            <polyline
+              points="7 10 12 15 17 10"
+            />
+            <line
+              x1="12"
+              x2="12"
+              y1="15"
+              y2="3"
+            />
+          </svg>
+          <h3
+            class="feature-tertiary"
+          >
+            Download the code!
+          </h3>
+          <p
+            class="feature-p"
+          >
+            voluptate dolores ea atque ex. Ab, aut labore?.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+`;
