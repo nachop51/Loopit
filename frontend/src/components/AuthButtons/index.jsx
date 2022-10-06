@@ -1,11 +1,28 @@
 import "./AuthButtons.css";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import ModalLogIn from "./ModalLogIn";
 import ModalSignUp from "./ModalSignUp";
+import { signOut } from "../../actions";
 
-const AuthButtons = () => {
+const AuthButtons = ({ signOut, isSignedIn }) => {
   const [loginIsOpen, setLoginIsOpen] = useState(false);
   const [signIsOpen, setSignIsOpen] = useState(false);
+
+  if (isSignedIn === null) {
+    return null;
+  }
+
+  if (isSignedIn) {
+    return (
+      <div className="buttons-container">
+        <button className="button" onClick={signOut}>
+          Sign Out
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="buttons-container">
@@ -33,4 +50,10 @@ const AuthButtons = () => {
   );
 };
 
-export default AuthButtons;
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, { signOut })(AuthButtons);
