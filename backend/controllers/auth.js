@@ -49,17 +49,10 @@ const register = async (req, res) => {
         expiresIn: "7d",
       }
     );
-    res
+    return res
       .status(200)
-      .json({
-        state: "Registered",
-        username: username,
-      })
-      .cookie({
-        token: token,
-        maxAge: 604800000,
-        httpOnly: true,
-      });
+      .cookie("token", token, { maxAge: 604800000, httpOnly: true })
+      .json({ status: "logged", username: userExists.username, token: token });
   } catch (error) {
     res.status(400).json({
       state: "Error",
