@@ -1,12 +1,11 @@
-const follower = require("../models/followers");
+const Follower = require("../models/followers");
 
 const addFollower = (req, res) => {
-  const { user_id, user_id } = req.body;
-  follower
-    .create({
-      user_id: user_id,
-      user_id: user_id,
-    })
+  const { user_id, username } = req.body;
+  Follower.create({
+    user_id: user_id,
+    username: username,
+  })
     .then((results) => {
       if (!results) {
         res.status(200).json({
@@ -19,4 +18,8 @@ const addFollower = (req, res) => {
         error: error,
       });
     });
+};
+
+module.exports = {
+  addFollower: addFollower,
 };

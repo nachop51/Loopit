@@ -9,7 +9,7 @@ const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");
 const routeFavorite = require("./routes/routeFavorites");
 const routeLanguages = require("./routes/routeLanguages");
-const routeFollower = require("./routes/routeFollower");
+const routeFollower = require("./routes/routeFollowers");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
