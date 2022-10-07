@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loop-container {
+  @apply m-auto mt-32 w-2/3 rounded-xl border-4 border-solid border-white;
+}

@@ -17,15 +17,15 @@ const Loop = sequelize.define(
     },
     description: {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
     },
     content: {
-      type: DataTypes.TEXT((length = "long")),
+      type: DataTypes.TEXT((length = "short")),
       allowNull: false,
     },
     filename: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

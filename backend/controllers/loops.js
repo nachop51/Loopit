@@ -1,5 +1,6 @@
 const Loop = require("../models/loops");
 const Language = require("../models/languages");
+const { where } = require("sequelize");
 
 // Creados: - Agregar un loop
 //          - Eliminar un loop
@@ -101,13 +102,39 @@ const updateLoop = (req, res) => {
     });
 };
 
-const getLoops = (req, res) => {
+const getLoops = async (req, res) => {
+  const { language } = req.params;
+  if (language) {
+    try {
+      const response  = await   Loop.findAll({
+        attributes: ["id", "name", "description", "content", "filename"],
+        include: [
+          {
+            model: Language,
+            as: "language",
+            attributes: ["name"],
+            where: { name: language },
+          },
+        ],
+      })
+      return res.status(200).json({
+        status: "OK",
+        loops: response,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: "Error",
+        error: error,
+      });
+    }    
+  }
   Loop.findAll({
+    attributes: ["id", "name", "description", "content", "filename"],
     include: [
       {
         model: Language,
         as: "language",
-        attributes: ["name"],
+        attributes: ["name", "id"],
       },
     ],
   })
@@ -126,7 +153,8 @@ const getLoops = (req, res) => {
 };
 
 const getLoopsByLanguage = (req, res) => {
-  const { language } = req.body;
+  const { language } = req.params;
+  console.log(req.params)
   if (!language) {
     return res.status(400).json({
       status: "Error",
@@ -134,6 +162,7 @@ const getLoopsByLanguage = (req, res) => {
     });
   }
   Loop.findAll({
+    attributes: ["id", "name", "description", "content", "filename"],
     include: [
       {
         model: Language,

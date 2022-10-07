@@ -1,9 +1,9 @@
 import loopit from "../api/loopit";
 
-export const logIn = (userName) => {
+export const logIn = (username) => {
   return {
     type: "LOG_IN",
-    payload: userName,
+    payload: username,
   };
 };
 
@@ -19,7 +19,7 @@ export const checkUserAuth = () => async (dispatch) => {
 
     const payload = {};
     switch (response.data.status) {
-      case "Authorized":
+      case "authorized":
         payload.status = true;
         payload.username = response.data.username;
         break;

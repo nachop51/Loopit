@@ -1,56 +1,41 @@
 body {
-  background: #444;
+  background: #111;
 }
 
 nav {
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  padding: 4rem 1.1rem;
-  /* background-color: rgba(225, 225, 225, 0.01); */
-  position: fixed;
+  @apply flex w-max flex-col justify-between fixed rounded-full gap-4 px-2 py-4;
   left: 5%;
-  bottom: 20%;
-  gap: 1rem;
-  justify-content: space-between;
-  border-radius: 200px;
-  backdrop-filter: blur(15px);
-  z-index: 999;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* nav {
-  @apply flex flex-col justify-between px-4 py-16 fixed gap-4;
-  left: 5%;
-  bottom: 20%;
-  border-radius: 200px;
-  z-index: 999;
-} */
-
 nav a {
-  background: transparent;
+  @apply relative bg-opacity-0 text-white text-4xl;
   padding: 0.9rem;
   border-radius: 200px;
   display: flex;
   color: #fff;
   font-size: 2.1rem;
+  transition: all 0.2s;
 }
-
-/* nav a {
-  @apply bg-transparent flex text-4xl p-4 text-white;
-  border-radius: 200px;
-} */
 
 nav a:hover {
-  background: rgba(225, 225, 225, 0.1);
+  transform: scale(1.5);
 }
 
-nav a.active {
+nav a:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e1e1e11a;
+  transform: scale(0.75);
+  border-radius: 100%;
+}
+
+/* nav a.active {
   background: rgba(225, 225, 225, 0.2);
   color: #fff;
-}
-
-/* 
-nav a.active {
-  @apply text-white;
-  background-color: rgba(225, 225, 225, 0.2);
-} */
+}  */

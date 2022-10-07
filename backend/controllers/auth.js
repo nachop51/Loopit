@@ -13,7 +13,7 @@ const register = async (req, res) => {
     });
   }
   try {
-    const errors = [];
+    const errors = {};
     const userUsernameExist = await User.findOne({
       where: { username: username },
     });
@@ -21,10 +21,10 @@ const register = async (req, res) => {
       where: { email: email },
     });
     if (userUsernameExist) {
-      errors.push("Username already exists");
+      errors["username"] = "Username already exists";
     }
     if (userEmailExist) {
-      errors.push("Email already exists");
+      errors["email"] = "Email already exists";
     }
     if (errors.length > 0) {
       return res.status(400).json({
@@ -49,10 +49,13 @@ const register = async (req, res) => {
         expiresIn: "7d",
       }
     );
-    return res
+     return res
       .status(200)
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-      .json({ status: "logged", username: userExists.username, token: token });
+      .json({
+        state: "Registered",
+        username: username,
+      });
   } catch (error) {
     res.status(400).json({
       state: "Error",
