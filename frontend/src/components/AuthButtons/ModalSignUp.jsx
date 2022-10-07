@@ -1,6 +1,10 @@
 import "./Modal.css";
 import { Form, Field } from "react-final-form";
 import { setIn } from "final-form";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { logIn } from "../../actions";
 import useEsc from "../../hooks/useEsc";
 
 import {
@@ -12,14 +16,10 @@ import {
 } from "./validations";
 import loopit from "../../api/loopit";
 
-const ModalForm = ({ show, closeModal, openTheOther }) => {
+const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
   useEsc(show, closeModal);
 
-  // const renderErrors = ({ error, touched, submitError }) => {
-  //   return (
-
-  //   );
-  // };
+  const navigate = useNavigate();
 
   const buildInput = ({ input, meta, label, placeholder }) => {
     return (
@@ -63,22 +63,25 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
         fullname: fullname,
         password: pass,
       });
-      console.log(response);
+      if (response.status === 200) {
+        logIn(response.data.username);
+        navigate("/");
+      }
     } catch (error) {
       let errors = {};
       const setError = (key, value) => {
         errors = setIn(errors, key, value);
       };
-      const message = error.response.data.state;
+      const message = error.response.data.error;
       const flags = {
         email: false,
         user: false,
       };
-      if (message === "Bad Request - This email already exists") {
+      if (message[1] === "Email already exists") {
         setError("email", "This email already exists");
         flags.email = true;
       }
-      if (message === "Bad Request - This username already exists") {
+      if (message[0] === "Username already exists") {
         setError("user", "This username already exists");
         flags.user = true;
       }
@@ -165,4 +168,4 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
   );
 };
 
-export default ModalForm;
+export default connect(null, { logIn })(ModalForm);

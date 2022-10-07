@@ -2,6 +2,7 @@ import "./Loopit.css";
 import Nav from "./components/Nav";
 import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../assets/loading_spinner.gif";
+import LoopList from "./components/LoopList";
 
 const LoopitApp = ({ userStatus }) => {
   useAuth(userStatus);
@@ -13,6 +14,9 @@ const LoopitApp = ({ userStatus }) => {
   return (
     <>
       <Nav />
+      <div className="loop-container">
+        <LoopList />
+      </div>
     </>
   );
 };
