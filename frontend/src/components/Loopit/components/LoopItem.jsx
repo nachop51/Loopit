@@ -4,18 +4,28 @@ const LoopItem = () => {
   return (
     <div className="loop">
       <div className="user-info">
-        <div className="avatar"></div>
+        <div className="avatar">
+          <img
+            src="https://i.pravatar.cc/300"
+            className="avatar-img"
+            alt="user-profile"
+          />
+        </div>
         <div>
           <h3>valerepetto14</h3>
           <span>At 15/12 19:10PM</span>
         </div>
         <div className="loop-buttons">
-          <div></div>
-          <div></div>
-          <div></div>
+          <div title="Share"></div>
+          <div title="Copy"></div>
+          <div title="Download"></div>
         </div>
       </div>
-      <div className="tag"></div>
+      <div className="tag-container">
+        <span className="tag-javascript">Javascript</span>
+        <span className="tag-html">HTML</span>
+        <span className="tag-css">CSS</span>
+      </div>
       <div className="loop-content">
         <p>
           lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla Lorem
@@ -26,14 +36,18 @@ const LoopItem = () => {
         </p>
       </div>
       <div className="loop-info">
-        <div>
-          <span>Votes&nbsp;</span>
-          <span>&nbsp;Comments</span>
+        <div className="heading-comments">
+          {/* <span>Votes&nbsp;</span> */}
+          <span>&nbsp;View comments</span>
         </div>
         <div className="loop-info-buttons">
-          <div>↑</div>
+          <div className="action-comment" title="positive-vote">
+            ↑
+          </div>
           <div>Comment</div>
-          <div>↓</div>
+          <div className="action-comment" title="negative-vote">
+            ↓
+          </div>
         </div>
       </div>
     </div>

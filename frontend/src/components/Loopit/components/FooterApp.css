@@ -1,0 +1,33 @@
+footer {
+  background: #222;
+}
+
+.footer-container {
+  @apply pt-7 pb-10;
+  @apply md:pt-12 pb-10;
+}
+
+.footer-content {
+  @apply flex justify-around pb-2;
+  @apply md:justify-evenly;
+  @apply lg:justify-evenly;
+  @apply xl:justify-evenly;
+}
+
+.footer-container p {
+  @apply text-gray-400 text-center text-xs;
+  @apply lg:text-xs xl:text-sm;
+}
+
+.footer-container p a {
+  @apply text-white no-underline text-xl p-2;
+  @apply xl:text-2xl;
+}
+
+.footer-container span {
+  @apply text-white font-medium;
+}
+
+#link-about {
+  text-decoration: none;
+}
