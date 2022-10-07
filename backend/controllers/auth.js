@@ -39,10 +39,27 @@ const register = async (req, res) => {
       email: email,
       password: passEncrypt,
     });
-    res.status(200).json({
-      state: "Registered",
-      username: username,
-    });
+    const token = jwt.sign(
+      {
+        username: username,
+        userId: newUser.id,
+      },
+      key,
+      {
+        expiresIn: "7d",
+      }
+    );
+    res
+      .status(200)
+      .json({
+        state: "Registered",
+        username: username,
+      })
+      .cookie({
+        token: token,
+        maxAge: 604800000,
+        httpOnly: true,
+      });
   } catch (error) {
     res.status(400).json({
       state: "Error",
@@ -84,7 +101,7 @@ const login = async (req, res) => {
       },
       key,
       {
-        expiresIn: "1h",
+        expiresIn: "7d",
       }
     );
     return res

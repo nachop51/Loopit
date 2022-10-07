@@ -14,6 +14,12 @@ const conexion = mysql.createPool({
 const sequelize = new Sequelize("loopit", "loopit", "loop", {
   host: "54.94.125.72",
   dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 });
 
 module.exports = { conexion: conexion, sequelize: sequelize };
