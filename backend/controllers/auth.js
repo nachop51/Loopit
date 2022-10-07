@@ -13,7 +13,7 @@ const register = async (req, res) => {
     });
   }
   try {
-    const errors = [];
+    const errors = {};
     const userUsernameExist = await User.findOne({
       where: { username: username },
     });
@@ -21,10 +21,10 @@ const register = async (req, res) => {
       where: { email: email },
     });
     if (userUsernameExist) {
-      errors.push("Username already exists");
+      errors["username"] = "Username already exists";
     }
     if (userEmailExist) {
-      errors.push("Email already exists");
+      errors["email"] = "Email already exists";
     }
     if (errors.length > 0) {
       return res.status(400).json({
