@@ -14,25 +14,25 @@ const register = async (req, res) => {
   }
   try {
     const errors = {};
-    const userUsernameExist = await User.findOne({
+    const userUsernameExist = await User.findAll({
       where: { username: username },
     });
-    const userEmailExist = await User.findOne({
+    const userEmailExist = await User.findAll({
       where: { email: email },
     });
-    if (userUsernameExist) {
+    if (userUsernameExist.length > 0) {
       errors["username"] = "Username already exists";
     }
-    if (userEmailExist) {
+    if (userEmailExist.length > 0) {
       errors["email"] = "Email already exists";
     }
-    if (errors.length > 0) {
+    if (Object.keys(errors).length > 0) {
       return res.status(400).json({
         state: "Error",
         error: errors,
       });
-    }
-    let passEncrypt = await bcrypt.hash(password, 8);
+    } else {
+      let passEncrypt = await bcrypt.hash(password, 8);
     const newUser = User.create({
       username: username,
       full_name: fullname,
@@ -56,6 +56,7 @@ const register = async (req, res) => {
         state: "Registered",
         username: username,
       });
+    }
   } catch (error) {
     res.status(400).json({
       state: "Error",
