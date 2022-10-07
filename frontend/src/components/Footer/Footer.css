@@ -3,7 +3,15 @@ footer {
 }
 
 .footer-container {
-  @apply pt-24 pb-10;
+  @apply pt-7 pb-10;
+  @apply md:pt-12 pb-10;
+}
+
+.footer-content {
+  @apply flex justify-around pb-2;
+  @apply md:justify-evenly;
+  @apply lg:justify-evenly;
+  @apply xl:justify-evenly;
 }
 
 .footer-container p {
@@ -12,5 +20,14 @@ footer {
 }
 
 .footer-container p a {
-  @apply text-white underline text-2xl p-2;
+  @apply text-white no-underline text-xl p-2;
+  @apply xl:text-2xl;
+}
+
+.footer-container span {
+  @apply text-white font-medium;
+}
+
+#link-about {
+  text-decoration: none;
 }

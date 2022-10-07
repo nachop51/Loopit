@@ -23,10 +23,6 @@ const Loop = sequelize.define(
       type: DataTypes.TEXT((length = "long")),
       allowNull: false,
     },
-    languages: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
     filename: {
       type: DataTypes.STRING(50),
       allowNull: false,
