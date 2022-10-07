@@ -1,8 +1,8 @@
 import "./Nav.css";
 
-import { BiCodeAlt } from "react-icons/bi";
-import { RiAccountCircleFill } from "react-icons/ri";
-import { BsFillHeartFill } from "react-icons/bs";
+import { HiCode } from "react-icons/hi";
+import { BiUserCircle } from "react-icons/bi";
+import { FiHeart } from "react-icons/fi";
 import { AiOutlineHome } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
@@ -14,13 +14,13 @@ const Nav = () => {
         <AiOutlineHome />
       </Link>
       <Link to="/favorites">
-        <BsFillHeartFill />
+        <FiHeart />
       </Link>
       <Link to="/create-loop">
-        <BiCodeAlt />
+        <HiCode />
       </Link>
       <Link to="/account">
-        <RiAccountCircleFill />
+        <BiUserCircle />
       </Link>
     </nav>
   );

@@ -19,7 +19,7 @@ export const checkUserAuth = () => async (dispatch) => {
 
     const payload = {};
     switch (response.data.status) {
-      case "Authorized":
+      case "authorized":
         payload.status = true;
         payload.username = response.data.username;
         break;

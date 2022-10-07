@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
 import { checkUserAuth } from "../actions";
+import LoadingSpinner from "../assets/loading_spinner.gif";
 
 const App = ({ isSignedIn, checkUserAuth }) => {
   useEffect(() => {
@@ -14,7 +15,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   }, [checkUserAuth]);
 
   if (isSignedIn === null) {
-    return <div>Loading...</div>;
+    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
   }
 
   return (

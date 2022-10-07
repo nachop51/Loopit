@@ -1,20 +1,17 @@
-import "./index.css";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import "./Loopit.css";
 import Nav from "./components/Nav";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../../assets/loading_spinner.gif";
 
 const LoopitApp = ({ userStatus }) => {
-  const navigate = useNavigate();
+  useAuth(userStatus);
 
-  useEffect(() => {
-    if (!userStatus) {
-      navigate("/home");
-    }
-  });
+  if (!userStatus) {
+    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
+  }
 
   return (
     <>
-      <h1>App</h1>
       <Nav />
     </>
   );
