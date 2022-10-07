@@ -1,0 +1,32 @@
+.loop {
+  @apply p-4;
+  color: white;
+}
+
+.avatar {
+  @apply rounded-full ml-3 w-9 h-9 border-4 border-solid border-white inline-block relative my-auto;
+}
+
+.user-info {
+  @apply relative flex flex-row flex-nowrap gap-3;
+}
+
+.loop-buttons {
+  @apply flex flex-row flex-nowrap gap-3 ml-auto mr-4 self-center;
+}
+
+.loop-buttons > * {
+  @apply w-9 h-9 rounded-full border-4 border-solid border-white;
+}
+
+.loop-content {
+  @apply py-5;
+}
+
+.loop-info-buttons {
+  @apply flex flex-row justify-between gap-3;
+}
+
+.loop-info-buttons > * {
+  @apply m-auto;
+}
