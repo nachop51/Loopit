@@ -31,7 +31,6 @@ const App = ({ isSignedIn, checkUserAuth }) => {
     <>
       <Logo />
       {!stateNav && <Nav />}
-      {/* <Nav /> */}
       <Routes>
         <Route path="/home" element={<LandingPage />} />
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />

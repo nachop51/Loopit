@@ -14,7 +14,6 @@ const LoopitApp = ({ userStatus }) => {
 
   return (
     <>
-      <Nav />
       <div className="loop-container">
         <LoopList />
       </div>

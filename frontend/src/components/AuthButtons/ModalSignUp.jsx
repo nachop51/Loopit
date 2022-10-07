@@ -73,15 +73,16 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         errors = setIn(errors, key, value);
       };
       const message = error.response.data.error;
+      console.log(message);
       const flags = {
         email: false,
         user: false,
       };
-      if (message[1] === "Email already exists") {
+      if (message.email) {
         setError("email", "This email already exists");
         flags.email = true;
       }
-      if (message[0] === "Username already exists") {
+      if (message.username) {
         setError("user", "This username already exists");
         flags.user = true;
       }
