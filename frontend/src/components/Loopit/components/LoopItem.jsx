@@ -17,8 +17,8 @@ const LoopItem = () => {
         </div>
         <div className="loop-buttons">
           <div title="Share"></div>
+          <div title="Copy"></div>
           <div title="Download"></div>
-          <div title="Save in your list"></div>
         </div>
       </div>
       <div className="tag-container">
