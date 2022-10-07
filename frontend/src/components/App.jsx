@@ -19,9 +19,8 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   }, [checkUserAuth]);
 
   useEffect(() => {
-    if (window.location.pathname === "/home") {
-      setStateNav(true);
-    }
+    if (window.location.pathname === "/home") setStateNav(true);
+    else setStateNav(false);
   }, [location]);
 
   if (isSignedIn === null) {
