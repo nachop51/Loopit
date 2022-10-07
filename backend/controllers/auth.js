@@ -52,10 +52,7 @@ const register = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-      .json({
-        state: "Registered",
-        username: username,
-      });
+      .json({ status: "logged", username: userExists.username, token: token });
   } catch (error) {
     res.status(400).json({
       state: "Error",
