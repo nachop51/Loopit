@@ -6,7 +6,7 @@ import ModalLogIn from "./ModalLogIn";
 import ModalSignUp from "./ModalSignUp";
 import { signOut } from "../../actions";
 
-const AuthButtons = ({ signOut, isSignedIn }) => {
+export const AuthButtons = ({ signOut, isSignedIn }) => {
   const [loginIsOpen, setLoginIsOpen] = useState(false);
   const [signIsOpen, setSignIsOpen] = useState(false);
 
@@ -26,7 +26,11 @@ const AuthButtons = ({ signOut, isSignedIn }) => {
 
   return (
     <div className="buttons-container">
-      <button className="button" onClick={() => setLoginIsOpen(!loginIsOpen)}>
+      <button
+        className="button"
+        onClick={() => setLoginIsOpen(!loginIsOpen)}
+        data-testid="button-login"
+      >
         Log In
       </button>
       <ModalLogIn
@@ -36,7 +40,11 @@ const AuthButtons = ({ signOut, isSignedIn }) => {
         }}
         show={loginIsOpen}
       />
-      <button className="button" onClick={() => setSignIsOpen(!signIsOpen)}>
+      <button
+        className="button"
+        onClick={() => setSignIsOpen(!signIsOpen)}
+        data-testid="button-register"
+      >
         Sign Up
       </button>
       <ModalSignUp

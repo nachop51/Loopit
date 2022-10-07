@@ -1,20 +1,26 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render as testRender, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import AuthButtons from "../../components/AuthButtons/index.jsx";
+import { AuthButtons } from "../../components/AuthButtons";
+import { Provider } from "react-redux";
+import { store } from "../../store/store";
+
+const render = (component) =>
+  testRender(<Provider store={store}>{component}</Provider>);
 
 describe("Renderizado y correcto funcionamiento del flujo de autenticación", () => {
   it("Debe existir un componente AuthButtons en el dom", () => {
     const { container } = render(<AuthButtons />);
+
     expect(container).toMatchSnapshot();
   });
 
   test("Ambos botones de autenticación deben encontrarse en la página", () => {
     render(<AuthButtons />);
+    // screen.debug();
     // existencia de los botones
     const loginButton = screen.getByTestId("button-login");
     expect(loginButton).toBeInTheDocument();
-    const registerButton = screen.getByTestId("button-signup");
+    const registerButton = screen.getByTestId("button-register");
     expect(registerButton).toBeInTheDocument();
     // Tipo de etiqueta
     expect(loginButton.tagName).toBe("BUTTON");

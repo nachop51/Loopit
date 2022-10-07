@@ -1,231 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renderizado correcto de los botones de autenticación Debe existir un componente AuthButtons en el dom 1`] = `
-<div>
-  <div
-    class="buttons-container"
-  >
-    <button
-      class="button"
-      data-testid="button-login"
-    >
-      Log In
-    </button>
-    <div
-      class="modal "
-    >
-      <div
-        class="modal-content"
-      >
-        <h2>
-          Log In
-        </h2>
-        <h4>
-          To continue to Loopit
-        </h4>
-        <form
-          class="form"
-        >
-          <div>
-            <label
-              for="input"
-            >
-              Username or email
-            </label>
-            <input
-              id="input"
-              placeholder="email@example.com"
-              required=""
-              type="text"
-              value=""
-            />
-          </div>
-          <div>
-            <label
-              for="pass"
-            >
-              Password
-            </label>
-            <input
-              id="pass"
-              placeholder="••••••••"
-              required=""
-              type="password"
-              value=""
-            />
-          </div>
-          <span
-            class=" error-message"
-          >
-            Invalid username or password
-          </span>
-          <button
-            class="btn"
-            type="submit"
-          >
-            Log In
-          </button>
-        </form>
-        <div
-          class="link"
-        >
-          <p>
-            Not registered yet? 
-            <button
-              class="linkTo"
-            >
-              Sign Up
-            </button>
-          </p>
-        </div>
-      </div>
-    </div>
-    <button
-      class="button"
-      data-testid="button-signup"
-    >
-      Sign Up
-    </button>
-    <div
-      class="modal "
-    >
-      <div
-        class="modal-content"
-      >
-        <h2>
-          Sign Up
-        </h2>
-        <h4>
-          Create a new account
-        </h4>
-        <form
-          class="form"
-        >
-          <div>
-            <label
-              for="fullname"
-            >
-              Full Name
-            </label>
-            <input
-              class="ELPEPE"
-              id="fullname"
-              name="fullname"
-              placeholder="John Doe"
-              type="text"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid full name is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="username"
-            >
-              Username
-            </label>
-            <input
-              class="ELPEPE"
-              id="username"
-              name="username"
-              placeholder="Example"
-              type="text"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid username is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="email"
-            >
-              Email
-            </label>
-            <input
-              class="ELPEPE"
-              id="email"
-              name="email"
-              placeholder="example@email.com"
-              type="email"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid email is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="password"
-            >
-              Password
-            </label>
-            <input
-              class="ELPEPE"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              type="password"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid password is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="confirm"
-            >
-              Repeat password
-            </label>
-            <input
-              class="ELPEPE"
-              id="confirm"
-              name="confirm"
-              placeholder="••••••••"
-              type="password"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              Passwords must match
-            </span>
-          </div>
-          <button
-            class="btn"
-            type="submit"
-          >
-            Sign Up
-          </button>
-        </form>
-        <div
-          class="link"
-        >
-          <p>
-            Already have an account? 
-            <button
-              class="linkTo"
-            >
-              Log In
-            </button>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe existir un componente AuthButtons en el dom 1`] = `
 <div>
   <div
@@ -254,36 +28,49 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
         >
           <div>
             <label
-              for="input"
+              for="username"
             >
-              Username or email
+              Username or Email
             </label>
             <input
-              id="input"
+              autocomplete="off"
+              class=""
+              id="username"
+              name="username"
               placeholder="email@example.com"
-              required=""
-              type="text"
               value=""
             />
+            <span
+              class="error-message "
+            >
+              Username is required
+            </span>
           </div>
           <div>
             <label
-              for="pass"
+              for="password"
             >
               Password
             </label>
             <input
-              id="pass"
+              autocomplete="off"
+              class=""
+              id="password"
+              name="password"
               placeholder="••••••••"
-              required=""
               type="password"
               value=""
             />
+            <span
+              class="error-message "
+            >
+              Password is required
+            </span>
           </div>
           <span
-            class=" error-message"
+            class="error-message "
           >
-            Invalid username or password
+            <br />
           </span>
           <button
             class="btn"
@@ -308,7 +95,7 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
     </div>
     <button
       class="button"
-      data-testid="button-signup"
+      data-testid="button-register"
     >
       Sign Up
     </button>
@@ -334,37 +121,37 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
               Full Name
             </label>
             <input
-              class="ELPEPE"
+              autocomplete="off"
+              class=""
               id="fullname"
               name="fullname"
-              placeholder="John Doe"
-              type="text"
+              placeholder="John Code"
               value=""
             />
             <span
               class="error-message "
             >
-              A valid full name is required
+              Fullname is required
             </span>
           </div>
           <div>
             <label
-              for="username"
+              for="user"
             >
               Username
             </label>
             <input
-              class="ELPEPE"
-              id="username"
-              name="username"
-              placeholder="Example"
-              type="text"
+              autocomplete="off"
+              class=""
+              id="user"
+              name="user"
+              placeholder="Looper"
               value=""
             />
             <span
               class="error-message "
             >
-              A valid username is required
+              Username is required
             </span>
           </div>
           <div>
@@ -374,123 +161,18 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
               Email
             </label>
             <input
-              class="ELPEPE"
+              autocomplete="off"
+              class=""
               id="email"
               name="email"
-              placeholder="example@email.com"
-              type="email"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid email is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="password"
-            >
-              Password
-            </label>
-            <input
-              class="ELPEPE"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              type="password"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid password is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="confirm"
-            >
-              Repeat password
-            </label>
-            <input
-              class="ELPEPE"
-              id="confirm"
-              name="confirm"
-              placeholder="••••••••"
-              type="password"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              Passwords must match
-            </span>
-          </div>
-          <button
-            class="btn"
-            type="submit"
-          >
-            Sign Up
-          </button>
-        </form>
-        <div
-          class="link"
-        >
-          <p>
-            Already have an account? 
-            <button
-              class="linkTo"
-            >
-              Log In
-            </button>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Renderizado y funcionamiento correcto de los botones de autenticación Debe existir un componente AuthButtons en el dom 1`] = `
-<div>
-  <div
-    class="buttons-container"
-  >
-    <button
-      class="button"
-      data-testid="button-login"
-    >
-      Log In
-    </button>
-    <div
-      class="modal "
-    >
-      <div
-        class="modal-content"
-      >
-        <h2>
-          Log In
-        </h2>
-        <h4>
-          To continue to Loopit
-        </h4>
-        <form
-          class="form"
-        >
-          <div>
-            <label
-              for="input"
-            >
-              Username or email
-            </label>
-            <input
-              id="input"
               placeholder="email@example.com"
-              required=""
-              type="text"
               value=""
             />
+            <span
+              class="error-message "
+            >
+              Email is required
+            </span>
           </div>
           <div>
             <label
@@ -499,130 +181,10 @@ exports[`Renderizado y funcionamiento correcto de los botones de autenticación 
               Password
             </label>
             <input
+              autocomplete="off"
+              class=""
               id="pass"
-              placeholder="••••••••"
-              required=""
-              type="password"
-              value=""
-            />
-          </div>
-          <span
-            class=" error-message"
-          >
-            Invalid username or password
-          </span>
-          <button
-            class="btn"
-            type="submit"
-          >
-            Log In
-          </button>
-        </form>
-        <div
-          class="link"
-        >
-          <p>
-            Not registered yet? 
-            <button
-              class="linkTo"
-            >
-              Sign Up
-            </button>
-          </p>
-        </div>
-      </div>
-    </div>
-    <button
-      class="button"
-      data-testid="button-signup"
-    >
-      Sign Up
-    </button>
-    <div
-      class="modal "
-    >
-      <div
-        class="modal-content"
-      >
-        <h2>
-          Sign Up
-        </h2>
-        <h4>
-          Create a new account
-        </h4>
-        <form
-          class="form"
-        >
-          <div>
-            <label
-              for="fullname"
-            >
-              Full Name
-            </label>
-            <input
-              class="ELPEPE"
-              id="fullname"
-              name="fullname"
-              placeholder="John Doe"
-              type="text"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid full name is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="username"
-            >
-              Username
-            </label>
-            <input
-              class="ELPEPE"
-              id="username"
-              name="username"
-              placeholder="Example"
-              type="text"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid username is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="email"
-            >
-              Email
-            </label>
-            <input
-              class="ELPEPE"
-              id="email"
-              name="email"
-              placeholder="example@email.com"
-              type="email"
-              value=""
-            />
-            <span
-              class="error-message "
-            >
-              A valid email is required
-            </span>
-          </div>
-          <div>
-            <label
-              for="password"
-            >
-              Password
-            </label>
-            <input
-              class="ELPEPE"
-              id="password"
-              name="password"
+              name="pass"
               placeholder="••••••••"
               type="password"
               value=""
@@ -630,19 +192,20 @@ exports[`Renderizado y funcionamiento correcto de los botones de autenticación 
             <span
               class="error-message "
             >
-              A valid password is required
+              Password is required
             </span>
           </div>
           <div>
             <label
-              for="confirm"
+              for="confirmPass"
             >
-              Repeat password
+              Confirm Password
             </label>
             <input
-              class="ELPEPE"
-              id="confirm"
-              name="confirm"
+              autocomplete="off"
+              class=""
+              id="confirmPass"
+              name="confirmPass"
               placeholder="••••••••"
               type="password"
               value=""
@@ -650,7 +213,7 @@ exports[`Renderizado y funcionamiento correcto de los botones de autenticación 
             <span
               class="error-message "
             >
-              Passwords must match
+              Password confirmation is required
             </span>
           </div>
           <button

@@ -1,17 +1,13 @@
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+// import { configureStore } from "@reduxjs/toolkit";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./components/App";
-import reducers from "./reducers";
+import { store } from "./store/store";
 
 const element = document.getElementById("root");
 const root = ReactDOM.createRoot(element);
-
-const store = configureStore({
-  reducer: reducers,
-});
 
 root.render(
   <Provider store={store}>
