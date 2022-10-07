@@ -34,8 +34,3 @@ nav a:hover::after {
   transform: scale(0.75);
   border-radius: 100%;
 }
-
-/* nav a.active {
-  background: rgba(225, 225, 225, 0.2);
-  color: #fff;
-}  */

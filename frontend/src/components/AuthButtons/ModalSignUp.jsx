@@ -85,7 +85,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         setError("user", "This username already exists");
         flags.user = true;
       }
-      if (!flags.email && !flags.user) {
+      if (flags.email && flags.user) {
         console.log("Server error, try again later");
       }
       if (Object.entries(errors).length > 0) {
