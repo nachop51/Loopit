@@ -6,24 +6,36 @@
 }
 /* ^ Utility */
 
-.btn {
+body {
+  background: #141416;
+}
+
+.btn-animation {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   background-color: #09203f;
   transition: all 0.4s;
 }
 
-.btn:hover {
+.btn-animation:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.404);
 }
 
-.btn:active,
-.btn:focus {
+.btn-animation:active,
+.btn-animation:focus {
   outline: none;
   transform: translateY(-1px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-body {
-  background: #111;
+.btn {
+  @apply rounded-lg bg-white border-none w-16 text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
+  font-size: 12px;
+  @apply sm:w-20 sm:text-base;
+  @apply md:w-28;
+  @apply lg:w-32 lg:text-lg;
+}
+
+.btn-gray {
+  @apply bg-gray-800 text-white;
 }
