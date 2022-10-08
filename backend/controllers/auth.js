@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
 const register = async (req, res) => {
-  const { username, fullname, password, email } = req.body;
+  const { username, fullname, password, email, id } = req.body;
   // If the user did not pass the required information, status code 400 is launched
   if (!username || !fullname || !password || !email) {
     return res.status(400).json({
@@ -54,7 +54,8 @@ const register = async (req, res) => {
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
       .json({
         state: "Registered",
-        username: username,
+        username: username
+        user_id: id,
       });
   } catch (error) {
     res.status(400).json({
