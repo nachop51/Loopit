@@ -1,3 +1,11 @@
 .heading-creator {
   @apply text-center text-white mt-14;
 }
+
+.monaco-editor * {
+  font-family: Consolas;
+}
+
+.monaco-editor .mtkz {
+  display: contents !important;
+}

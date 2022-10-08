@@ -1,14 +1,16 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import Logo from "./Logo";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
+
+import Logo from "./Logo";
 import Nav from "./Loopit/Nav";
 import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
 import CreateLoop from "./Loopit/pages/CreateLoop";
 import { checkUserAuth } from "../actions";
 import LoadingSpinner from "../assets/loading_spinner.gif";
+import Favorites from "./Loopit/pages/Favorites";
 
 const App = ({ isSignedIn, checkUserAuth }) => {
   const [stateNav, setStateNav] = useState(false);
@@ -35,6 +37,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
         <Route path="/home" element={<LandingPage />} />
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
         <Route path="/create-loop" element={<CreateLoop />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </>

@@ -1,7 +1,7 @@
-import Laptop from "../../assets/laptop.png";
+import Laptop from "../../assets/laptop-landing.png";
 import Phone from "../../assets/phone.png";
 import { AiOutlineShareAlt } from "react-icons/ai";
-import { FiCopy, FiDownload, FiShare } from "react-icons/fi";
+import { FiCopy, FiDownload } from "react-icons/fi";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";

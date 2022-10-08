@@ -1,5 +1,5 @@
 .loop {
-  @apply p-4;
+  @apply p-4 relative;
   color: white;
 }
 
@@ -18,29 +18,8 @@
   @apply relative flex flex-row flex-nowrap gap-3;
 }
 
-.tag-container {
-  @apply pt-2;
-}
-
-.tag-javascript {
-  @apply rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none;
-  background-color: rgb(255, 230, 0);
-  text-shadow: 2px 4px 5px rgba(225, 225, 225, 0.05);
-}
-
-.tag-html {
-  @apply rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none;
-  background-color: rgb(255, 94, 66);
-}
-
-.tag-css {
-  @apply rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none;
-
-  background-color: rgb(0, 102, 255);
-}
-
 .loop-buttons {
-  @apply flex flex-row flex-nowrap gap-3 ml-auto mr-4 self-center;
+  @apply absolute top-5 right-0 flex flex-row flex-nowrap gap-3 ml-auto mr-4 self-center;
 }
 
 .loop-buttons > * {

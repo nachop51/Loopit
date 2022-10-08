@@ -4,7 +4,11 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-/* ^ Utility */
+
+*::selection {
+  background: #f5005636;
+  color: #fff;
+}
 
 body {
   /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
@@ -30,7 +34,7 @@ body {
 }
 
 .btn {
-  @apply rounded-lg bg-white border-none w-16 text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
+  @apply rounded-lg bg-white border-none w-16 text-rose-500 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
   font-size: 12px;
   @apply sm:w-20 sm:text-base;
   @apply md:w-28;
@@ -42,5 +46,5 @@ body {
 }
 
 .btn-lily {
-  @apply bg-red-500 text-white;
+  @apply bg-rose-500 text-white;
 }
