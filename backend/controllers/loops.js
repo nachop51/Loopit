@@ -1,5 +1,6 @@
 const Loop = require("../models/loops");
 const Language = require("../models/languages");
+const User = require("../models/users");
 const { where } = require("sequelize");
 
 // Creados: - Agregar un loop
@@ -114,9 +115,10 @@ const getLoops = async (req, res) => {
             as: "language",
             attributes: ["name"],
             where: { name: language },
-          },
+          }
         ],
       })
+      console.log("hola")
       return res.status(200).json({
         status: "OK",
         loops: response,
@@ -136,6 +138,11 @@ const getLoops = async (req, res) => {
         as: "language",
         attributes: ["name", "id"],
       },
+      {
+        model: User,
+        as: "user",
+        attributes: ["username"],
+      }
     ],
   })
     .then((loops) => {
