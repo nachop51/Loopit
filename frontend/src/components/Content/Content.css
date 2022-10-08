@@ -20,11 +20,10 @@
 }
 
 .intro-text__title {
-  @apply text-3xl text-transparent text-center my-6;
+  @apply text-3xl text-transparent text-center my-6 bg-red-500;
   @apply md:text-5xl md:my-10;
   @apply lg:text-6xl lg:my-12;
   @apply xl:text-left;
-  background: linear-gradient(270deg, #ff6ae6 0%, #6866e7 100%);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -32,7 +31,7 @@
 }
 
 .intro-text__p {
-  @apply px-10 pt-6 sm:text-justify text-gray-300 mb-5;
+  @apply pt-6 sm:text-justify text-gray-300 mb-5;
 }
 
 .intro-text__button {
@@ -40,7 +39,7 @@
 }
 
 .intro-images {
-  @apply my-auto flex flex-col-reverse justify-center items-center;
+  @apply my-auto pb-14 flex flex-col-reverse justify-center items-center;
   @apply sm:flex sm:flex-row sm:justify-center sm:items-center;
 }
 
@@ -63,4 +62,8 @@
 .row {
   @apply grid grid-cols-1 place-items-center gap-8 mt-16;
   @apply xl:grid-cols-3 xl:px-48;
+}
+
+.intro-text__button.btn.btn-animation {
+  @apply bg-red-500 text-white mb-14;
 }

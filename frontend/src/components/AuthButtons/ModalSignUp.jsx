@@ -144,7 +144,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
                   return validatePasswordConfirmation(value, props);
                 }}
               />
-              <button className="btn" type="submit">
+              <button className="btn-lily" type="submit">
                 Sign Up
               </button>
             </form>

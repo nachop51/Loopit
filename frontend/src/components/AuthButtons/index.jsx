@@ -37,7 +37,7 @@ const AuthButtons = ({ signOut, isSignedIn }) => {
         show={loginIsOpen}
       />
       <button
-        className="btn btn-gray"
+        className="btn btn-lily"
         onClick={() => setSignIsOpen(!signIsOpen)}
       >
         Sign Up

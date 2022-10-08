@@ -7,7 +7,8 @@
 /* ^ Utility */
 
 body {
-  background: #141416;
+  /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
+  background-color: #111;
 }
 
 .btn-animation {
@@ -38,4 +39,8 @@ body {
 
 .btn-gray {
   @apply bg-gray-800 text-white;
+}
+
+.btn-lily {
+  @apply bg-red-500 text-white;
 }

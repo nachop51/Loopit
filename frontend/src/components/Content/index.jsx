@@ -1,7 +1,7 @@
 import Laptop from "../../assets/laptop.png";
 import Phone from "../../assets/phone.png";
-import { GrShareOption } from "react-icons/gr";
-import { FiCopy, FiDownload } from "react-icons/fi";
+import { AiOutlineShareAlt } from "react-icons/ai";
+import { FiCopy, FiDownload, FiShare } from "react-icons/fi";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
@@ -33,7 +33,7 @@ const Content = () => {
             className="intro-text__button btn btn-animation"
             onClick={goApp}
           >
-            Jump in!
+            Go to app
           </button>
         </article>
         <article className="intro-images">
@@ -48,7 +48,7 @@ const Content = () => {
             label="Share your code!"
             text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae omnis ipsa."
           >
-            <GrShareOption className="feature-icon" />
+            <AiOutlineShareAlt className="feature-icon" />
           </Card>
           <Card
             label="Copy"
