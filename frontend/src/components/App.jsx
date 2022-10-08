@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import Nav from "./Loopit/components/Nav";
+import Nav from "./Loopit/Nav";
 import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
 import CreateLoop from "./Loopit/pages/CreateLoop";

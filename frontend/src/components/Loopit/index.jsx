@@ -1,9 +1,8 @@
 import "./Loopit.css";
-import Nav from "./components/Nav";
 import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../assets/loading_spinner.gif";
-import LoopList from "./components/LoopList";
-import FooterApp from "./components/FooterApp";
+import Footer from "../Footer";
+import LoopList from "./LoopList";
 
 const LoopitApp = ({ userStatus }) => {
   useAuth(userStatus);
@@ -17,7 +16,7 @@ const LoopitApp = ({ userStatus }) => {
       <div className="loop-container">
         <LoopList />
       </div>
-      <FooterApp />
+      <Footer />
     </>
   );
 };
