@@ -33,7 +33,7 @@ const register = async (req, res) => {
       });
     } else {
       let passEncrypt = await bcrypt.hash(password, 8);
-    const newUser = User.create({
+    const newUser =  await User.create({
       username: username,
       full_name: fullname,
       email: email,
@@ -54,7 +54,8 @@ const register = async (req, res) => {
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
       .json({
         state: "Registered",
-        username: username,
+        id: newUser.id,
+        username: newUser.username,
       });
     }
   } catch (error) {
@@ -104,7 +105,7 @@ const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-      .json({ status: "logged", username: userExists.username, token: token });
+      .json({ status: "logged", id: userExists.id  ,username: userExists.username});
   } catch (error) {
     return res.status(400).json({
       status: "Error",

@@ -12,7 +12,7 @@ const { route } = require("./routeAuth");
 routeLoops.post("/add", addLoop);
 routeLoops.delete("/delete", deleteLoop);
 routeLoops.put("/update", updateLoop);
-// routeLoops.get("/all/:language", getLoops);
+routeLoops.get("/all/:language", getLoops);
 routeLoops.get("/all", getLoops);
 
 module.exports = routeLoops;
