@@ -1,5 +1,5 @@
 .main {
-  @apply mt-28 mx-4;
+  /* @apply mt-28 mx-4; */ /* Block the autocomplete of monaco editor ??*/
   @apply sm:mx-12;
   @apply lg:mx-14;
 }
@@ -20,15 +20,15 @@
 }
 
 .intro-text__title {
-  @apply text-3xl text-transparent text-center my-6;
+  @apply text-3xl text-transparent text-center my-6 bg-slate-50;
   @apply md:text-5xl md:my-10;
   @apply lg:text-6xl lg:my-12;
   @apply xl:text-left xl:text-8xl;
-  background: linear-gradient(180deg, #e11d48, #ff90a8);
+  background-color: #f6feff;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  /* background: linear-gradient(90deg, #09203f 0%, #537895 100%); */ /* ^ Light mode */
+  text-shadow: 4px 4px rgb(0, 0, 0, 0.2);
 }
 
 .intro-text__p {
@@ -70,6 +70,5 @@
 }
 
 .intro-text__button.btn.btn-animation {
-  background-color: #e11d477b;
-  @apply text-white mb-14 w-52;
+  @apply bg-slate-900 text-white mb-14 w-2/5;
 }

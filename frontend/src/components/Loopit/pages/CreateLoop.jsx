@@ -1,13 +1,25 @@
 import "./CreateLoop.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
+import LoadingSpinner from "../../../assets/loading_spinner.gif";
 
 const CreateLoop = () => {
-  const [isEditorReady, setIsEditorReady] = useState(false);
+  // const [isEditorReady, setIsEditorReady] = useState(false);
+  const editorRef = useRef(null);
 
-  function handleEditorDidMount() {
-    setIsEditorReady(true);
+  function handleEditorDidMount(editor, monaco) {
+    // console.log(editor, monaco);
+    editorRef.current = editor;
   }
+
+  const handleSave = () => {
+    const valueEditor = editorRef.current.getValue();
+    alert(`contenido enviado: ${valueEditor}`);
+    // fetch("/apí/save", )
+  };
+
+  // Guardamos la información ingresada en un estado
+  // const [content, setContent] = useState("");
 
   return (
     <>
@@ -17,7 +29,10 @@ const CreateLoop = () => {
           height="50vh"
           language="javascript"
           theme="vs-dark"
-          loading={<p>Loading...</p>}
+          loading={
+            <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+          }
+          // onChange={(value) => setContent(value)}
           options={{
             fontFamily: "Consolas",
             showUnused: true,
@@ -29,7 +44,11 @@ const CreateLoop = () => {
             },
           }}
           editorDidMount={handleEditorDidMount}
+          onMount={handleEditorDidMount}
         />
+        <button className="btn btn-lily save-button" onClick={handleSave}>
+          Create loop
+        </button>
       </div>
     </>
   );

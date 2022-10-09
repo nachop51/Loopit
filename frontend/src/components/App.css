@@ -6,13 +6,15 @@
 }
 
 *::selection {
-  background: #f5005636;
+  background: #1e80ff36;
   color: #fff;
 }
 
 body {
   /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
   background-color: #111;
+  background: linear-gradient(90deg, #09203f 0%, #537895 100%),
+    linear-gradient(0deg, #ffffff, #ffffff);
 }
 
 .btn-animation {
@@ -34,7 +36,7 @@ body {
 }
 
 .btn {
-  @apply rounded-lg bg-white border-none w-16 text-rose-500 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
+  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
   font-size: 12px;
   @apply sm:w-20 sm:text-base;
   @apply md:w-28;
@@ -46,5 +48,5 @@ body {
 }
 
 .btn-lily {
-  @apply bg-rose-500 text-white;
+  @apply bg-gray-900 text-white;
 }
