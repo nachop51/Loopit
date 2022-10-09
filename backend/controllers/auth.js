@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
 const register = async (req, res) => {
-  const { username, fullname, password, email } = req.body;
+  const { username, fullname, password, email, id } = req.body;
   // If the user did not pass the required information, status code 400 is launched
   if (!username || !fullname || !password || !email) {
     return res.status(400).json({
@@ -33,7 +33,7 @@ const register = async (req, res) => {
       });
     } else {
       let passEncrypt = await bcrypt.hash(password, 8);
-    const newUser =  await User.create({
+      const newUser =  await User.create({
       username: username,
       full_name: fullname,
       email: email,
@@ -49,7 +49,7 @@ const register = async (req, res) => {
         expiresIn: "7d",
       }
     );
-     return res
+    return res
       .status(200)
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
       .json({

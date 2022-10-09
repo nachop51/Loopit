@@ -73,19 +73,20 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         errors = setIn(errors, key, value);
       };
       const message = error.response.data.error;
+      console.log(message);
       const flags = {
         email: false,
         user: false,
       };
-      if (message[1] === "Email already exists") {
+      if (message.email) {
         setError("email", "This email already exists");
         flags.email = true;
       }
-      if (message[0] === "Username already exists") {
+      if (message.username) {
         setError("user", "This username already exists");
         flags.user = true;
       }
-      if (!flags.email && !flags.user) {
+      if (flags.email && flags.user) {
         console.log("Server error, try again later");
       }
       if (Object.entries(errors).length > 0) {
@@ -143,7 +144,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
                   return validatePasswordConfirmation(value, props);
                 }}
               />
-              <button className="btn" type="submit">
+              <button className="btn-lily" type="submit">
                 Sign Up
               </button>
             </form>

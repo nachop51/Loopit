@@ -17,7 +17,7 @@ const AuthButtons = ({ signOut, isSignedIn }) => {
   if (isSignedIn) {
     return (
       <div className="buttons-container">
-        <button className="button" onClick={signOut}>
+        <button className="btn" onClick={signOut}>
           Sign Out
         </button>
       </div>
@@ -26,7 +26,7 @@ const AuthButtons = ({ signOut, isSignedIn }) => {
 
   return (
     <div className="buttons-container">
-      <button className="button" onClick={() => setLoginIsOpen(!loginIsOpen)}>
+      <button className="btn" onClick={() => setLoginIsOpen(!loginIsOpen)}>
         Log In
       </button>
       <ModalLogIn
@@ -36,7 +36,10 @@ const AuthButtons = ({ signOut, isSignedIn }) => {
         }}
         show={loginIsOpen}
       />
-      <button className="button" onClick={() => setSignIsOpen(!signIsOpen)}>
+      <button
+        className="btn btn-lily"
+        onClick={() => setSignIsOpen(!signIsOpen)}
+      >
         Sign Up
       </button>
       <ModalSignUp

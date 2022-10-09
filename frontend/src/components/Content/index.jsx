@@ -1,6 +1,6 @@
 import Laptop from "../../assets/laptop.png";
 import Phone from "../../assets/phone.png";
-import { GrShareOption } from "react-icons/gr";
+import { AiOutlineShareAlt } from "react-icons/ai";
 import { FiCopy, FiDownload } from "react-icons/fi";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
@@ -16,11 +16,11 @@ const Content = () => {
   };
 
   return (
-    <main>
+    <main className="main">
       <section className="intro">
-        <div className="intro-text">
-          <h1 className="intro-title">Learn from the best solutions</h1>
-          <p className="intro-p">
+        <article className="intro-text">
+          <h1 className="intro-text__title">Learn from the best solutions</h1>
+          <p className="intro-text__p">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
             laboriosam nulla molestias soluta amet ab natus aut corrupti odit
             quas doloribus dignissimos dicta similique consequuntur neque
@@ -29,14 +29,17 @@ const Content = () => {
             suscipit at deleniti architecto labore dicta fugiat, atque aliquam
             id illum. Praesentium reprehenderit dolores asperiores officiis.
           </p>
-          <button className="button go btn" onClick={goApp}>
+          <button
+            className="intro-text__button btn btn-animation"
+            onClick={goApp}
+          >
             Go to app
           </button>
-        </div>
-        <div className="intro-images">
-          <img className="intro-images-phone" src={Phone} alt="Phone" />
-          <img className="intro-images-laptop" src={Laptop} alt="Laptop" />
-        </div>
+        </article>
+        <article className="intro-images">
+          <img className="intro-images__phone" src={Phone} alt="Phone" />
+          <img className="intro-images__laptop" src={Laptop} alt="Laptop" />
+        </article>
       </section>
       <section className="features">
         <TitleAnimation title="Awesome features!" width={17} />
@@ -45,7 +48,7 @@ const Content = () => {
             label="Share your code!"
             text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae omnis ipsa."
           >
-            <GrShareOption className="feature-icon" />
+            <AiOutlineShareAlt className="feature-icon" />
           </Card>
           <Card
             label="Copy"
