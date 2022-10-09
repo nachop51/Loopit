@@ -1,4 +1,4 @@
-import Laptop from "../../assets/laptop-landing.png";
+import Laptop from "../../assets/laptop.png";
 import Phone from "../../assets/phone.png";
 import { AiOutlineShareAlt } from "react-icons/ai";
 import { FiCopy, FiDownload } from "react-icons/fi";
