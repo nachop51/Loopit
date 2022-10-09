@@ -14,7 +14,7 @@ const User = ({ username }) => {
         />
       </div>
       <div>
-        <h3>Username</h3>
+        <h3>{choose(["nacho", "santi", "mate", "vale"])}</h3>
         <span>At 15/12 19:10PM</span>
       </div>
     </div>

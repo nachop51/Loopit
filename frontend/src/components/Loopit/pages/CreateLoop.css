@@ -4,6 +4,7 @@
 
 .monaco-editor * {
   font-family: Consolas;
+  @apply mx-0 my-0;
 }
 
 .monaco-editor .mtkz {

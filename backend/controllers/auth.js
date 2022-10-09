@@ -54,7 +54,7 @@ const register = async (req, res) => {
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
       .json({
         state: "Registered",
-        username: username
+        username: username,
         user_id: id,
       });
   } catch (error) {

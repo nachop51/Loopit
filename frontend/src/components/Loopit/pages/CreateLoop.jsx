@@ -1,5 +1,5 @@
 import "./CreateLoop.css";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Editor from "@monaco-editor/react";
 import LoadingSpinner from "../../../assets/loading_spinner.gif";
 
@@ -38,8 +38,6 @@ const CreateLoop = () => {
             showUnused: true,
             tabSize: 2,
             suggest: {
-              preview: true,
-              previewMode: "prefix",
               showClasses: true,
             },
           }}
