@@ -1,17 +1,18 @@
 .main {
-  /* @apply mt-28 mx-4; */ /* Block the autocomplete of monaco editor ??*/
   @apply sm:mx-12;
   @apply lg:mx-14;
 }
 
 .intro {
+  @apply mt-28 mx-4;
   @apply grid;
   @apply md:place-items-center;
   @apply lg:gap-x-8;
   @apply xl:grid-cols-2;
   /* background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff; */
-  min-height: calc(100vh - 7rem);
+  /* min-height: calc(100vh - 7rem); */
   border-radius: 1.2rem 1.2rem 0 0;
+  min-height: 100vh;
 }
 
 .intro-text {
@@ -32,7 +33,7 @@
 }
 
 .intro-text__p {
-  @apply pt-6 sm:text-justify text-gray-300 mb-5 font-medium;
+  @apply pt-6 sm:text-justify text-gray-300 text-xl mb-5 font-medium;
 }
 
 .intro-text__button {
