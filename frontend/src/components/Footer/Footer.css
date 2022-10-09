@@ -1,5 +1,6 @@
 footer {
-  background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff;
+  /* background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff; */
+  background: #222;
 }
 
 .footer-container {

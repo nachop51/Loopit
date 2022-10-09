@@ -1,5 +1,7 @@
 const Loop = require("../models/loops");
 const Language = require("../models/languages");
+const User = require("../models/users");
+const { where } = require("sequelize");
 
 // Creados: - Agregar un loop
 //          - Eliminar un loop
@@ -101,13 +103,49 @@ const updateLoop = (req, res) => {
     });
 };
 
-const getLoops = (req, res) => {
+const getLoops = async (req, res) => {
+  const { language } = req.params;
+  if (language) {
+    try {
+      const response = await Loop.findAll({
+        attributes: ["id", "name", "description", "content", "filename"],
+        include: [
+          {
+            model: Language,
+            as: "language",
+            attributes: ["name"],
+            where: { name: language },
+          },
+          {
+            model: User,
+            as: "user",
+            attributes: ["username"],
+          },
+        ],
+      });
+      return res.status(200).json({
+        status: "OK",
+        loops: response,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: "Error",
+        error: error,
+      });
+    }
+  }
   Loop.findAll({
+    attributes: ["id", "name", "description", "content", "filename"],
     include: [
       {
         model: Language,
         as: "language",
-        attributes: ["name"],
+        attributes: ["name", "id"],
+      },
+      {
+        model: User,
+        as: "user",
+        attributes: ["username"],
       },
     ],
   })
@@ -125,42 +163,43 @@ const getLoops = (req, res) => {
     });
 };
 
-const getLoopsByLanguage = (req, res) => {
-  const { language } = req.body;
-  if (!language) {
-    return res.status(400).json({
-      status: "Error",
-      error: "Bad Request - Missing data",
-    });
-  }
-  Loop.findAll({
-    include: [
-      {
-        model: Language,
-        as: "language",
-        attributes: ["name"],
-        where: { name: language },
-      },
-    ],
-  })
-    .then((loops) => {
-      res.status(200).json({
-        status: "OK",
-        loops: loops,
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        status: "Error",
-        error: error,
-      });
-    });
-};
+// const getLoopsByLanguage = (req, res) => {
+//   const { language } = req.params;
+//   console.log(req.params)
+//   if (!language) {
+//     return res.status(400).json({
+//       status: "Error",
+//       error: "Bad Request - Missing data",
+//     });
+//   }
+//   Loop.findAll({
+//     attributes: ["id", "name", "description", "content", "filename"],
+//     include: [
+//       {
+//         model: Language,
+//         as: "language",
+//         attributes: ["name"],
+//         where: { name: language },
+//       },
+//     ],
+//   })
+//     .then((loops) => {
+//       res.status(200).json({
+//         status: "OK",
+//         loops: loops,
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(400).json({
+//         status: "Error",
+//         error: error,
+//       });
+//     });
+// };
 
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
   updateLoop: updateLoop,
   getLoops: getLoops,
-  getLoopsByLanguage: getLoopsByLanguage,
 };

@@ -43,3 +43,20 @@ Loop.belongsTo(Language, {
   foreignKey: "language_id",
   targetId: "id",
 });
+
+// Loop.belongsToMany(User, {
+//   as: "usersFavorites",
+//   through: "loop_language",
+//   foreignKey: "loop_id",
+//   otherKey: "user_id",
+//   onDelete: "cascade",
+// });
+// Language.belongsToMany(Loop, {
+//   as: "loopsFavorites",
+//   through: "loop_language",
+//   foreignKey: "language_id",
+//   otherKey: "loop_id",
+//   onDelete: "cascade",
+// });
+
+// define relationship many to many between loops and user (followers)
