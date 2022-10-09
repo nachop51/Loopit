@@ -4,7 +4,7 @@ const addFollower = (req, res) => {
   const { user_id, username } = req.body;
   Follower.create({
     user_id: user_id,
-    username: username,
+    follow_id: username,
   })
     .then((results) => {
       if (!results) {

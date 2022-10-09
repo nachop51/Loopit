@@ -9,7 +9,7 @@ const Follower = sequelize.define(
       allowNull: false.valueOf,
       primaryKey: true,
     },
-    user_id: {
+    follow_id: {
       type: DataTypes.UUID,
       allowNull: false.valueOf,
       primaryKey: true,
