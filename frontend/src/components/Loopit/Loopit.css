@@ -6,5 +6,5 @@
 }
 
 .loop-container {
-  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl border-4 border-solid border-white;
+  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl;
 }

@@ -1,6 +1,7 @@
 .loop {
   @apply p-4 relative;
   color: white;
+  margin-bottom: 80px;
 }
 
 .avatar {

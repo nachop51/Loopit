@@ -14,11 +14,7 @@ const User = ({ username }) => {
         />
       </div>
       <div>
-        <h3>
-          {username
-            ? username
-            : choose(["vale", "santi", "nacho", "mateo", "danielle"])}
-        </h3>
+        <h3>Username</h3>
         <span>At 15/12 19:10PM</span>
       </div>
     </div>

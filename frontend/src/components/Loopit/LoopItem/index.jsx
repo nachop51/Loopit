@@ -1,4 +1,5 @@
-import "./LoopItem.css";
+// import "./LoopItem.css";
+import "./LoopItemLIGHT.css";
 import User from "./User";
 import Tags from "./Tags";
 import Interact from "./Interact";
