@@ -44,7 +44,7 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
         password: password,
       });
       setError(false);
-      logIn(response.data.username);
+      logIn(response.data.id, response.data.username);
       closeModal();
       console.log(response.data);
     } catch (error) {
