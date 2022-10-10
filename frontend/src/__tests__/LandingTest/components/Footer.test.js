@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Footer from "../../components/Footer/index.jsx";
+import Footer from "../../../components/Footer/index.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Footer renders correctly", () => {

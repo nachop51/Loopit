@@ -1,9 +1,9 @@
 import { render as testRender, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { AuthButtons } from "../../components/AuthButtons";
+import { AuthButtons } from "../../../../components/AuthButtons";
 import { Provider } from "react-redux";
-import { store } from "../../store/store";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { store } from "../../../../store/store";
+import { BrowserRouter } from "react-router-dom";
 
 const render = (component) =>
   testRender(

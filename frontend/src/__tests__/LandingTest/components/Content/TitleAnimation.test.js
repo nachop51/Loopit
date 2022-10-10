@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
-import TitleAnimation from "../../components/Content/TitleAnimation";
+import TitleAnimation from "../../../../components/Content/TitleAnimation";
 import { render, screen } from "@testing-library/react";
 
 describe("Correcto renderizado del titulo animado (features section heading)", () => {
