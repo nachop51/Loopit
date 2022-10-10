@@ -9,7 +9,7 @@ const getUsers = (req, res) => {
       {
         model: Loop,
         as: "loops",
-        attributes: ["id", "name", "description", "content", "languages"],
+        attributes: ["id", "name", "description", "content"],
       },
     ],
   })
@@ -27,7 +27,7 @@ const getUsers = (req, res) => {
       });
       res.status(200).json({
         status: "OK",
-        data: list_users,
+        users: list_users,
       });
     })
     .catch((error) => {

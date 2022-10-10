@@ -17,7 +17,7 @@ export const AuthButtons = ({ signOut, isSignedIn }) => {
   if (isSignedIn) {
     return (
       <div className="buttons-container">
-        <button className="button" onClick={signOut}>
+        <button className="btn" onClick={signOut}>
           Sign Out
         </button>
       </div>
@@ -26,11 +26,7 @@ export const AuthButtons = ({ signOut, isSignedIn }) => {
 
   return (
     <div className="buttons-container">
-      <button
-        className="button"
-        onClick={() => setLoginIsOpen(!loginIsOpen)}
-        data-testid="button-login"
-      >
+      <button className="btn" onClick={() => setLoginIsOpen(!loginIsOpen)}>
         Log In
       </button>
       <ModalLogIn
@@ -41,9 +37,8 @@ export const AuthButtons = ({ signOut, isSignedIn }) => {
         show={loginIsOpen}
       />
       <button
-        className="button"
+        className="btn btn-lily"
         onClick={() => setSignIsOpen(!signIsOpen)}
-        data-testid="button-register"
       >
         Sign Up
       </button>

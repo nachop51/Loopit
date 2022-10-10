@@ -1,5 +1,10 @@
 import "./Modal.css";
 import { Form, Field } from "react-final-form";
+import { setIn } from "final-form";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { logIn } from "../../actions";
 import useEsc from "../../hooks/useEsc";
 
 import {
@@ -11,29 +16,41 @@ import {
 } from "./validations";
 import loopit from "../../api/loopit";
 
-const ModalForm = ({ show, closeModal, openTheOther }) => {
+const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
   useEsc(show, closeModal);
 
-  const renderErrors = ({ error, touched }) => {
-    return (
-      <span className={`error-message ${error && touched ? "show-span" : ""}`}>
-        {error ? error : <br />}
-      </span>
-    );
-  };
+  const navigate = useNavigate();
 
   const buildInput = ({ input, meta, label, placeholder }) => {
     return (
       <div>
         <label htmlFor={input.name}>{label}</label>
         <input
-          className={meta.error && meta.touched ? "error-validator" : ""}
+          className={
+            (meta.error || meta.submitError) && meta.touched
+              ? "error-validator"
+              : ""
+          }
           {...input}
           placeholder={placeholder}
           id={input.name}
           autoComplete="off"
         />
-        {renderErrors(meta)}
+        <span
+          className={`error-message ${
+            (meta.error || meta.submitError) && meta.touched ? "show-span" : ""
+          }`}
+        >
+          {meta.error || meta.submitError ? (
+            meta.error ? (
+              meta.error
+            ) : (
+              meta.submitError
+            )
+          ) : (
+            <br />
+          )}
+        </span>
       </div>
     );
   };
@@ -46,19 +63,34 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
         fullname: fullname,
         password: pass,
       });
-      console.log(response);
+      if (response.status === 200) {
+        logIn(response.data.username);
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error.response.data);
-      switch (error.response.data.state) {
-        case "Bad Request - This email already exists":
-          console.log("This email already exists");
-          break;
-        case "Bad Request - This username already exists":
-          console.log("This username already exists");
-          break;
-        default:
-          console.log("Server error, try again later");
-          break;
+      let errors = {};
+      const setError = (key, value) => {
+        errors = setIn(errors, key, value);
+      };
+      const message = error.response.data.error;
+      console.log(message);
+      const flags = {
+        email: false,
+        user: false,
+      };
+      if (message.email) {
+        setError("email", "This email already exists");
+        flags.email = true;
+      }
+      if (message.username) {
+        setError("user", "This username already exists");
+        flags.user = true;
+      }
+      if (flags.email && flags.user) {
+        console.log("Server error, try again later");
+      }
+      if (Object.entries(errors).length > 0) {
+        return errors;
       }
     }
   };
@@ -112,7 +144,7 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
                   return validatePasswordConfirmation(value, props);
                 }}
               />
-              <button className="btn" type="submit">
+              <button className="btn-lily" type="submit">
                 Sign Up
               </button>
             </form>
@@ -137,4 +169,4 @@ const ModalForm = ({ show, closeModal, openTheOther }) => {
   );
 };
 
-export default ModalForm;
+export default connect(null, { logIn })(ModalForm);

@@ -38,15 +38,13 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
   };
 
   const onSubmit = async ({ username, password }) => {
-    console.log(username);
-    console.log(password);
     try {
       const response = await loopit.post("/auth/login", {
         user: username,
         password: password,
       });
       setError(false);
-      logIn(response.data.username);
+      logIn(response.data.id, response.data.username);
       closeModal();
       console.log(response.data);
     } catch (error) {
@@ -84,7 +82,7 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
               <span className={`error-message ${error ? "show-span" : ""}`}>
                 {error ? "Invalid username or password" : <br />}
               </span>
-              <button className="btn" type="submit">
+              <button className="btn-lily btn-animate" type="submit">
                 Log In
               </button>
             </form>

@@ -1,9 +1,12 @@
 import loopit from "../api/loopit";
 
-export const logIn = (userName) => {
+export const logIn = (id, username) => {
   return {
     type: "LOG_IN",
-    payload: userName,
+    payload: {
+      id,
+      username,
+    },
   };
 };
 
@@ -19,12 +22,14 @@ export const checkUserAuth = () => async (dispatch) => {
 
     const payload = {};
     switch (response.data.status) {
-      case "Authorized":
+      case "authorized":
         payload.status = true;
+        payload.id = response.data.id;
         payload.username = response.data.username;
         break;
       default:
         payload.status = false;
+        payload.id = null;
         payload.username = null;
         break;
     }
@@ -36,7 +41,13 @@ export const checkUserAuth = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "CHECK_USER_AUTH",
-      payload: { status: false, username: null },
+      payload: { status: false, id: null, username: null },
     });
   }
+};
+
+export const fetchLoops = () => async (dispatch) => {
+  const response = await loopit.get("/loop/all");
+
+  dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
 };

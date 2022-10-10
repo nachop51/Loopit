@@ -3,9 +3,8 @@ const key = require("../config").key;
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
-//function to register a new user
 const register = async (req, res) => {
-  const { username, fullname, password, email } = req.body;
+  const { username, fullname, password, email, id } = req.body;
   // If the user did not pass the required information, status code 400 is launched
   if (!username || !fullname || !password || !email) {
     return res.status(400).json({
@@ -14,36 +13,51 @@ const register = async (req, res) => {
     });
   }
   try {
-    let passEncrypt = await bcrypt.hash(password, 8);
-    User.create({
+    const errors = {};
+    const userUsernameExist = await User.findAll({
+      where: { username: username },
+    });
+    const userEmailExist = await User.findAll({
+      where: { email: email },
+    });
+    if (userUsernameExist.length > 0) {
+      errors["username"] = "Username already exists";
+    }
+    if (userEmailExist.length > 0) {
+      errors["email"] = "Email already exists";
+    }
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json({
+        state: "Error",
+        error: errors,
+      });
+    } else {
+      let passEncrypt = await bcrypt.hash(password, 8);
+      const newUser =  await User.create({
       username: username,
       full_name: fullname,
       email: email,
       password: passEncrypt,
-    })
-      .then((user) => {
-        res.status(200).json({
-          state: "Registered",
-          username: username,
-        });
-      })
-      .catch((error) => {
-        let errorBd = error.errors.map((e) => e.message);
-        if (errorBd[0] === "username must be unique") {
-          res.status(400).json({
-            state: "Bad Request - This username already exists",
-          });
-        } else if (errorBd[0] === "email must be unique") {
-          res.status(400).json({
-            state: "Bad Request - This email already exists",
-          });
-        } else {
-          res.status(400).json({
-            state: "Error",
-            error: error,
-          });
-        }
+    });
+    const token = jwt.sign(
+      {
+        username: username,
+        userId: newUser.id,
+      },
+      key,
+      {
+        expiresIn: "7d",
+      }
+    );
+    return res
+      .status(200)
+      .cookie("token", token, { maxAge: 604800000, httpOnly: true })
+      .json({
+        state: "Registered",
+        id: newUser.id,
+        username: newUser.username,
       });
+    }
   } catch (error) {
     res.status(400).json({
       state: "Error",
@@ -52,7 +66,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
   const { user, password } = req.body;
   if (!user || !password) {
     return res.status(400).json({
@@ -60,54 +74,44 @@ const login = (req, res) => {
       error: "Bad Request - Missing data",
     });
   }
-  let datoSearch = user.includes("@") ? { email: user } : { username: user };
-  console.log(datoSearch);
-  User.findOne({
-    where: datoSearch,
-  })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).json({
-          status: "Error",
-          error: "Bad request - failed credentials",
-        });
-      }
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (err) {
-          return res.status(500).json({
-            status: "Error",
-            error: err,
-          });
-        }
-        if (result) {
-          const token = jwt.sign(
-            {
-              username: user.username,
-              userId: user.id,
-            },
-            key,
-            {
-              expiresIn: "1h",
-            }
-          );
-          res
-            .status(200)
-            .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-            .json({ status: "logged", username: user.username });
-        } else {
-          res.status(400).json({
-            status: "Error",
-            error: "Bad request - failed credentials",
-          });
-        }
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        status: "Error",
-        error: err,
-      });
+  try {
+    let datoSearch = user.includes("@") ? { email: user } : { username: user };
+    const userExists = await User.findOne({
+      where: datoSearch,
     });
+    if (!userExists) {
+      return res.status(404).json({
+        status: "Error",
+        error: "Bad request - failed credentials",
+      });
+    }
+    const passMatch = bcrypt.compare(password, userExists.password);
+    if (!passMatch) {
+      return res.status(404).json({
+        status: "Error",
+        error: "Bad request - failed credentials",
+      });
+    }
+    const token = jwt.sign(
+      {
+        username: userExists.username,
+        userId: userExists.id,
+      },
+      key,
+      {
+        expiresIn: "7d",
+      }
+    );
+    return res
+      .status(200)
+      .cookie("token", token, { maxAge: 604800000, httpOnly: true })
+      .json({ status: "logged", id: userExists.id  ,username: userExists.username});
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const logout = (req, res) => {

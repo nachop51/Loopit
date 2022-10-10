@@ -15,7 +15,7 @@
 .feature-tertiary {
   @apply text-2xl font-bold;
   @apply text-gray-600;
-  background: linear-gradient(90deg, #09203f 0%, #537895 100%);
+  background: #111;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
