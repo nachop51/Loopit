@@ -42,11 +42,11 @@ app.use(
 
 //define routes of the app
 app.use("/auth", routeAuth);
-app.use("/user", routeUser);
-app.use("/loop", routeLoop);
-app.use("/favorite", routeFavorite);
-app.use("/language", routeLanguages);
-app.use("/follower", routeFollower);
+app.use("/users", routeUser);
+app.use("/loops", routeLoop);
+app.use("/favorites", routeFavorite);
+app.use("/languages", routeLanguages);
+app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
 
 //sync database and start server

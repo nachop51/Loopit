@@ -23,7 +23,9 @@ Desarrollo de la API - Metodos creados al momento
 /favorite
 	- /add
 		- Agrega un loop a favoritos { user_id: "", loop_id: ""}
-	
+
+/languages
+	/all: 
 
 next tasks:
 
