@@ -4,12 +4,7 @@
   @apply md:text-6xl;
   @apply lg:text-6xl;
 
-  background: linear-gradient(90deg, #09203f 0%, #537895 100%),
-    linear-gradient(0deg, #ffffff, #ffffff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: rgba(255, 255, 255, 0.733);
   overflow: hidden;
   display: block;
   white-space: nowrap;
