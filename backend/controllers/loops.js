@@ -163,6 +163,40 @@ const getLoops = async (req, res) => {
     });
 };
 
+// const getLoopsByLanguage = (req, res) => {
+//   const { language } = req.params;
+//   console.log(req.params)
+//   if (!language) {
+//     return res.status(400).json({
+//       status: "Error",
+//       error: "Bad Request - Missing data",
+//     });
+//   }
+//   Loop.findAll({
+//     attributes: ["id", "name", "description", "content", "filename"],
+//     include: [
+//       {
+//         model: Language,
+//         as: "language",
+//         attributes: ["name"],
+//         where: { name: language },
+//       },
+//     ],
+//   })
+//     .then((loops) => {
+//       res.status(200).json({
+//         status: "OK",
+//         loops: loops,
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(400).json({
+//         status: "Error",
+//         error: error,
+//       });
+//     });
+// };
+
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
