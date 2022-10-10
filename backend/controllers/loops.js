@@ -1,20 +1,17 @@
 const Loop = require("../models/loops");
-const Languages_loops = require("../models/languages");
+const Language= require("../models/languages");
 const User = require("../models/users");
 const { where } = require("sequelize");
-
-// Creados: - Agregar un loop
-//          - Eliminar un loop
-// Falta: - Update a loop
+const { Op } = require("sequelize");
 
 const addLoop = async (req, res) => {
-  const { name, description, content, language_name, filename, user_id } =
+  const { name, description, content, language, filename, user_id } =
     req.body;
   if (
     !name ||
     !description ||
     !content ||
-    !language_name ||
+    !language ||
     !filename ||
     !user_id
   ) {
@@ -24,34 +21,33 @@ const addLoop = async (req, res) => {
     });
   }
   try{
+    const language_id = await Language.findOne({
+      where: { name: language },
+    });
+    if(!language_id){
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Language dont exist",
+      });
+    }
     const new_loop = await Loop.create({
       name: name,
       description: description,
       content: content,
       filename: filename,
       user_id: user_id,
-    });
-    const add_languages_loop = await Languages_loops.create({
-      name_language: language_name,
-      loop_id: new_loop.id,
+      language_id: language_id.id,
     });
     return res.status(200).json({
       status: "OK",
       loop: new_loop,
     });
   }catch(error){
-      // let errorBD = error.fields;
-      // if (errorBD[0] === "user_id") {
-      //   res.status(400).json({
-      //     status: "Error",
-      //     error: "Bad Request - This user does not exist",
-      //   });
-      // } else {
-        res.status(400).json({
-          status: "Error",
-          error: error,
-        });
-      }
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+    }
 };
 
 const deleteLoop = (req, res) => {
@@ -107,16 +103,16 @@ const getLoops = async (req, res) => {
         attributes: ["id", "name", "description", "content", "filename"],
         include: [
           {
-            model: Languages_loops,
-            as: "language",
-            attributes: ["name"],
-            where: { name: language },
-          },
-          {
             model: User,
             as: "user",
             attributes: ["username"],
           },
+          {
+            model: Language,
+            as: "language",
+            attributes: ["name"],
+            where: { name: language },
+          }
         ],
       });
       return res.status(200).json({
@@ -137,6 +133,11 @@ const getLoops = async (req, res) => {
         model: User,
         as: "user",
         attributes: ["username"],
+      },
+      {
+        model: Language,
+        as: "language",
+        attributes: ["name"],
       }
     ],
   })
@@ -157,6 +158,7 @@ const getLoops = async (req, res) => {
 
 const searchLoops = async (req, res) => {
   const { search } = req.params;
+  console.log(search);
   if (!search) {
     res.status(400).json({
       status: "Error",
@@ -166,14 +168,30 @@ const searchLoops = async (req, res) => {
   try {
     const response = await Loop.findAll({
       attributes: ["id", "name", "description", "content", "filename"],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        }
+      ],
     },
     {
       where: {
         [Op.or]: [
           { name: { [Op.like]: `%${search}%` } },
-        ]
-      }
-  });    
+        ],
+      },
+    });
+  res.status(200).json({
+    status: "OK",
+    loops: response,
+  });
   } catch (error) {
     res.status(400).json({
       status: "Error",

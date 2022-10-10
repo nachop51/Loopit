@@ -86,7 +86,6 @@ const login = async (req, res) => {
       })
     }
     const passMatch = await bcrypt.compare(password, userExists.password);
-    console.log(passMatch);
     if (!passMatch) {
       return res.status(404).json({
         status: "Error",

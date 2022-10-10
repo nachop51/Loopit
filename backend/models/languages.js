@@ -2,15 +2,15 @@ const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../database/db");
 
 
-const Languages_loops = sequelize.define(
-  "Languages_loops",
+const Language = sequelize.define(
+  "Languages",
   {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
-    name_language: {
+    name: {
       type: DataTypes.STRING(40),
       allowNull: false,
       unique: true,
@@ -23,17 +23,5 @@ const Languages_loops = sequelize.define(
       updatedAt: "update_at",
   }
 )
-// const Language = sequelize.define("Languages", {
-//   id: {
-//     type: Sequelize.UUID,
-//     defaultValue: Sequelize.UUIDV4,
-//     primaryKey: true,
-//   },
-//   name: {
-//     type: DataTypes.STRING(45),
-//     allowNull: false,
-//     unique: true,
-//   },
-// });
 
-module.exports = Languages_loops;
+module.exports = Language;
