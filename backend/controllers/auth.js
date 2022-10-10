@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
 const register = async (req, res) => {
-  const { username, fullname, password, email } = req.body;
+  const { username, fullname, password, email, id } = req.body;
   // If the user did not pass the required information, status code 400 is launched
   if (!username || !fullname || !password || !email) {
     return res.status(400).json({
@@ -33,30 +33,30 @@ const register = async (req, res) => {
       });
     } else {
       let passEncrypt = await bcrypt.hash(password, 8);
-      const newUser = await User.create({
+      const newUser =  await User.create({
+      username: username,
+      full_name: fullname,
+      email: email,
+      password: passEncrypt,
+    });
+    const token = jwt.sign(
+      {
         username: username,
-        full_name: fullname,
-        email: email,
-        password: passEncrypt,
+        userId: newUser.id,
+      },
+      key,
+      {
+        expiresIn: "7d",
+      }
+    );
+    return res
+      .status(200)
+      .cookie("token", token, { maxAge: 604800000, httpOnly: true })
+      .json({
+        state: "Registered",
+        id: newUser.id,
+        username: newUser.username,
       });
-      const token = jwt.sign(
-        {
-          username: username,
-          userId: newUser.id,
-        },
-        key,
-        {
-          expiresIn: "7d",
-        }
-      );
-      return res
-        .status(200)
-        .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-        .json({
-          state: "Registered",
-          id: newUser.id,
-          username: newUser.username,
-        });
     }
   } catch (error) {
     res.status(400).json({
@@ -105,11 +105,7 @@ const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-      .json({
-        status: "logged",
-        id: userExists.id,
-        username: userExists.username,
-      });
+      .json({ status: "logged", id: userExists.id  ,username: userExists.username});
   } catch (error) {
     return res.status(400).json({
       status: "Error",
