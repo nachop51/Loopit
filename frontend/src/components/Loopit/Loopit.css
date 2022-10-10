@@ -9,4 +9,5 @@
 
 .loop-container {
   @apply m-auto mb-20 mt-32 w-2/3 rounded-xl min-h-screen;
+  z-index: 1;
 }

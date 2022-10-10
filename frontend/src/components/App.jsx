@@ -12,6 +12,7 @@ import { checkUserAuth } from "../actions";
 // import LoadingSpinner from "../assets/loading_spinner.gif";
 import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./Loopit/pages/Favorites";
+import ErrorPage from "./404";
 
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
@@ -55,9 +56,10 @@ const App = ({ isSignedIn, checkUserAuth }) => {
               resize: true,
             },
           },
+          pauseOnBlur: true,
           particles: {
             color: {
-              value: "#ffffff",
+              value: ["#BD10E0", "#B8E986", "#50E3C2", "#FFD300", "#E86363"],
             },
             collisions: {
               enable: true,
@@ -97,7 +99,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
         <Route path="/create-loop" element={<CreateLoop />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
