@@ -9,8 +9,13 @@ import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
 import CreateLoop from "./Loopit/pages/CreateLoop";
 import { checkUserAuth } from "../actions";
-import LoadingSpinner from "../assets/loading_spinner.gif";
+// import LoadingSpinner from "../assets/loading_spinner.gif";
+import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./Loopit/pages/Favorites";
+
+import { useCallback } from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 const App = ({ isSignedIn, checkUserAuth }) => {
   const [stateNav, setStateNav] = useState(false);
@@ -25,6 +30,10 @@ const App = ({ isSignedIn, checkUserAuth }) => {
     else setStateNav(false);
   }, [location]);
 
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
+
   if (isSignedIn === null) {
     return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
   }
@@ -32,6 +41,56 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   return (
     <>
       <Logo />
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          fpsLimit: 60,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              resize: true,
+            },
+          },
+          particles: {
+            color: {
+              value: "#ffffff",
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              directions: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: true,
+              speed: 0.4,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 1750,
+              },
+              value: 100,
+            },
+            opacity: {
+              value: 0.3,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 2, max: 5 },
+            },
+          },
+          detectRetina: true,
+        }}
+      />
       {!stateNav && <Nav />}
       <Routes>
         <Route path="/home" element={<LandingPage />} />

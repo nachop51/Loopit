@@ -1,8 +1,8 @@
 import "./CreateLoop.css";
 import { useRef } from "react";
 import Editor from "@monaco-editor/react";
-import LoadingSpinner from "../../../assets/loading_spinner.gif";
-
+// import LoadingSpinner from "../../../assets/loading_spinner.gif";
+import LoadingSpinner from "../../../assets/nobg.gif";
 const CreateLoop = () => {
   // const [isEditorReady, setIsEditorReady] = useState(false);
   const editorRef = useRef(null);

@@ -8,10 +8,6 @@ import "./Content.css";
 
 import { useNavigate } from "react-router-dom";
 
-import { useCallback } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-
 const Content = () => {
   const navigate = useNavigate();
 
@@ -19,62 +15,8 @@ const Content = () => {
     navigate("/");
   };
 
-  const particlesInit = useCallback(async (engine) => {
-    await loadFull(engine);
-  }, []);
-
   return (
     <main className="main">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              resize: true,
-            },
-          },
-          particles: {
-            color: {
-              value: "#ffffff",
-            },
-            collisions: {
-              enable: true,
-            },
-            move: {
-              directions: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: true,
-              speed: 0.4,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 1750,
-              },
-              value: 100,
-            },
-            opacity: {
-              value: 0.3,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 2, max: 5 },
-            },
-          },
-          detectRetina: true,
-        }}
-      />
       <section className="intro">
         <article className="intro-text">
           <h1 className="intro-text__title">Learn from the best solutions</h1>

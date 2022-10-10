@@ -3,8 +3,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  filter: blur(0.8px);
+  opacity: 0.5;
 }
 
 .loop-container {
-  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl;
+  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl min-h-screen;
 }

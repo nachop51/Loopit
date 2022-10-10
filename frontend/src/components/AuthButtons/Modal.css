@@ -101,3 +101,7 @@
 .show-span {
   @apply opacity-100 visible;
 }
+
+.show-span-form {
+  @apply opacity-100 visible text-center;
+}

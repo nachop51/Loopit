@@ -10,9 +10,9 @@ import Feedback from "./Feedback";
 const LoopItem = ({ loop }) => {
   return (
     <div className="loop">
-      <User username={loop.user} />
+      <User username={loop.user.username} />
       <Interact links={[]} />
-      <Tags languages={loop.language} />
+      <Tags languages={[]} />
       <Content
         languages={loop.language}
         description={loop.description}
