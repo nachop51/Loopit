@@ -122,7 +122,7 @@ const getLoops = async (req, res) => {
             attributes: ["username"],
           },
         ],
-      })
+      });
       return res.status(200).json({
         status: "OK",
         loops: response,
