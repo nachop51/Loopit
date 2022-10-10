@@ -4,7 +4,7 @@ const {
   deleteLoop,
   updateLoop,
   getLoops,
-  getLoopsByLanguage,
+  searchLoops
 } = require("../controllers/loops");
 const { route } = require("./routeAuth");
 
@@ -14,5 +14,6 @@ routeLoops.delete("/delete", deleteLoop);
 routeLoops.put("/update", updateLoop);
 routeLoops.get("/all/:language", getLoops);
 routeLoops.get("/all", getLoops);
+routeLoops.get("/search/:search", searchLoops);
 
 module.exports = routeLoops;
