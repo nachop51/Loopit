@@ -2,6 +2,9 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
+import { useCallback } from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 import Logo from "./Logo";
 import Nav from "./Loopit/Nav";
@@ -14,10 +17,6 @@ import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./Loopit/pages/Favorites";
 import ErrorPage from "./404";
 
-import { useCallback } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-
 const App = ({ isSignedIn, checkUserAuth }) => {
   const [stateNav, setStateNav] = useState(false);
   let location = useLocation();
@@ -27,8 +26,9 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   }, [checkUserAuth]);
 
   useEffect(() => {
-    if (window.location.pathname === "/home") setStateNav(true);
-    else setStateNav(false);
+    let loc = window.location.pathname;
+    if (["/", "/create-loop", "/favorites"].includes(loc)) setStateNav(false);
+    else setStateNav(true);
   }, [location]);
 
   const particlesInit = useCallback(async (engine) => {

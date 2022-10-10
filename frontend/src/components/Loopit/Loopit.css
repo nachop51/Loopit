@@ -5,6 +5,7 @@
   transform: translate(-50%, -50%);
   filter: blur(0.8px);
   opacity: 0.5;
+  width: 25%;
 }
 
 .loop-container {

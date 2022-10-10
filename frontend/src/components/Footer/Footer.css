@@ -13,6 +13,17 @@
   }
 }
 
+@media (max-width: 1024px) {
+}
+
+@media (min-width: 1460px) {
+  .footer-container {
+    background: url("../../assets/layered-waves-haikei.svg") no-repeat;
+    background-position-y: 75%;
+    background-size: cover;
+  }
+}
+
 .footer-content {
   @apply flex justify-around pb-2;
   @apply md:justify-evenly;

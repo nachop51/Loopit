@@ -51,3 +51,7 @@ body {
 .btn-lily {
   @apply bg-gray-900 text-white;
 }
+
+.btn-expand {
+  @apply w-40;
+}
