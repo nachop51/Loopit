@@ -83,7 +83,7 @@ const login = async (req, res) => {
       return res.status(404).json({
         status: "Error",
         error: "Bad request - failed credentials",
-      });
+      })
     }
     const passMatch = bcrypt.compare(password, userExists.password);
     if (!passMatch) {
@@ -128,9 +128,13 @@ const verifyTokenUser = async (req, res) => {
     const verified = jwt.verify(token, key);
     const tokenInfo = jwt.decode(token);
     const username = tokenInfo.username;
+    const userInfo = await User.findOne({
+      where: { username: username },
+    });
     res.status(200).json({
       status: "authorized",
-      username: username,
+      id: userInfo.id,
+      username: userInfo.username,
     });
   } catch (error) {
     res.status(200).json({

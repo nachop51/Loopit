@@ -74,8 +74,30 @@ const updateLanguage = (req, res) => {
     });
 };
 
+const getLanguages =  async (req, res) => {
+  try {
+    const languages = await Language.findAll(
+      {
+        attributes: ["id", "name"],
+      }
+    );
+    res.status(200).json({
+      status: "OK",
+      languages: languages,
+    })
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+}
+  
+
+
 module.exports = {
   addLanguage: addLanguage,
   deleteLanguage: deleteLanguage,
   updateLanguage: updateLanguage,
+  getLanguages: getLanguages,
 };
