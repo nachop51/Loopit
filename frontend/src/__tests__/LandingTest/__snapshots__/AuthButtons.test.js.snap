@@ -6,7 +6,7 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
     class="buttons-container"
   >
     <button
-      class="button"
+      class="btn"
       data-testid="button-login"
     >
       Log In
@@ -73,7 +73,7 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
             <br />
           </span>
           <button
-            class="btn"
+            class="btn-lily btn-animate"
             type="submit"
           >
             Log In
@@ -94,7 +94,7 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
       </div>
     </div>
     <button
-      class="button"
+      class="btn btn-lily"
       data-testid="button-register"
     >
       Sign Up
@@ -217,7 +217,7 @@ exports[`Renderizado y correcto funcionamiento del flujo de autenticación Debe 
             </span>
           </div>
           <button
-            class="btn"
+            class="btn-lily"
             type="submit"
           >
             Sign Up

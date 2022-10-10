@@ -3,9 +3,14 @@ import "@testing-library/jest-dom/extend-expect";
 import { AuthButtons } from "../../components/AuthButtons";
 import { Provider } from "react-redux";
 import { store } from "../../store/store";
+import { BrowserRouter, Routes } from "react-router-dom";
 
 const render = (component) =>
-  testRender(<Provider store={store}>{component}</Provider>);
+  testRender(
+    <BrowserRouter>
+      <Provider store={store}>{component}</Provider>
+    </BrowserRouter>
+  );
 
 describe("Renderizado y correcto funcionamiento del flujo de autenticación", () => {
   it("Debe existir un componente AuthButtons en el dom", () => {

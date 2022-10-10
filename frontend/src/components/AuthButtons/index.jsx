@@ -26,7 +26,11 @@ export const AuthButtons = ({ signOut, isSignedIn }) => {
 
   return (
     <div className="buttons-container">
-      <button className="btn" onClick={() => setLoginIsOpen(!loginIsOpen)}>
+      <button
+        className="btn"
+        onClick={() => setLoginIsOpen(!loginIsOpen)}
+        data-testid="button-login"
+      >
         Log In
       </button>
       <ModalLogIn
@@ -39,6 +43,7 @@ export const AuthButtons = ({ signOut, isSignedIn }) => {
       <button
         className="btn btn-lily"
         onClick={() => setSignIsOpen(!signIsOpen)}
+        data-testid="button-register"
       >
         Sign Up
       </button>

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Renderizado correcto del contenedor del contenido Debe existir un componente Content en el dom 1`] = `undefined`;
