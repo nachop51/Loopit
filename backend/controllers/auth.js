@@ -46,7 +46,7 @@ const register = async (req, res) => {
       },
       key,
       {
-        expiresIn: "7d",
+        expiresIn: "1d",
       }
     );
     return res
@@ -85,7 +85,8 @@ const login = async (req, res) => {
         error: "Bad request - failed credentials",
       })
     }
-    const passMatch = bcrypt.compare(password, userExists.password);
+    const passMatch = await bcrypt.compare(password, userExists.password);
+    console.log(passMatch);
     if (!passMatch) {
       return res.status(404).json({
         status: "Error",

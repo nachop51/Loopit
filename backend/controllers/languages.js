@@ -1,4 +1,4 @@
-const Language = require("../models/languages");
+const Languages_loops = require("../models/languages");
 
 const addLanguage = (req, res) => {
   const { name } = req.body;
