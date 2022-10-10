@@ -46,16 +46,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
         id="tsparticles"
         init={particlesInit}
         options={{
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              resize: true,
-            },
-          },
+          fpsLimit: 30,
           pauseOnBlur: true,
           particles: {
             color: {
@@ -90,7 +81,6 @@ const App = ({ isSignedIn, checkUserAuth }) => {
               value: { min: 2, max: 5 },
             },
           },
-          detectRetina: true,
         }}
       />
       {!stateNav && <Nav />}
