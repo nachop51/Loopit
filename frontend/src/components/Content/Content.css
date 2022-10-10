@@ -4,15 +4,14 @@
 }
 
 .intro {
-  @apply mt-28 mx-4;
+  @apply mt-24 mx-4;
   @apply grid;
   @apply md:place-items-center;
   @apply lg:gap-x-8;
   @apply xl:grid-cols-2;
   /* background: linear-gradient(90deg, #09203f 0%, #537895 100%), #ffffff; */
-  /* min-height: calc(100vh - 7rem); */
+  min-height: calc(100vh - 6rem);
   border-radius: 1.2rem 1.2rem 0 0;
-  min-height: 100vh;
 }
 
 .intro-text {
@@ -29,7 +28,7 @@
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  text-shadow: 4px 4px rgb(0, 0, 0, 0.2);
+  text-shadow: 2px 4px 4px rgb(0, 0, 0, 0.1);
 }
 
 .intro-text__p {
