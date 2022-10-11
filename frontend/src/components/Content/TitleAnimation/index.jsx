@@ -1,6 +1,7 @@
 import "./TitleAnimation.css";
 import { useState } from "react";
 import VisibilitySensor from "react-visibility-sensor";
+import PropTypes from "prop-types";
 
 const TitleAnimation = ({ title, width }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,6 +20,11 @@ const TitleAnimation = ({ title, width }) => {
       </span>
     </VisibilitySensor>
   );
+};
+
+TitleAnimation.propTypes = {
+  title: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default TitleAnimation;
