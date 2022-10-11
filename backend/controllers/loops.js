@@ -100,7 +100,6 @@ const getLoops = async (req, res) => {
   if (language) {
     try {
       const response  = await   Loop.findAll({
-        attributes: ["id", "name", "description", "content", "filename"],
         include: [
           {
             model: User,
@@ -127,7 +126,6 @@ const getLoops = async (req, res) => {
     }
   }
   Loop.findAll({
-    attributes: ["id", "name", "description", "content", "filename"],
     include: [
       {
         model: User,

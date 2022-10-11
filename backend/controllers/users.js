@@ -38,6 +38,8 @@ const getUsers = (req, res) => {
     });
 };
 
+const getUserByNames = (req, res) => {
+
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
   getUsers: getUsers,

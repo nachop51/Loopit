@@ -1,5 +1,6 @@
 Desarrollo de la API - Metodos creados al momento
 
+
 /auth
 	- /login
 		- Crear un usuario {user: "", password: ""}
@@ -7,29 +8,70 @@ Desarrollo de la API - Metodos creados al momento
 		- Registra un usuario en la base de datos {username:"", fullname: "", password: "", email: ""}
 	- /verify
 		- verifica un token dado
+	- /logout
+		- Cerrar la sesion del usuario
+
+
 /user
-	- /users
-		- Obtener los datos de todos los usuarios de nuestra base de datos
-	- /users/<username>
-	-/update
-	-/delete
+	- /all
+		- te trae la data de todos los usuarios
+
+	** FALTA -> TRAER LA DATA DE UN usuario
+			 -> ELIMINAR UN USUARIO
+			 -> MODIFICAR LOS DATOS DE UN USUARIO
+
+
 /loop
 	- /add
 		- Agrega un loop a la base de datos {name:"",description:"", content:"",language:"", filename:"" }
 	- /delete
 		- Elimina un loop de la base de datos {id:""}
 	-/update
-		- Updatea el contenido del loop {id:"" y los atributos que quieras modificar}
+		- Updatea el contenido del loop {id:"" y los atributos que quieras modificar
+	-/all
+		- Trae todos los loops con su informacion
+	-/all/:language
+		- Trae todos los loops con su informacion del lenguaje dado
+	
+	** FALTA -> ARREGLAR EL SEARCH
+			 -> TRAER LA INFO DE UN LOOP POR UN ID
+
+
 /favorite
 	- /add
 		- Agrega un loop a favoritos { user_id: "", loop_id: ""}
 
+	**FALTA -> AGREGAR METODO PARA SACAR LOOP DE LOS FAVORITOS
+
+
 /languages
-	/all: 
+	- /all
+		- Agregar un lenguaje a la lista 
+	- /delete
+		- Eliminar un lenguaje de la lista
+	- /put
+		- Modificar un lenguaje de la lista
+	- /all
+		- Mostrar todos los lenguajes de la lista 
 
-next tasks:
 
-more models
-check slave of mysql
-keep learning sequelize
-keep learning cookies and jwt
+/followers:
+	- /add
+		- Agregar un nuevo seguidor
+
+	**FALTA METODO PARA ELIMINAR UN SEGUIDOR DE LA LISTA
+
+
+/like
+	**FALTA METODOS PARA AGREGAR LIKES Y PARA ELIMINAR LOS LIKES
+	  RELACION DE 1 A 
+	  GENERAR EL CONTROLADOR PARA ESTOS
+
+
+/mail
+	- /post
+		- Envia un mail a un usuario
+
+
+
+
