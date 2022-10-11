@@ -1,5 +1,5 @@
 .footer-container {
-  background: url("../../assets/layered-waves-haikei (2).svg") no-repeat;
+  background: url("../../assets/layered-waves-haikei (3).svg") no-repeat;
   background-position-y: 100%;
   min-height: 22rem;
   @apply flex flex-col justify-end bg-cover;
