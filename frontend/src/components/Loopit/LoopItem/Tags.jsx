@@ -1,17 +1,9 @@
 import "./Tags.css";
 
-const Tags = ({ languages }) => {
-  console.log(languages);
-
+const Tags = ({ language }) => {
   return (
     <div className="tag-container">
-      <span
-        className={
-          languages.name ? `tag ${languages.name.toLowerCase()}` : "tag"
-        }
-      >
-        {languages.name}
-      </span>
+      <span className={language + " tag"}>{language}</span>
     </div>
   );
 };
