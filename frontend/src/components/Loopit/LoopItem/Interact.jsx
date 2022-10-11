@@ -17,7 +17,7 @@ const Interact = ({ content, filename }) => {
         <VscCopy />
       </div>
       <div
-        title="Download"
+        title="Download as txt"
         onClick={() => {
           const a = document.createElement("a");
           const blob = new Blob([content], { type: "txt" });
