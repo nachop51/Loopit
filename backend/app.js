@@ -22,8 +22,13 @@ require("dotenv").config({ path: "./.env" });
 const { sequelize } = require("./database/db");
 //import models from models folder and associate them
 require("./models/asociations.js");
-const { User } = require("./models/users");
-const { Loop } = require("./models/loops");
+const User = require("./models/users");
+const Loop = require("./models/loops");
+const Language = require("./models/languages");
+// const Favorite = require("./models/favorites");
+const Follower = require("./models/followers");
+// const Like = require("./models/likes");
+//import bcrypt to hash passwords
 
 const port = process.env.PORT;
 
