@@ -1,10 +1,7 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import { useCallback } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
 
 import Logo from "./Logo";
 import Nav from "./Loopit/Nav";
@@ -31,10 +28,6 @@ const App = ({ isSignedIn, checkUserAuth }) => {
     else setStateNav(true);
   }, [location]);
 
-  const particlesInit = useCallback(async (engine) => {
-    await loadFull(engine);
-  }, []);
-
   if (isSignedIn === null) {
     return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
   }
@@ -42,7 +35,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   return (
     <>
       <Logo />
-      <Particles
+      {/* <Particles
         id="tsparticles"
         init={particlesInit}
         options={{
@@ -82,7 +75,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
             },
           },
         }}
-      />
+      /> */}
       {!stateNav && <Nav />}
       <Routes>
         <Route path="/home" element={<LandingPage />} />
