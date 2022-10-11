@@ -11,6 +11,7 @@ const routeFavorite = require("./routes/routeFavorites");
 const routeLanguages = require("./routes/routeLanguages");
 const routeFollower = require("./routes/routeFollowers");
 const routeMail = require("./routes/routeMail");
+const routeLike = require("./routes/routeLike");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
