@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../assets/loading_spinner.gif";
 // import Footer from "../Footer";
 import LoopList from "./LoopList";
+import Aside from "./Aside";
 
 const LoopitApp = ({ userStatus }) => {
   useAuth(userStatus);
@@ -15,9 +16,7 @@ const LoopitApp = ({ userStatus }) => {
     <>
       <main className="loop-container">
         <LoopList />
-        <aside>
-          <h2>Loops of the week:</h2>
-        </aside>
+        <Aside />
       </main>
     </>
   );

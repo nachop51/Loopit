@@ -9,6 +9,8 @@
 }
 
 .loop-container {
-  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl min-h-screen;
+  @apply mb-20 mt-32 rounded-xl min-h-screen
+  flex flex-row gap-12 relative ml-auto;
+  width: calc(90% - 3rem);
   z-index: 1;
 }

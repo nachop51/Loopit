@@ -12,7 +12,7 @@ const Feedback = () => {
         </div>
         <div>Comment</div>
         <div className="action-comment" title="negative-vote">
-          ❤️
+          🤩
         </div>
       </div>
     </div>

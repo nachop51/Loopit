@@ -4,14 +4,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Logo from "./Logo";
-import Nav from "./Loopit/Nav";
+import Nav from "./NavBar/";
 import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
-import CreateLoop from "./Loopit/pages/CreateLoop";
+import CreateLoop from "./pages/CreateLoop";
 import { checkUserAuth } from "../actions";
 // import LoadingSpinner from "../assets/loading_spinner.gif";
 import LoadingSpinner from "../assets/nobg.gif";
-import Favorites from "./Loopit/pages/Favorites";
+import Favorites from "./pages/Favorites";
 import ErrorPage from "./404";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
