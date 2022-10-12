@@ -76,7 +76,23 @@ const getFavoritesUser = async (req, res) => {
     });
   }
   try {
-    const favorites =  Favorite.findAll();
+    const favorites = await Loop.findAll(
+      {
+        attributes: ["id", "name", "description", "content", "filename"],
+        include: [
+          {
+            model: User,
+            as: "user",
+            attributes: ["username"],
+            where: { id: id }
+          },
+          {
+            model: Language,
+            as: "language",
+            attributes: ["name"],
+          },
+        ],
+      });
     return res.status(200).json({
       status: "OK",
       favorites: favorites,
