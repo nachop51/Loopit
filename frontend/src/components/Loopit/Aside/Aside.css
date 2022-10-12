@@ -1,0 +1,9 @@
+.aside {
+  @apply w-2/6 fixed right-0;
+}
+
+.aside-container {
+  @apply rounded-2xl py-12 mr-8;
+  height: 80vh;
+  background-color: #ddd;
+}

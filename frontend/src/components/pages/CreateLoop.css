@@ -1,0 +1,58 @@
+.editor {
+  @apply min-h-screen;
+}
+
+.heading-creator {
+  @apply text-center text-white mt-14 pb-10;
+}
+
+.editor-container:not(.monaco-editor) {
+  @apply w-2/3 ml-auto m-auto text-center pt-5;
+  @apply sm:w-1/2;
+  @apply md:w-4/6 ml-auto mr-10;
+  @apply lg:w-9/12 m-auto;
+  @apply xl:w-9/12 m-auto;
+  /* margin: 20px auto 20px auto; */
+  /* align-content: center; */
+}
+
+.monaco-editor * {
+  font-family: Consolas;
+  @apply !mx-0;
+}
+
+.monaco-editor .mtkz {
+  display: contents !important;
+}
+
+.editor-form {
+  @apply w-2/3 m-auto text-center mb-5;
+  @apply bg-slate-100 bg-opacity-60 rounded-lg py-12;
+}
+
+.editor-form input,
+.editor-form select {
+  @apply w-1/2 rounded-lg focus:outline-0 focus:outline-none border-2 border-solid border-gray-400 p-2 mb-5;
+}
+
+.editor-form input::placeholder,
+.editor-form select {
+  @apply text-gray-500;
+}
+
+.show-editor-error {
+  @apply text-red-500 opacity-100 visible text-center text-sm mb-4;
+}
+
+.editor-req {
+  @apply !border-gray-700;
+}
+
+.editor-req::placeholder,
+select.editor-req {
+  @apply !text-gray-600;
+}
+
+.save-button {
+  margin-top: 20px;
+}
