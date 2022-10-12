@@ -1,4 +1,6 @@
 const User = require("../models/users");
+const Loop = require("../models/loops");
+const Favorite = require("../models/favorites");
 
 const addFavorite = async (req, res) => {
   const { user_id, loop_id } = req.body;
@@ -9,10 +11,10 @@ const addFavorite = async (req, res) => {
     });
   }
   try {
+    const loop = await Loop.findByPk(loop_id);
     const user = await User.findByPk(user_id);
-    console.log(user);
-    console.log(loop_id);
-    const add_favorite = await user.addLoop(loop_id);
+    const add_favorite = await loop.addUser(user, { through: Favorite });
+    console.log(add_favorite);
     res.status(200).json({
       status: "OK",
       data: add_favorite,
