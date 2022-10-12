@@ -29,53 +29,16 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   }, [location]);
 
   if (isSignedIn === null) {
-    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
+    return (
+      <div style={{ width: "100vw", height: "100vh" }}>
+        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+      </div>
+    );
   }
 
   return (
     <>
       <Logo />
-      {/* <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fpsLimit: 30,
-          pauseOnBlur: true,
-          particles: {
-            color: {
-              value: ["#BD10E0", "#B8E986", "#50E3C2", "#FFD300", "#E86363"],
-            },
-            collisions: {
-              enable: true,
-            },
-            move: {
-              directions: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: true,
-              speed: 0.4,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 1750,
-              },
-              value: 100,
-            },
-            opacity: {
-              value: 0.3,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 2, max: 5 },
-            },
-          },
-        }}
-      /> */}
       {!stateNav && <Nav />}
       <Routes>
         <Route path="/home" element={<LandingPage />} />

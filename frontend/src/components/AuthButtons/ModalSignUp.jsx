@@ -76,7 +76,6 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         errors = setIn(errors, key, value);
       };
       const message = error.response.data.error;
-      console.log(message);
       if (message.email) {
         setError("email", "This email already exists");
       }
