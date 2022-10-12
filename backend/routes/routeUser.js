@@ -1,7 +1,8 @@
 const routeUser = require("express").Router();
-const { getUsers } = require("../controllers/users");
+const { getUsers, getFavoritesUser } = require("../controllers/users");
 
 //define routes for user
-routeUser.get("/users/", getUsers);
+routeUser.get("/all", getUsers);
+routeUser.get("/favorites/:id", getFavoritesUser);
 
 module.exports = routeUser;

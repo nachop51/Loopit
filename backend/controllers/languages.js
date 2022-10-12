@@ -1,6 +1,6 @@
 const Language = require("../models/languages");
 
-const addLanguage = (req, res) => {
+const addLanguage = async (req, res) => {
   const { name } = req.body;
   if (!name) {
     return res.status(400).json({
@@ -8,26 +8,20 @@ const addLanguage = (req, res) => {
       error: "Bad Request - Missing data",
     });
   }
-  Language.create({ name: name })
-    .then((languages) => {
-      res.status(200).json({
-        state: "Added",
-        data: languages.dataValues,
-      });
-    })
-    .catch((error) => {
-      console.log(error.errors[0].message);
-      if (error.errors[0].message === "name must be unique") {
-        res.status(400).json({
-          status: "Error",
-          error: "Language already exists",
-        });
-      }
+  try {
+    const new_language = await Language.create({
+      name: name,
+    });
+    res.status(200).json({
+      status: "OK",
+      language: new_language,
+    });
+  } catch (error) {
       res.status(400).json({
         state: "Error",
         error: error,
       });
-    });
+    };
 };
 
 const deleteLanguage = (req, res) => {
@@ -74,8 +68,30 @@ const updateLanguage = (req, res) => {
     });
 };
 
+const getLanguages =  async (req, res) => {
+  try {
+    const languages = await Language.findAll(
+      {
+        attributes: ["id", "name"],
+      }
+    );
+    res.status(200).json({
+      status: "OK",
+      languages: languages,
+    })
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+}
+  
+
+
 module.exports = {
   addLanguage: addLanguage,
   deleteLanguage: deleteLanguage,
   updateLanguage: updateLanguage,
+  getLanguages: getLanguages,
 };

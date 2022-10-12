@@ -1,5 +1,4 @@
-// import "./LoopItem.css";
-import "./LoopItemLIGHT.css";
+import "./LoopItem.css";
 import User from "./User";
 import Tags from "./Tags";
 import Interact from "./Interact";
@@ -10,11 +9,11 @@ import Feedback from "./Feedback";
 const LoopItem = ({ loop }) => {
   return (
     <div className="loop">
-      <User username={loop.user} />
-      <Interact links={[]} />
-      <Tags languages={loop.language} />
+      <User username={loop.user.username} />
+      <Interact content={loop.content} />
+      <Tags language={loop.language.name} />
       <Content
-        languages={loop.language}
+        language={loop.language.name}
         description={loop.description}
         content={loop.content}
       />

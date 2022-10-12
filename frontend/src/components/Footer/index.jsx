@@ -25,7 +25,9 @@ const Footer = () => {
           </a>
         </p>
       </div>
-      <p data-testid="footer-heading">All rights reserved &copy;Loopit 2022</p>
+      <p data-testid="footer-heading" className="footer-copy">
+        All rights reserved &copy;Loopit 2022
+      </p>
     </footer>
   );
 };

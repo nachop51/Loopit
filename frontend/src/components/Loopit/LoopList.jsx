@@ -6,8 +6,10 @@ import { fetchLoops } from "../../actions";
 
 const LoopList = ({ loops, fetchLoops }) => {
   useEffect(() => {
-    fetchLoops();
-  }, [fetchLoops]);
+    if (loops.length === 0) {
+      fetchLoops();
+    }
+  }, [fetchLoops, loops.length]);
 
   const renderedLoops = loops.map((loop) => {
     return <LoopItem key={loop.id} loop={loop} />;

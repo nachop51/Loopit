@@ -11,6 +11,7 @@ const routeFavorite = require("./routes/routeFavorites");
 const routeLanguages = require("./routes/routeLanguages");
 const routeFollower = require("./routes/routeFollowers");
 const routeMail = require("./routes/routeMail");
+const routeLike = require("./routes/routeLike");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
@@ -21,8 +22,13 @@ require("dotenv").config({ path: "./.env" });
 const { sequelize } = require("./database/db");
 //import models from models folder and associate them
 require("./models/asociations.js");
-const { User } = require("./models/users");
-const { Loop } = require("./models/loops");
+const User = require("./models/users");
+const Loop = require("./models/loops");
+const Language = require("./models/languages");
+// const Favorite = require("./models/favorites");
+const Follower = require("./models/followers");
+// const Like = require("./models/likes");
+//import bcrypt to hash passwords
 
 const port = process.env.PORT;
 
@@ -42,11 +48,11 @@ app.use(
 
 //define routes of the app
 app.use("/auth", routeAuth);
-app.use("/user", routeUser);
-app.use("/loop", routeLoop);
-app.use("/favorite", routeFavorite);
-app.use("/language", routeLanguages);
-app.use("/follower", routeFollower);
+app.use("/users", routeUser);
+app.use("/loops", routeLoop);
+app.use("/favorites", routeFavorite);
+app.use("/languages", routeLanguages);
+app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
 
 //sync database and start server

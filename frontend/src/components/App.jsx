@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -9,8 +9,10 @@ import LandingPage from "./LandingPage";
 import LoopitApp from "./Loopit";
 import CreateLoop from "./Loopit/pages/CreateLoop";
 import { checkUserAuth } from "../actions";
-import LoadingSpinner from "../assets/loading_spinner.gif";
+// import LoadingSpinner from "../assets/loading_spinner.gif";
+import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./Loopit/pages/Favorites";
+import ErrorPage from "./404";
 
 const App = ({ isSignedIn, checkUserAuth }) => {
   const [stateNav, setStateNav] = useState(false);
@@ -21,12 +23,17 @@ const App = ({ isSignedIn, checkUserAuth }) => {
   }, [checkUserAuth]);
 
   useEffect(() => {
-    if (window.location.pathname === "/home") setStateNav(true);
-    else setStateNav(false);
+    let loc = window.location.pathname;
+    if (["/", "/create-loop", "/favorites"].includes(loc)) setStateNav(false);
+    else setStateNav(true);
   }, [location]);
 
   if (isSignedIn === null) {
-    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
+    return (
+      <div style={{ width: "100vw", height: "100vh" }}>
+        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+      </div>
+    );
   }
 
   return (
@@ -38,7 +45,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
         <Route path="/create-loop" element={<CreateLoop />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );

@@ -13,9 +13,12 @@ const LoopitApp = ({ userStatus }) => {
 
   return (
     <>
-      <div className="loop-container">
+      <main className="loop-container">
         <LoopList />
-      </div>
+        <aside>
+          <h2>Loops of the week:</h2>
+        </aside>
+      </main>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import "./Modal.css";
 import { Form, Field } from "react-final-form";
-import { setIn } from "final-form";
+import { setIn, FORM_ERROR } from "final-form";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -68,26 +68,19 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         navigate("/");
       }
     } catch (error) {
+      if (error.message.includes("Network")) {
+        return { [FORM_ERROR]: "Something went wrong, try again later..." };
+      }
       let errors = {};
       const setError = (key, value) => {
         errors = setIn(errors, key, value);
       };
       const message = error.response.data.error;
-      console.log(message);
-      const flags = {
-        email: false,
-        user: false,
-      };
       if (message.email) {
         setError("email", "This email already exists");
-        flags.email = true;
       }
       if (message.username) {
         setError("user", "This username already exists");
-        flags.user = true;
-      }
-      if (flags.email && flags.user) {
-        console.log("Server error, try again later");
       }
       if (Object.entries(errors).length > 0) {
         return errors;
@@ -103,7 +96,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
 
         <Form
           onSubmit={onSubmit}
-          render={({ handleSubmit }) => (
+          render={({ handleSubmit, submitError }) => (
             <form onSubmit={handleSubmit} className="form">
               <Field
                 name="fullname"
@@ -144,6 +137,11 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
                   return validatePasswordConfirmation(value, props);
                 }}
               />
+              {submitError && (
+                <div className="error-message show-span-form">
+                  {submitError}
+                </div>
+              )}
               <button className="btn-lily" type="submit">
                 Sign Up
               </button>

@@ -1,9 +1,4 @@
 const User = ({ username }) => {
-  const choose = (choices) => {
-    var index = Math.floor(Math.random() * choices.length);
-    return choices[index];
-  };
-
   return (
     <div className="user-info">
       <div className="avatar">
@@ -14,7 +9,7 @@ const User = ({ username }) => {
         />
       </div>
       <div>
-        <h3>{choose(["nacho", "santi", "mate", "vale"])}</h3>
+        <h3>{username}</h3>
         <span>At 15/12 19:10PM</span>
       </div>
     </div>
