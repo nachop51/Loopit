@@ -1,5 +1,5 @@
 .footer-container {
-  background: url("../../assets/layered-waves-haikei.svg") no-repeat;
+  background: url("../../assets/layered-waves-haikei (3).svg") no-repeat;
   background-position-y: 100%;
   min-height: 22rem;
   @apply flex flex-col justify-end bg-cover;
@@ -7,7 +7,7 @@
 
 @media (max-width: 768px) {
   .footer-container {
-    background: url("../../assets/layered-waves-haikei (1).svg") no-repeat;
+    background: url("../../assets/layered-waves-haikei.png") no-repeat;
     background-position-y: 100%;
     background-size: cover;
   }
@@ -18,7 +18,7 @@
 
 @media (min-width: 1460px) {
   .footer-container {
-    background: url("../../assets/layered-waves-haikei.svg") no-repeat;
+    /* background: url("../../assets/layered-waves-haikei.svg") no-repeat; */
     background-position-y: 75%;
     background-size: cover;
   }

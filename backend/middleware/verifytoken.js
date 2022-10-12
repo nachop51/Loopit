@@ -6,7 +6,8 @@ const verifytoken = (req, res, next) => {
   if (
     req.url === "/auth/login" ||
     req.url === "/auth/register" ||
-    req.url === "/auth/verify"
+    req.url === "/auth/verify" ||
+    req.url === "/loops/add"
   ) {
     next();
   } else {
