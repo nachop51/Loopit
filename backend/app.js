@@ -33,11 +33,6 @@ const Follower = require("./models/followers");
 const port = process.env.PORT;
 
 //middlewares
-app.use(cookieParser());
-app.use("/", verifytoken);
-app.use(express.urlencoded({ extended: false }));
-//parse date request to json and append it to req.body
-app.use(express.json());
 //config cors for allow cross origin resource sharing for origin localhost:3001 with credentials
 app.use(
   cors({
@@ -45,15 +40,21 @@ app.use(
     credentials: true,
   })
 );
-
-//define routes of the app
+app.use(cookieParser());
+//parse date request to json and append it to req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/loops", routeLoop);
 app.use("/auth", routeAuth);
 app.use("/users", routeUser);
-app.use("/loops", routeLoop);
 app.use("/favorites", routeFavorite);
 app.use("/languages", routeLanguages);
 app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
+//verify token
+app.use("/", verifytoken);
+
+
 
 //sync database and start server
 app.listen(3000, () => {
