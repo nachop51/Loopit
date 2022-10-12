@@ -3,7 +3,15 @@
 }
 
 .aside-container {
-  @apply rounded-2xl py-12 mr-8;
+  @apply rounded-xl py-12 mr-8;
   height: 80vh;
-  background-color: #ddd;
+  background-color: rgba(221, 221, 221, 0.13);
+  padding: 3rem 1rem;
+}
+
+.item-container {
+  @apply rounded-md;
+  background-color: #fff;
+  margin: 10px 5px;
+  padding: 1rem 2rem;
 }
