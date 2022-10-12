@@ -1,30 +1,22 @@
 const Loop = require("../models/loops");
-const Language= require("../models/languages");
+const Language = require("../models/languages");
 const User = require("../models/users");
 const { where } = require("sequelize");
 const { Op } = require("sequelize");
 
 const addLoop = async (req, res) => {
-  const { name, description, content, language, filename, user_id } =
-    req.body;
-  if (
-    !name ||
-    !description ||
-    !content ||
-    !language ||
-    !filename ||
-    !user_id
-  ) {
+  const { name, description, content, language, filename, user_id } = req.body;
+  if (!name || !content || !language || !user_id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - Missing data",
     });
   }
-  try{
+  try {
     const language_id = await Language.findOne({
       where: { name: language },
     });
-    if(!language_id){
+    if (!language_id) {
       return res.status(400).json({
         status: "Error",
         error: "Bad Request - Language dont exist",
@@ -42,12 +34,12 @@ const addLoop = async (req, res) => {
       status: "OK",
       loop: new_loop,
     });
-  }catch(error){
+  } catch (error) {
     res.status(400).json({
       status: "Error",
       error: error,
     });
-    }
+  }
 };
 
 const deleteLoop = (req, res) => {
@@ -95,11 +87,47 @@ const updateLoop = (req, res) => {
     });
 };
 
+const getLoopsbyID = async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - missing data",
+    });
+  }
+  try {
+    const response = await Loop.findAll({
+      where: { id: id },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "id",
+          attributes: ["loop_id"],
+        },
+      ],
+    });
+    return res.status(200).json({
+      status: "OK",
+      loops: response,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
 const getLoops = async (req, res) => {
   const { language } = req.params;
   if (language) {
     try {
-      const response  = await   Loop.findAll({
+      const response = await Loop.findAll({
         include: [
           {
             model: User,
@@ -111,7 +139,7 @@ const getLoops = async (req, res) => {
             as: "language",
             attributes: ["name"],
             where: { name: language },
-          }
+          },
         ],
       });
       return res.status(200).json({
@@ -136,7 +164,7 @@ const getLoops = async (req, res) => {
         model: Language,
         as: "language",
         attributes: ["name"],
-      }
+      },
     ],
   })
     .then((loops) => {
@@ -153,7 +181,6 @@ const getLoops = async (req, res) => {
     });
 };
 
-
 const searchLoops = async (req, res) => {
   const { search } = req.params;
   console.log(search);
@@ -164,39 +191,39 @@ const searchLoops = async (req, res) => {
     });
   }
   try {
-    const response = await Loop.findAll({
-      attributes: ["id", "name", "description", "content", "filename"],
-      include: [
-        {
-          model: User,
-          as: "user",
-          attributes: ["username"],
-        },
-        {
-          model: Language,
-          as: "language",
-          attributes: ["name"],
-        }
-      ],
-    },
-    {
-      where: {
-        [Op.or]: [
-          { name: { [Op.like]: `%${search}%` } },
+    const response = await Loop.findAll(
+      {
+        attributes: ["id", "name", "description", "content", "filename"],
+        include: [
+          {
+            model: User,
+            as: "user",
+            attributes: ["username"],
+          },
+          {
+            model: Language,
+            as: "language",
+            attributes: ["name"],
+          },
         ],
       },
+      {
+        where: {
+          [Op.or]: [{ name: { [Op.like]: `%${search}%` } }],
+        },
+      }
+    );
+    res.status(200).json({
+      status: "OK",
+      loops: response,
     });
-  res.status(200).json({
-    status: "OK",
-    loops: response,
-  });
   } catch (error) {
     res.status(400).json({
       status: "Error",
       error: error,
     });
   }
-}
+};
 
 module.exports = {
   addLoop: addLoop,
@@ -204,4 +231,5 @@ module.exports = {
   updateLoop: updateLoop,
   getLoops: getLoops,
   searchLoops: searchLoops,
+  getLoopsbyID: getLoopsbyID,
 };

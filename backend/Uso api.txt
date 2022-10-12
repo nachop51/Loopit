@@ -1,7 +1,7 @@
 Desarrollo de la API - Metodos creados al momento
 
 
-/auth
+/auth - 
 	- /login
 		- Crear un usuario {user: "", password: ""}
 	- /register
@@ -45,7 +45,7 @@ Desarrollo de la API - Metodos creados al momento
 
 
 /languages
-	- /all
+	- /add
 		- Agregar un lenguaje a la lista 
 	- /delete
 		- Eliminar un lenguaje de la lista
