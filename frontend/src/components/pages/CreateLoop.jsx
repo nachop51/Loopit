@@ -64,6 +64,25 @@ const CreateLoop = ({ user_id }) => {
     <main className="editor">
       <div className="editor-container">
         <h1 className="heading-creator">Create your loop!</h1>
+
+        <Editor
+          height="40vh"
+          language="javascript"
+          theme="vs-dark"
+          loading={
+            <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+          }
+          options={{
+            fontFamily: "Consolas",
+            showUnused: true,
+            tabSize: 2,
+            suggest: {
+              showClasses: true,
+            },
+          }}
+          onMount={handleEditorDidMount}
+        />
+
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, submitError }) => (
@@ -105,23 +124,6 @@ const CreateLoop = ({ user_id }) => {
               </button>
             </form>
           )}
-        />
-        <Editor
-          height="40vh"
-          language="javascript"
-          theme="vs-dark"
-          loading={
-            <img src={LoadingSpinner} alt="Spinner" className="spinner" />
-          }
-          options={{
-            fontFamily: "Consolas",
-            showUnused: true,
-            tabSize: 2,
-            suggest: {
-              showClasses: true,
-            },
-          }}
-          onMount={handleEditorDidMount}
         />
       </div>
     </main>
