@@ -3,10 +3,11 @@ import { useRef } from "react";
 import Editor from "@monaco-editor/react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
+import loopit from "../../../api/loopit";
 
 import LoadingSpinner from "../../../assets/nobg.gif";
 
-const CreateLoop = () => {
+const CreateLoop = ({ user_id }) => {
   const editorRef = useRef(null);
 
   const handleEditorDidMount = (editor, monaco) => {
@@ -14,7 +15,7 @@ const CreateLoop = () => {
     editorRef.current.focus();
   };
 
-  const onSubmit = ({ name, description, language, filename }) => {
+  const onSubmit = async ({ name, description, language, filename }) => {
     const valueEditor = editorRef.current.getValue();
 
     if (language === "default" || !language) {
@@ -26,12 +27,22 @@ const CreateLoop = () => {
 
     const params = {
       name,
-      filename,
       content: valueEditor,
+      language,
+      user_id,
     };
     if (description) params.description = description;
     if (filename) params.filename = filename;
     console.log(params);
+    try {
+      const response = await loopit.post("/loops/add", {
+        ...params,
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const buildInput = ({ input, meta, label, placeholder, optionalClass }) => {
@@ -82,10 +93,12 @@ const CreateLoop = () => {
                 placeholder="Filename (optional)"
                 render={buildInput}
               />
-              {submitError && (
+              {submitError ? (
                 <div className="error-message show-editor-error">
                   {submitError}
                 </div>
+              ) : (
+                <br className="show-editor-error" />
               )}
               <button type="submit" className="btn btn-lily">
                 Create loop

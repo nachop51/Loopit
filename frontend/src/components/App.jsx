@@ -14,7 +14,7 @@ import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./Loopit/pages/Favorites";
 import ErrorPage from "./404";
 
-const App = ({ isSignedIn, checkUserAuth }) => {
+const App = ({ isSignedIn, checkUserAuth, id }) => {
   const [stateNav, setStateNav] = useState(false);
   let location = useLocation();
 
@@ -43,7 +43,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
       <Routes>
         <Route path="/home" element={<LandingPage />} />
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
-        <Route path="/create-loop" element={<CreateLoop />} />
+        <Route path="/create-loop" element={<CreateLoop user_id={id} />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
@@ -54,6 +54,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    id: state.auth.id,
   };
 };
 
