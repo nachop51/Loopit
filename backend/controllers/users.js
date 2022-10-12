@@ -1,6 +1,6 @@
 const User = require("../models/users");
 const Loop = require("../models/loops");
-// const Favorite = require("../models/favorites");
+const Favorite = require("../models/favorites");
 const Language = require("../models/languages");
 
 // Falta: - Agregar metodo para buscar usuarios por username
@@ -40,54 +40,53 @@ const getUsers = (req, res) => {
     });
 };
 
+const getUserById = async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - Missing data",
+    });
+  }
+  try {
+    const user = await User.findByPk(id,
+      {
+        attributes: ["id", "username", "email", "full_name"],
+      })
+    res.status(200).json({
+    status: "OK",
+    user: user,
+  });
+  }
+  catch (error) {
+    res.status(500).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
+
 const getFavoritesUser = async (req, res) => {
-  // const { id } = req.params;
-  // if (!id) {
-  //   return res.status(400).json({
-  //     status: "Error",
-  //     error: "Bad Request - Missing data",
-  //   });
-  // }
-  // try {
-  //   const user = await User.findByPk(id);
-  //   if (!user) {
-  //     return res.status(404).json({
-  //       status: "Error",
-  //       error: "User not found",
-  //     });
-  //   }
-  //   const favorites = await User.findAll({
-  //     attributes: ["username"],
-  //     include: [
-  //       {
-  //         model: Loop,
-  //         as: "loops",
-  //         attributes: ["name"],
-  //         include: [
-  //           {
-  //             model: Language,
-  //             as: "language",
-  //             attributes: ["name"],
-  //           },
-  //           {
-  //             model: Favorite,
-  //             as: "favorites",
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //     where: { id: id },
-  //   });
-  //   return res.status(200).json({
-  //     status: "OK",
-  //     favorites: favorites,
-  //   });
-  // } catch (error) {
-  //   res.status(400).json({
-  //     status: "Error",
-  //     error: error,
-  //   });
-  // }
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - Missing data",
+    });
+  }
+  try {
+    const favorites =  Favorite.findAll();
+    return res.status(200).json({
+      status: "OK",
+      favorites: favorites,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const getUserByNames = (req, res) => {};
@@ -95,5 +94,6 @@ const getUserByNames = (req, res) => {};
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
   getUsers: getUsers,
+  getUserById: getUserById,
   getFavoritesUser: getFavoritesUser,
 };
