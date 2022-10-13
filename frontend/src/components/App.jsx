@@ -12,6 +12,7 @@ import { checkUserAuth } from "../actions";
 // import LoadingSpinner from "../assets/loading_spinner.gif";
 import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./pages/Favorites";
+import About from "./pages/About";
 import ErrorPage from "./404";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
@@ -45,6 +46,7 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
         <Route path="/create-loop" element={<CreateLoop user_id={id} />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
