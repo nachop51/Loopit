@@ -12,8 +12,8 @@ import { checkUserAuth } from "../actions";
 // import LoadingSpinner from "../assets/loading_spinner.gif";
 import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./pages/Favorites";
-import About from "./pages/About";
 import ErrorPage from "./404";
+import Account from "./pages/Account";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   const [stateNav, setStateNav] = useState(false);
@@ -25,7 +25,8 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
 
   useEffect(() => {
     let loc = window.location.pathname;
-    if (["/", "/create-loop", "/favorites"].includes(loc)) setStateNav(false);
+    if (["/", "/create-loop", "/favorites", "/account"].includes(loc))
+      setStateNav(false);
     else setStateNav(true);
   }, [location]);
 
@@ -46,7 +47,7 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
         <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
         <Route path="/create-loop" element={<CreateLoop user_id={id} />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/account" element={<Account />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

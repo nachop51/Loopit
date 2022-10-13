@@ -81,10 +81,6 @@ const CreateLoop = ({ user_id }) => {
                   className="editor-req"
                   name="language"
                   component="select"
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    return e.target.value;
-                  }}
                 >
                   <option value="default">Choose a language</option>
                   <option value="Javascript">❤️ JavaScript</option>
@@ -109,26 +105,28 @@ const CreateLoop = ({ user_id }) => {
                 }}
                 onMount={handleEditorDidMount}
               />
-              <Field
-                name="description"
-                placeholder="Description (optional)"
-                render={buildInput}
-              />
-              <Field
-                name="filename"
-                placeholder="Filename (optional)"
-                render={buildInput}
-              />
-              {submitError ? (
-                <div className="error-message show-editor-error">
-                  {submitError}
-                </div>
-              ) : (
-                <br className="show-editor-error" />
-              )}
-              <button type="submit" className="btn btn-lily">
-                Create loop
-              </button>
+              <div className="input-optional">
+                <Field
+                  name="filename"
+                  placeholder="Filename (optional)"
+                  render={buildInput}
+                />
+                <Field
+                  name="description"
+                  placeholder="Description (optional)"
+                  render={buildInput}
+                />
+                {submitError ? (
+                  <div className="error-message show-editor-error">
+                    {submitError}
+                  </div>
+                ) : (
+                  <br className="show-editor-error" />
+                )}
+                <button type="submit" className="btn btn-lily create-loop">
+                  Create loop
+                </button>
+              </div>
             </form>
           )}
         />
