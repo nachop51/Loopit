@@ -1,9 +1,11 @@
+import "./Content.css";
+
 const Content = ({ content, description, language }) => {
   return (
     <div className="loop-content">
       {description}
       <pre>
-        <code>{content}</code>
+        <code className="code">{content}</code>
       </pre>
     </div>
   );

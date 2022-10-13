@@ -1,8 +1,8 @@
-.tag-container {
+.language-container {
   @apply pt-2;
 }
 
-.tag {
+.language {
   @apply rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none bg-gray-400;
 }
 
