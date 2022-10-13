@@ -92,4 +92,5 @@ input#filename {
 }
 
 button.create-loop {
+  transform: scale(1.5);
 }

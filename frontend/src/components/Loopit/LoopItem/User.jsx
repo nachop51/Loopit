@@ -12,8 +12,7 @@ const User = ({ username }) => {
       </div>
       <div>
         <h3>{username}</h3>
-        <span>{new Date.UTC.toString()}</span>
-        {/* <span>At 15/12 19:10PM</span> */}
+        <span>{new Date().toUTCString()}</span>
       </div>
     </div>
   );
