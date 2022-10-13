@@ -14,6 +14,7 @@ import LoadingSpinner from "../assets/nobg.gif";
 import Favorites from "./pages/Favorites";
 import ErrorPage from "./404";
 import Account from "./pages/Account";
+import About from "./AboutPage";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   const [stateNav, setStateNav] = useState(false);
@@ -48,6 +49,7 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
         <Route path="/create-loop" element={<CreateLoop user_id={id} />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
