@@ -116,17 +116,17 @@ const CreateLoop = ({ user_id }) => {
                   placeholder="Description (optional)"
                   render={buildInput}
                 />
-                {submitError ? (
-                  <div className="error-message show-editor-error">
-                    {submitError}
-                  </div>
-                ) : (
-                  <br className="show-editor-error" />
-                )}
                 <button type="submit" className="btn btn-lily create-loop">
                   Create loop
                 </button>
               </div>
+              {submitError ? (
+                <div className="error-message show-editor-error">
+                  {submitError}
+                </div>
+              ) : (
+                <br className="show-editor-error" />
+              )}
             </form>
           )}
         />
