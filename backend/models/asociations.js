@@ -14,7 +14,7 @@ Loop.belongsTo(User, {
   foreignKey: "user_id",
   targetId: "id",
 });
-
+//
 //define relationships many to many between loops and user (favorites)
 User.belongsToMany(Loop, {
   through: "Favorites",
