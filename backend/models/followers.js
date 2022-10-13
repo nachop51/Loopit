@@ -15,7 +15,11 @@ const Follower = sequelize.define(
       primaryKey: true,
     },
   },
-  {}
+  {
+    timestamps: true,
+    createdAt: "create_at",
+    updatedAt: "update_at",
+  }
 );
 
 module.exports = Follower;

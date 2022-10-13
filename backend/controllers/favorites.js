@@ -13,8 +13,7 @@ const addFavorite = async (req, res) => {
   try {
     const loop = await Loop.findByPk(loop_id);
     const user = await User.findByPk(user_id);
-    const add_favorite = await loop.addUser(user, { through: Favorite });
-    console.log(add_favorite);
+    const favorite = await User.addFavorite(loop);
     res.status(200).json({
       status: "OK",
       data: add_favorite,

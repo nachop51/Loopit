@@ -25,8 +25,8 @@ require("./models/asociations.js");
 const User = require("./models/users");
 const Loop = require("./models/loops");
 const Language = require("./models/languages");
-const Favorite = require("./models/favorites");
 const Follower = require("./models/followers");
+const Favorite = require("./models/favorites");
 // const Like = require("./models/likes");
 //import bcrypt to hash passwords
 
@@ -53,8 +53,6 @@ app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
 //verify token
 app.use("/", verifytoken);
-
-
 
 //sync database and start server
 app.listen(3000, () => {

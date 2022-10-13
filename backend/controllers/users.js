@@ -1,7 +1,7 @@
 const User = require("../models/users");
 const Loop = require("../models/loops");
-const Favorite = require("../models/favorites");
 const Language = require("../models/languages");
+const Favorite = require("../models/favorites");
 
 // Falta: - Agregar metodo para buscar usuarios por username
 //        - Metodo para eliminar usuarios
@@ -49,23 +49,26 @@ const getUserById = async (req, res) => {
     });
   }
   try {
-    const user = await User.findByPk(id,
-      {
-        attributes: ["id", "username", "email", "full_name"],
-      })
+    const user = await User.findByPk(id, {
+      attributes: ["id", "username", "email", "full_name"],
+      include: [
+        {
+          model: Loop,
+          as: "loops",
+        },
+      ],
+    });
     res.status(200).json({
-    status: "OK",
-    user: user,
-  });
-  }
-  catch (error) {
+      status: "OK",
+      user: user,
+    });
+  } catch (error) {
     res.status(500).json({
       status: "Error",
       error: error,
     });
   }
 };
-
 
 const getFavoritesUser = async (req, res) => {
   const { id } = req.params;
@@ -76,23 +79,18 @@ const getFavoritesUser = async (req, res) => {
     });
   }
   try {
-    const favorites = await Loop.findAll(
-      {
-        attributes: ["id", "name", "description", "content", "filename"],
-        include: [
-          {
-            model: User,
-            as: "user",
-            attributes: ["username"],
-            where: { id: id }
-          },
-          {
-            model: Language,
-            as: "language",
-            attributes: ["name"],
-          },
-        ],
-      });
+    const favorites = await Favorite.findAll({
+      where: {
+        user_id: id,
+      },
+      include: [
+        {
+          model: Loop,
+          as: "loop",
+          attributes: ["id", "name", "description", "content"],
+        },
+      ],
+    });
     return res.status(200).json({
       status: "OK",
       favorites: favorites,
