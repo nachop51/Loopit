@@ -18,6 +18,8 @@ const CreateLoop = ({ user_id }) => {
   const onSubmit = async ({ name, description, language, filename }) => {
     const valueEditor = editorRef.current.getValue();
 
+    if (valueEditor.length > 2400) return null;
+
     if (language === "default" || !language) {
       return { [FORM_ERROR]: "Language is required" };
     }
@@ -47,61 +49,66 @@ const CreateLoop = ({ user_id }) => {
 
   const buildInput = ({ input, meta, label, placeholder, optionalClass }) => {
     return (
-      <div>
-        <label htmlFor={input.name}>{label}</label>
-        <input
-          {...input}
-          className={optionalClass ? optionalClass : ""}
-          placeholder={placeholder}
-          id={input.name}
-          autoComplete="off"
-        />
-      </div>
+      <input
+        {...input}
+        className={optionalClass ? optionalClass : ""}
+        placeholder={placeholder}
+        id={input.name}
+        autoComplete="off"
+      />
     );
   };
 
   return (
     <main className="editor">
+      <h2 className="heading-creator">Create your loop!</h2>
       <div className="editor-container">
-        <h1 className="heading-creator">Create your loop!</h1>
-
-        <Editor
-          height="40vh"
-          language="javascript"
-          theme="vs-dark"
-          loading={
-            <img src={LoadingSpinner} alt="Spinner" className="spinner" />
-          }
-          options={{
-            fontFamily: "Consolas",
-            showUnused: true,
-            tabSize: 2,
-            suggest: {
-              showClasses: true,
-            },
-          }}
-          onMount={handleEditorDidMount}
-        />
-
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, submitError }) => (
             <form onSubmit={handleSubmit} className="editor-form">
-              <Field
-                name="name"
-                optionalClass="editor-req"
-                validate={(input) => {
-                  return input === "" ? { title: "Title is required" } : null;
+              <div className="inputs-required">
+                <Field
+                  name="name"
+                  optionalClass="editor-req"
+                  validate={(input) => {
+                    return input === "" ? { title: "Title is required" } : null;
+                  }}
+                  placeholder="Title"
+                  render={buildInput}
+                />
+                <Field
+                  className="editor-req"
+                  name="language"
+                  component="select"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    return e.target.value;
+                  }}
+                >
+                  <option value="default">Choose a language</option>
+                  <option value="Javascript">❤️ JavaScript</option>
+                  <option value="Python">💚 Python</option>
+                  <option value="HTML">💙 HTML</option>
+                </Field>
+              </div>
+              <Editor
+                height="40vh"
+                language="javascript"
+                theme="vs-dark"
+                loading={
+                  <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+                }
+                options={{
+                  fontFamily: "Consolas",
+                  showUnused: true,
+                  tabSize: 2,
+                  suggest: {
+                    showClasses: true,
+                  },
                 }}
-                placeholder="Title"
-                render={buildInput}
+                onMount={handleEditorDidMount}
               />
-              <Field className="editor-req" name="language" component="select">
-                <option value="default">Choose a language</option>
-                <option value="Javascript">❤️ JavaScript</option>
-                <option value="Python">💚 Python</option>
-                <option value="HTML">💙 HTML</option>
-              </Field>
               <Field
                 name="description"
                 placeholder="Description (optional)"

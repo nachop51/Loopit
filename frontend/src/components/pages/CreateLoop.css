@@ -7,7 +7,8 @@
 }
 
 .editor-container:not(.monaco-editor) {
-  @apply w-2/3 ml-auto m-auto text-center pt-5;
+  @apply bg-slate-100 bg-opacity-60 rounded-lg;
+  @apply w-2/3 ml-auto m-auto text-center;
   @apply sm:w-1/2;
   @apply md:w-4/6 ml-auto mr-10;
   @apply lg:w-9/12 m-auto;
@@ -33,11 +34,9 @@
 
 .editor-form {
   @apply m-auto text-center mb-5 mt-12;
-  @apply bg-slate-100 bg-opacity-60 rounded-lg py-12;
 }
 
-.editor-form input,
-.editor-form select {
+.editor-form input {
   @apply w-1/2 rounded-lg focus:outline-0 focus:outline-none border-2 border-solid border-gray-400 p-2 mb-5;
 }
 
@@ -59,6 +58,19 @@ select.editor-req {
   @apply !text-gray-600;
 }
 
-.save-button {
-  margin-top: 20px;
+.inputs-required {
+  @apply flex justify-between p-2 bg-slate-100 bg-opacity-80;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.inputs-required input {
+  @apply block w-2/5 mb-0;
+}
+
+.inputs-required select {
+  @apply w-2/5 rounded-lg focus:outline-0 focus:outline-none border-2 border-solid border-gray-400 p-2 mb-0;
+}
+
+.btn-lily {
+  @apply my-8;
 }
