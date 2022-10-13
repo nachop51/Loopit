@@ -1,4 +1,5 @@
 import "./Content.css";
+import PropTypes from "prop-types";
 
 const Content = ({ content, description, language }) => {
   return (
@@ -9,6 +10,11 @@ const Content = ({ content, description, language }) => {
       </pre>
     </div>
   );
+};
+
+Content.propTypes = {
+  content: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 export default Content;
