@@ -11,8 +11,10 @@
 }
 
 body {
-  /* background: #fff; fallback for old browsers */
-  background: url("../assets/blurry-gradient-haikei.png");
+  /* background: #090214; */ /* fallback for old browsers */
+  /* background: #0c020f; */
+  background: #15151e; /* ! puede ser */
+  /* background: url("../assets/blurry-gradient-haikei.png"); */
 
   background-size: cover;
   background-repeat: no-repeat;

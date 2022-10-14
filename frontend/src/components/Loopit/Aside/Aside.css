@@ -1,16 +1,21 @@
 .aside {
-  @apply w-2/6 fixed right-0;
+  @apply w-3/12;
 }
 
 .aside-container {
-  @apply rounded-xl px-12 mr-8;
+  @apply rounded-xl px-12;
   height: 80vh;
   background-color: rgba(221, 221, 221, 0.13);
-  padding: 1rem 1rem;
+  padding: 1rem;
 }
 
 .item-container {
-  @apply rounded-md  my-2.5 mx-1 text-slate-100 shadow-2xl;
+  @apply rounded-md my-2.5 text-slate-100 shadow-2xl;
   border: 2px solid #fff;
   padding: 1rem 2rem;
+  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
+}
+
+.aside-view-yarn {
+  text-align: end;
 }

@@ -71,13 +71,15 @@ select.editor-req {
 .inputs-required input,
 .inputs-required select {
   color: #ccc;
-  background: #222;
+  background: #15151e;
 }
 
 input#filename,
 input#description {
-  @apply border-none text-slate-100 p-5 mb-0;
-  background-color: #222;
+  @apply text-slate-100 p-3 mb-0;
+  background-color: #15151e;
+  border: 1.5px solid rgba(255, 255, 255, 0.137);
+  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
 }
 
 .input-optional {

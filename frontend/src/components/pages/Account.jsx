@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { fetchUser } from "../../actions";
 
 const Account = ({ user, fetchUser }) => {
+  console.log(user);
+
   useEffect(() => {
     if (!user) fetchUser();
   }, [fetchUser, user]);
@@ -40,7 +42,6 @@ const Account = ({ user, fetchUser }) => {
         </div>
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>
-          
         </div>
       </div>
     </main>
