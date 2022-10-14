@@ -3,13 +3,19 @@ const { sequelize } = require("../database/db");
 const User = require("./users");
 const Loop = require("./loops");
 
-const Favorite = sequelize.define(
-  "Favorites",
+const Save = sequelize.define(
+  "Saves",
   {
     user_id: {
       type: DataTypes.UUID,
       allowNull: false.valueOf,
       primaryKey: true,
+    },
+    loop_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      primaryKey: true,
+    },
   },
   {
     // Other model options go here
@@ -19,4 +25,4 @@ const Favorite = sequelize.define(
   }
 );
 
-module.exports = Favorite;
+module.exports = Save;

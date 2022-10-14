@@ -7,7 +7,7 @@ const cors = require("cors");
 const routeAuth = require("./routes/routeAuth");
 const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");
-const routeFavorite = require("./routes/routeFavorites");
+const routeSaves = require("./routes/routeSaves");
 const routeLanguages = require("./routes/routeLanguages");
 const routeFollower = require("./routes/routeFollowers");
 const routeMail = require("./routes/routeMail");
@@ -26,7 +26,7 @@ const User = require("./models/users");
 const Loop = require("./models/loops");
 const Language = require("./models/languages");
 const Follower = require("./models/followers");
-const Favorite = require("./models/favorites");
+const Save = require("./models/saves");
 // const Like = require("./models/likes");
 //import bcrypt to hash passwords
 
@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/loops", routeLoop);
 app.use("/auth", routeAuth);
 app.use("/users", routeUser);
-app.use("/favorites", routeFavorite);
+app.use("/saves", routeSaves);
 app.use("/languages", routeLanguages);
 app.use("/followers", routeFollower);
 app.use("/mail", routeMail);

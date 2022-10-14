@@ -1,6 +1,7 @@
 const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const User = require("../models/users");
+const Save = require("../models/saves");
 const { where } = require("sequelize");
 const { Op } = require("sequelize");
 
@@ -19,7 +20,7 @@ const addLoop = async (req, res) => {
     if (!language_id) {
       return res.status(400).json({
         status: "Error",
-        error: "Bad Request - Language dont exist",
+        error: "Bad Request - Language does not exist",
       });
     }
     const new_loop = await Loop.create({
@@ -42,49 +43,101 @@ const addLoop = async (req, res) => {
   }
 };
 
-const deleteLoop = (req, res) => {
-  const { id } = req.body;
+const deleteLoop = async (req, res) => {
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
-  Loop.destroy({
-    where: { id: id },
-  }).then((results) => {
+  try {
+    const loop_destroy = await Loop.findByPk(id);
+    if (!loop_destroy) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - loop does not exist",
+      });
+    }
+    await loop_destroy.destroy();
+    const favorite_destroy = await Save.destroy({
+      where: { loop_id: id },
+    });
     res.status(200).json({
       status: "OK",
       data: [],
     });
-  });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
-const updateLoop = (req, res) => {
-  const { id } = req.body;
+const updateLoop = async (req, res) => {
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
-  delete req.body.id;
-  delete req.body.user_id;
-  Loop.update(req.body, {
-    where: { id: id },
-  })
-    .then((results) => {
-      res.status(200).json({
-        status: "OK",
-        data: [],
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
+  try {
+    const loop = await Loop.findByPk(id);
+    if (!loop) {
+      return res.status(400).json({
         status: "Error",
-        error: error,
+        error: "Bad Request - Loop does not exist",
       });
+    }
+    const { name, description, content, language, filename, user_id } =
+      req.body;
+    if (name) {
+      loop.name = name;
+    }
+    if (description) {
+      loop.description = description;
+    }
+    if (content) {
+      loop.content = content;
+    }
+    if (language) {
+      const language_id = await Language.findOne({
+        where: { name: language },
+      });
+      if (!language_id) {
+        return res.status(400).json({
+          status: "Error",
+          error: "Bad Request - Language does not exist",
+        });
+      }
+      loop.language_id = language_id.id;
+    }
+    if (filename) {
+      loop.filename = filename;
+    }
+    if (user_id) {
+      const user = await User.findBypk(user_id);
+      if (!user) {
+        return res.status(400).json({
+          status: "Error",
+          error: "Bad Request - User does not exist",
+        });
+      }
+      loop.user_id = user_id;
+    }
+    await loop.save();
+    res.status(200).json({
+      status: "OK",
+      loop: loop,
     });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const getLoopsbyID = async (req, res) => {
@@ -106,8 +159,8 @@ const getLoopsbyID = async (req, res) => {
         },
         {
           model: Language,
-          as: "id",
-          attributes: ["loop_id"],
+          as: "language",
+          attributes: ["name"],
         },
       ],
     });
