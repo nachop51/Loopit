@@ -41,10 +41,47 @@ const me = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
+  let { username, limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  let dicUsername = {};
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  if (username) {
+    dicUsername = {
+      limit: limit,
+      offset: page * limit - limit,
+      where: {
+        username: username,
+      },
+      attributes: ["id", "username", "email", "full_name"],
+    };
+  } else {
+    dicUsername = {
+      limit: limit,
+      offset: page * limit - limit,
+      attributes: ["id", "username", "email", "full_name"],
+    };
+  }
   try {
-    const users = await User.findAll();
+    const users = await User.findAll(dicUsername);
+    if (!users) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
+    delete dicUsername.limit;
+    delete dicUsername.offset;
+    delete dicUsername.attributes;
+    const countUsername = await User.count(dicUsername);
+    const totalPages = Math.ceil(countUsername / limit);
     res.status(200).json({
       status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
       users: users,
     });
   } catch (error) {
@@ -112,36 +149,6 @@ const updateUser = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
-  const id = req.params.id;
-  if (!id) {
-    return res.status(400).json({
-      status: "Error",
-      error: "Bad Request - Missing data",
-    });
-  }
-  try {
-    const user = await User.findByPk(id, {
-      attributes: ["id", "username", "email", "full_name"],
-    });
-    if (!user) {
-      return res.status(400).json({
-        status: "Error",
-        error: "Bad Request - User does not exist",
-      });
-    }
-    res.status(200).json({
-      status: "OK",
-      user: user,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      error: error,
-    });
-  }
-};
-
 const getUserByusername = async (req, res) => {
   const username = req.params.username;
   if (!username) {
@@ -184,39 +191,13 @@ const getUserByusername = async (req, res) => {
   }
 };
 
-const getLoopsByUser = async (req, res) => {
-  const { id } = req.params;
-  if (!id) {
-    return res.status(400).json({
-      status: "Error",
-      error: "Bad Request - Missing data",
-    });
-  }
-  try {
-    const loops = await Loop.findAll({
-      where: { user_id: id },
-      include: [
-        {
-          model: Language,
-          as: "language",
-          attributes: ["name"],
-        },
-      ],
-    });
-    res.status(200).json({
-      status: "OK",
-      loops: loops,
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: "Error",
-      error: error,
-    });
-  }
-};
-
 const getSaveUser = async (req, res) => {
   const { id } = req.params;
+  let { limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  if (!page) page = 1;
+  if (!limit) limit = 10;
   if (!id) {
     return res.status(400).json({
       status: "Error",
@@ -250,8 +231,6 @@ module.exports = {
   me: me,
   updateUser: updateUser,
   getUsers: getUsers,
-  getUserById: getUserById,
   getSaveUser: getSaveUser,
-  getLoopsByUser: getLoopsByUser,
   getUserByusername: getUserByusername,
 };
