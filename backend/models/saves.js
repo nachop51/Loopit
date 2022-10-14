@@ -1,25 +1,28 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../database/db");
+const User = require("./users");
+const Loop = require("./loops");
 
-const Follower = sequelize.define(
-  "Followers",
+const Save = sequelize.define(
+  "Saves",
   {
     user_id: {
       type: DataTypes.UUID,
       allowNull: false.valueOf,
       primaryKey: true,
     },
-    follow_id: {
+    loop_id: {
       type: DataTypes.UUID,
-      allowNull: false.valueOf,
+      allowNull: false,
       primaryKey: true,
     },
   },
   {
+    // Other model options go here
     timestamps: true,
     createdAt: "create_at",
     updatedAt: "update_at",
   }
 );
 
-module.exports = Follower;
+module.exports = Save;

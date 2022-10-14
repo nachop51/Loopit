@@ -17,11 +17,11 @@ const addLanguage = async (req, res) => {
       language: new_language,
     });
   } catch (error) {
-      res.status(400).json({
-        state: "Error",
-        error: error,
-      });
-    };
+    res.status(400).json({
+      state: "Error",
+      error: error,
+    });
+  }
 };
 
 const deleteLanguage = (req, res) => {
@@ -42,52 +42,60 @@ const deleteLanguage = (req, res) => {
   });
 };
 
-const updateLanguage = (req, res) => {
-  const { id } = req.body;
+const updateLanguage = async (req, res) => {
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - Missing data",
     });
   }
-  delete req.body.id;
-  Language.update(req.body, {
-    where: { id: id },
-  })
-    .then((results) => {
-      res.status(200).json({
-        status: "OK",
-        data: [],
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        status: "Error",
-        error: error,
-      });
-    });
-};
-
-const getLanguages =  async (req, res) => {
   try {
-    const languages = await Language.findAll(
-      {
-        attributes: ["id", "name"],
-      }
-    );
+    const language = await Language.findByPk(id);
+    if (!language) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Language does not exist",
+      });
+    }
+    const { name } = req.body;
+    if (!name) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Missing data",
+      });
+    }
+    await language.update({
+      name: name,
+    });
     res.status(200).json({
       status: "OK",
-      languages: languages,
-    })
+      language: language,
+    });
   } catch (error) {
     res.status(400).json({
       status: "Error",
       error: error,
     });
   }
-}
-  
+};
 
+const getLanguages = async (req, res) => {
+  try {
+    const languages = await Language.findAll({
+      attributes: ["id", "name"],
+    });
+    res.status(200).json({
+      status: "OK",
+      languages: languages,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
 
 module.exports = {
   addLanguage: addLanguage,
