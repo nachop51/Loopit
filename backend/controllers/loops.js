@@ -228,6 +228,7 @@ const getLoops = async (req, res) => {
         "create_at",
       ],
       include: [dicUsername, dicLanguage],
+      order: [["create_at", "DESC"]],
     });
     if (!loops) {
       return res.status(400).json({
