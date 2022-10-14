@@ -3,10 +3,10 @@ import "./Logo.css";
 
 import { Link } from "react-router-dom";
 
-const Logo = ({ width }) => {
+const Logo = ({ width, link }) => {
   return (
     <div className="logo">
-      <Link to="/home">
+      <Link to={`${link}`}>
         <img
           className="logo-img"
           src={Image}
