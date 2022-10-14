@@ -1,5 +1,12 @@
 nav {
-  @apply flex flex-col justify-start gap-4;
+  @apply flex justify-center gap-4;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 999;
+  backdrop-filter: blur(15px);
+  padding-top: 10px;
 }
 
 nav a {
