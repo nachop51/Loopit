@@ -3,11 +3,12 @@ import LoopList from "./LoopList";
 import Aside from "./Aside";
 import Footer from "../Footer";
 
-const LoopitApp = ({ userStatus }) => {
+const LoopitApp = ({ children }) => {
   return (
     <>
       <main className="loops">
         <div className="loop-container">
+          {children}
           <LoopList />
           <Aside />
         </div>

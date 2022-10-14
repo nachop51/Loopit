@@ -1,6 +1,6 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Logo from "./Logo";
@@ -18,19 +18,9 @@ import Account from "./pages/Account";
 import About from "./AboutPage";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
-  const [stateNav, setStateNav] = useState(false);
-  let location = useLocation();
-
   useEffect(() => {
     checkUserAuth();
   }, [checkUserAuth]);
-
-  useEffect(() => {
-    let loc = window.location.pathname;
-    if (["/", "/create-loop", "/saved", "/account"].includes(loc))
-      setStateNav(false);
-    else setStateNav(true);
-  }, [location]);
 
   if (isSignedIn === null) {
     return (
@@ -43,14 +33,15 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
   return (
     <>
       <Logo />
-      {!stateNav && <Nav />}
       <Routes>
         <Route path="/home" element={<LandingPage />} />
         <Route
           path="/"
           element={
             <ProtectedRoute userStatus={isSignedIn}>
-              <LoopitApp />
+              <LoopitApp>
+                <Nav />
+              </LoopitApp>
             </ProtectedRoute>
           }
         />
@@ -58,7 +49,9 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
           path="/create-loop"
           element={
             <ProtectedRoute userStatus={isSignedIn}>
-              <CreateLoop user_id={id} />
+              <CreateLoop user_id={id}>
+                <Nav />
+              </CreateLoop>
             </ProtectedRoute>
           }
         />
@@ -66,7 +59,9 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
           path="/saved"
           element={
             <ProtectedRoute userStatus={isSignedIn}>
-              <Saved />
+              <Saved>
+                <Nav />
+              </Saved>
             </ProtectedRoute>
           }
         />
@@ -74,7 +69,9 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
           path="/account"
           element={
             <ProtectedRoute userStatus={isSignedIn}>
-              <Account />
+              <Account>
+                <Nav />
+              </Account>
             </ProtectedRoute>
           }
         />
