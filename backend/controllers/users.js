@@ -28,9 +28,19 @@ const me = async (req, res) => {
         error: "Bad Request - User does not exist",
       });
     }
+    const countLoops = await Loop.count({
+      where: { user_id: token_decode.userId },
+    });
+    const countSaves = await Save.count({
+      where: { user_id: token_decode.userId },
+    });
     res.status(200).json({
       status: "OK",
-      me: user,
+      me: {
+        data: user,
+        loops: countLoops,
+        saves: countSaves,
+      },
     });
   } catch (error) {
     res.status(500).json({
