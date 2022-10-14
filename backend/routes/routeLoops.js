@@ -12,7 +12,6 @@ const { route } = require("./routeAuth");
 routeLoops.post("/add", addLoop);
 routeLoops.delete("/delete/:id", deleteLoop);
 routeLoops.put("/update/:id", updateLoop);
-routeLoops.get("/all/:language", getLoops);
 routeLoops.get("/all", getLoops);
 routeLoops.get("/:id", getLoopsbyID);
 

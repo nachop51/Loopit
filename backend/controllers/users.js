@@ -20,7 +20,7 @@ const me = async (req, res) => {
   try {
     const token_decode = await jwt.verify(token, key);
     const user = await User.findByPk(token_decode.userId, {
-      attributes: ["id", "username", "email", "full_name"],
+      attributes: ["email", "full_name"],
     });
     if (!user) {
       return res.status(400).json({
@@ -40,39 +40,56 @@ const me = async (req, res) => {
   }
 };
 
-const getUsers = (req, res) => {
-  User.findAll({
-    include: [
-      {
-        model: Loop,
-        as: "loops",
-        attributes: ["id", "name", "description", "content"],
+const getUsers = async (req, res) => {
+  let { username, limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  let dicUsername = {};
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  if (username) {
+    dicUsername = {
+      limit: limit,
+      offset: page * limit - limit,
+      where: {
+        username: username,
       },
-    ],
-  })
-    .then((users) => {
-      list_users = [];
-      users.forEach((user) => {
-        const { id, username, email, full_name } = user.dataValues;
-        list_users.push({
-          id: id,
-          full_name: full_name,
-          username: username,
-          email: email,
-          loops: user.dataValues.loops.length,
-        });
-      });
-      res.status(200).json({
-        status: "OK",
-        users: list_users,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
+      attributes: ["id", "username", "email", "full_name"],
+    };
+  } else {
+    dicUsername = {
+      limit: limit,
+      offset: page * limit - limit,
+      attributes: ["id", "username", "email", "full_name"],
+    };
+  }
+  try {
+    const users = await User.findAll(dicUsername);
+    if (!users) {
+      return res.status(400).json({
         status: "Error",
-        error: error,
+        error: "Bad Request - User does not exist",
       });
+    }
+    delete dicUsername.limit;
+    delete dicUsername.offset;
+    delete dicUsername.attributes;
+    const countUsername = await User.count(dicUsername);
+    const totalPages = Math.ceil(countUsername / limit);
+    res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      users: users,
     });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const updateUser = async (req, res) => {
@@ -132,21 +149,39 @@ const updateUser = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
-  const id = req.params.id;
-  if (!id) {
+const getUserByusername = async (req, res) => {
+  const username = req.params.username;
+  if (!username) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - Missing data",
     });
   }
   try {
-    const user = await User.findByPk(id, {
+    console.log("hola");
+    const user = await User.findAll({
+      where: { username: username },
       attributes: ["id", "username", "email", "full_name"],
+    });
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
+    const countSave = await Save.count({
+      where: { user_id: user[0].id },
+    });
+    const countLoop = await Loop.count({
+      where: { user_id: user[0].id },
     });
     res.status(200).json({
       status: "OK",
-      user: user,
+      user: {
+        personal_info: user[0],
+        loops: countLoop,
+        saves: countSave,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -156,39 +191,13 @@ const getUserById = async (req, res) => {
   }
 };
 
-const getLoopsByUser = async (req, res) => {
-  const { id } = req.params;
-  if (!id) {
-    return res.status(400).json({
-      status: "Error",
-      error: "Bad Request - Missing data",
-    });
-  }
-  try {
-    const loops = await Loop.findAll({
-      where: { user_id: id },
-      include: [
-        {
-          model: Language,
-          as: "language",
-          attributes: ["name"],
-        },
-      ],
-    });
-    res.status(200).json({
-      status: "OK",
-      loops: loops,
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: "Error",
-      error: error,
-    });
-  }
-};
-
 const getSaveUser = async (req, res) => {
   const { id } = req.params;
+  let { limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  if (!page) page = 1;
+  if (!limit) limit = 10;
   if (!id) {
     return res.status(400).json({
       status: "Error",
@@ -222,7 +231,6 @@ module.exports = {
   me: me,
   updateUser: updateUser,
   getUsers: getUsers,
-  getUserById: getUserById,
   getSaveUser: getSaveUser,
-  getLoopsByUser: getLoopsByUser,
+  getUserByusername: getUserByusername,
 };

@@ -2,8 +2,9 @@ const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const User = require("../models/users");
 const Save = require("../models/saves");
-const { where } = require("sequelize");
 const { Op } = require("sequelize");
+const querystring = require("querystring");
+const { url } = require("inspector");
 
 const addLoop = async (req, res) => {
   const { name, description, content, language, filename, user_id } = req.body;
@@ -177,61 +178,81 @@ const getLoopsbyID = async (req, res) => {
 };
 
 const getLoops = async (req, res) => {
-  const { language } = req.params;
-  if (language) {
-    try {
-      const response = await Loop.findAll({
-        include: [
-          {
-            model: User,
-            as: "user",
-            attributes: ["username"],
-          },
-          {
-            model: Language,
-            as: "language",
-            attributes: ["name"],
-            where: { name: language },
-          },
-        ],
-      });
-      return res.status(200).json({
-        status: "OK",
-        loops: response,
-      });
-    } catch (error) {
+  let { page, limit, language, username } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  let dicLanguage = {};
+  let dicUsername = {};
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  if (!language) {
+    dicLanguage = {
+      model: Language,
+      as: "language",
+      attributes: ["name"],
+    };
+  } else {
+    dicLanguage = {
+      model: Language,
+      as: "language",
+      attributes: ["name"],
+      where: { name: language },
+    };
+  }
+  console.log(username);
+  if (!username) {
+    dicUsername = {
+      model: User,
+      as: "user",
+      attributes: ["username"],
+    };
+  } else {
+    dicUsername = {
+      model: User,
+      as: "user",
+      attributes: ["username"],
+      where: { username: username },
+    };
+  }
+  try {
+    console.log("hola");
+    const loops = await Loop.findAll({
+      limit: limit,
+      offset: page * limit - limit,
+      attributes: [
+        "id",
+        "name",
+        "description",
+        "content",
+        "filename",
+        "create_at",
+      ],
+      include: [dicUsername, dicLanguage],
+    });
+    if (!loops) {
       return res.status(400).json({
         status: "Error",
-        error: error,
+        error: "Loop list is empty",
       });
     }
-  }
-  Loop.findAll({
-    include: [
-      {
-        model: User,
-        as: "user",
-        attributes: ["username"],
-      },
-      {
-        model: Language,
-        as: "language",
-        attributes: ["name"],
-      },
-    ],
-  })
-    .then((loops) => {
-      res.status(200).json({
-        status: "OK",
-        loops: loops,
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        status: "Error",
-        error: error,
-      });
+    const countLoops = await Loop.count({
+      include: [dicUsername, dicLanguage],
     });
+    const totalPages = Math.ceil(countLoops / limit);
+    return res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      loops: loops,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const searchLoops = async (req, res) => {
@@ -285,4 +306,5 @@ module.exports = {
   getLoops: getLoops,
   searchLoops: searchLoops,
   getLoopsbyID: getLoopsbyID,
+  // getAllLoopsByLanguage: getAllLoopsByLanguage,
 };
