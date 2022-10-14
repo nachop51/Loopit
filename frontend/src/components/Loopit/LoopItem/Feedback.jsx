@@ -26,7 +26,7 @@ const Feedback = () => {
           <MdRecommend className={like ? "icon recommend-active" : "icon"} />
           <span>I recomend</span>
         </a>
-        <div>Comment</div>
+        <a className="comment-button">Comment..</a>
         <a className="action-comment" onClick={handleSave}>
           <IoBookmark className={save ? "icon save-active" : "icon"} />
           <span>Save</span>
