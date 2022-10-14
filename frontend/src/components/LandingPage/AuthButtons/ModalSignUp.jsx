@@ -4,8 +4,8 @@ import { setIn, FORM_ERROR } from "final-form";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { logIn } from "../../actions";
-import useEsc from "../../hooks/useEsc";
+import { logIn } from "../../../actions";
+import useEsc from "../../../hooks/useEsc";
 
 import {
   validateFullname,
@@ -14,7 +14,7 @@ import {
   validateEmail,
   validatePasswordConfirmation,
 } from "./validations";
-import loopit from "../../api/loopit";
+import loopit from "../../../api/loopit";
 
 const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
   useEsc(show, closeModal);

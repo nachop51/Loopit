@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 
-import { logIn } from "../../actions";
+import { logIn } from "../../../actions";
 import { validateUser } from "./validations";
-import useEsc from "../../hooks/useEsc";
-import loopit from "../../api/loopit";
+import useEsc from "../../../hooks/useEsc";
+import loopit from "../../../api/loopit";
 
 const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
   const [error, setError] = useState(null);

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import ModalLogIn from "./ModalLogIn";
 import ModalSignUp from "./ModalSignUp";
-import { signOut } from "../../actions";
+import { signOut } from "../../../actions";
 
 const AuthButtons = ({ signOut, isSignedIn }) => {
   const [loginIsOpen, setLoginIsOpen] = useState(false);

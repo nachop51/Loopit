@@ -7,9 +7,10 @@ import Feedback from "./Feedback";
 
 // Props will have an username an image, content and more tags
 const LoopItem = ({ loop }) => {
+  console.log(loop);
   return (
     <div className="loop">
-      <User username={loop.user.username} />
+      <User username={loop.user.username} time={loop.create_at} />
       <Interact content={loop.content} />
       <Language language={loop.language.name} />
       <Content

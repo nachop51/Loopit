@@ -30,12 +30,11 @@ const CreateLoop = ({ user_id }) => {
     const params = {
       name,
       content: valueEditor,
-      language,
+      language: language.toLowerCase(),
       user_id,
     };
     if (description) params.description = description;
     if (filename) params.filename = filename;
-    console.log(params);
     try {
       const response = await loopit.post("/loops/add", {
         ...params,
