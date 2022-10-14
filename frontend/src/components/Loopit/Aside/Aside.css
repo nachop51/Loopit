@@ -4,7 +4,7 @@
 
 .aside-container {
   @apply rounded-xl px-12;
-  height: 100vh;
+  height: 80vh;
   background-color: rgba(221, 221, 221, 0.13);
   padding: 1rem;
 }

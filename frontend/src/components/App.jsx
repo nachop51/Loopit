@@ -32,7 +32,6 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
 
   return (
     <>
-      <Logo />
       <Routes>
         <Route path="/home" element={<LandingPage />} />
         <Route
@@ -40,6 +39,7 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
           element={
             <ProtectedRoute userStatus={isSignedIn}>
               <LoopitApp>
+                <Logo width={50} />
                 <Nav />
               </LoopitApp>
             </ProtectedRoute>
