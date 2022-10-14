@@ -10,6 +10,7 @@ import LoopitApp from "./Loopit";
 import CreateLoop from "./pages/CreateLoop";
 import { checkUserAuth } from "../actions";
 // import LoadingSpinner from "../assets/loading_spinner.gif";
+import ProtectedRoute from "./ProtectedRoute";
 import LoadingSpinner from "../assets/nobg.gif";
 import Saved from "./pages/Saved";
 import ErrorPage from "./404";
@@ -45,10 +46,46 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
       {!stateNav && <Nav />}
       <Routes>
         <Route path="/home" element={<LandingPage />} />
-        <Route path="/" element={<LoopitApp />} />
-        <Route path="/create-loop" element={<CreateLoop user_id={id} />} />
-        <Route path="/saved" element={<Saved />} />
-        <Route path="/account" element={<Account />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute userStatus={isSignedIn}>
+              <LoopitApp />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-loop"
+          element={
+            <ProtectedRoute userStatus={isSignedIn}>
+              <CreateLoop user_id={id} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/saved"
+          element={
+            <ProtectedRoute userStatus={isSignedIn}>
+              <Saved />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute userStatus={isSignedIn}>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/users/*"
+          element={
+            <ProtectedRoute userStatus={isSignedIn}>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
