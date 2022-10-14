@@ -20,7 +20,7 @@ const me = async (req, res) => {
   try {
     const token_decode = await jwt.verify(token, key);
     const user = await User.findByPk(token_decode.userId, {
-      attributes: ["id", "username", "email", "full_name"],
+      attributes: ["email", "full_name"],
     });
     if (!user) {
       return res.status(400).json({
@@ -40,39 +40,19 @@ const me = async (req, res) => {
   }
 };
 
-const getUsers = (req, res) => {
-  User.findAll({
-    include: [
-      {
-        model: Loop,
-        as: "loops",
-        attributes: ["id", "name", "description", "content"],
-      },
-    ],
-  })
-    .then((users) => {
-      list_users = [];
-      users.forEach((user) => {
-        const { id, username, email, full_name } = user.dataValues;
-        list_users.push({
-          id: id,
-          full_name: full_name,
-          username: username,
-          email: email,
-          loops: user.dataValues.loops.length,
-        });
-      });
-      res.status(200).json({
-        status: "OK",
-        users: list_users,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "Error",
-        error: error,
-      });
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.status(200).json({
+      status: "OK",
+      users: users,
     });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const updateUser = async (req, res) => {
@@ -144,9 +124,57 @@ const getUserById = async (req, res) => {
     const user = await User.findByPk(id, {
       attributes: ["id", "username", "email", "full_name"],
     });
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
     res.status(200).json({
       status: "OK",
       user: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
+const getUserByusername = async (req, res) => {
+  const username = req.params.username;
+  if (!username) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - Missing data",
+    });
+  }
+  try {
+    console.log("hola");
+    const user = await User.findAll({
+      where: { username: username },
+      attributes: ["id", "username", "email", "full_name"],
+    });
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
+    const countSave = await Save.count({
+      where: { user_id: user[0].id },
+    });
+    const countLoop = await Loop.count({
+      where: { user_id: user[0].id },
+    });
+    res.status(200).json({
+      status: "OK",
+      user: {
+        personal_info: user[0],
+        loops: countLoop,
+        saves: countSave,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -225,4 +253,5 @@ module.exports = {
   getUserById: getUserById,
   getSaveUser: getSaveUser,
   getLoopsByUser: getLoopsByUser,
+  getUserByusername: getUserByusername,
 };

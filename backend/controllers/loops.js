@@ -2,7 +2,6 @@ const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const User = require("../models/users");
 const Save = require("../models/saves");
-const { where } = require("sequelize");
 const { Op } = require("sequelize");
 
 const addLoop = async (req, res) => {
@@ -206,32 +205,42 @@ const getLoops = async (req, res) => {
       });
     }
   }
-  Loop.findAll({
-    include: [
-      {
-        model: User,
-        as: "user",
-        attributes: ["username"],
-      },
-      {
-        model: Language,
-        as: "language",
-        attributes: ["name"],
-      },
-    ],
-  })
-    .then((loops) => {
-      res.status(200).json({
-        status: "OK",
-        loops: loops,
-      });
+  try {
+    Loop.findAll({
+      limit: 2,
+      offset: 1,
+      order: [["create_at", "DESC"]],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        },
+      ],
     })
-    .catch((error) => {
-      res.status(400).json({
-        status: "Error",
-        error: error,
+      .then((loops) => {
+        res.status(200).json({
+          status: "OK",
+          loops: loops,
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          status: "Error",
+          error: error,
+        });
       });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
     });
+  }
 };
 
 const searchLoops = async (req, res) => {
