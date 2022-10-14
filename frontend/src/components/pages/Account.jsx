@@ -40,7 +40,6 @@ const Account = ({ user, fetchUser }) => {
         </div>
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>
-          
         </div>
       </div>
     </main>

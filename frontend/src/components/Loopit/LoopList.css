@@ -1,6 +1,5 @@
 .loop-list {
   @apply flex flex-col;
-  width: 60%;
 }
 
 .loop-list > *:not(:first-child) {
