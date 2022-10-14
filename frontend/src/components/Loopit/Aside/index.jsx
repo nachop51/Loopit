@@ -11,7 +11,7 @@ const Aside = () => {
             code with the world. Create a profile, upload your code, and share
             it with your friends, followers and the world.
           </p>
-          <span className="aside-view-yarn">Seguir hilo</span>
+          <p className="aside-view-yarn">Follow thread</p>
         </div>
       </div>
     </aside>

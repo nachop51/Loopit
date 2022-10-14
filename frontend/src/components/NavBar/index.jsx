@@ -1,5 +1,4 @@
 import "./Nav.css";
-// import "./NavLight.css";
 import { useState } from "react";
 
 import { HiCode, HiOutlineBookmark } from "react-icons/hi";

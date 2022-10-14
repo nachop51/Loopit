@@ -1,5 +1,5 @@
 .aside {
-  @apply w-2/6;
+  @apply w-3/12;
 }
 
 .aside-container {
@@ -13,4 +13,8 @@
   @apply rounded-md my-2.5 text-slate-100 shadow-2xl;
   border: 2px solid #fff;
   padding: 1rem 2rem;
+}
+
+.aside-view-yarn {
+  text-align: end;
 }

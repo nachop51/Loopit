@@ -42,10 +42,10 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
   return (
     <>
       <Logo />
-      {/* {!stateNav && <Nav />} */}
+      {!stateNav && <Nav />}
       <Routes>
         <Route path="/home" element={<LandingPage />} />
-        <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
+        <Route path="/" element={<LoopitApp />} />
         <Route path="/create-loop" element={<CreateLoop user_id={id} />} />
         <Route path="/saved" element={<Saved />} />
         <Route path="/account" element={<Account />} />
