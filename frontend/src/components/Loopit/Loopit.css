@@ -10,7 +10,7 @@
 
 .loop-container {
   @apply mb-20 mt-32 rounded-xl min-h-screen
-  flex flex-row gap-12 relative ml-auto;
-  width: calc(90% - 3rem);
+  flex flex-row gap-12 relative mx-60;
+  width: 100%;
   z-index: 1;
 }

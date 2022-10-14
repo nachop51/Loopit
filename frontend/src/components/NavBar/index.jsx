@@ -1,28 +1,35 @@
 import "./Nav.css";
 // import "./NavLight.css";
+import { useState } from "react";
 
-import { HiCode } from "react-icons/hi";
+import { HiCode, HiOutlineBookmark } from "react-icons/hi";
 import { BiUserCircle } from "react-icons/bi";
-import { FiHeart } from "react-icons/fi";
 import { AiOutlineHome } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  const [active, setActive] = useState(window.location.pathname);
+
+  const routes = [
+    { id: "/", icon: <AiOutlineHome /> },
+    { id: "/saved", icon: <HiOutlineBookmark /> },
+    { id: "/create-loop", icon: <HiCode /> },
+    { id: "/account", icon: <BiUserCircle /> },
+  ];
+
   return (
     <nav>
-      <Link to="/">
-        <AiOutlineHome />
-      </Link>
-      <Link to="/favorites">
-        <FiHeart />
-      </Link>
-      <Link to="/create-loop">
-        <HiCode />
-      </Link>
-      <Link to="/account">
-        <BiUserCircle />
-      </Link>
+      {routes.map(({ id, icon }) => (
+        <Link
+          key={id}
+          to={id}
+          onClick={() => setActive(id)}
+          className={active === id ? "active" : ""}
+        >
+          {icon}
+        </Link>
+      ))}
     </nav>
   );
 };

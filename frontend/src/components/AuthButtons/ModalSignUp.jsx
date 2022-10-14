@@ -57,10 +57,15 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
 
   const onSubmit = async ({ fullname, user, email, pass }) => {
     try {
+      const f_name = fullname
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
       const response = await loopit.post("/auth/register", {
         email: email,
         username: user,
-        fullname: fullname,
+        fullname: f_name,
         password: pass,
       });
       if (response.status === 200) {

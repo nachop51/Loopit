@@ -7,14 +7,11 @@
 }
 
 .editor-container:not(.monaco-editor) {
-  @apply bg-slate-100 bg-opacity-60 rounded-lg;
+  @apply rounded-lg p-6 bg-slate-800 bg-opacity-80;
   @apply w-2/3 ml-auto m-auto text-center;
   @apply sm:w-1/2;
   @apply md:w-4/6 ml-auto mr-10;
   @apply lg:w-9/12 m-auto;
-  @apply xl:w-9/12 m-auto;
-  /* margin: 20px auto 20px auto; */
-  /* align-content: center; */
 }
 
 .monaco-editor * {
@@ -33,7 +30,7 @@
 }
 
 .editor-form {
-  @apply m-auto text-center mb-5 mt-12 pb-4 bg-slate-800 bg-opacity-80;
+  @apply m-auto text-center pb-4 bg-slate-800 bg-opacity-80;
 }
 
 .editor-form input {
@@ -89,8 +86,4 @@ input#description {
 
 input#filename {
   width: 20%;
-}
-
-button.create-loop {
-  transform: scale(1.5);
 }
