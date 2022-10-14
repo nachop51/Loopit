@@ -12,10 +12,10 @@ const Nav = () => {
   const [active, setActive] = useState(window.location.pathname);
 
   const routes = [
-    { id: "/", icon: <AiOutlineHome />, iconActive: <AiFillHome /> },
-    { id: "/saved", icon: <IoBookmarkOutline />, iconActive: <IoBookmark /> },
-    { id: "/create-loop", icon: <HiOutlineCode />, iconActive: <HiCode /> },
-    { id: "/account", icon: <BiUser />, iconActive: <BiUserCircle /> },
+    { id: "/l", icon: <AiOutlineHome />, iconActive: <AiFillHome /> },
+    { id: "/l/saved", icon: <IoBookmarkOutline />, iconActive: <IoBookmark /> },
+    { id: "/l/create-loop", icon: <HiOutlineCode />, iconActive: <HiCode /> },
+    { id: "/l/account", icon: <BiUser />, iconActive: <BiUserCircle /> },
   ];
 
   return (

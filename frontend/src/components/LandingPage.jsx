@@ -6,7 +6,7 @@ import Logo from "./Logo";
 const LandingPage = () => {
   return (
     <>
-      <Logo width={75} />
+      <Logo width={75} link={"/"} />
       <AuthButtons />
       <Content />
       <Footer />

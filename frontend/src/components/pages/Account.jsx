@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { fetchUser } from "../../actions";
 
 const Account = ({ user, fetchUser }) => {
+  console.log(user);
+
   useEffect(() => {
     if (!user) fetchUser();
   }, [fetchUser, user]);
