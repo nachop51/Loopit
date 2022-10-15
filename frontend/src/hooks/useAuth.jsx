@@ -6,7 +6,7 @@ const useAuth = (userStatus) => {
 
   useEffect(() => {
     if (!userStatus) {
-      navigate("/home");
+      navigate("/");
     }
   });
 };

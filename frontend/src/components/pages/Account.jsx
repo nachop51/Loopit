@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser } from "../../actions";
 
-const Account = ({ auth, user, fetchUser }) => {
+const Account = ({ auth, account, fetchUser }) => {
   useEffect(() => {
-    if (!user) fetchUser();
-  }, [fetchUser, user]);
+    if (!account) fetchUser();
+  }, [fetchUser, account]);
 
-  if (user === null) {
+  if (account === null) {
     return (
       <div style={{ width: "100vw", height: "100vh" }}>
         <img src={LoadingSpinner} alt="Spinner" className="spinner" />
@@ -39,11 +39,11 @@ const Account = ({ auth, user, fetchUser }) => {
             </div>
             <div className="stats-container">
               <h3>Gists saved</h3>
-              <h4>{user?.saves}</h4>
+              <h4>{account?.saves}</h4>
             </div>
             <div className="stats-container">
               <h3>Gists uploaded</h3>
-              <h4>{user?.loops}</h4>
+              <h4>{account?.loops}</h4>
             </div>
           </div>
         </div>
@@ -56,11 +56,11 @@ const Account = ({ auth, user, fetchUser }) => {
             </div>
             <div className="profile-data-item">
               <h3>Email:</h3>
-              <h4>{user.data?.email}</h4>
+              <h4>{account.data?.email}</h4>
             </div>
             <div className="profile-data-item">
               <h3>Full name:</h3>
-              <h4>{user.data?.full_name}</h4>
+              <h4>{account.data?.full_name}</h4>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@ const Account = ({ auth, user, fetchUser }) => {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    user: state.user,
+    account: state.account,
   };
 };
 

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 import LandingPage from "./LandingPage/";
 import { checkUserAuth } from "../actions";
-// import LoadingSpinner from "../assets/loading_spinner.gif";
 import Appliaction from "./Appliaction";
 import LoadingSpinner from "../assets/nobg.gif";
 import ErrorPage from "./404";

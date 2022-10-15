@@ -6,5 +6,5 @@ import profileReducer from "./profileReducer";
 export default combineReducers({
   auth: authReducer,
   loops: loopReducer,
-  user: profileReducer,
+  account: profileReducer,
 });
