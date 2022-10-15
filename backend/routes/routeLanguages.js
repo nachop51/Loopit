@@ -9,7 +9,7 @@ const {
 //define routes for languages
 routeLanguages.post("/add", addLanguage);
 routeLanguages.delete("/delete", deleteLanguage);
-routeLanguages.put("/update", updateLanguage);
+routeLanguages.put("/update/:id", updateLanguage);
 routeLanguages.get("/all", getLanguages);
 
 module.exports = routeLanguages;

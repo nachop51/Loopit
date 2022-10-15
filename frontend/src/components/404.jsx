@@ -32,7 +32,7 @@ const ErrorPage = () => {
             The link you were looking for does not exist or has been removed.
           </p>
         </div>
-        <Link to="/home">
+        <Link to="/">
           <button className="btn btn-expand">Go back to home</button>
         </Link>
       </div>

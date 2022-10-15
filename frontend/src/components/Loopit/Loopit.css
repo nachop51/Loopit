@@ -8,7 +8,10 @@
   width: 25%;
 }
 
+.loops {
+  @apply mb-20 mt-32 min-h-screen;
+}
+
 .loop-container {
-  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl min-h-screen;
-  z-index: 1;
+  @apply flex flex-row justify-center gap-6;
 }

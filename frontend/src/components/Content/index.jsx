@@ -11,7 +11,7 @@ const Content = () => {
   const navigate = useNavigate();
 
   const goApp = () => {
-    navigate("/");
+    navigate("/l");
   };
 
   return (

@@ -12,7 +12,7 @@ const Footer = () => {
           <img src={image} alt="logo-footer" width={80} />
         </Link>
 
-        <Link id="link-about" className="/about">
+        <Link to="/about" id="link-about" className="/about">
           <span>About us</span>
         </Link>
 

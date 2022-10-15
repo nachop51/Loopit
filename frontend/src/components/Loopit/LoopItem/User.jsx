@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const User = ({ username }) => {
   return (
     <div className="user-info">
@@ -10,10 +12,15 @@ const User = ({ username }) => {
       </div>
       <div>
         <h3>{username}</h3>
-        <span>At 15/12 19:10PM</span>
+        <span>{new Date().toUTCString()}</span>
       </div>
     </div>
   );
+};
+
+User.propTypes = {
+  username: PropTypes.string.isRequired,
+  // image: PropTypes.string.isRequired,
 };
 
 export default User;

@@ -51,3 +51,9 @@ export const fetchLoops = () => async (dispatch) => {
 
   dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
 };
+
+export const fetchUser = () => async (dispatch) => {
+  const response = await loopit.get("/users/me");
+
+  dispatch({ type: "FETCH_USER", payload: response.data.me });
+};

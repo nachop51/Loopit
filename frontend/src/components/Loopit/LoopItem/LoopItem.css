@@ -2,6 +2,7 @@
   @apply p-4 relative rounded-2xl;
   background-color: #ddd;
   color: #333;
+  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
 }
 
 .avatar {
@@ -58,5 +59,21 @@
 
 /** COMMENTS */
 .action-comment {
-  @apply font-bold text-2xl cursor-pointer select-none;
+  @apply font-semibold text-lg cursor-pointer select-none;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.action-comment .icon {
+  font-size: 24px;
+  margin: 2px;
+}
+
+.action-comment .save-active {
+  color: #f7c900;
+}
+
+.action-comment .recommend-active {
+  color: #ff1111;
 }

@@ -1,7 +1,7 @@
 Desarrollo de la API - Metodos creados al momento
 
 
-/auth
+/auth - 
 	- /login
 		- Crear un usuario {user: "", password: ""}
 	- /register
@@ -12,13 +12,18 @@ Desarrollo de la API - Metodos creados al momento
 		- Cerrar la sesion del usuario
 
 
+
+
 /user
 	- /all
 		- te trae la data de todos los usuarios
+	- /all/:id
+		- te trae la data de un usuario en especifico
 
-	** FALTA -> TRAER LA DATA DE UN usuario
-			 -> ELIMINAR UN USUARIO
+	** FALTA -> ELIMINAR UN USUARIO
 			 -> MODIFICAR LOS DATOS DE UN USUARIO
+
+
 
 
 /loop
@@ -27,25 +32,28 @@ Desarrollo de la API - Metodos creados al momento
 	- /delete
 		- Elimina un loop de la base de datos {id:""}
 	-/update
-		- Updatea el contenido del loop {id:"" y los atributos que quieras modificar
+		- Updatea el contenido del loop {id:"" y los atributos que quieras modificar}
 	-/all
 		- Trae todos los loops con su informacion
 	-/all/:language
 		- Trae todos los loops con su informacion del lenguaje dado
+	- /all/:id
+		- Trae la data de un loop en especifico
 	
-	** FALTA -> ARREGLAR EL SEARCH
-			 -> TRAER LA INFO DE UN LOOP POR UN ID
+	** FALTA -> ARREGLAR EL SEARCH -- SECUNDARIO
 
 
-/favorite
+
+
+/save
 	- /add
-		- Agrega un loop a favoritos { user_id: "", loop_id: ""}
-
-	**FALTA -> AGREGAR METODO PARA SACAR LOOP DE LOS FAVORITOS
+		- Agrega un loop a guardados { user_id: "", loop_id: ""}
+	- /delete
+		- Elimina un loop de guardados
 
 
 /languages
-	- /all
+	- /add
 		- Agregar un lenguaje a la lista 
 	- /delete
 		- Eliminar un lenguaje de la lista
@@ -55,6 +63,8 @@ Desarrollo de la API - Metodos creados al momento
 		- Mostrar todos los lenguajes de la lista 
 
 
+
+
 /followers:
 	- /add
 		- Agregar un nuevo seguidor
@@ -62,10 +72,19 @@ Desarrollo de la API - Metodos creados al momento
 	**FALTA METODO PARA ELIMINAR UN SEGUIDOR DE LA LISTA
 
 
+
+
 /like
 	**FALTA METODOS PARA AGREGAR LIKES Y PARA ELIMINAR LOS LIKES
 	  RELACION DE 1 A 
 	  GENERAR EL CONTROLADOR PARA ESTOS
+
+
+
+
+/comments
+
+
 
 
 /mail

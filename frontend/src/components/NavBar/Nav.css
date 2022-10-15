@@ -1,0 +1,43 @@
+nav {
+  @apply flex justify-center gap-4;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 999;
+  backdrop-filter: blur(15px);
+  padding-top: 10px;
+}
+
+nav a {
+  @apply relative text-white p-4 rounded-full flex text-3xl;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+nav a:hover {
+  transform: scale(1.3);
+}
+
+nav a:hover::after {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full rounded-full;
+  background: #e1e1e11a;
+  transform: scale(0.75);
+}
+
+@media screen and (hover: none) {
+  nav a:hover {
+    transform: scale(1);
+  }
+
+  nav a:active {
+    background: #e1e1e11a;
+  }
+
+  nav a:hover::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+}
