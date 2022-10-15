@@ -1,9 +1,10 @@
 .account {
-  @apply flex flex-col items-center justify-center w-full min-h-screen;
+  @apply flex flex-col items-center justify-center w-full min-h-screen relative top-7;
 }
 
 .account-title {
-  @apply text-5xl font-bold mb-5 text-white;
+  @apply text-2xl font-bold mb-5 text-white py-5;
+  @apply md:text-3xl lg:text-4xl xl:text-4xl;
 }
 
 .profile {
@@ -12,7 +13,9 @@
 }
 
 .profile-ui {
-  @apply bg-slate-100 bg-opacity-60 rounded-2xl p-10 flex flex-col items-center;
+  @apply bg-transparent bg-opacity-50 rounded-2xl p-10 flex flex-col items-center;
+  border: 2px solid #fff;
+  box-shadow: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
 }
 
 .profile-stats-pic {
@@ -20,7 +23,7 @@
 }
 
 .profile-stats-heading {
-  @apply mr-auto text-neutral-600 mb-2;
+  @apply mr-auto text-white mb-2;
 }
 
 .profile-stats-container {
@@ -28,12 +31,24 @@
 }
 
 .profile-stats-container div {
-  @apply bg-neutral-800 text-neutral-100 p-4 rounded-md;
+  @apply bg-slate-800 text-neutral-100 p-4 rounded-md;
+}
+
+.profile-data h2 {
+  @apply text-white pb-6;
 }
 
 .stats-container h3,
 .stats-container h4 {
-  @apply text-center;
+  @apply text-center select-none;
+}
+
+.stats-container {
+  transition: all 0.1s;
+}
+
+.stats-container:hover {
+  box-shadow: 0.5px 0.5px 20px rgba(225, 225, 225, 0.4);
 }
 
 .stats-container h3 {
