@@ -1,12 +1,7 @@
 .nav {
-  @apply flex justify-center gap-4;
+  @apply flex justify-center gap-4 fixed top-0 w-full z-50;
   background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  width: 100%;
-  top: 0px;
-  z-index: 999;
   backdrop-filter: blur(15px);
-  padding-top: 10px;
 }
 
 .nav-links {
@@ -40,4 +35,14 @@
     width: 0;
     height: 0;
   }
+}
+
+.navbar-logo {
+  @apply absolute left-4;
+  top: 50%;
+  transform: translateY(-40%);
+}
+
+.navbar-logo img {
+  @apply flex justify-center items-center;
 }

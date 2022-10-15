@@ -27,6 +27,7 @@ const CreateLoop = ({ user_id }) => {
       return null;
     }
 
+    console.log(language.toLowerCase());
     const params = {
       name,
       content: valueEditor,
@@ -35,10 +36,9 @@ const CreateLoop = ({ user_id }) => {
     };
     if (description) params.description = description;
     if (filename) params.filename = filename;
+    console.log(params);
     try {
-      const response = await loopit.post("/loops/add", {
-        ...params,
-      });
+      const response = await loopit.post("/loops/add", params);
 
       console.log(response);
     } catch (error) {

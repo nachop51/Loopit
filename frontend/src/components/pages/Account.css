@@ -39,3 +39,19 @@
 .stats-container h3 {
   @apply font-medium;
 }
+
+.profile-data-container {
+  @apply flex flex-col items-start gap-4;
+}
+
+.profile-data-item {
+  @apply flex flex-col items-start gap-2;
+}
+
+.profile-data-item h4 {
+  @apply text-neutral-600;
+}
+
+.profile-data-item h3 {
+  @apply text-neutral-100;
+}

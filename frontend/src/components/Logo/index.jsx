@@ -3,9 +3,10 @@ import "./Logo.css";
 
 import { Link } from "react-router-dom";
 
-const Logo = ({ width, link }) => {
+// oC means optionalClass
+const Logo = ({ width, link, oC }) => {
   return (
-    <div className="logo">
+    <div className={oC ? oC : "logo"}>
       <Link to={link}>
         <img
           className="logo-img"
