@@ -213,7 +213,7 @@ const getSaveUser = async (req, res) => {
     const token_decode = await jwt.verify(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Loops.filename ,Users.username FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id WHERE Saves.user_id = ?;",
+      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Loops.filename ,Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ?;",
       {
         limit: limit,
         offset: page * limit - limit,
@@ -231,13 +231,31 @@ const getSaveUser = async (req, res) => {
       where: { user_id: id_user },
     });
     const totalPages = Math.ceil(countSaves / limit);
+    const listloops = [];
+    for (let i of data) {
+      const loop = {
+        id: i.loop_id,
+        name: i.name,
+        description: i.description,
+        content: i.content,
+        filename: i.filename,
+        create_at: i.create_at,
+        user: {
+          username: i.username,
+        },
+        language: {
+          name: i.language_name,
+        },
+      };
+      listloops.push(loop);
+    }
     return res.status(200).json({
       status: "OK",
       pages: {
         now: page,
         total: totalPages,
       },
-      loops: data,
+      loops: listloops,
     });
   } catch (error) {
     res.status(400).json({
