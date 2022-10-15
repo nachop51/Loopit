@@ -3,6 +3,8 @@
   background-color: #ddd;
   color: #333;
   box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
+  max-width: 80%;
+  left: 21%;
 }
 
 .avatar {
@@ -72,7 +74,12 @@
   margin: 2px;
 }
 
-.action-comment .save-active {
+.comment-button {
+  @apply text-slate-800 font-bold bg-transparent cursor-pointer;
+  border: none;
+}
+
+.comment-button .action-comment .save-active {
   color: #f7c900;
 }
 

@@ -24,9 +24,9 @@ const Feedback = () => {
       <div className="loop-info-buttons">
         <button className="action-comment" onClick={handleLike}>
           <MdRecommend className={like ? "icon recommend-active" : "icon"} />
-          <span>I recomend</span>
+          <span>Like</span>
         </button>
-        <button className="comment-button">Comment..</button>
+        <button className="comment-button">Comment...</button>
         <button className="action-comment" onClick={handleSave}>
           <IoBookmark className={save ? "icon save-active" : "icon"} />
           <span>Save</span>

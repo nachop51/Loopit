@@ -1,6 +1,7 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
 import loopit from "../../api/loopit";
+import Skeleton from "react-loading-skeleton";
 
 import { useState, useEffect } from "react";
 
@@ -24,7 +25,11 @@ const LoopList = ({ endpoint }) => {
   }, [endpoint, page]);
 
   if (loopsList === []) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <div className="loading">
+        <Skeleton />
+      </div>
+    );
   }
 
   const renderedLoops = loopsList.map((loop) => {
