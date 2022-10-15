@@ -2,9 +2,9 @@ import "./Account.css";
 import LoadingSpinner from "../../assets/nobg.gif";
 import { connect } from "react-redux";
 import { useEffect } from "react";
-import { fetchUser } from "../../actions";
+import { fetchUser, signOut } from "../../actions";
 
-const Account = ({ auth, account, fetchUser }) => {
+const Account = ({ auth, account, fetchUser, signOut }) => {
   useEffect(() => {
     if (!account) fetchUser();
   }, [fetchUser, account]);
@@ -63,6 +63,8 @@ const Account = ({ auth, account, fetchUser }) => {
               <h4>{account.data?.full_name}</h4>
             </div>
           </div>
+          <button>Edit</button>
+          <button onClick={() => signOut()}>Sign Out</button>
         </div>
       </div>
     </main>
@@ -76,4 +78,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUser })(Account);
+export default connect(mapStateToProps, { fetchUser, signOut })(Account);
