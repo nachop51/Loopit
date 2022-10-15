@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
-import Laptop from "../../assets/laptop.png";
-import Phone from "../../assets/phone.png";
+import Laptop from "../../../assets/laptop.png";
+import Phone from "../../../assets/phone.png";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";

@@ -1,9 +1,10 @@
 .editor {
-  @apply min-h-screen;
+  @apply min-h-screen relative top-24;
 }
 
 .heading-creator {
-  @apply text-center text-white mt-14 pb-10;
+  @apply text-center text-2xl font-bold mb-5 text-white py-6;
+  @apply md:text-3xl lg:text-4xl xl:text-4xl;
 }
 
 .editor-container:not(.monaco-editor) {
@@ -79,7 +80,7 @@ input#description {
   @apply text-slate-100 p-3 mb-0;
   background-color: #15151e;
   border: 1.5px solid rgba(255, 255, 255, 0.137);
-  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
+  box-shadow: 2px 2px 12px rgba(255, 255, 255, 0.137);
 }
 
 .input-optional {

@@ -17,17 +17,16 @@ const Appliaction = ({ userStatus, id, user }) => {
 
   return (
     <>
-      <Logo width={50} link="/l" />
-      <Nav />
-      <main>
-        <Routes>
-          <Route index element={<LoopitApp />} />
-          <Route path="create-loop" element={<CreateLoop />} />
-          <Route path="saved" element={<Saved />} />
-          <Route path="account" element={<Account />} />
-          <Route path="users/*" element={<Account />} />
-        </Routes>
-      </main>
+      <Nav>
+        <Logo width={40} link="/l" oC="navbar-logo" />
+      </Nav>
+      <Routes>
+        <Route index element={<LoopitApp />} />
+        <Route path="create-loop" element={<CreateLoop user_id={id} />} />
+        <Route path="saved" element={<Saved />} />
+        <Route path="account" element={<Account />} />
+        <Route path="users/*" element={<Account />} />
+      </Routes>
     </>
   );
 };

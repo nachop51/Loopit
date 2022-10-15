@@ -9,7 +9,7 @@ import Feedback from "./Feedback";
 const LoopItem = ({ loop }) => {
   return (
     <div className="loop">
-      <User username={loop.user.username} />
+      <User username={loop.user.username} time={loop.create_at} />
       <Interact content={loop.content} />
       <Language language={loop.language.name} />
       <Content
