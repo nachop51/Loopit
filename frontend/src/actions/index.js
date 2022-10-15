@@ -46,12 +46,6 @@ export const checkUserAuth = () => async (dispatch) => {
   }
 };
 
-export const fetchLoops = () => async (dispatch) => {
-  const response = await loopit.get("/loops/all");
-
-  dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
-};
-
 export const fetchUser = () => async (dispatch) => {
   const response = await loopit.get("/users/me");
 

@@ -3,13 +3,12 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-import LandingPage from "./LandingPage";
+import LandingPage from "./LandingPage/";
 import { checkUserAuth } from "../actions";
-// import LoadingSpinner from "../assets/loading_spinner.gif";
 import Appliaction from "./Appliaction";
 import LoadingSpinner from "../assets/nobg.gif";
 import ErrorPage from "./404";
-import About from "./AboutPage";
+import About from "./About/";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   useEffect(() => {
