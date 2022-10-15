@@ -2,6 +2,7 @@ const User = require("../models/users");
 const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const Save = require("../models/saves");
+const Follower = require("../models/followers");
 const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
@@ -202,6 +203,51 @@ const getUserByusername = async (req, res) => {
 };
 
 const getSaveUser = async (req, res) => {
+  const token = req.cookies.token;
+  let { limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  try {
+    const token_decode = await jwt.verify(token, key);
+    const id_user = token_decode.userId;
+    const data = await sequelize.query(
+      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Users.username as owner  FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id WHERE Saves.user_id = ?;",
+      {
+        limit: limit,
+        offset: page * limit - limit,
+        replacements: [id_user],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    if (!data) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - No loops saved by the user yet",
+      });
+    }
+    const countSaves = await Save.count({
+      where: { user_id: id_user },
+    });
+    const totalPages = Math.ceil(countSaves / limit);
+    return res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      saves: data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
+const getFollowersByUser = async (req, res) => {
   const { id } = req.params;
   let { limit, page } = req.query;
   page = parseInt(page, 10);
@@ -215,16 +261,39 @@ const getSaveUser = async (req, res) => {
     });
   }
   try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
     const data = await sequelize.query(
-      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Users.username as owner  FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id WHERE Saves.user_id = ?;",
+      "SELECT Users.id, Users.username, Users.email, Users.full_name FROM Followers JOIN Users ON Followers.user_id = Users.id WHERE Followers.user_id = ?;",
       {
+        limit: limit,
+        offset: page * limit - limit,
         replacements: [id],
         type: sequelize.QueryTypes.SELECT,
       }
     );
+    if (!data) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - followers empty",
+      });
+    }
+    const countFollowers = await Follower.count({
+      where: { user_id: id },
+    });
+    const totalPages = Math.ceil(countFollowers / limit);
     return res.status(200).json({
       status: "OK",
-      saves: data,
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      followers: data,
     });
   } catch (error) {
     res.status(400).json({
@@ -243,4 +312,5 @@ module.exports = {
   getUsers: getUsers,
   getSaveUser: getSaveUser,
   getUserByusername: getUserByusername,
+  getFollowersByUser: getFollowersByUser,
 };

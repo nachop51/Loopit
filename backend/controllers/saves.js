@@ -2,16 +2,21 @@ const User = require("../models/users");
 const Loop = require("../models/loops");
 const Save = require("../models/saves");
 const { sequelize } = require("../database/db");
+const jwt = require("jsonwebtoken");
+const { key } = require("../config");
 
 const addSave = async (req, res) => {
-  const { user_id, loop_id } = req.body;
-  if (!user_id || !loop_id) {
+  const { loop_id } = req.body;
+  const token = req.cookies.token;
+  if (!loop_id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
   try {
+    const token_decode = jwt.verify(token, key);
+    const user_id = token_decode.userId;
     const loop = await Loop.findByPk(loop_id);
     if (!loop) {
       return res.status(400).json({
@@ -27,7 +32,7 @@ const addSave = async (req, res) => {
       });
     }
     const new_save = await Save.create({
-      user_id: user.id,
+      user_id: user_id,
       loop_id: loop.id,
     });
     res.status(200).json({
@@ -54,7 +59,6 @@ const deleteSave = async (req, res) => {
     const save = await Save.findOne({
       where: { user_id: user_id, loop_id: loop_id },
     });
-    console.log(save);
     if (!save) {
       return res.status(400).json({
         status: "Error",
