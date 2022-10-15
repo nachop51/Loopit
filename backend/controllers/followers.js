@@ -1,8 +1,9 @@
 const Follower = require("../models/followers");
+const User = require("../models/users");
 
 const addFollower = async (req, res) => {
-  const { user_id, following_id } = req.body;
-  if (!user_id || !username) {
+  const { user_id, follow_id } = req.body;
+  if (!user_id || !follow_id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
@@ -16,16 +17,16 @@ const addFollower = async (req, res) => {
         Error: "Bad Request - User does not exist",
       });
     }
-    const following = await User.findByPk(following_id);
-    if (!following) {
+    const follow = await User.findByPk(follow_id);
+    if (!follow) {
       return res.status(400).json({
         status: "Error",
         Error: "Bad Request - User does not exist",
       });
     }
-    const follower = Follower.create({
+    const follower = await Follower.create({
       user_id: user_id,
-      following: following_id,
+      follow_id: follow_id,
     });
     res.status(200).json({
       status: "OK",
