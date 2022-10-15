@@ -10,7 +10,7 @@ const LoopItem = ({ loop }) => {
   return (
     <div className="loop">
       <User username={loop.user.username} time={loop.create_at} />
-      <Interact content={loop.content} />
+      <Interact content={loop.content} filename={loop.filename} />
       <Language language={loop.language.name} />
       <Content
         language={loop.language.name}

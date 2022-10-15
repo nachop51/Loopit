@@ -1,0 +1,79 @@
+.loop {
+  @apply p-4 relative rounded-2xl;
+  background-color: #ddd;
+  color: #333;
+  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
+}
+
+.avatar {
+  @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.avatar-img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.user-info {
+  @apply relative flex flex-row flex-nowrap gap-3;
+}
+
+.loop-buttons {
+  @apply absolute top-5 right-0 flex flex-row flex-nowrap gap-3 ml-auto mr-4 self-center;
+}
+
+.loop-buttons > * {
+  @apply w-10 h-10 rounded-full border-2 border-solid;
+  border: linear-gradient(90deg, #09203f 0%, #537895 100%),
+    linear-gradient(0deg, #ffffff, #ffffff);
+  font-size: 30px;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.loop-buttons > *:hover {
+  background-color: rgba(225, 225, 0, 0.2);
+}
+
+.loop-content {
+  @apply py-5 px-4 rounded-lg mt-2;
+  background: #444;
+  color: lemonchiffon;
+}
+
+.loop-content p {
+  @apply font-mono py-2 px-4 rounded-md leading-6 shadow-2xl;
+  background-color: rgba(225, 225, 225, 0.05);
+}
+
+.loop-info-buttons {
+  @apply flex flex-row justify-between gap-3;
+}
+
+.loop-info-buttons > * {
+  @apply m-auto;
+}
+
+/** COMMENTS */
+.action-comment {
+  @apply font-semibold text-lg cursor-pointer select-none;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.action-comment .icon {
+  font-size: 24px;
+  margin: 2px;
+}
+
+.action-comment .save-active {
+  color: #f7c900;
+}
+
+.action-comment .recommend-active {
+  color: #ff1111;
+}

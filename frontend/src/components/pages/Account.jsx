@@ -38,11 +38,11 @@ const Account = ({ auth, account, fetchUser }) => {
               <h4>8</h4>
             </div>
             <div className="stats-container">
-              <h3>Gists saved</h3>
+              <h3>Loops saved</h3>
               <h4>{account?.saves}</h4>
             </div>
             <div className="stats-container">
-              <h3>Gists uploaded</h3>
+              <h3>Loops uploaded</h3>
               <h4>{account?.loops}</h4>
             </div>
           </div>
