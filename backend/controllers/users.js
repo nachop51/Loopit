@@ -213,7 +213,7 @@ const getSaveUser = async (req, res) => {
     const token_decode = await jwt.verify(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Users.username as owner  FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id WHERE Saves.user_id = ?;",
+      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Loops.filename ,Users.username FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id WHERE Saves.user_id = ?;",
       {
         limit: limit,
         offset: page * limit - limit,
