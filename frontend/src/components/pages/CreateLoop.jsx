@@ -1,36 +1,28 @@
 import "./CreateLoop.css";
-import { useRef } from "react";
-import Editor from "@monaco-editor/react";
+import { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 import loopit from "../../api/loopit";
-
-import LoadingSpinner from "../../assets/nobg.gif";
+import LoadEditor from "../Editor";
 
 const CreateLoop = ({ user_id }) => {
-  const editorRef = useRef(null);
-
-  const handleEditorDidMount = (editor, monaco) => {
-    editorRef.current = editor;
-    editorRef.current.focus();
-  };
+  const [language, setLanguage] = useState("text");
+  const [code, setCode] = useState("");
 
   const onSubmit = async ({ name, description, language, filename }) => {
-    const valueEditor = editorRef.current.getValue();
+    if (code.length > 3000) return null;
 
-    if (valueEditor.length > 2400) return null;
-
-    if (language === "default" || !language) {
+    if (!language) {
       return { [FORM_ERROR]: "Language is required" };
     }
-    if (!valueEditor || valueEditor === "") {
+    if (!code || code === "") {
       return null;
     }
 
     console.log(language.toLowerCase());
     const params = {
       name,
-      content: valueEditor,
+      content: code,
       language: language.toLowerCase(),
       user_id,
     };
@@ -46,7 +38,7 @@ const CreateLoop = ({ user_id }) => {
     }
   };
 
-  const buildInput = ({ input, meta, label, placeholder, optionalClass }) => {
+  const buildInput = ({ input, placeholder, optionalClass }) => {
     return (
       <input
         {...input}
@@ -81,29 +73,13 @@ const CreateLoop = ({ user_id }) => {
                   name="language"
                   component="select"
                 >
-                  <option value="default">Choose a language</option>
+                  <option value="text">Choose a language</option>
                   <option value="Javascript">❤️ JavaScript</option>
                   <option value="Python">💚 Python</option>
                   <option value="HTML">💙 HTML</option>
                 </Field>
               </div>
-              <Editor
-                height="40vh"
-                language="javascript"
-                theme="vs-dark"
-                loading={
-                  <img src={LoadingSpinner} alt="Spinner" className="spinner" />
-                }
-                options={{
-                  fontFamily: "Consolas",
-                  showUnused: true,
-                  tabSize: 2,
-                  suggest: {
-                    showClasses: true,
-                  },
-                }}
-                onMount={handleEditorDidMount}
-              />
+              <LoadEditor setCode={setCode} language={language} />
               <div className="input-optional">
                 <Field
                   name="filename"
