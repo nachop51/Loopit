@@ -237,7 +237,7 @@ const getSaveUser = async (req, res) => {
         now: page,
         total: totalPages,
       },
-      saves: data,
+      loops: data,
     });
   } catch (error) {
     res.status(400).json({
