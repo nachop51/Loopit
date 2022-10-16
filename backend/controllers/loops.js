@@ -6,6 +6,7 @@ const Like = require("../models/likes");
 const { Op } = require("sequelize");
 const { url } = require("inspector");
 const jwt = require("jsonwebtoken");
+const { Console } = require("console");
 const { key } = "../config";
 
 const addLoop = async (req, res) => {
@@ -216,7 +217,6 @@ const getLoops = async (req, res) => {
     };
   }
   try {
-    console.log("hola");
     const loops = await Loop.findAll({
       limit: limit,
       offset: page * limit - limit,
@@ -253,22 +253,24 @@ const getLoops = async (req, res) => {
     });
     const totalPages = Math.ceil(countLoops / limit);
     loops.forEach((loop) => {
-      likesUser.forEach((like) => {
-        if (loop.id === like.loop_id) {
+      for (let a = 0; a < likesUser.length; a++) {
+        if (loop.id === likesUser[a].loop_id) {
           loop.dataValues.like = true;
+          break;
         } else {
           loop.dataValues.like = false;
         }
-      });
+      }
     });
     loops.forEach((loop) => {
-      savesUser.forEach((save) => {
-        if (loop.id === save.loop_id) {
+      for (let a = 0; a < savesUser.length; a++) {
+        if (loop.id === savesUser[a].loop_id) {
           loop.dataValues.save = true;
+          break;
         } else {
           loop.dataValues.save = false;
         }
-      });
+      }
     });
     return res.status(200).json({
       status: "OK",
