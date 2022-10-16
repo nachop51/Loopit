@@ -8,7 +8,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 // Props will have an username an image, content and more tags
-const LoopItem = ({ loop, loading }) => {
+const LoopItem = ({ collection, loop, loading }) => {
   loading = false;
   if (loading) {
     // return (
@@ -52,7 +52,7 @@ const LoopItem = ({ loop, loading }) => {
         description={loop.description}
         content={String.fromCharCode(...loop.content.data)}
       />
-      <Feedback loop={loop} />
+      <Feedback loop={loop} collection={collection} />
     </div>
   );
 };

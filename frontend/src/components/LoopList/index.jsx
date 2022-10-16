@@ -1,34 +1,46 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
-import loopit from "../../api/loopit";
+// import loopit from "../../api/loopit";
 
-import { useState, useEffect } from "react";
+import { fetchLoops, fetchSaves } from "../../actions";
 
-const LoopList = ({ endpoint }) => {
-  const [loopsList, setLoopsList] = useState([]);
-  const [page, setPage] = useState(1);
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
-  console.log(loopsList);
-
+const LoopList = ({ collection, fetchLoops, fetchSaves, loops }) => {
   useEffect(() => {
-    const fetchLoops = async () => {
-      const response = await loopit.get(endpoint, {
-        params: {
-          limit: 10,
-          page,
-        },
-      });
-      setLoopsList(response.data.loops);
-    };
+    if (collection === "all") {
+      fetchLoops();
+    } else if (collection === "saved") {
+      fetchSaves();
+    }
+  }, [fetchLoops, fetchSaves, collection]);
 
-    fetchLoops();
-  }, [endpoint, page]);
+  const handleRender = () => {
+    let mapFrom = [];
+    if (collection === "all") {
+      mapFrom = loops.all;
+    } else if (collection === "saved") {
+      mapFrom = loops.saved;
+    } else if (collection === "created") {
+      mapFrom = loops.created;
+    }
+    return mapFrom.map((loop) => {
+      return <LoopItem collection={collection} key={loop.id} loop={loop} />;
+    });
+  };
 
-  const renderedLoops = loopsList.map((loop) => {
-    return <LoopItem key={loop.id} loop={loop} />;
-  });
-
-  return <div className="loop-list">{renderedLoops}</div>;
+  return <div className="loop-list">{handleRender()}</div>;
 };
 
-export default LoopList;
+const mapStateToProps = (state) => {
+  return {
+    loops: state.loops,
+  };
+};
+
+export default connect(mapStateToProps, {
+  fetchLoops,
+  fetchSaves,
+  // fetchCreated,
+})(LoopList);

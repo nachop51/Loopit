@@ -1,14 +1,11 @@
 .editor {
-  @apply relative pt-20 w-screen;
-  height: calc(100vh - 5rem);
-  background: var(--background-image);
-  background-size: cover;
+  @apply relative w-screen pb-48;
 }
 
 .heading-creator {
-  @apply text-center text-2xl font-bold mb-5 py-6;
+  @apply text-center text-2xl font-bold mb-5 pb-6;
   @apply md:text-3xl lg:text-4xl xl:text-4xl;
-  color: var(--heading-color);
+  color: rgb(var(--primary-color));
 }
 
 .editor-container {

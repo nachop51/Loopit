@@ -3,7 +3,6 @@
   --nav-background: #f7f7f8;
   --background-color: #efeff1;
   --primary-color: 145, 71, 255;
-  --heading-color: #000;
 }
 
 *:not(.editor) {
@@ -14,8 +13,7 @@
 }
 
 #root {
-  position: relative;
-  @apply py-24;
+  @apply min-h-screen py-24 relative;
 }
 
 /* TODO: Define a selection color */

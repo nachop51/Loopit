@@ -51,3 +51,33 @@ export const fetchUser = () => async (dispatch) => {
 
   dispatch({ type: "FETCH_USER", payload: response.data.me });
 };
+
+export const fetchLoops = () => async (dispatch) => {
+  const response = await loopit.get("/loops/all");
+
+  dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
+};
+
+export const fetchSaves = () => async (dispatch) => {
+  const response = await loopit.get("/users/saves");
+
+  dispatch({ type: "FETCH_SAVED", payload: response.data.loops });
+};
+
+// export const fetchCreated = () => async (dispatch) => {
+//   const response = await loopit.get("/loops/created");
+
+//   dispatch({ type: "FETCH_CREATED", payload: response.data.loops });
+// };
+
+export const updateLoops = (collection, action, state, id) => {
+  return {
+    type: "UPDATE_LOOPS",
+    payload: {
+      action,
+      collection,
+      state,
+      id,
+    },
+  };
+};

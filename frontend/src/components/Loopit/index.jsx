@@ -7,7 +7,7 @@ const LoopitApp = () => {
     <>
       <main className="loops">
         <div className="loop-container">
-          <LoopList endpoint="/loops/all" />
+          <LoopList collection="all" />
           <Aside />
         </div>
       </main>

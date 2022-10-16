@@ -3,7 +3,10 @@ import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
 import loopit from "../../../api/loopit";
 
-const Feedback = ({ loop }) => {
+import { connect } from "react-redux";
+import { updateLoops } from "../../../actions";
+
+const Feedback = ({ loop, updateLoops, collection }) => {
   const [save, setSave] = useState(loop.save);
   const [like, setLike] = useState(loop.like);
 
@@ -16,6 +19,7 @@ const Feedback = ({ loop }) => {
         await loopit.post("/saves/add", { loop_id: loop.id });
         setSave(!save);
       }
+      updateLoops(collection, "save", !save, loop.id);
     } catch (error) {
       console.log(error);
     }
@@ -30,6 +34,7 @@ const Feedback = ({ loop }) => {
         await loopit.post("/likes/delete", { loop_id: loop.id });
         setLike(!like);
       }
+      updateLoops(collection, "like", !like, loop.id);
     } catch (error) {
       console.log(error);
     }
@@ -55,4 +60,4 @@ const Feedback = ({ loop }) => {
   );
 };
 
-export default Feedback;
+export default connect(null, { updateLoops })(Feedback);

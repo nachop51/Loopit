@@ -5,5 +5,5 @@
 
 .heading-saved {
   @apply font-bold text-4xl text-center pb-10;
-  color: var(--heading-color);
+  color: rgb(var(--primary-color));
 }

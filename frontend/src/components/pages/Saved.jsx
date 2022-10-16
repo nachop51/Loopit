@@ -7,7 +7,7 @@ const Saved = () => {
     <main className="container-saved">
       <h1 className="heading-saved">Loops saved</h1>
       <div className="loop-container">
-        <LoopList endpoint="/users/saves" />
+        <LoopList collection="saved" />
       </div>
     </main>
   );
