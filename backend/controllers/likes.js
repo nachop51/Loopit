@@ -52,6 +52,56 @@ const addLike = async (req, res) => {
   }
 };
 
+const deleteLike = async (req, res) => {
+  const token = req.cookies.token;
+  const { loop_id } = req.body;
+  if (!loop_id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - missing data",
+    });
+  }
+  try {
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
+    const user = await User.findByPk(user_id);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - user does not exist",
+      });
+    }
+    const like_delete = await Like.findAll({
+      where: {
+        user_id: user_id,
+        loop_id: loop_id,
+      },
+    });
+    if (!like_delete) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - like does not exist",
+      });
+    }
+    const delete_like = await Like.destroy({
+      where: {
+        user_id: user_id,
+        loop_id: loop_id,
+      },
+    });
+    res.status(200).json({
+      status: "OK",
+      data: [],
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   addLike: addLike,
+  deleteLike: deleteLike,
 };

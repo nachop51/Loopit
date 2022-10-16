@@ -251,8 +251,9 @@ const getLoops = async (req, res) => {
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
     });
-    const totalPages = Math.ceil(countLoops / limit);
     loops.forEach((loop) => {
+      loop.dataValues.like = false;
+      loop.dataValues.save = false;
       for (let a = 0; a < likesUser.length; a++) {
         if (loop.id === likesUser[a].loop_id) {
           loop.dataValues.like = true;
@@ -261,8 +262,6 @@ const getLoops = async (req, res) => {
           loop.dataValues.like = false;
         }
       }
-    });
-    loops.forEach((loop) => {
       for (let a = 0; a < savesUser.length; a++) {
         if (loop.id === savesUser[a].loop_id) {
           loop.dataValues.save = true;
@@ -272,6 +271,7 @@ const getLoops = async (req, res) => {
         }
       }
     });
+    const totalPages = Math.ceil(countLoops / limit);
     return res.status(200).json({
       status: "OK",
       pages: {

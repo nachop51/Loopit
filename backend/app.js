@@ -27,7 +27,7 @@ const Loop = require("./models/loops");
 const Language = require("./models/languages");
 const Follower = require("./models/followers");
 const Save = require("./models/saves");
-// const Like = require("./models/likes");
+const Like = require("./models/likes");
 //import bcrypt to hash passwords
 
 const port = process.env.PORT;
