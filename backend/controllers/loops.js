@@ -244,6 +244,10 @@ const getLoops = async (req, res) => {
       where: { user_id: user_id },
       attributes: ["loop_id"],
     });
+    const savesUser = await Save.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
     });
@@ -254,6 +258,15 @@ const getLoops = async (req, res) => {
           loop.dataValues.like = true;
         } else {
           loop.dataValues.like = false;
+        }
+      });
+    });
+    loops.forEach((loop) => {
+      savesUser.forEach((save) => {
+        if (loop.id === save.loop_id) {
+          loop.dataValues.save = true;
+        } else {
+          loop.dataValues.save = false;
         }
       });
     });
