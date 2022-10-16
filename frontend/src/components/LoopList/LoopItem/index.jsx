@@ -1,5 +1,4 @@
 import "./LoopItem.css";
-import { useState } from "react";
 import User from "./User";
 import Language from "./Language";
 import Interact from "./Interact";
@@ -32,8 +31,6 @@ const LoopItem = ({ loop, loading }) => {
       </div>
     );
   }
-
-  console.log(loop);
 
   return (
     <div className="loop">

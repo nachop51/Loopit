@@ -16,7 +16,6 @@ const LoopList = ({ endpoint }) => {
           page,
         },
       });
-      console.log(response.data.loops);
       setLoopsList(response.data.loops);
     };
 
@@ -24,7 +23,6 @@ const LoopList = ({ endpoint }) => {
   }, [endpoint, page]);
 
   const renderedLoops = loopsList.map((loop) => {
-    console.log(loopsList === []);
     return <LoopItem key={loop.id} loop={loop} />;
   });
 

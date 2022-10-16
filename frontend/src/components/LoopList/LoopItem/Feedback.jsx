@@ -21,9 +21,18 @@ const Feedback = ({ loop }) => {
     }
   };
 
-  const handleLike = () => {
-    if (like) setLike(false);
-    else setLike(true);
+  const handleLike = async () => {
+    try {
+      if (like) {
+        await loopit.post("/likes/add", { loop_id: loop.id });
+        setLike(!save);
+      } else {
+        await loopit.post("/likes/delete", { loop_id: loop.id });
+        setLike(!save);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
