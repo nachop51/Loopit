@@ -1,21 +1,23 @@
 .aside {
-  @apply w-3/12;
+  @apply hidden;
+  @apply md:hidden md:w-3/12 lg:block lg:w-3/12 xl:block xl:w-3/12 2xl:block 2xl:w-2/6;
 }
 
 .aside-container {
   @apply rounded-xl px-12;
   height: 80vh;
-  background-color: rgba(221, 221, 221, 0.13);
+  /* background-color: rgba(221, 221, 221, 0.024); */
   padding: 1rem;
 }
 
 .item-container {
-  @apply rounded-md my-2.5 text-slate-100 shadow-2xl;
+  @apply rounded-md my-2.5 text-slate-100 font-extralight shadow-2xl;
   border: 2px solid #fff;
   padding: 1rem 2rem;
-  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
+  box-shadow: 1px 1px 12px rgba(255, 255, 255, 0.4);
 }
 
 .aside-view-yarn {
+  @apply font-bold;
   text-align: end;
 }

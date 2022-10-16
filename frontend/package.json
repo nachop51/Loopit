@@ -24,6 +24,7 @@
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "skeleton-css": "^2.0.4",
     "utf8": "^3.0.0",
     "web-vitals": "^2.1.4"
   },
