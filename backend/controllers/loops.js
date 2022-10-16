@@ -253,7 +253,6 @@ const getLoops = async (req, res) => {
     });
     const totalPages = Math.ceil(countLoops / limit);
     loops.forEach((loop) => {
-      loop.dataValues.like = false;
       likesUser.forEach((like) => {
         if (loop.id === like.loop_id) {
           loop.dataValues.like = true;
@@ -263,7 +262,6 @@ const getLoops = async (req, res) => {
       });
     });
     loops.forEach((loop) => {
-      loop.dataValues.save = false;
       savesUser.forEach((save) => {
         if (loop.id === save.loop_id) {
           loop.dataValues.save = true;
