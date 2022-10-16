@@ -9,6 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 // Props will have an username an image, content and more tags
 const LoopItem = ({ loop, loading }) => {
+  loading = false;
   if (loading) {
     // return (
     //   <div className="loop">
@@ -28,6 +29,8 @@ const LoopItem = ({ loop, loading }) => {
           <Skeleton width={90} />
           <Skeleton height={90} />
         </div>
+
+        <Skeleton />
       </div>
     );
   }
