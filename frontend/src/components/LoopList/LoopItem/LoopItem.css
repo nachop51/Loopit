@@ -3,7 +3,7 @@
   background-color: #ddd;
   color: #333;
   box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
-  max-width: 80%;
+  width: 100%;
 }
 
 .avatar {
