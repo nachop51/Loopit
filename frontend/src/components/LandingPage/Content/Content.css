@@ -46,7 +46,7 @@
 
 .intro-images__laptop {
   @apply mb-4;
-  @apply w-full sm:w-2/3  md:w-2/3 lg:w-2/3; /* * xl: for extra large screens */
+  @apply w-full sm:w-2/3  md:w-2/3 lg:w-5/6; /* * xl: for extra large screens */
 }
 
 .intro-images__phone {
