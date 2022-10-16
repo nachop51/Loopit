@@ -60,7 +60,6 @@ const CreateLoop = ({ user_id }) => {
               <div className="inputs-required">
                 <Field
                   name="name"
-                  optionalClass="editor-req"
                   validate={(input) => {
                     return input === "" ? { title: "Title is required" } : null;
                   }}
@@ -69,7 +68,6 @@ const CreateLoop = ({ user_id }) => {
                 />
                 <select
                   name="language"
-                  className="editor-req"
                   onChange={(e) => {
                     setLanguage(e.target.value);
                     console.log(e.target.value);
