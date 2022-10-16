@@ -1,12 +1,18 @@
-* {
+:root {
+  --color-background: #15151e;
+  --heading-color: #fff;
+}
+
+*:not(.editor) {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
+/* TODO: Define a selection color */
 *::selection {
-  background: #1e80ff36;
+  /* background: #1e80ff36; */
   color: #fff;
 }
 

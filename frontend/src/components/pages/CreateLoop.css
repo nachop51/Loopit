@@ -3,8 +3,9 @@
 }
 
 .heading-creator {
-  @apply text-center text-2xl font-bold mb-5 text-white py-6;
+  @apply text-center text-2xl font-bold mb-5 py-6;
   @apply md:text-3xl lg:text-4xl xl:text-4xl;
+  color: var(--heading-color);
 }
 
 .editor-container:not(.monaco-editor) {
@@ -52,10 +53,6 @@ select.editor-req {
   @apply text-red-500 opacity-100 visible text-center text-sm mb-4;
 }
 
-.editor-req {
-  @apply !border-gray-700;
-}
-
 .inputs-required {
   @apply flex justify-between p-2 bg-slate-800 bg-opacity-80;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -73,6 +70,7 @@ select.editor-req {
 .inputs-required select {
   color: #ccc;
   background: #15151e;
+  @apply !border-gray-700;
 }
 
 input#filename,

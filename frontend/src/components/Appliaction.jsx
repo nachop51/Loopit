@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+
 import useAuth from "../hooks/useAuth";
 import LoadingSpinner from "../assets/nobg.gif";
 import Nav from "./NavBar";

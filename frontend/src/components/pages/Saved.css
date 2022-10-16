@@ -1,9 +1,6 @@
 .container-saved {
-  position: absolute;
-  top: 65px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  @apply absolute top-16 justify-center w-full items-center;
+  background-color: var(--color-background);
 }
 
 .heading-saved {

@@ -5,7 +5,7 @@ import loopit from "../../../api/loopit";
 
 const Feedback = ({ loop }) => {
   const [save, setSave] = useState(loop.save);
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(loop.like);
 
   const handleSave = async () => {
     try {
@@ -23,7 +23,7 @@ const Feedback = ({ loop }) => {
 
   const handleLike = async () => {
     try {
-      if (like) {
+      if (!like) {
         await loopit.post("/likes/add", { loop_id: loop.id });
         setLike(!save);
       } else {

@@ -2,6 +2,7 @@ import "./CreateLoop.css";
 import { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
+
 import loopit from "../../api/loopit";
 import LoadEditor from "../Editor";
 
@@ -60,7 +61,6 @@ const CreateLoop = ({ user_id }) => {
               <div className="inputs-required">
                 <Field
                   name="name"
-                  optionalClass="editor-req"
                   validate={(input) => {
                     return input === "" ? { title: "Title is required" } : null;
                   }}
@@ -69,7 +69,6 @@ const CreateLoop = ({ user_id }) => {
                 />
                 <select
                   name="language"
-                  className="editor-req"
                   onChange={(e) => {
                     setLanguage(e.target.value);
                     console.log(e.target.value);
