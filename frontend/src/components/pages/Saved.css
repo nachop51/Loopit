@@ -1,0 +1,11 @@
+.container-saved {
+  position: absolute;
+  top: 65px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.heading-saved {
+  @apply font-bold text-white text-4xl text-center py-10;
+}

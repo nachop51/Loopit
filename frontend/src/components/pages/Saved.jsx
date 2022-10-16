@@ -1,7 +1,14 @@
+import LoopList from "../LoopList";
+
+import "./Saved.css";
+
 const Favorites = () => {
   return (
-    <main style={{ minHeight: "100vh" }}>
-      <h1>Lista de loops favoritos</h1>
+    <main className="container-saved" style={{ minHeight: "100vh" }}>
+      <h1 className="heading-saved">Lista de loops favoritos</h1>
+      <div className="loop-container">
+        <LoopList endpoint="/users/saves" />
+      </div>
     </main>
   );
 };

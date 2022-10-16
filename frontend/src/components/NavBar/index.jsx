@@ -2,7 +2,7 @@ import "./Nav.css";
 import { useState } from "react";
 
 import { HiCode, HiOutlineCode } from "react-icons/hi";
-import { BiUser } from "react-icons/bi";
+import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { AiOutlineHome, AiFillHome } from "react-icons/ai";
 import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 
@@ -14,11 +14,15 @@ const Nav = ({ children }) => {
   const routes = [
     { id: "/l", icon: <AiOutlineHome />, iconActive: <AiFillHome /> },
     { id: "/l/saved", icon: <IoBookmarkOutline />, iconActive: <IoBookmark /> },
-    { id: "/l/create-loop", icon: <HiOutlineCode />, iconActive: <HiCode /> },
+    {
+      id: "/l/create-loop",
+      icon: <HiOutlineCode />,
+      iconActive: <HiCode style={{ transform: "scale(1.25)" }} />,
+    },
     {
       id: "/l/account",
-      icon: <BiUser />,
-      iconActive: <BiUser />,
+      icon: <BsPerson />,
+      iconActive: <BsPersonFill />,
     },
   ];
 

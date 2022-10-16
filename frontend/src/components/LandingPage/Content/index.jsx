@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
-import Laptop from "../../../assets/laptop.png";
-import Phone from "../../../assets/phone.png";
+import Laptop from "../../../assets/mockup-dark.png";
+import Phone from "../../../assets/mockup-mobile.png";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
@@ -18,15 +18,13 @@ const Content = () => {
     <main className="main">
       <section className="intro">
         <article className="intro-text">
-          <h1 className="intro-text__title">Learn from the best solutions</h1>
+          <h1 className="intro-text__title">Discover new solutions daily</h1>
           <p className="intro-text__p">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-            laboriosam nulla molestias soluta amet ab natus aut corrupti odit
-            quas doloribus dignissimos dicta similique consequuntur neque
-            molestiae, totam cum nobis. Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Voluptate maxime obcaecati iusto quae debitis
-            suscipit at deleniti architecto labore dicta fugiat, atque aliquam
-            id illum. Praesentium reprehenderit dolores asperiores officiis.
+            Si eres desarrollador o desarrolladora estás en el lugar correcto,
+            aqui vas a poder encontrar una grandiosa comunidad, donde descubrir
+            maravillosas y mejores soluciones todos los días. Discutir y
+            ayudarse entre personas con mismos problemas y mismos intereses. En
+            fin amantes de la tecnología.
           </p>
           <button
             className="intro-text__button btn btn-animation"

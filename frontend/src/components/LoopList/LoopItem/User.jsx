@@ -34,6 +34,18 @@ const User = ({ username, time }) => {
       </div>
     </div>
   );
+
+  // return (
+  //   <div className="user-info-esq">
+  //     <div className="avatar">
+  //       <Skeleton />
+  //     </div>
+  //     <div>
+  //       <h3>{<Skeleton />}</h3>
+  //       <span>{<Skeleton />}</span>
+  //     </div>
+  //   </div>
+  // );
 };
 
 User.propTypes = {

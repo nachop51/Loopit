@@ -1,5 +1,5 @@
 import "./Loopit.css";
-import LoadLoops from "./LoadLoops";
+import LoopList from "../LoopList";
 import Aside from "./Aside";
 import Footer from "../Footer";
 
@@ -7,12 +7,13 @@ const LoopitApp = () => {
   return (
     <>
       <main className="loops">
+        <h1 className="heading-home">Descubre nuevas soluciones!</h1>
         <div className="loop-container">
-          <LoadLoops />
+          <LoopList endpoint="/loops/all" />
           <Aside />
         </div>
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };

@@ -2,12 +2,13 @@
   @apply p-4 relative rounded-2xl;
   background-color: #ddd;
   color: #333;
-  box-shadow: 2px 4px 12px rgba(255, 255, 255, 0.137);
+  box-shadow: 0.4px 0.4px 8px rgba(255, 255, 255, 0.2);
+  width: 100%;
 }
 
 .avatar {
   @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none;
-  z-index: 999;
+  z-index: 2;
   cursor: pointer;
 }
 
@@ -39,8 +40,8 @@
 }
 
 .loop-content {
-  @apply py-5 px-4 rounded-lg mt-2;
-  background: #444;
+  @apply py-5 px-4 rounded-md mt-2 shadow-2xl;
+  background-color: #15151ee8;
   color: lemonchiffon;
 }
 
@@ -72,7 +73,12 @@
   margin: 2px;
 }
 
-.action-comment .save-active {
+.comment-button {
+  @apply text-slate-800 font-bold bg-transparent cursor-pointer;
+  border: none;
+}
+
+.save-active {
   color: #f7c900;
 }
 
