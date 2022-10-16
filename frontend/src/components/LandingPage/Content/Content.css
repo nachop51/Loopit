@@ -61,7 +61,8 @@
   padding-top: 2rem;
   padding-bottom: 6rem;
   border-radius: 0 0 1.2rem 1.2rem;
-  background: radial-gradient(#ffffff45, #ffffff00);
+  /* background: radial-gradient(#ffffff45, #ffffff00); */
+
   border-radius: 20px;
 }
 
