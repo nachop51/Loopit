@@ -7,6 +7,7 @@ import LoopitApp from "./Loopit";
 import CreateLoop from "./pages/CreateLoop";
 import Saved from "./pages/Saved";
 import Account from "./pages/Account";
+import ErrorPage from "./404";
 
 const Appliaction = ({ userStatus, id, user }) => {
   useAuth(userStatus);
@@ -30,6 +31,7 @@ const Appliaction = ({ userStatus, id, user }) => {
         <Route path="saved" element={<Saved />} />
         <Route path="account" element={<Account />} />
         <Route path="users/*" element={<Account />} />
+        <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
     </>
   );
