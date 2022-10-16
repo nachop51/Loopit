@@ -66,6 +66,24 @@
   border-radius: 20px;
 }
 
+.feature-box {
+  background: transparent;
+  border: 1px solid #fff;
+  box-shadow: 1px 1px 10px rgb(225, 225, 225, 0.4);
+}
+
+.feature-icon {
+  color: #f6feff;
+}
+
+.feature-tertiary {
+  color: #f2f2f2;
+}
+
+.feature-p {
+  color: #777;
+}
+
 .intro-text__button {
   @apply xl:ml-0;
 }

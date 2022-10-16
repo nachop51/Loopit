@@ -15,7 +15,7 @@ body {
   /* background: #0c020f; */
   background: #15151e; /* ! puede ser */
   /* background: url("../assets/blurry-gradient-haikei.png"); */
-
+  background-image: url("../assets/option-one-oscura.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
