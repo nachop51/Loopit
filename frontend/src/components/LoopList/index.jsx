@@ -23,11 +23,8 @@ const LoopList = ({ endpoint }) => {
     fetchLoops();
   }, [endpoint, page]);
 
-  if (loopsList === []) {
-    return <div className="loading">Loading...</div>;
-  }
-
   const renderedLoops = loopsList.map((loop) => {
+    console.log(loopsList === []);
     return <LoopItem key={loop.id} loop={loop} />;
   });
 

@@ -15,7 +15,7 @@ const LoadEditor = ({ width, height, language, setCode }) => {
 
   return (
     <Editor
-      height="40vh"
+      height={height}
       language={language || "javascript"}
       theme="vs-dark"
       loading={<img src={LoadingSpinner} alt="Spinner" className="spinner" />}

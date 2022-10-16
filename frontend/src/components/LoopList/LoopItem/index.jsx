@@ -9,10 +9,8 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 // Props will have an username an image, content and more tags
-const LoopItem = ({ loop }) => {
-  const [loading, setLoading] = useState(false);
-
-  if (loading)
+const LoopItem = ({ loop, loading }) => {
+  if (loading) {
     // return (
     //   <div className="loop">
     //     <User username={<Skeleton />} time={loop.create_at} />
@@ -33,20 +31,26 @@ const LoopItem = ({ loop }) => {
         </div>
       </div>
     );
-  else
-    return (
-      <div className="loop">
-        <User username={loop.user.username} time={loop.create_at} />
-        <Interact content={loop.content} filename={loop.filename} />
-        <Language language={loop.language.name} />
-        <Content
-          language={loop.language.name}
-          description={loop.description}
-          content={loop.content}
-        />
-        <Feedback loop={loop} />
-      </div>
-    );
+  }
+
+  console.log(loop);
+
+  return (
+    <div className="loop">
+      <User username={loop.user.username} time={loop.create_at} />
+      <Interact
+        content={String.fromCharCode(...loop.content.data)}
+        filename={loop.filename}
+      />
+      <Language language={loop.language.name} />
+      <Content
+        language={loop.language.name}
+        description={loop.description}
+        content={String.fromCharCode(...loop.content.data)}
+      />
+      <Feedback loop={loop} />
+    </div>
+  );
 };
 
 export default LoopItem;

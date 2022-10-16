@@ -12,7 +12,11 @@ const Appliaction = ({ userStatus, id, user }) => {
   useAuth(userStatus);
 
   if (!userStatus) {
-    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
+    return (
+      <div style={{ width: "100vw", height: "100vh" }}>
+        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+      </div>
+    );
   }
 
   return (

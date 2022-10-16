@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
+import loopit from "../../../api/loopit";
 
-const Feedback = () => {
-  const [save, setSave] = useState(false);
+const Feedback = ({ loop }) => {
+  const [save, setSave] = useState(loop.save);
   const [like, setLike] = useState(false);
 
-  const handleSave = () => {
-    if (save) setSave(false);
-    else setSave(true);
+  const handleSave = async () => {
+    try {
+      if (save) {
+        await loopit.post("/saves/delete", { loop_id: loop.id });
+        setSave(!save);
+      } else {
+        await loopit.post("/saves/add", { loop_id: loop.id });
+        setSave(!save);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleLike = () => {
