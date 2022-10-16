@@ -250,6 +250,21 @@ const getSaveUser = async (req, res) => {
       };
       listloops.push(loop);
     }
+    const user_id = token_decode.userId;
+    const savesUser = await Save.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
+    listloops.forEach((loop) => {
+      for (let a = 0; a < savesUser.length; a++) {
+        if (loop.id === savesUser[a].loop_id) {
+          loop.save = true;
+          break;
+        } else {
+          loop.save = false;
+        }
+      }
+    });
     return res.status(200).json({
       status: "OK",
       pages: {
