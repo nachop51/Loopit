@@ -48,7 +48,7 @@
 }
 
 .stats-container:hover {
-  box-shadow: 0.3px 0.3px 20px rgba(225, 225, 225, 0.2);
+  box-shadow: 0.3px 0.3px 20px rgba(225, 225, 225, 0.4);
 }
 
 .stats-container h3 {
