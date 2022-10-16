@@ -63,8 +63,10 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
               <h4>{account.data?.full_name}</h4>
             </div>
           </div>
-          <button>Edit</button>
-          <button onClick={() => signOut()}>Sign Out</button>
+          <button className="profile-btn-edit">Edit</button>
+          <button onClick={() => signOut()} className="profile-btn-sign-out">
+            Sign Out
+          </button>
         </div>
       </div>
     </main>
