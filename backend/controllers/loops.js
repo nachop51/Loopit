@@ -3,10 +3,10 @@ const Language = require("../models/languages");
 const User = require("../models/users");
 const Save = require("../models/saves");
 const Like = require("../models/likes");
+const Comment = require("../models/comments");
 const { Op } = require("sequelize");
 const { url } = require("inspector");
 const jwt = require("jsonwebtoken");
-const { Console } = require("console");
 const { key } = "../config";
 
 const addLoop = async (req, res) => {
@@ -237,6 +237,7 @@ const getLoops = async (req, res) => {
         error: "Loop list is empty",
       });
     }
+    //get info of user
     const token = req.cookies.token;
     const token_decode = jwt.decode(token, key);
     const user_id = token_decode.userId;
@@ -248,9 +249,7 @@ const getLoops = async (req, res) => {
       where: { user_id: user_id },
       attributes: ["loop_id"],
     });
-    const countLoops = await Loop.count({
-      include: [dicUsername, dicLanguage],
-    });
+    //this part check if the user has liked or saved the loop
     loops.forEach((loop) => {
       loop.dataValues.like = false;
       loop.dataValues.save = false;
@@ -270,6 +269,21 @@ const getLoops = async (req, res) => {
           loop.dataValues.save = false;
         }
       }
+    });
+    // in this part we count the number of likes and saves
+    for (let i = 0; i < loops.length; i++) {
+      const countLikesLoop = await Like.count({
+        where: { loop_id: loops[i].id },
+      });
+      const countSavesLoop = await Save.count({
+        where: { loop_id: loops[i].id },
+      });
+      loops[i].dataValues.countLikes = countLikesLoop;
+      loops[i].dataValues.countSaves = countSavesLoop;
+    }
+    //total number of loops for pagination
+    const countLoops = await Loop.count({
+      include: [dicUsername, dicLanguage],
     });
     const totalPages = Math.ceil(countLoops / limit);
     return res.status(200).json({

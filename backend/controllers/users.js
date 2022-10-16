@@ -228,10 +228,6 @@ const getSaveUser = async (req, res) => {
         error: "Bad Request - No loops saved by the user yet",
       });
     }
-    const countSaves = await Save.count({
-      where: { user_id: id_user },
-    });
-    const totalPages = Math.ceil(countSaves / limit);
     const listloops = [];
     for (let i of data) {
       const loop = {
@@ -251,11 +247,26 @@ const getSaveUser = async (req, res) => {
       listloops.push(loop);
     }
     const user_id = token_decode.userId;
+    const likesUser = await Like.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
     const savesUser = await Save.findAll({
       where: { user_id: user_id },
       attributes: ["loop_id"],
     });
+    //this part check if the user has liked or saved the loop
     listloops.forEach((loop) => {
+      loop.like = false;
+      loop.save = false;
+      for (let a = 0; a < likesUser.length; a++) {
+        if (loop.id === likesUser[a].loop_id) {
+          loop.like = true;
+          break;
+        } else {
+          loop.like = false;
+        }
+      }
       for (let a = 0; a < savesUser.length; a++) {
         if (loop.id === savesUser[a].loop_id) {
           loop.save = true;
@@ -265,6 +276,22 @@ const getSaveUser = async (req, res) => {
         }
       }
     });
+    // in this part we count the number of likes and saves
+    for (let i = 0; i < listloops.length; i++) {
+      const countLikesLoop = await Like.count({
+        where: { loop_id: listloops[i].id },
+      });
+      const countSavesLoop = await Save.count({
+        where: { loop_id: listloops[i].id },
+      });
+      listloops[i].countLikes = countLikesLoop;
+      listloops[i].countSaves = countSavesLoop;
+    }
+    console.log("holaaaa");
+    const countSaves = await Save.count({
+      where: { user_id: id_user },
+    });
+    const totalPages = Math.ceil(countSaves / limit);
     return res.status(200).json({
       status: "OK",
       pages: {
