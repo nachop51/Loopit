@@ -51,6 +51,7 @@ app.use("/saves", routeSaves);
 app.use("/languages", routeLanguages);
 app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
+app.use("/likes", routeLike);
 //verify token
 app.use("/", verifytoken);
 

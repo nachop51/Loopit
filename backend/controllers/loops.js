@@ -2,9 +2,11 @@ const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const User = require("../models/users");
 const Save = require("../models/saves");
+const Like = require("../models/likes");
 const { Op } = require("sequelize");
-const querystring = require("querystring");
 const { url } = require("inspector");
+const jwt = require("jsonwebtoken");
+const { key } = "../config";
 
 const addLoop = async (req, res) => {
   const { name, description, content, language, filename, user_id } = req.body;
@@ -199,7 +201,6 @@ const getLoops = async (req, res) => {
       where: { name: language },
     };
   }
-  console.log(username);
   if (!username) {
     dicUsername = {
       model: User,
@@ -236,10 +237,26 @@ const getLoops = async (req, res) => {
         error: "Loop list is empty",
       });
     }
+    const token = req.cookies.token;
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
+    const likesUser = await Like.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
     });
     const totalPages = Math.ceil(countLoops / limit);
+    loops.forEach((loop) => {
+      likesUser.forEach((like) => {
+        if (loop.id === like.loop_id) {
+          loop.dataValues.like = true;
+        } else {
+          loop.dataValues.like = false;
+        }
+      });
+    });
     return res.status(200).json({
       status: "OK",
       pages: {
