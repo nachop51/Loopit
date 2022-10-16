@@ -44,11 +44,11 @@
 }
 
 .stats-container {
-  transition: all 0.1s;
+  transition: all 0.4s;
 }
 
 .stats-container:hover {
-  box-shadow: 0.5px 0.5px 20px rgba(225, 225, 225, 0.4);
+  box-shadow: 0.3px 0.3px 20px rgba(225, 225, 225, 0.4);
 }
 
 .stats-container h3 {
@@ -69,4 +69,21 @@
 
 .profile-data-item h3 {
   @apply text-neutral-100;
+}
+
+.profile-btn-edit,
+.profile-btn-sign-out {
+  @apply mx-3 my-2 bg-transparent px-5   py-3 text-white font-bold rounded-md w-full;
+  border: 2px solid #fff;
+  animation: 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  cursor: pointer;
+}
+
+.profile-btn-edit {
+  margin-top: 2rem;
+}
+
+.profile-btn-edit:hover,
+.profile-btn-sign-out:hover {
+  background-color: rgba(225, 225, 225, 0.2);
 }
