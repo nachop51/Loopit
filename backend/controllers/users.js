@@ -3,6 +3,7 @@ const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const Save = require("../models/saves");
 const Follower = require("../models/followers");
+const Like = require("../models/likes");
 const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
@@ -321,7 +322,68 @@ const getFollowersByUser = async (req, res) => {
   }
 };
 
-const getUserByNames = (req, res) => {};
+const getLikesByUser = async (req, res) => {
+  const token = req.cookies.token;
+  let { limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  try {
+    const token_decode = await jwt.decode(token, key);
+    const id_user = token_decode.userId;
+    const data = await sequelize.query(
+      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Likes JOIN Loops ON Likes.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Likes.user_id = ?;",
+      {
+        limit: limit,
+        offset: page * limit - limit,
+        replacements: [id_user],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    if (!data) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - No loops liked by the user yet",
+      });
+    }
+    const countLikes = await Like.count({
+      where: { user_id: id_user },
+    });
+    const totalPages = Math.ceil(countLikes / limit);
+    const listloops = [];
+    for (let i of data) {
+      const loop = {
+        id: i.loop_id,
+        name: i.name,
+        description: i.description,
+        content: i.content,
+        filename: i.filename,
+        create_at: i.create_at,
+        user: {
+          username: i.username,
+        },
+        language: {
+          name: i.language_name,
+        },
+      };
+      listloops.push(loop);
+    }
+    res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      loops: listloops,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
 
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
@@ -331,4 +393,5 @@ module.exports = {
   getSaveUser: getSaveUser,
   getUserByusername: getUserByusername,
   getFollowersByUser: getFollowersByUser,
+  getLikesByUser: getLikesByUser,
 };

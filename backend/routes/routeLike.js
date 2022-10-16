@@ -1,8 +1,7 @@
 const routeLike = require("express").Router();
-const {  } = require("../controllers/likes");
+const { addLike } = require("../controllers/likes");
 
 //define routes for likes
-routeLike.post("/likes/", );
-routeLike.delete("/likes/", );
+routeLike.post("/add", addLike);
 
 module.exports = routeLike;

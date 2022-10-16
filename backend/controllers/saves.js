@@ -48,14 +48,17 @@ const addSave = async (req, res) => {
 };
 
 const deleteSave = async (req, res) => {
-  const { user_id, loop_id } = req.body;
-  if (!user_id || !loop_id) {
+  const { loop_id } = req.body;
+  const token = req.cookies.token;
+  if (!loop_id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
   try {
+    const token_decode = jwt.verify(token, key);
+    const user_id = token_decode.userId;
     const save = await Save.findOne({
       where: { user_id: user_id, loop_id: loop_id },
     });

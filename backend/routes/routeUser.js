@@ -6,6 +6,7 @@ const {
   me,
   getUserByusername,
   getFollowersByUser,
+  getLikesByUser,
 } = require("../controllers/users");
 
 //define routes for user
@@ -15,5 +16,6 @@ routeUser.get("/all", getUsers);
 routeUser.get("/profile/:username", getUserByusername);
 routeUser.get("/saves", getSaveUser);
 routeUser.get("/followers/:id", getFollowersByUser);
+routeUser.get("/likes", getLikesByUser);
 
 module.exports = routeUser;

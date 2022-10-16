@@ -22,4 +22,4 @@ const Like = sequelize.define(
   }
 );
 
-module.exports = Likes;
+module.exports = Like;
