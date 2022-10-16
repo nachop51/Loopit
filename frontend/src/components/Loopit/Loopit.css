@@ -13,7 +13,7 @@
 }
 
 .loops {
-  @apply mb-20 mt-32 min-h-screen;
+  @apply min-h-screen;
 }
 
 .loop-container {

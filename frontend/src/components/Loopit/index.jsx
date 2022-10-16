@@ -1,7 +1,6 @@
 import "./Loopit.css";
 import LoopList from "../LoopList";
 import Aside from "./Aside";
-import Footer from "../Footer";
 
 const LoopitApp = () => {
   return (
@@ -12,7 +11,6 @@ const LoopitApp = () => {
           <Aside />
         </div>
       </main>
-      <Footer />
     </>
   );
 };

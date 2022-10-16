@@ -1,6 +1,9 @@
 :root {
-  --color-background: #15151e;
-  --heading-color: #fff;
+  --background-image: url("../assets/blurry-gradient-haikei\ \(1\).png");
+  --nav-background: #f7f7f8;
+  --background-color: #efeff1;
+  --primary-color: 145, 71, 255;
+  --heading-color: #000;
 }
 
 *:not(.editor) {
@@ -10,18 +13,19 @@
   font-family: "Poppins", sans-serif;
 }
 
+#root {
+  position: relative;
+  @apply py-24;
+}
+
 /* TODO: Define a selection color */
 *::selection {
-  /* background: #1e80ff36; */
-  color: #fff;
+  background: rgb(var(--primary-color), 0.5);
+  color: white;
 }
 
 body {
-  /* background: #090214; */ /* fallback for old browsers */
-  /* background: #0c020f; */
-  background: #15151e; /* ! puede ser */
-  /* background: url("../assets/blurry-gradient-haikei.png"); */
-  background-image: url("../assets/option-one-oscura.png");
+  background: var(--background-color);
   background-size: cover;
   background-repeat: no-repeat;
 }

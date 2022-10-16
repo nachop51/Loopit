@@ -1,8 +1,9 @@
 .container-saved {
-  @apply absolute top-16 justify-center w-full items-center;
-  background-color: var(--color-background);
+  @apply justify-center w-full items-center relative pb-96;
+  min-height: 100vh;
 }
 
 .heading-saved {
-  @apply font-bold text-white text-4xl text-center py-10;
+  @apply font-bold text-4xl text-center pb-10;
+  color: var(--heading-color);
 }

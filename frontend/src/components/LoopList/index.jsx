@@ -8,6 +8,8 @@ const LoopList = ({ endpoint }) => {
   const [loopsList, setLoopsList] = useState([]);
   const [page, setPage] = useState(1);
 
+  console.log(loopsList);
+
   useEffect(() => {
     const fetchLoops = async () => {
       const response = await loopit.get(endpoint, {

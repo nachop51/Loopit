@@ -1,5 +1,7 @@
 // Interacts props will have the links
-import { AiOutlineShareAlt, AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineShareAlt } from "react-icons/ai";
+import { MdContentCopy } from "react-icons/md";
+import { HiDownload } from "react-icons/hi";
 import { VscCopy } from "react-icons/vsc";
 import PropTypes from "prop-types";
 
@@ -30,7 +32,7 @@ const Interact = ({ content, filename }) => {
           console.log(a);
         }}
       >
-        <AiOutlineDownload />
+        <HiDownload />
       </div>
     </div>
   );

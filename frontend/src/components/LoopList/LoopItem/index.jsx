@@ -1,6 +1,6 @@
 import "./LoopItem.css";
 import User from "./User";
-import Language from "./Language";
+import Description from "./Description";
 import Interact from "./Interact";
 import Content from "./Content";
 import Feedback from "./Feedback";
@@ -42,7 +42,11 @@ const LoopItem = ({ loop, loading }) => {
         content={String.fromCharCode(...loop.content.data)}
         filename={loop.filename}
       />
-      <Language language={loop.language.name} />
+      <Description
+        title={loop.name}
+        description={loop.description}
+        language={loop.language.name}
+      />
       <Content
         language={loop.language.name}
         description={loop.description}

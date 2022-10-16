@@ -43,12 +43,12 @@ const Feedback = ({ loop }) => {
       <div className="loop-info-buttons">
         <button className="action-comment" onClick={handleLike}>
           <MdRecommend className={like ? "icon recommend-active" : "icon"} />
-          <span>Like</span>
+          <span>&nbsp;Like</span>
         </button>
         <button className="comment-button">Comment...</button>
         <button className="action-comment" onClick={handleSave}>
           <IoBookmark className={save ? "icon save-active" : "icon"} />
-          <span>Save</span>
+          <span>&nbsp;Save</span>
         </button>
       </div>
     </div>

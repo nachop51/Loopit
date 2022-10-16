@@ -1,4 +1,5 @@
-import Image from "../../assets/logo2.png";
+// import Image from "../../assets/logo2.png";
+import Image from "../../assets/primary-logo.png";
 import "./Logo.css";
 
 import { Link } from "react-router-dom";

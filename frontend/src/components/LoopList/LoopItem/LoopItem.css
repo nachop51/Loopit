@@ -1,8 +1,9 @@
 .loop {
-  @apply p-4 relative rounded-2xl;
-  background-color: #ddd;
+  @apply p-4 relative rounded-2xl bg-white;
+  border: 2px solid;
+  border-color: rgb(var(--primary-color), 0.3);
   color: #333;
-  box-shadow: 0.4px 0.4px 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0.4px 0.4px 8px rgba(255, 255, 255, 0.5);
   width: 100%;
 }
 
@@ -79,9 +80,9 @@
 }
 
 .save-active {
-  color: #f7c900;
+  color: rgb(var(--primary-color));
 }
 
 .action-comment .recommend-active {
-  color: #ff1111;
+  color: rgb(var(--primary-color));
 }

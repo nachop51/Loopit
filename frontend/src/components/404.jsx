@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 
 const divStyle = {
   display: "flex",
@@ -36,7 +35,6 @@ const ErrorPage = () => {
           <button className="btn btn-expand">Go back to home</button>
         </Link>
       </div>
-      <Footer />
     </>
   );
 };

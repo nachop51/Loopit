@@ -9,6 +9,7 @@ import CreateLoop from "./pages/CreateLoop";
 import Saved from "./pages/Saved";
 import Account from "./pages/Account";
 import ErrorPage from "./404";
+import Footer from "./Footer";
 
 const Appliaction = ({ userStatus, id, user }) => {
   useAuth(userStatus);
@@ -34,6 +35,7 @@ const Appliaction = ({ userStatus, id, user }) => {
         <Route path="users/*" element={<Account />} />
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
+      <Footer />
     </>
   );
 };
