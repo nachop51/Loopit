@@ -25,10 +25,10 @@ const Feedback = ({ loop }) => {
     try {
       if (!like) {
         await loopit.post("/likes/add", { loop_id: loop.id });
-        setLike(!save);
+        setLike(!like);
       } else {
         await loopit.post("/likes/delete", { loop_id: loop.id });
-        setLike(!save);
+        setLike(!like);
       }
     } catch (error) {
       console.log(error);
