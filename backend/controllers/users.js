@@ -224,7 +224,7 @@ const getSaveUser = async (req, res) => {
     const token_decode = await jwt.decode(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.create_at DESC;",
+      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC;",
       {
         limit: limit,
         offset: page * limit - limit,
@@ -247,7 +247,7 @@ const getSaveUser = async (req, res) => {
         description: i.description,
         content: i.content,
         filename: i.filename,
-        create_at: i.create_at,
+        created_at: i.created_at,
         user: {
           username: i.username,
         },
@@ -386,7 +386,7 @@ const getLikesByUser = async (req, res) => {
     const token_decode = await jwt.decode(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
-      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Likes JOIN Loops ON Likes.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Likes.user_id = ?;",
+      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Likes JOIN Loops ON Likes.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Likes.user_id = ?;",
       {
         limit: limit,
         offset: page * limit - limit,
@@ -412,7 +412,7 @@ const getLikesByUser = async (req, res) => {
         description: i.description,
         content: i.content,
         filename: i.filename,
-        create_at: i.create_at,
+        created_at: i.created_at,
         user: {
           username: i.username,
         },

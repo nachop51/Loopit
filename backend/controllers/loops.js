@@ -7,6 +7,7 @@ const Comment = require("../models/comments");
 const { Op } = require("sequelize");
 const { url } = require("inspector");
 const jwt = require("jsonwebtoken");
+const { sequelize } = require("../database/db");
 const { key } = "../config";
 
 const addLoop = async (req, res) => {
@@ -66,10 +67,16 @@ const deleteLoop = async (req, res) => {
         error: "Bad Request - loop does not exist",
       });
     }
-    await loop_destroy.destroy();
-    const favorite_destroy = await Save.destroy({
+    const save_destroy = await Save.destroy({
       where: { loop_id: id },
     });
+    const comment_destroy = await Comment.destroy({
+      where: { loop_id: id },
+    });
+    const like_destroy = await Like.destroy({
+      where: { loop_id: id },
+    });
+    await loop_destroy.destroy();
     res.status(200).json({
       status: "OK",
       data: [],
@@ -229,10 +236,10 @@ const getLoops = async (req, res) => {
         "description",
         "content",
         "filename",
-        "create_at",
+        "created_at",
       ],
       include: [dicUsername, dicLanguage],
-      order: [["create_at", "DESC"]],
+      order: [["created_at", "DESC"]],
     });
     if (!loops) {
       return res.status(400).json({
@@ -310,7 +317,7 @@ const getLoops = async (req, res) => {
   }
 };
 
-const getLoopInfo = async (req, res) => {
+const getLoopComments = async (req, res) => {
   const { loop_id } = req.params;
   if (!loop_id) {
     return res.status(400).json({
@@ -326,12 +333,17 @@ const getLoopInfo = async (req, res) => {
         error: "Bad Request - Loop does not exist",
       });
     }
-    const commenst = await Comment.findAll({
-      where: { loop_id: loop_id },
-    });
+    const comments = await sequelize.query(
+      "SELECT Comments.id, Comments.content, Users.username, Comments.created_at FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE Comments.loop_id = ?;",
+      {
+        replacements: [loop_id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    console.log("holaaaaaa");
     return res.status(200).json({
       status: "OK",
-      comments: commenst,
+      comments: comments,
     });
   } catch (error) {
     res.status(400).json({
@@ -392,6 +404,6 @@ module.exports = {
   getLoops: getLoops,
   searchLoops: searchLoops,
   getLoopsbyID: getLoopsbyID,
-  getLoopInfo: getLoopInfo,
+  getLoopComments: getLoopComments,
   // getAllLoopsByLanguage: getAllLoopsByLanguage,
 };
