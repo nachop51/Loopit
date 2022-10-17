@@ -9,12 +9,19 @@
   /* background-color: rgba(221, 221, 221, 0.024); */
   padding: 1rem;
 }
-
+/** Dark article **/
+/* 
 .item-container {
   @apply rounded-md my-2.5 text-slate-100 font-extralight shadow-2xl;
   border: 2px solid #fff;
   padding: 1rem 2rem;
   box-shadow: 1px 1px 12px rgba(255, 255, 255, 0.4);
+} */
+
+.item-container {
+  @apply rounded-md mb-6 text-slate-600 font-medium shadow-2xl;
+  border: 2px solid rgb(var(--primary-color), 0.3);
+  padding: 1rem 2rem;
 }
 
 .aside-view-yarn {
