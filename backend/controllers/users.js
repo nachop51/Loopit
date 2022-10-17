@@ -42,6 +42,7 @@ const me = async (req, res) => {
         data: user,
         loops: countLoops,
         saves: countSaves,
+        followers: 0,
       },
     });
   } catch (error) {

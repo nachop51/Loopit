@@ -20,7 +20,7 @@ const Loop = sequelize.define(
       allowNull: true,
     },
     content: {
-      type: DataTypes.BLOB,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     filename: {
