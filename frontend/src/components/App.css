@@ -7,7 +7,7 @@
   --font-family: "Poppins", sans-serif;
 
   --nav-background: #f7f7f8;
-  --nav-size: 4rem;
+
   --shadow-light: 0.5px 0.5px 20px rgba(0, 0, 0, 0.2);
   --shadow-dark: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
 
@@ -37,6 +37,7 @@ body {
   background: var(--background-color);
   background-size: cover;
   background-repeat: no-repeat;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .btn-animation {
