@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(element);
 
 root.render(
   <Provider store={store}>
-    <SkeletonTheme baseColor="#313131" highlightColor="#525252" height={20}>
+    <SkeletonTheme baseColor="#9e9e9e" highlightColor="#ccc" height={20}>
       <BrowserRouter>
         <App />
       </BrowserRouter>

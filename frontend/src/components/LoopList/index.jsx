@@ -60,6 +60,7 @@ const LoopList = ({
       return (
         <div className="loop">
           <div style={{ display: "flex", flexDirection: "column" }}>
+            {/* <Skeleton width={20} className="circle" /> */}
             <Skeleton width={90} />
             <Skeleton height={90} />
           </div>
