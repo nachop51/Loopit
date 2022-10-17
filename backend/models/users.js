@@ -29,6 +29,10 @@ const User = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+    theme: {
+      type: DataTypes.STRING(20),
+      defaultValue: "light",
+    },
   },
   {
     // Other model options go here

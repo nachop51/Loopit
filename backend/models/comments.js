@@ -17,12 +17,10 @@ const Comment = sequelize.define(
     user_id: {
       type: DataTypes.UUID,
       allowNull: false,
-      primaryKey: true,
     },
     loop_id: {
       type: DataTypes.UUID,
       allowNull: false,
-      primaryKey: true,
     },
   },
   {

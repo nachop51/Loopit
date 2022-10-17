@@ -7,6 +7,7 @@ const Like = require("../models/likes");
 const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
+const { isErrored } = require("nodemailer/lib/xoauth2");
 
 // Falta: - Agregar metodo para buscar usuarios por username
 //        - Metodo para eliminar usuarios
@@ -437,6 +438,31 @@ const getLikesByUser = async (req, res) => {
   }
 };
 
+const changeThemeMode = async (req, res) => {
+  const token = req.cookies.token;
+  try {
+    const token_decode = jwt.decode(token, key);
+    const user = await User.findByPk(token_decode.userId);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
+    if (user.theme_mode === "light") {
+      user.theme_mode = "dark";
+    } else {
+      user.theme_mode = "light";
+    }
+    await user.save();
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
   me: me,
@@ -446,4 +472,5 @@ module.exports = {
   getUserByusername: getUserByusername,
   getFollowersByUser: getFollowersByUser,
   getLikesByUser: getLikesByUser,
+  changeThemeMode: changeThemeMode,
 };
