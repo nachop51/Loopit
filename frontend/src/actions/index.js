@@ -46,6 +46,12 @@ export const checkUserAuth = () => async (dispatch) => {
   }
 };
 
+export const setHasData = () => {
+  return {
+    type: "SET_HAS_DATA",
+  };
+};
+
 export const fetchUser = () => async (dispatch) => {
   const response = await loopit.get("/users/me");
 
@@ -64,11 +70,13 @@ export const fetchSaves = () => async (dispatch) => {
   dispatch({ type: "FETCH_SAVED", payload: response.data.loops });
 };
 
-// export const fetchCreated = () => async (dispatch) => {
-//   const response = await loopit.get("/loops/created");
+export const fetchCreated = (username) => async (dispatch) => {
+  if (username) {
+    const response = await loopit.get(`/loops/all?username=${username}`);
 
-//   dispatch({ type: "FETCH_CREATED", payload: response.data.loops });
-// };
+    dispatch({ type: "FETCH_CREATED", payload: response.data.loops });
+  }
+};
 
 export const updateLoops = (collection, action, state, id) => {
   return {

@@ -44,6 +44,8 @@ const Feedback = ({ loop, updateLoops, collection }) => {
   return (
     <div className="loop-info">
       <div className="heading-comments">
+        <p>Likes</p>
+        <p>Comments</p>
         <br />
       </div>
       <div className="loop-info-buttons">

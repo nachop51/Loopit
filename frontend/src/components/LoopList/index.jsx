@@ -1,26 +1,38 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
 // import loopit from "../../api/loopit";
-import { fetchLoops, fetchSaves } from "../../actions";
+import {
+  fetchLoops,
+  fetchSaves,
+  fetchCreated,
+  setHasData,
+} from "../../actions";
 
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const LoopList = ({ collection, fetchLoops, fetchSaves, loops }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
+const LoopList = ({
+  collection,
+  fetchLoops,
+  fetchSaves,
+  fetchCreated,
+  setHasData,
+  loops,
+  hasData,
+  username,
+}) => {
   useEffect(() => {
+    setHasData();
     if (collection === "all") {
       fetchLoops();
     } else if (collection === "saved") {
       fetchSaves();
+    } else if (collection === "created") {
+      fetchCreated(username);
     }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }, [fetchLoops, fetchSaves, collection]);
+  }, [fetchLoops, fetchSaves, fetchCreated, username, setHasData, collection]);
 
   const handleRender = () => {
     let mapFrom = [];
@@ -51,18 +63,21 @@ const LoopList = ({ collection, fetchLoops, fetchSaves, loops }) => {
   };
 
   return (
-    <div className="loop-list">{isLoading ? skeleton() : handleRender()}</div>
+    <div className="loop-list">{!hasData ? skeleton() : handleRender()}</div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     loops: state.loops,
+    hasData: state.loops.hasData,
+    username: state.auth.username,
   };
 };
 
 export default connect(mapStateToProps, {
   fetchLoops,
   fetchSaves,
-  // fetchCreated,
+  fetchCreated,
+  setHasData,
 })(LoopList);

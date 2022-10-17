@@ -2,26 +2,35 @@ const initialState = {
   all: [],
   saved: [],
   created: [],
+  hasData: false,
 };
 
 const loopReducer = (state = initialState, action) => {
   console.log(action);
   console.log(state);
   switch (action.type) {
+    case "SET_HAS_DATA":
+      return {
+        ...state,
+        hasData: false,
+      };
     case "FETCH_LOOPS":
       return {
         ...state,
         all: action.payload,
+        hasData: true,
       };
     case "FETCH_SAVED":
       return {
         ...state,
         saved: action.payload,
+        hasData: true,
       };
     case "FETCH_CREATED":
       return {
         ...state,
         created: action.payload,
+        hasData: true,
       };
     case "UPDATE_LOOPS":
       let updatedLoops = {
@@ -55,6 +64,12 @@ const loopReducer = (state = initialState, action) => {
         updatedLoops.created = mapFrom;
       }
       return updatedLoops;
+    case "SIGN_OUT":
+      return {
+        all: [],
+        saved: [],
+        created: [],
+      };
     default:
       return state;
   }
