@@ -147,7 +147,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
                   {submitError}
                 </div>
               )}
-              <button className="btn-lily" type="submit">
+              <button className="btn btn-primary btn-animation" type="submit">
                 Sign Up
               </button>
             </form>

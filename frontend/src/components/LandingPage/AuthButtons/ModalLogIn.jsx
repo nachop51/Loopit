@@ -83,7 +83,7 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
               <span className={`error-message ${error ? "show-span" : ""}`}>
                 {error ? "Invalid username or password" : <br />}
               </span>
-              <button className="btn-lily btn-animate" type="submit">
+              <button className="btn btn-primary btn-animation" type="submit">
                 Log In
               </button>
             </form>

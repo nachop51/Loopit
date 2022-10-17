@@ -27,7 +27,7 @@ const Content = () => {
             fin amantes de la tecnología.
           </p>
           <button
-            className="intro-text__button btn btn-animation"
+            className="intro-text__button btn btn-animation btn-primary"
             onClick={goApp}
           >
             Go to app

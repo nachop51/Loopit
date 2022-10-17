@@ -1,7 +1,6 @@
 :root {
-  --background-image: url("../assets/blurry-gradient-haikei\ \(1\).png");
   --background-color: #efeff1;
-  --background-url: url("../assets/option-one-oscura.png");
+
   --primary-color: 145, 71, 255; /* Violet */
   --secondary-color: #f2f2f2;
 
@@ -12,8 +11,9 @@
   --shadow-light: 0.5px 0.5px 20px rgba(0, 0, 0, 0.2);
   --shadow-dark: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
 
-  --text-light: #444;
-  --text-dark: #fff;
+  --text-light: #666;
+  --text-color: #444;
+  --text-dark: #222;
 }
 
 *:not(.editor) {
@@ -40,8 +40,6 @@ body {
 }
 
 .btn-animation {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  background-color: #09203f;
   transition: all 0.4s;
 }
 
@@ -58,19 +56,17 @@ body {
 }
 
 .btn {
-  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
-  font-size: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold text-xs;
   @apply sm:w-20 sm:text-base;
   @apply md:w-28;
   @apply lg:w-32 lg:text-lg;
+  color: rgb(var(--primary-color));
 }
 
-.btn-gray {
-  @apply bg-gray-800 text-white;
-}
-
-.btn-lily {
-  @apply bg-gray-900 text-white;
+.btn-primary {
+  @apply text-white;
+  background-color: rgb(var(--primary-color));
 }
 
 .btn-expand {

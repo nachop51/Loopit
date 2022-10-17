@@ -1,13 +1,10 @@
 .title-animation {
-  @apply text-center text-2xl font-semibold my-8 mx-auto;
+  @apply text-center text-2xl font-semibold my-8 mx-auto overflow-hidden block whitespace-nowrap;
   @apply sm:text-3xl;
   @apply md:text-6xl;
   @apply lg:text-6xl;
 
-  color: rgba(255, 255, 255, 0.733);
-  overflow: hidden;
-  display: block;
-  white-space: nowrap;
+  color: rgb(var(--primary-color));
   letter-spacing: 0.05em;
   border-right: 4px solid;
 }
@@ -32,6 +29,6 @@
     border-color: transparent;
   }
   50% {
-    border-color: rgba(255, 255, 255, 0.425);
+    border-color: var(--text-light);
   }
 }
