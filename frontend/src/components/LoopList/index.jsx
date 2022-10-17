@@ -43,6 +43,13 @@ const LoopList = ({
     } else if (collection === "created") {
       mapFrom = loops.created;
     }
+    if (mapFrom.length === 0) {
+      return (
+        <div className="no-loops">
+          <h2>No loops to show</h2>
+        </div>
+      );
+    }
     return mapFrom.map((loop) => {
       return <LoopItem collection={collection} key={loop.id} loop={loop} />;
     });

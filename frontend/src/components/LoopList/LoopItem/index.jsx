@@ -13,7 +13,7 @@ const LoopItem = ({ collection, loop }) => {
   return (
     <div className="loop">
       <User username={username} time={loop.create_at} />
-      <Interact content={loop.content.data} filename={loop.filename} />
+      <Interact content={loop.content} filename={loop.filename} />
       <Description
         title={loop.name}
         description={loop.description}
