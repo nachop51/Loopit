@@ -6,8 +6,6 @@ const initialState = {
 };
 
 const loopReducer = (state = initialState, action) => {
-  console.log(action);
-  console.log(state);
   switch (action.type) {
     case "SET_HAS_DATA":
       return {

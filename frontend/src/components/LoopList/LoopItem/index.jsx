@@ -12,7 +12,7 @@ const LoopItem = ({ collection, loop }) => {
 
   return (
     <div className="loop">
-      <User username={username} time={loop.create_at} />
+      <User username={username} time={loop.created_at} />
       <Interact content={loop.content} filename={loop.filename} />
       <Description
         title={loop.name}
