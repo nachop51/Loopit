@@ -52,7 +52,7 @@ const CreateLoop = ({ user_id }) => {
 
   return (
     <main className="editor">
-      <h1 className="heading-creator">Create your loop!</h1>
+      <h1 className="heading-primary">Create your loop!</h1>
       <div className="editor-container">
         <Form
           onSubmit={onSubmit}

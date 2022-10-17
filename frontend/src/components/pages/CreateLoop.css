@@ -2,12 +2,6 @@
   @apply relative w-screen pb-48;
 }
 
-.heading-creator {
-  @apply text-center text-2xl font-bold mb-5 pb-6;
-  @apply md:text-3xl lg:text-4xl xl:text-4xl;
-  color: rgb(var(--primary-color));
-}
-
 .editor-container {
   @apply rounded-lg p-6 bg-slate-800 bg-opacity-80;
   @apply w-2/3 ml-auto m-auto text-center;

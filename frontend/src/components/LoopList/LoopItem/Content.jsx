@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const Content = ({ content, description, language }) => {
+const Content = ({ content, language }) => {
   return (
     <div className="loop-content">
-      {description}
       <SyntaxHighlighter
         language={language}
         style={atomOneDark}
@@ -20,7 +19,7 @@ const Content = ({ content, description, language }) => {
 
 Content.propTypes = {
   content: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  language: PropTypes.string,
 };
 
 export default Content;
