@@ -7,6 +7,6 @@ const {
 
 routeComment.post("/add", addComment);
 routeComment.post("/delete", deleteComment);
-routeComment.update("/update", updateComment);
+routeComment.put("/update", updateComment);
 
 module.exports = routeComment;

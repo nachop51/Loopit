@@ -1,12 +1,12 @@
 const User = require("../models/users");
 const Loop = require("../models/loops");
-const Like = require("../models/likes");
 const Comment = require("../models/comments");
 const jwt = require("jsonwebtoken");
 const { key } = require("../config");
 
 const addComment = async (req, res) => {
   const { content, loop_id } = req.body;
+  const token = req.cookies.token;
   if (!content || !loop_id) {
     return res.status(400).json({
       status: "Error",
@@ -17,12 +17,14 @@ const addComment = async (req, res) => {
     const token_decode = jwt.verify(token, key);
     const user_id = token_decode.userId;
     const loop = await Loop.findByPk(loop_id);
+    console.log("holaaaaaa");
     if (!loop) {
       return res.status(400).json({
         status: "Error",
         Error: "Bad Request - loop does not exist",
       });
     }
+    console.log("holaaaa");
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
