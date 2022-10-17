@@ -3,9 +3,11 @@ const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const Save = require("../models/saves");
 const Follower = require("../models/followers");
+const Like = require("../models/likes");
 const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
+const { isErrored } = require("nodemailer/lib/xoauth2");
 
 // Falta: - Agregar metodo para buscar usuarios por username
 //        - Metodo para eliminar usuarios
@@ -20,7 +22,8 @@ const me = async (req, res) => {
   }
   try {
     const token_decode = await jwt.verify(token, key);
-    const user = await User.findByPk(token_decode.userId, {
+    const user_id = token_decode.userId;
+    const user = await User.findByPk(user_id, {
       attributes: ["email", "full_name"],
     });
     if (!user) {
@@ -35,12 +38,20 @@ const me = async (req, res) => {
     const countSaves = await Save.count({
       where: { user_id: token_decode.userId },
     });
+    const countFollowings = await Follower.count({
+      where: { user_id: user_id },
+    });
+    const countFollowers = await Follower.count({
+      where: { follow_id: user_id },
+    });
     res.status(200).json({
       status: "OK",
       me: {
         data: user,
         loops: countLoops,
         saves: countSaves,
+        followings: countFollowings,
+        followers: countFollowers,
       },
     });
   } catch (error) {
@@ -210,10 +221,10 @@ const getSaveUser = async (req, res) => {
   if (!page) page = 1;
   if (!limit) limit = 10;
   try {
-    const token_decode = await jwt.verify(token, key);
+    const token_decode = await jwt.decode(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Loops.filename ,Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ?;",
+      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC;",
       {
         limit: limit,
         offset: page * limit - limit,
@@ -227,11 +238,8 @@ const getSaveUser = async (req, res) => {
         error: "Bad Request - No loops saved by the user yet",
       });
     }
-    const countSaves = await Save.count({
-      where: { user_id: id_user },
-    });
-    const totalPages = Math.ceil(countSaves / limit);
     const listloops = [];
+    console.log(data);
     for (let i of data) {
       const loop = {
         id: i.loop_id,
@@ -239,7 +247,7 @@ const getSaveUser = async (req, res) => {
         description: i.description,
         content: i.content,
         filename: i.filename,
-        create_at: i.create_at,
+        created_at: i.created_at,
         user: {
           username: i.username,
         },
@@ -249,6 +257,52 @@ const getSaveUser = async (req, res) => {
       };
       listloops.push(loop);
     }
+    const user_id = token_decode.userId;
+    const likesUser = await Like.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
+    const savesUser = await Save.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
+    //this part check if the user has liked or saved the loop
+    listloops.forEach((loop) => {
+      loop.like = false;
+      loop.save = false;
+      for (let a = 0; a < likesUser.length; a++) {
+        if (loop.id === likesUser[a].loop_id) {
+          loop.like = true;
+          break;
+        } else {
+          loop.like = false;
+        }
+      }
+      for (let a = 0; a < savesUser.length; a++) {
+        if (loop.id === savesUser[a].loop_id) {
+          loop.save = true;
+          break;
+        } else {
+          loop.save = false;
+        }
+      }
+    });
+    // in this part we count the number of likes and saves
+    for (let i = 0; i < listloops.length; i++) {
+      const countLikesLoop = await Like.count({
+        where: { loop_id: listloops[i].id },
+      });
+      const countSavesLoop = await Save.count({
+        where: { loop_id: listloops[i].id },
+      });
+      listloops[i].countLikes = countLikesLoop;
+      listloops[i].countSaves = countSavesLoop;
+    }
+    console.log("holaaaa");
+    const countSaves = await Save.count({
+      where: { user_id: id_user },
+    });
+    const totalPages = Math.ceil(countSaves / limit);
     return res.status(200).json({
       status: "OK",
       pages: {
@@ -321,7 +375,93 @@ const getFollowersByUser = async (req, res) => {
   }
 };
 
-const getUserByNames = (req, res) => {};
+const getLikesByUser = async (req, res) => {
+  const token = req.cookies.token;
+  let { limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  try {
+    const token_decode = await jwt.decode(token, key);
+    const id_user = token_decode.userId;
+    const data = await sequelize.query(
+      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Likes JOIN Loops ON Likes.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Likes.user_id = ?;",
+      {
+        limit: limit,
+        offset: page * limit - limit,
+        replacements: [id_user],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    if (!data) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - No loops liked by the user yet",
+      });
+    }
+    const countLikes = await Like.count({
+      where: { user_id: id_user },
+    });
+    const totalPages = Math.ceil(countLikes / limit);
+    const listloops = [];
+    for (let i of data) {
+      const loop = {
+        id: i.loop_id,
+        name: i.name,
+        description: i.description,
+        content: i.content,
+        filename: i.filename,
+        created_at: i.created_at,
+        user: {
+          username: i.username,
+        },
+        language: {
+          name: i.language_name,
+        },
+      };
+      listloops.push(loop);
+    }
+    res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      loops: listloops,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
+const changeThemeMode = async (req, res) => {
+  const token = req.cookies.token;
+  try {
+    const token_decode = jwt.decode(token, key);
+    const user = await User.findByPk(token_decode.userId);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
+    if (user.theme_mode === "light") {
+      user.theme_mode = "dark";
+    } else {
+      user.theme_mode = "light";
+    }
+    await user.save();
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
 
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
@@ -331,4 +471,6 @@ module.exports = {
   getSaveUser: getSaveUser,
   getUserByusername: getUserByusername,
   getFollowersByUser: getFollowersByUser,
+  getLikesByUser: getLikesByUser,
+  changeThemeMode: changeThemeMode,
 };

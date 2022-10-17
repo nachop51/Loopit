@@ -1,37 +1,29 @@
 import "./CreateLoop.css";
-import { useRef } from "react";
-import Editor from "@monaco-editor/react";
+import { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
-import loopit from "../../api/loopit";
 
-import LoadingSpinner from "../../assets/nobg.gif";
+import loopit from "../../api/loopit";
+import LoadEditor from "../Editor";
 
 const CreateLoop = ({ user_id }) => {
-  const editorRef = useRef(null);
+  const [language, setLanguage] = useState("javascript");
+  const [code, setCode] = useState("");
 
-  const handleEditorDidMount = (editor, monaco) => {
-    editorRef.current = editor;
-    editorRef.current.focus();
-  };
+  const onSubmit = async ({ name, description, filename }) => {
+    if (code.length > 3000) return null;
 
-  const onSubmit = async ({ name, description, language, filename }) => {
-    const valueEditor = editorRef.current.getValue();
-
-    if (valueEditor.length > 2400) return null;
-
-    if (language === "default" || !language) {
+    if (!language || language === "default") {
       return { [FORM_ERROR]: "Language is required" };
     }
-    if (!valueEditor || valueEditor === "") {
+    if (!code || code === "") {
       return null;
     }
 
-    console.log(language.toLowerCase());
     const params = {
       name,
-      content: valueEditor,
-      language: language.toLowerCase(),
+      content: code,
+      language,
       user_id,
     };
     if (description) params.description = description;
@@ -46,7 +38,7 @@ const CreateLoop = ({ user_id }) => {
     }
   };
 
-  const buildInput = ({ input, meta, label, placeholder, optionalClass }) => {
+  const buildInput = ({ input, placeholder, optionalClass }) => {
     return (
       <input
         {...input}
@@ -60,7 +52,7 @@ const CreateLoop = ({ user_id }) => {
 
   return (
     <main className="editor">
-      <h2 className="heading-creator">Create your loop!</h2>
+      <h1 className="heading-primary">Create your loop!</h1>
       <div className="editor-container">
         <Form
           onSubmit={onSubmit}
@@ -69,41 +61,105 @@ const CreateLoop = ({ user_id }) => {
               <div className="inputs-required">
                 <Field
                   name="name"
-                  optionalClass="editor-req"
                   validate={(input) => {
                     return input === "" ? { title: "Title is required" } : null;
                   }}
                   placeholder="Title"
                   render={buildInput}
                 />
-                <Field
-                  className="editor-req"
+                <select
                   name="language"
-                  component="select"
+                  onChange={(e) => {
+                    setLanguage(e.target.value);
+                    console.log(e.target.value);
+                    return e.target.innerHTML;
+                  }}
                 >
-                  <option value="default">Choose a language</option>
-                  <option value="Javascript">❤️ JavaScript</option>
-                  <option value="Python">💚 Python</option>
-                  <option value="HTML">💙 HTML</option>
-                </Field>
+                  <option>javascript</option>
+                  <option>python</option>
+                  <option>c</option>
+                  <option>aes</option>
+                  <option>apex</option>
+                  <option>azcli</option>
+                  <option>bat</option>
+                  <option>bicep</option>
+                  <option>cameligo</option>
+                  <option>clojure</option>
+                  <option>coffeescript</option>
+                  <option>cpp</option>
+                  <option>csharp</option>
+                  <option>csp</option>
+                  <option>css</option>
+                  <option>cypher</option>
+                  <option>dart</option>
+                  <option>dockerfile</option>
+                  <option>ecl</option>
+                  <option>elixir</option>
+                  <option>flow9</option>
+                  <option>freemarker2</option>
+                  <option>fsharp</option>
+                  <option>go</option>
+                  <option>graphql</option>
+                  <option>handlebars</option>
+                  <option>hcl</option>
+                  <option>html</option>
+                  <option>ini</option>
+                  <option>java</option>
+                  <option>json</option>
+                  <option>julia</option>
+                  <option>kotlin</option>
+                  <option>less</option>
+                  <option>lexon</option>
+                  <option>liquid</option>
+                  <option>lua</option>
+                  <option>m3</option>
+                  <option>markdown</option>
+                  <option>mips</option>
+                  <option>msdax</option>
+                  <option>mysql</option>
+                  <option>objective-c</option>
+                  <option>pascal</option>
+                  <option>pascaligo</option>
+                  <option>perl</option>
+                  <option>pgsql</option>
+                  <option>php</option>
+                  <option>pla</option>
+                  <option>plaintext</option>
+                  <option>postiats</option>
+                  <option>powerquery</option>
+                  <option>powershell</option>
+                  <option>proto</option>
+                  <option>pug</option>
+                  <option>qsharp</option>
+                  <option>r</option>
+                  <option>razor</option>
+                  <option>redis</option>
+                  <option>redshift</option>
+                  <option>restructuredtext</option>
+                  <option>ruby</option>
+                  <option>rust</option>
+                  <option>sb</option>
+                  <option>scala</option>
+                  <option>scheme</option>
+                  <option>scss</option>
+                  <option>shell</option>
+                  <option>sol</option>
+                  <option>sparql</option>
+                  <option>sql</option>
+                  <option>st</option>
+                  <option>swift</option>
+                  <option>systemverilog</option>
+                  <option>tcl</option>
+                  <option>twig</option>
+                  <option>typescript</option>
+                  <option>vb</option>
+                  <option>verilog</option>
+                  <option>xml</option>
+                  <option>yaml</option>
+                  <option>Plain text</option>
+                </select>
               </div>
-              <Editor
-                height="40vh"
-                language="javascript"
-                theme="vs-dark"
-                loading={
-                  <img src={LoadingSpinner} alt="Spinner" className="spinner" />
-                }
-                options={{
-                  fontFamily: "Consolas",
-                  showUnused: true,
-                  tabSize: 2,
-                  suggest: {
-                    showClasses: true,
-                  },
-                }}
-                onMount={handleEditorDidMount}
-              />
+              <LoadEditor setCode={setCode} language={language} height="40vh" />
               <div className="input-optional">
                 <Field
                   name="filename"

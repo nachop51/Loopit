@@ -1,28 +1,46 @@
-* {
+:root {
+  --background-color: #efeff1;
+
+  --primary-color: 145, 71, 255; /* Violet */
+  --secondary-color: #f2f2f2;
+
+  --font-family: "Poppins", sans-serif;
+
+  --nav-background: #f7f7f8;
+
+  --shadow-light: 0.5px 0.5px 20px rgba(0, 0, 0, 0.2);
+  --shadow-dark: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
+
+  --text-light: #666;
+  --text-color: #444;
+  --text-dark: #222;
+}
+
+*:not(.editor) {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-family);
 }
 
+#root {
+  @apply min-h-screen py-24 relative;
+}
+
+/* TODO: Define a selection color */
 *::selection {
-  background: #1e80ff36;
-  color: #fff;
+  background: rgb(var(--primary-color), 0.5);
+  color: white;
 }
 
 body {
-  /* background: #090214; */ /* fallback for old browsers */
-  /* background: #0c020f; */
-  background: #15151e; /* ! puede ser */
-  /* background: url("../assets/blurry-gradient-haikei.png"); */
-
+  background: var(--background-color);
   background-size: cover;
   background-repeat: no-repeat;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .btn-animation {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  background-color: #09203f;
   transition: all 0.4s;
 }
 
@@ -39,19 +57,17 @@ body {
 }
 
 .btn {
-  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold;
-  font-size: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold text-xs;
   @apply sm:w-20 sm:text-base;
   @apply md:w-28;
   @apply lg:w-32 lg:text-lg;
+  color: rgb(var(--primary-color));
 }
 
-.btn-gray {
-  @apply bg-gray-800 text-white;
-}
-
-.btn-lily {
-  @apply bg-gray-900 text-white;
+.btn-primary {
+  @apply text-white;
+  background-color: rgb(var(--primary-color));
 }
 
 .btn-expand {

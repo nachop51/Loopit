@@ -1,13 +1,24 @@
 // Interacts props will have the links
-import { AiOutlineShareAlt, AiOutlineDownload } from "react-icons/ai";
-import { VscCopy } from "react-icons/vsc";
+import { RiShareForwardFill } from "react-icons/ri";
+import { MdContentCopy } from "react-icons/md";
+import { HiDownload } from "react-icons/hi";
 import PropTypes from "prop-types";
 
 const Interact = ({ content, filename }) => {
+  const createToDownload = () => {
+    const a = document.createElement("a");
+    const blob = new Blob([content], { type: "txt" });
+    const url = URL.createObjectURL(blob);
+    a.setAttribute("href", url);
+    a.setAttribute("download", filename || "Loop");
+    a.click();
+    a.remove();
+  };
+
   return (
     <div className="loop-buttons">
       <div title="Share">
-        <AiOutlineShareAlt />
+        <RiShareForwardFill />
       </div>
       <div
         onClick={() => {
@@ -15,22 +26,10 @@ const Interact = ({ content, filename }) => {
         }}
         title="Copy the code"
       >
-        <VscCopy />
+        <MdContentCopy />
       </div>
-      <div
-        title="Download as txt"
-        onClick={() => {
-          const a = document.createElement("a");
-          const blob = new Blob([content], { type: "txt" });
-          const url = URL.createObjectURL(blob);
-          a.setAttribute("href", url);
-          a.setAttribute("download", "Loop");
-          a.click();
-          a.remove();
-          console.log(a);
-        }}
-      >
-        <AiOutlineDownload />
+      <div title="Download as txt" onClick={createToDownload}>
+        <HiDownload />
       </div>
     </div>
   );

@@ -1,18 +1,17 @@
 import "./Loopit.css";
 import LoopList from "../LoopList";
 import Aside from "./Aside";
-import Footer from "../Footer";
 
 const LoopitApp = () => {
   return (
     <>
       <main className="loops">
+        <h1 className="heading-primary">Loops</h1>
         <div className="loop-container">
-          <LoopList endpoint="/loops/all" />
+          <LoopList collection="all" />
           <Aside />
         </div>
       </main>
-      <Footer />
     </>
   );
 };

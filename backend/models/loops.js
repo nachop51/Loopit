@@ -20,7 +20,7 @@ const Loop = sequelize.define(
       allowNull: true,
     },
     content: {
-      type: DataTypes.TEXT((length = "short")),
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     filename: {
@@ -31,8 +31,8 @@ const Loop = sequelize.define(
   {
     // Other model options go here
     timestamps: true,
-    createdAt: "create_at",
-    updatedAt: "update_at",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 module.exports = Loop;

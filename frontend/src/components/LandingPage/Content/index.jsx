@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
-import Laptop from "../../../assets/laptop.png";
-import Phone from "../../../assets/phone.png";
+import Laptop from "../../../assets/mockup-dark.png";
+import Phone from "../../../assets/mockup-mobile.png";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
@@ -18,18 +18,16 @@ const Content = () => {
     <main className="main">
       <section className="intro">
         <article className="intro-text">
-          <h1 className="intro-text__title">Learn from the best solutions</h1>
+          <h1 className="intro-text__title">
+            Discover new <br /> solutions <u>daily.</u>
+          </h1>
           <p className="intro-text__p">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-            laboriosam nulla molestias soluta amet ab natus aut corrupti odit
-            quas doloribus dignissimos dicta similique consequuntur neque
-            molestiae, totam cum nobis. Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Voluptate maxime obcaecati iusto quae debitis
-            suscipit at deleniti architecto labore dicta fugiat, atque aliquam
-            id illum. Praesentium reprehenderit dolores asperiores officiis.
+            Loopit is a social media platform for programmers to share their
+            code with the world. Create a profile, upload your code, and share
+            it with your friends and followers.
           </p>
           <button
-            className="intro-text__button btn btn-animation"
+            className="intro-text__button btn btn-animation btn-primary"
             onClick={goApp}
           >
             Go to app
@@ -45,19 +43,19 @@ const Content = () => {
         <div className="row">
           <Card
             label="Share your code!"
-            text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae omnis ipsa."
+            text="Share your code with the world and get feedback from other programmers."
           >
             <FiShare2 className="feature-icon" />
           </Card>
           <Card
             label="Copy"
-            text="dolore fuga enim sed explicabo iusto nostrum cumque temporibus itaque nesciunt."
+            text="Instantly copy code snippets to your clipboard."
           >
             <FiCopy className="feature-icon" />
           </Card>
           <Card
             label="Download the code!"
-            text="voluptate dolores ea atque ex. Ab, aut labore?."
+            text="Download the code to your computer in just one click!"
           >
             <FiDownload className="feature-icon" />
           </Card>

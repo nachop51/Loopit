@@ -1,23 +1,26 @@
 import "./LoopItem.css";
 import User from "./User";
-import Language from "./Language";
+import Description from "./Description";
 import Interact from "./Interact";
 import Content from "./Content";
 import Feedback from "./Feedback";
 
-// Props will have an username an image, content and more tags
-const LoopItem = ({ loop }) => {
+const LoopItem = ({ collection, loop }) => {
+  console.log(loop);
+
+  const username = loop?.user?.username || "No name";
+
   return (
     <div className="loop">
-      <User username={loop.user.username} time={loop.create_at} />
+      <User username={username} time={loop.created_at} />
       <Interact content={loop.content} filename={loop.filename} />
-      <Language language={loop.language.name} />
-      <Content
-        language={loop.language.name}
+      <Description
+        title={loop.name}
         description={loop.description}
-        content={loop.content}
+        language={loop.language.name}
       />
-      <Feedback loop={loop} />
+      <Content language={loop.language.name} content={loop.content} />
+      <Feedback loop={loop} collection={collection} />
     </div>
   );
 };

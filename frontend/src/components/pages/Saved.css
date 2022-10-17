@@ -1,0 +1,9 @@
+.container-saved {
+  @apply justify-center w-full items-center relative;
+  min-height: 100vh;
+}
+
+.heading-primary {
+  @apply font-bold text-4xl text-center pb-10;
+  color: rgb(var(--primary-color));
+}

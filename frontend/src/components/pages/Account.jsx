@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser, signOut } from "../../actions";
 
+import LoopList from "../LoopList/";
+
 const Account = ({ auth, account, fetchUser, signOut }) => {
   useEffect(() => {
     if (!account) fetchUser();
@@ -31,11 +33,11 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
           <div className="profile-stats-container">
             <div className="stats-container">
               <h3>Following</h3>
-              <h4>10</h4>
+              <h4>{account?.followings}</h4>
             </div>
             <div className="stats-container">
               <h3>Followers</h3>
-              <h4>8</h4>
+              <h4>{account?.followers}</h4>
             </div>
             <div className="stats-container">
               <h3>Loops saved</h3>
@@ -63,10 +65,13 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
               <h4>{account.data?.full_name}</h4>
             </div>
           </div>
-          <button>Edit</button>
-          <button onClick={() => signOut()}>Sign Out</button>
+          <button className="profile-btn-edit">Edit</button>
+          <button onClick={() => signOut()} className="profile-btn-sign-out">
+            Sign Out
+          </button>
         </div>
       </div>
+      <LoopList collection="created" />
     </main>
   );
 };

@@ -1,14 +1,16 @@
 import LoopList from "../LoopList";
 
-const Favorites = () => {
+import "./Saved.css";
+
+const Saved = () => {
   return (
-    <main style={{ minHeight: "100vh" }}>
-      <h1>Lista de loops favoritos</h1>
+    <main className="container-saved">
+      <h1 className="heading-primary">Loops saved</h1>
       <div className="loop-container">
-        <LoopList endpoint="/users/saves" />
+        <LoopList collection="saved" />
       </div>
     </main>
   );
 };
 
-export default Favorites;
+export default Saved;

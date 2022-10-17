@@ -2,7 +2,7 @@
   background: url("../../assets/layered-waves-haikei (3).svg") no-repeat;
   background-position-y: 100%;
   min-height: 22rem;
-  @apply flex flex-col justify-end bg-cover;
+  @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full;
 }
 
 @media (max-width: 768px) {

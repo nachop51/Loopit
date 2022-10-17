@@ -1,11 +1,13 @@
 .nav {
   @apply flex justify-center gap-4 fixed top-0 w-full z-50;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(15px);
+  background-color: var(--nav-background);
+  backdrop-filter: blur(5px);
+  box-shadow: 15px -12px 20px 0px rgb(0 0 0 / 80%);
 }
 
 .nav-links {
-  @apply relative text-white p-4 rounded-full flex text-3xl;
+  @apply relative p-4 rounded-full flex text-3xl;
+  color: rgb(var(--primary-color));
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -40,9 +42,9 @@
 .navbar-logo {
   @apply absolute left-4;
   top: 50%;
-  transform: translateY(-40%);
+  transform: translateY(-50%);
 }
 
 .navbar-logo img {
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center w-2/5;
 }

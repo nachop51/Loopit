@@ -12,6 +12,7 @@ const routeLanguages = require("./routes/routeLanguages");
 const routeFollower = require("./routes/routeFollowers");
 const routeMail = require("./routes/routeMail");
 const routeLike = require("./routes/routeLike");
+const routeComment = require("./routes/routeComment");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
@@ -27,7 +28,8 @@ const Loop = require("./models/loops");
 const Language = require("./models/languages");
 const Follower = require("./models/followers");
 const Save = require("./models/saves");
-// const Like = require("./models/likes");
+const Like = require("./models/likes");
+const Comment = require("./models/comments");
 //import bcrypt to hash passwords
 
 const port = process.env.PORT;
@@ -51,6 +53,8 @@ app.use("/saves", routeSaves);
 app.use("/languages", routeLanguages);
 app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
+app.use("/likes", routeLike);
+app.use("/comments", routeComment);
 //verify token
 app.use("/", verifytoken);
 

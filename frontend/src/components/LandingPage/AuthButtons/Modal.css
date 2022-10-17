@@ -26,13 +26,15 @@
 }
 
 .modal-content h2 {
-  @apply text-center text-3xl font-extrabold mb-2 text-gray-900;
+  @apply text-center text-3xl font-extrabold mb-2;
   @apply sm:text-5xl sm:mb-5;
+  color: var(--text-dark);
 }
 
 .modal-content h4 {
-  @apply text-center text-lg font-semibold mb-2 text-gray-400;
+  @apply text-center text-lg font-semibold mb-2;
   @apply sm:text-xl sm:mb-5;
+  color: var(--text-light);
 }
 
 .form {
@@ -76,8 +78,9 @@
 .linkTo,
 .linkTo:visited,
 .linkTo:active {
-  @apply text-cyan-900 font-extrabold border-none no-underline cursor-pointer text-sm duration-300 bg-inherit;
+  @apply font-extrabold border-none no-underline cursor-pointer text-sm duration-300 bg-inherit;
   @apply sm:text-lg;
+  color: rgb(var(--primary-color));
 }
 
 .linkTo:hover {

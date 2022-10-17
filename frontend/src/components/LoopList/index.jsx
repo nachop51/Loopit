@@ -1,37 +1,91 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
-import loopit from "../../api/loopit";
+// import loopit from "../../api/loopit";
+import {
+  fetchLoops,
+  fetchSaves,
+  fetchCreated,
+  setHasData,
+} from "../../actions";
 
-import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const LoopList = ({ endpoint }) => {
-  const [loopsList, setLoopsList] = useState([]);
-  const [page, setPage] = useState(1);
-
+const LoopList = ({
+  collection,
+  fetchLoops,
+  fetchSaves,
+  fetchCreated,
+  setHasData,
+  loops,
+  hasData,
+  username,
+}) => {
   useEffect(() => {
-    const fetchLoops = async () => {
-      const response = await loopit.get(endpoint, {
-        params: {
-          limit: 10,
-          page,
-        },
-      });
-      console.log(response.data.loops);
-      setLoopsList(response.data.loops);
-    };
+    setHasData();
+    if (collection === "all") {
+      fetchLoops();
+    } else if (collection === "saved") {
+      fetchSaves();
+    } else if (collection === "created") {
+      fetchCreated(username);
+    }
+  }, [fetchLoops, fetchSaves, fetchCreated, username, setHasData, collection]);
 
-    fetchLoops();
-  }, [endpoint, page]);
+  const handleRender = () => {
+    let mapFrom = [];
+    if (collection === "all") {
+      mapFrom = loops.all;
+    } else if (collection === "saved") {
+      mapFrom = loops.saved;
+    } else if (collection === "created") {
+      mapFrom = loops.created;
+    }
+    if (mapFrom.length === 0) {
+      return (
+        <div className="no-loops">
+          <h2>No loops to show</h2>
+        </div>
+      );
+    }
+    return mapFrom.map((loop) => {
+      return <LoopItem collection={collection} key={loop.id} loop={loop} />;
+    });
+  };
 
-  if (loopsList === []) {
-    return <div className="loading">Loading...</div>;
-  }
+  const skeleton = () => {
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
+      return (
+        <div className="loop" key={i}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {/* <Skeleton width={20} className="circle" /> */}
+            <Skeleton width={90} />
+            <Skeleton height={90} />
+          </div>
+          <Skeleton />
+        </div>
+      );
+    });
+  };
 
-  const renderedLoops = loopsList.map((loop) => {
-    return <LoopItem key={loop.id} loop={loop} />;
-  });
-
-  return <div className="loop-list">{renderedLoops}</div>;
+  return (
+    <div className="loop-list">{!hasData ? skeleton() : handleRender()}</div>
+  );
 };
 
-export default LoopList;
+const mapStateToProps = (state) => {
+  return {
+    loops: state.loops,
+    hasData: state.loops.hasData,
+    username: state.auth.username,
+  };
+};
+
+export default connect(mapStateToProps, {
+  fetchLoops,
+  fetchSaves,
+  fetchCreated,
+  setHasData,
+})(LoopList);
