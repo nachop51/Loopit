@@ -223,7 +223,7 @@ const getSaveUser = async (req, res) => {
     const token_decode = await jwt.decode(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Loops.filename ,Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ?;",
+      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ?;",
       {
         limit: limit,
         offset: page * limit - limit,
@@ -238,6 +238,7 @@ const getSaveUser = async (req, res) => {
       });
     }
     const listloops = [];
+    console.log(data);
     for (let i of data) {
       const loop = {
         id: i.loop_id,
