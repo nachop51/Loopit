@@ -46,14 +46,24 @@ const addFollower = async (req, res) => {
 };
 
 const deleteFollower = async (req, res) => {
-  const { user_id, username } = req.body;
-  if (!user_id || !username) {
+  const { username } = req.body;
+  const token = req.cookies.token;
+  if (!username) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
   try {
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
+    const user = await User.findByPk(user_id);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        Error: "Bad Request - User does not exist",
+      });
+    }
     const follower = await Follower.findOne({
       where: { user_id: user_id, username: username },
     });

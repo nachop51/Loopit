@@ -25,8 +25,8 @@ const Comment = sequelize.define(
   },
   {
     timestamps: true,
-    creat_at: "create_at",
-    update_at: "update_at",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 

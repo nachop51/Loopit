@@ -51,15 +51,15 @@ const addComment = async (req, res) => {
 };
 
 const deleteComment = async (req, res) => {
-  const { id } = req.params;
-  if (!id) {
+  const { comment_id } = req.params;
+  if (!comment_id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
   try {
-    const comment_destroy = await Comment.findByPk(id);
+    const comment_destroy = await Comment.findByPk(comment_id);
     if (!comment_destroy) {
       return res.status(400).json({
         status: "Error",
@@ -118,5 +118,4 @@ module.exports = {
   addComment: addComment,
   deleteComment: deleteComment,
   updateComment: updateComment,
-  getCommentsByLoop: getCommentsByLoop,
 };

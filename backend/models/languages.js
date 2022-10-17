@@ -1,7 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../database/db");
 
-
 const Language = sequelize.define(
   "Languages",
   {
@@ -17,11 +16,11 @@ const Language = sequelize.define(
     },
   },
   {
-      // Other model options go here
-      timestamps: true,
-      createdAt: "create_at",
-      updatedAt: "update_at",
+    // Other model options go here
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
-)
+);
 
 module.exports = Language;
