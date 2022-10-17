@@ -9,6 +9,11 @@
 
   --nav-background: #f7f7f8;
   --nav-size: 4rem;
+  --shadow-light: 0.5px 0.5px 20px rgba(0, 0, 0, 0.2);
+  --shadow-dark: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
+
+  --text-light: #444;
+  --text-dark: #fff;
 }
 
 *:not(.editor) {

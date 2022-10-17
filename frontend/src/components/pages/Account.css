@@ -1,5 +1,6 @@
 .account {
   @apply flex flex-col items-center justify-start w-full min-h-screen relative pb-20;
+  color: var(--text-light);
 }
 
 .account-title {
@@ -16,11 +17,12 @@
 .profile-ui {
   @apply bg-transparent bg-opacity-50 rounded-2xl p-10 flex flex-col items-center w-full;
   border: 2px solid #fff;
-  box-shadow: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
+  box-shadow: var(--shadow-light);
 }
 
 .profile-stats-pic {
   @apply w-72 rounded-full mb-4;
+  border: 2px solid rgb(var(--primary-color), 0.3);
 }
 
 .profile-stats-heading {
@@ -32,11 +34,12 @@
 }
 
 .profile-stats-container div {
-  @apply bg-slate-800 text-neutral-100 p-4 rounded-md;
+  @apply bg-slate-800 text-white p-4 rounded-md;
 }
 
 .profile-data h2 {
-  @apply text-white pb-6;
+  /* @apply text-slate-600 pb-6; */
+  color: rgb(var(--primary-color));
 }
 
 .stats-container h3,
@@ -69,15 +72,16 @@
 }
 
 .profile-data-item h3 {
-  @apply text-neutral-100;
+  @apply text-slate-900;
 }
 
 .profile-btn-edit,
 .profile-btn-sign-out {
-  @apply mx-3 my-2 bg-transparent px-5   py-3 text-white font-bold rounded-md w-full;
-  border: 2px solid #fff;
+  @apply mx-3 my-2 px-5 py-3 text-white font-bold rounded-md w-full;
   animation: 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   cursor: pointer;
+  background-color: rgb(var(--primary-color), 0.8);
+  border: 1px solid rgb(var(--primary-color));
 }
 
 .profile-btn-edit {
@@ -87,4 +91,5 @@
 .profile-btn-edit:hover,
 .profile-btn-sign-out:hover {
   background-color: rgba(225, 225, 225, 0.2);
+  color: #444;
 }
