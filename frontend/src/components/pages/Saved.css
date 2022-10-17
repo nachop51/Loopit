@@ -1,5 +1,5 @@
 .container-saved {
-  @apply justify-center w-full items-center relative pb-96;
+  @apply justify-center w-full items-center relative;
   min-height: 100vh;
 }
 

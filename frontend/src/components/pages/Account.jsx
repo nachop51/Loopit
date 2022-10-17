@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser, signOut } from "../../actions";
 
+import LoopList from "../LoopList/";
+
 const Account = ({ auth, account, fetchUser, signOut }) => {
   useEffect(() => {
     if (!account) fetchUser();
@@ -69,6 +71,7 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
           </button>
         </div>
       </div>
+      <LoopList collection="created" />
     </main>
   );
 };

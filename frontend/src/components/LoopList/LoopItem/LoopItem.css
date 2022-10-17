@@ -87,3 +87,7 @@
 .action-comment .recommend-active {
   color: rgb(var(--primary-color));
 }
+
+.heading-comments {
+  @apply mt-4 text-base font-bold;
+}

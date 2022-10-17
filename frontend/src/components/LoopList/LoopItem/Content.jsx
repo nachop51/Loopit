@@ -10,6 +10,12 @@ const Content = ({ content, language }) => {
         language={language}
         style={atomOneDark}
         showLineNumbers
+        lineProps={{
+          style: {
+            whiteSpace: "pre-line",
+            width: "100%",
+          },
+        }}
       >
         {content}
       </SyntaxHighlighter>
@@ -19,7 +25,7 @@ const Content = ({ content, language }) => {
 
 Content.propTypes = {
   content: PropTypes.string.isRequired,
-  language: PropTypes.string,
+  language: PropTypes.string.isRequired,
 };
 
 export default Content;

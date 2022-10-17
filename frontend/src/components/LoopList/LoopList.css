@@ -1,5 +1,5 @@
 .loop-list {
-  @apply flex flex-col items-center;
+  @apply flex flex-col items-center pb-96;
   min-width: 40%;
 }
 
