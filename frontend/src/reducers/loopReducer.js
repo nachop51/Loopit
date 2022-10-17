@@ -63,6 +63,7 @@ const loopReducer = (state = initialState, action) => {
       } else if (action.payload.collection === "created") {
         updatedLoops.created = mapFrom;
       }
+      updatedLoops.hasData = true;
       return updatedLoops;
     case "SIGN_OUT":
       return {
