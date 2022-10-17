@@ -14,8 +14,7 @@
 }
 
 .avatar-img {
-  width: 100%;
-  border-radius: 50%;
+  @apply rounded-full w-full;
 }
 
 .user-info {
@@ -23,32 +22,25 @@
 }
 
 .loop-buttons {
-  @apply absolute top-5 right-0 flex flex-row flex-nowrap gap-3 ml-auto mr-4 self-center;
+  @apply absolute top-5 right-4 flex flex-row flex-nowrap gap-2 border border-solid border-violet-300 rounded-full;
 }
 
 .loop-buttons > * {
-  @apply w-10 h-10 rounded-full border-2 border-solid;
-  border: linear-gradient(90deg, #09203f 0%, #537895 100%),
-    linear-gradient(0deg, #ffffff, #ffffff);
-  font-size: 30px;
-  text-align: center;
-  align-content: center;
-  justify-content: center;
+  @apply flex w-10 h-10 text-2xl items-center justify-center;
+}
+
+.loop-buttons > *:not(.loop-buttons:last-child) {
+  border-rigth: 1px solid rgb(var(--primary-color), 0.3);
 }
 
 .loop-buttons > *:hover {
-  background-color: rgba(225, 225, 0, 0.2);
+  background-color: rgba(var(--primary-color), 0.3);
 }
 
 .loop-content {
   @apply py-5 px-4 rounded-md mt-2 shadow-2xl;
   background-color: #15151ee8;
-  color: lemonchiffon;
-}
-
-.loop-content p {
-  @apply font-mono py-2 px-4 rounded-md leading-6 shadow-2xl;
-  background-color: rgba(225, 225, 225, 0.05);
+  color: rgb(255, 250, 205);
 }
 
 .loop-info-buttons {
@@ -61,21 +53,15 @@
 
 /** COMMENTS */
 .action-comment {
-  @apply font-semibold text-lg cursor-pointer select-none;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  background: transparent;
-  border: none;
+  @apply font-semibold text-lg cursor-pointer select-none flex items-center justify-center bg-transparent border-none;
 }
 
 .action-comment .icon {
-  font-size: 24px;
-  margin: 2px;
+  @apply text-2xl m-0.5;
 }
 
 .comment-button {
-  @apply text-slate-800 font-bold bg-transparent cursor-pointer;
+  @apply text-black font-bold bg-transparent cursor-pointer text-lg;
   border: none;
 }
 

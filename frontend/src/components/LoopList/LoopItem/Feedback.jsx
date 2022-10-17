@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
-import loopit from "../../../api/loopit";
+import { BsChat } from "react-icons/bs";
 
-import { connect } from "react-redux";
 import { updateLoops } from "../../../actions";
+import loopit from "../../../api/loopit";
 
 const Feedback = ({ loop, updateLoops, collection }) => {
   const [save, setSave] = useState(loop.save);
@@ -50,7 +51,10 @@ const Feedback = ({ loop, updateLoops, collection }) => {
           <MdRecommend className={like ? "icon recommend-active" : "icon"} />
           <span>&nbsp;Like</span>
         </button>
-        <button className="comment-button">Comment...</button>
+        <button className="action-comment comment-button">
+          <BsChat className="icon" />
+          <span>&nbsp;Comment</span>
+        </button>
         <button className="action-comment" onClick={handleSave}>
           <IoBookmark className={save ? "icon save-active" : "icon"} />
           <span>&nbsp;Save</span>
