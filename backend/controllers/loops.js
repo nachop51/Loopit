@@ -10,8 +10,9 @@ const jwt = require("jsonwebtoken");
 const { key } = "../config";
 
 const addLoop = async (req, res) => {
-  const { name, description, content, language, filename, user_id } = req.body;
-  if (!name || !content || !language || !user_id) {
+  const { name, description, content, language, filename } = req.body;
+  const token = req.cookies.token;
+  if (!name || !content || !language) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - Missing data",
@@ -27,6 +28,8 @@ const addLoop = async (req, res) => {
         error: "Bad Request - Language does not exist",
       });
     }
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
     const new_loop = await Loop.create({
       name: name,
       description: description,

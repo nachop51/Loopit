@@ -21,7 +21,8 @@ const me = async (req, res) => {
   }
   try {
     const token_decode = await jwt.verify(token, key);
-    const user = await User.findByPk(token_decode.userId, {
+    const user_id = token_decode.userId;
+    const user = await User.findByPk(user_id, {
       attributes: ["email", "full_name"],
     });
     if (!user) {
@@ -36,13 +37,20 @@ const me = async (req, res) => {
     const countSaves = await Save.count({
       where: { user_id: token_decode.userId },
     });
+    const countFollowings = await Follower.count({
+      where: { user_id: user_id },
+    });
+    const countFollowers = await Follower.count({
+      where: { follow_id: user_id },
+    });
     res.status(200).json({
       status: "OK",
       me: {
         data: user,
         loops: countLoops,
         saves: countSaves,
-        followers: 0,
+        followings: countFollowings,
+        followers: countFollowers,
       },
     });
   } catch (error) {
@@ -212,7 +220,7 @@ const getSaveUser = async (req, res) => {
   if (!page) page = 1;
   if (!limit) limit = 10;
   try {
-    const token_decode = await jwt.verify(token, key);
+    const token_decode = await jwt.decode(token, key);
     const id_user = token_decode.userId;
     const data = await sequelize.query(
       "SELECT Saves.loop_id,Loops.name, Loops.description, Loops.content, Loops.filename ,Users.username, Loops.create_at, Loops.update_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Saves.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ?;",
