@@ -134,7 +134,7 @@ const verifyTokenUser = async (req, res) => {
     const username = tokenInfo.username;
     const userInfo = await User.findOne({
       where: { username: username },
-      attributes: ["theme"],
+      attributes: ["theme", "id", "username"],
     });
     res.status(200).json({
       status: "authorized",
