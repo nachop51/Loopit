@@ -17,20 +17,25 @@
   @apply rounded-full w-full;
 }
 
+.description-title {
+  @apply text-center text-2xl font-bold capitalize pb-2 text-slate-600;
+}
+
 .user-info {
   @apply relative flex flex-row flex-nowrap gap-3;
 }
 
 .loop-buttons {
-  @apply absolute top-5 right-4 flex flex-row flex-nowrap gap-2 border border-solid border-violet-300 rounded-full;
+  @apply absolute top-5 right-4 flex flex-row flex-nowrap gap-2 rounded-full;
 }
 
 .loop-buttons > * {
-  @apply flex w-10 h-10 text-2xl items-center justify-center;
+  @apply flex w-10 h-10 text-2xl items-center justify-center rounded-full shadow-2xl;
 }
 
 .loop-buttons > *:not(.loop-buttons:last-child) {
-  border-rigth: 1px solid rgb(var(--primary-color), 0.3);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 4px 3px 8px 0px rgb(0 0 0 / 29%);
 }
 
 .loop-buttons > *:hover {
