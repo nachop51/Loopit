@@ -50,7 +50,7 @@ const me = async (req, res) => {
         data: user,
         loops: countLoops,
         saves: countSaves,
-        followings: countFollowings,
+        following: countFollowings,
         followers: countFollowers,
       },
     });
