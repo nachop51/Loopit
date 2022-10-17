@@ -18,13 +18,13 @@ const Content = () => {
     <main className="main">
       <section className="intro">
         <article className="intro-text">
-          <h1 className="intro-text__title">Discover new solutions daily</h1>
+          <h1 className="intro-text__title">
+            Discover new <br /> solutions <u>daily.</u>
+          </h1>
           <p className="intro-text__p">
-            Si eres desarrollador o desarrolladora estás en el lugar correcto,
-            aqui vas a poder encontrar una grandiosa comunidad, donde descubrir
-            maravillosas y mejores soluciones todos los días. Discutir y
-            ayudarse entre personas con mismos problemas y mismos intereses. En
-            fin amantes de la tecnología.
+            Loopit is a social media platform for programmers to share their
+            code with the world. Create a profile, upload your code, and share
+            it with your friends and followers.
           </p>
           <button
             className="intro-text__button btn btn-animation btn-primary"
@@ -43,19 +43,19 @@ const Content = () => {
         <div className="row">
           <Card
             label="Share your code!"
-            text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae omnis ipsa."
+            text="Share your code with the world and get feedback from other programmers."
           >
             <FiShare2 className="feature-icon" />
           </Card>
           <Card
             label="Copy"
-            text="dolore fuga enim sed explicabo iusto nostrum cumque temporibus itaque nesciunt."
+            text="Instantly copy code snippets to your clipboard."
           >
             <FiCopy className="feature-icon" />
           </Card>
           <Card
             label="Download the code!"
-            text="voluptate dolores ea atque ex. Ab, aut labore?."
+            text="Download the code to your computer in just one click!"
           >
             <FiDownload className="feature-icon" />
           </Card>

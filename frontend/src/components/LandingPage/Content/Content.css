@@ -19,15 +19,16 @@
 
 .intro-text__title {
   @apply text-3xl text-transparent text-center my-6;
-  @apply md:text-5xl md:my-10;
-  @apply lg:text-6xl lg:my-12;
-  @apply xl:text-left xl:text-8xl;
+  @apply md:text-4xl md:my-10;
+  @apply lg:text-5xl lg:my-12;
+  @apply xl:text-left xl:text-6xl;
+  @apply 2xl:text-8xl;
   color: rgb(var(--primary-color));
   text-shadow: 2px 4px 4px rgb(0, 0, 0, 0.1);
 }
 
 .intro-text__p {
-  @apply pt-6 sm:text-justify text-xl mb-5 font-medium;
+  @apply pt-6 text-justify text-xl mb-5 font-medium;
   color: var(--text-color);
 }
 

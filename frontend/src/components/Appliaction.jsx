@@ -25,7 +25,7 @@ const Appliaction = ({ userStatus, id, user }) => {
   return (
     <>
       <Nav>
-        <Logo width={40} link="/l" oC="navbar-logo" />
+        <Logo link="/l" oC="navbar-logo" />
       </Nav>
       <Routes>
         <Route index element={<LoopitApp />} />

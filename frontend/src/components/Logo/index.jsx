@@ -5,16 +5,11 @@ import "./Logo.css";
 import { Link } from "react-router-dom";
 
 // oC means optionalClass
-const Logo = ({ width, link, oC }) => {
+const Logo = ({ link, oC }) => {
   return (
     <div className={oC ? oC : "logo"}>
       <Link to={link}>
-        <img
-          className="logo-img"
-          src={Image}
-          alt="Loopit logo"
-          style={{ width: `${width}%` }}
-        />
+        <img className="logo-img" src={Image} alt="Loopit logo" />
       </Link>
     </div>
   );
