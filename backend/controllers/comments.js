@@ -3,6 +3,7 @@ const Loop = require("../models/loops");
 const Comment = require("../models/comments");
 const jwt = require("jsonwebtoken");
 const { key } = require("../config");
+const { sequelize } = require("../database/db");
 
 const addComment = async (req, res) => {
   const { content, loop_id } = req.body;
@@ -111,12 +112,11 @@ const updateComment = async (req, res) => {
   }
 };
 
-const getCommentsbyLoop = async (req, res) => {};
-
 // HACER FUNCION PARA TRAER TODOS LOS COMENTARIOS DE UN LOOP
 
 module.exports = {
   addComment: addComment,
   deleteComment: deleteComment,
   updateComment: updateComment,
+  getCommentsByLoop: getCommentsByLoop,
 };

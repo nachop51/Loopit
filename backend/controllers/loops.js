@@ -281,9 +281,14 @@ const getLoops = async (req, res) => {
       const countSavesLoop = await Save.count({
         where: { loop_id: loops[i].id },
       });
+      const countComment = await Comment.count({
+        where: { loop_id: loops[i].id },
+      });
       loops[i].dataValues.countLikes = countLikesLoop;
       loops[i].dataValues.countSaves = countSavesLoop;
+      loops[i].dataValues.countComments = countComment;
     }
+
     //total number of loops for pagination
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
@@ -299,6 +304,37 @@ const getLoops = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
+const getLoopInfo = async (req, res) => {
+  const { loop_id } = req.params;
+  if (!loop_id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - missing data",
+    });
+  }
+  try {
+    const loop = await Loop.findByPk(loop_id);
+    if (!loop) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Loop does not exist",
+      });
+    }
+    const commenst = await Comment.findAll({
+      where: { loop_id: loop_id },
+    });
+    return res.status(200).json({
+      status: "OK",
+      comments: commenst,
+    });
+  } catch (error) {
+    res.status(400).json({
       status: "Error",
       error: error,
     });
@@ -356,5 +392,6 @@ module.exports = {
   getLoops: getLoops,
   searchLoops: searchLoops,
   getLoopsbyID: getLoopsbyID,
+  getLoopInfo: getLoopInfo,
   // getAllLoopsByLanguage: getAllLoopsByLanguage,
 };
