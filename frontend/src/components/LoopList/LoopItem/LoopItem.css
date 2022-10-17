@@ -17,8 +17,18 @@
   @apply rounded-full w-full;
 }
 
+.description {
+  @apply text-center p-4;
+}
+
 .description-title {
   @apply text-center text-2xl font-bold capitalize pb-2 text-slate-600;
+}
+
+/* language + description */
+.sub-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .user-info {

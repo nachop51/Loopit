@@ -5,8 +5,10 @@ const Description = ({ title, description, language }) => {
   return (
     <div className="description">
       <p className="description-title">{title}</p>
-      <span className={language + " default"}>{language}</span>
-      <span>{description}</span>
+      <div className="sub-container">
+        <span>{description}</span>
+        <span className={language + " default"}>{language}</span>
+      </div>
     </div>
   );
 };
