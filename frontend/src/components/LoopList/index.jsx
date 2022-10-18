@@ -18,6 +18,7 @@ const LoopList = ({
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
   setHasData,
   loops,
   hasData,
@@ -42,6 +43,8 @@ const LoopList = ({
       mapFrom = loops.saved;
     } else if (collection === "created") {
       mapFrom = loops.created;
+    } else if (collection === "search") {
+      mapFrom = loops.search;
     }
     if (mapFrom.length === 0) {
       return (
@@ -58,7 +61,7 @@ const LoopList = ({
   const skeleton = () => {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
       return (
-        <div className="loop">
+        <div className="loop" key={i}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             {/* <Skeleton width={20} className="circle" /> */}
             <Skeleton width={90} />
