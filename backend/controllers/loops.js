@@ -4,7 +4,8 @@ const User = require("../models/users");
 const Save = require("../models/saves");
 const Like = require("../models/likes");
 const Comment = require("../models/comments");
-const { Op } = require("sequelize");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const { url } = require("inspector");
 const jwt = require("jsonwebtoken");
 const { sequelize } = require("../database/db");
@@ -163,6 +164,7 @@ const getLoopsbyID = async (req, res) => {
     });
   }
   try {
+    console.log("holaaaaaa");
     const response = await Loop.findAll({
       where: { id: id },
       include: [
@@ -191,7 +193,7 @@ const getLoopsbyID = async (req, res) => {
 };
 
 const getLoops = async (req, res) => {
-  let { page, limit, language, username } = req.query;
+  let { page, limit, language, username, search, id } = req.query;
   page = parseInt(page, 10);
   limit = parseInt(limit, 10);
   let dicLanguage = {};
@@ -226,6 +228,18 @@ const getLoops = async (req, res) => {
       where: { username: username },
     };
   }
+  if (search) {
+    dicSearch.name = { [Op.like]: `%${search}%` };
+  } else {
+    console.log("hola");
+    dicSearch = {};
+  }
+  if (id) {
+    dicSearch.id = id;
+  } else {
+    dicSearch = {};
+  }
+  console.log(dicSearch);
   try {
     const loops = await Loop.findAll({
       limit: limit,
@@ -239,6 +253,7 @@ const getLoops = async (req, res) => {
         "created_at",
       ],
       include: [dicUsername, dicLanguage],
+      where: { ...dicSearch },
       order: [["created_at", "DESC"]],
     });
     if (!loops) {
@@ -353,57 +368,11 @@ const getLoopComments = async (req, res) => {
   }
 };
 
-const searchLoops = async (req, res) => {
-  const { search } = req.params;
-  console.log(search);
-  if (!search) {
-    res.status(400).json({
-      status: "Error",
-      error: "Bad Request - missing data",
-    });
-  }
-  try {
-    const response = await Loop.findAll(
-      {
-        attributes: ["id", "name", "description", "content", "filename"],
-        include: [
-          {
-            model: User,
-            as: "user",
-            attributes: ["username"],
-          },
-          {
-            model: Language,
-            as: "language",
-            attributes: ["name"],
-          },
-        ],
-      },
-      {
-        where: {
-          [Op.or]: [{ name: { [Op.like]: `%${search}%` } }],
-        },
-      }
-    );
-    res.status(200).json({
-      status: "OK",
-      loops: response,
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: "Error",
-      error: error,
-    });
-  }
-};
-
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
   updateLoop: updateLoop,
   getLoops: getLoops,
-  searchLoops: searchLoops,
   getLoopsbyID: getLoopsbyID,
   getLoopComments: getLoopComments,
-  // getAllLoopsByLanguage: getAllLoopsByLanguage,
 };
