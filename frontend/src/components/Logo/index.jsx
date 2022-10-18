@@ -1,10 +1,10 @@
+import "./Logo.css";
 import logo from "../../assets/primary-logo.png";
 import blueLogo from "../../assets/BlueLogo.png";
-import { connect } from "react-redux";
-
 import { switchTheme } from "../../actions";
-import "./Logo.css";
 
+import { WiDaySunny, WiMoonWaxingCrescent3 } from "react-icons/wi";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -76,7 +76,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
           handleMode(theme);
         }}
       >
-        Change theme
+        {theme === "light" ? <WiDaySunny /> : <WiMoonWaxingCrescent3 />}
       </button>
     </div>
   );

@@ -1,8 +1,8 @@
 import "./Aside.css";
 
-const Aside = () => {
+const Aside = ({ oC }) => {
   return (
-    <aside className="aside">
+    <aside className={"aside " + oC}>
       <div className="aside-container">
         <div className="item-container">
           <h2 className="aside-title">About Loopit</h2>

@@ -6,9 +6,12 @@ import { FORM_ERROR } from "final-form";
 import loopit from "../../api/loopit";
 import LoadEditor from "../Editor";
 
+import { useNavigate } from "react-router-dom";
+
 const CreateLoop = ({ user_id }) => {
   const [language, setLanguage] = useState("javascript");
   const [code, setCode] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = async ({ name, description, filename }) => {
     if (code.length > 3000) return null;
@@ -28,11 +31,14 @@ const CreateLoop = ({ user_id }) => {
     };
     if (description) params.description = description;
     if (filename) params.filename = filename;
-    console.log(params);
+    console.log(
+      "🚀 ~ file: CreateLoop.jsx ~ line 35 ~ onSubmit ~ params",
+      params
+    );
     try {
-      const response = await loopit.post("/loops/add", params);
+      await loopit.post("/loops/add", params);
 
-      console.log(response);
+      navigate("/l");
     } catch (error) {
       console.log(error);
     }
@@ -171,7 +177,7 @@ const CreateLoop = ({ user_id }) => {
                   placeholder="Description (optional)"
                   render={buildInput}
                 />
-                <button type="submit" className="btn btn-lily create-loop">
+                <button type="submit" className="btn btn-primary create-loop">
                   Create loop
                 </button>
               </div>

@@ -19,3 +19,11 @@
 .loop-container {
   @apply flex flex-row justify-center gap-6;
 }
+
+.a {
+  flex: 2 1 0;
+}
+
+.b {
+  flex: 1 1 0;
+}

@@ -1,10 +1,10 @@
 .loop {
   @apply w-10/12 p-4 relative rounded-2xl bg-white;
-  @apply xl:w-2/3;
   border: 2px solid;
   border-color: rgb(var(--primary-color), 0.3);
   color: #333;
   box-shadow: var(--shadow-light);
+  min-width: 80%;
 }
 
 .avatar {

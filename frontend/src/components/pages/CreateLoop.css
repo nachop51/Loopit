@@ -16,7 +16,7 @@
 }
 
 .monaco-editor .mtkz {
-  display: contents;
+  display: contents !important;
 }
 
 .editor {
