@@ -132,12 +132,15 @@ const verifyTokenUser = async (req, res) => {
         status: "token not found",
       });
     const verified = jwt.verify(token, key);
-    const tokenInfo = jwt.decode(token);
+    const tokenInfo = jwt.decode(token, key);
     const username = tokenInfo.username;
     const userInfo = await User.findOne({
       where: { username: username },
       attributes: ["theme", "id", "username"],
     });
+    if (!userInfo) {
+      return res.status(200).json({ status: "token not found" });
+    }
     res.status(200).json({
       status: "authorized",
       id: userInfo.id,
