@@ -7,8 +7,6 @@ const Like = require("../models/likes");
 const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
-const { isErrored } = require("nodemailer/lib/xoauth2");
-const { prototype } = require("nodemailer/lib/json-transport");
 
 // Falta: - Agregar metodo para buscar usuarios por username
 //        - Metodo para eliminar usuarios
@@ -162,7 +160,7 @@ const updateUser = async (req, res) => {
     await user.save();
     res.status(200).json({
       status: "OK",
-      user: user,
+      user: "User updated",
     });
   } catch (error) {
     res.status(400).json({
@@ -450,12 +448,17 @@ const changeThemeMode = async (req, res) => {
         error: "Bad Request - User does not exist",
       });
     }
-    if (user.theme_mode === "light") {
-      user.theme_mode = "dark";
+    console.log(user.dataValues.theme);
+    if (user.theme === "light") {
+      user.theme = "dark";
     } else {
-      user.theme_mode = "light";
+      user.theme = "light";
     }
     await user.save();
+    res.status(200).json({
+      status: "OK",
+      theme_mode: user.theme,
+    });
   } catch (error) {
     res.status(400).json({
       status: "Error",
@@ -469,6 +472,7 @@ const usersStats = async (req, res) => {
   try {
     let dicStatsCreate = {};
     let dicStatsLiked = {};
+    let dicStatsSaved = {};
     const token_decode = jwt.decode(token, key);
     const user_id = token_decode.userId;
     const statsCreated = await sequelize.query(
@@ -500,10 +504,27 @@ const usersStats = async (req, res) => {
       const porcentaje = (language.cantidad / totalLiked) * 100;
       dicStatsLiked[language.name] = parseFloat(porcentaje.toFixed(2));
     });
+
+    const statsSaved = await sequelize.query(
+      "Select Languages.name, count(*) as cantidad FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Languages ON Loops.language_id = Languages.id WHERE Saves.user_id = ? GROUP BY Languages.name;",
+      {
+        replacements: [user_id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    const totalSaved = await Save.count({
+      where: { user_id: user_id },
+    });
+    statsSaved.forEach((language) => {
+      const porcentaje = (language.cantidad / totalSaved) * 100;
+      dicStatsSaved[language.name] = parseFloat(porcentaje.toFixed(2));
+    });
+
     res.status(200).json({
       status: "OK",
       created: dicStatsCreate,
       Liked: dicStatsLiked,
+      Saved: dicStatsSaved,
     });
   } catch (error) {
     res.status(400).json({
