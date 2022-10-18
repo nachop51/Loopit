@@ -21,6 +21,7 @@ const LoopItem = ({ collection, loop }) => {
       <Feedback
         likes={loop.countLikes}
         saves={loop.countSaves}
+        comments={loop.countComments}
         loop={loop}
         collection={collection}
       />
