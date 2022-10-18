@@ -79,6 +79,12 @@ export const fetchCreated = (username) => async (dispatch) => {
   }
 };
 
+export const fetchSearch = (search) => async (dispatch) => {
+  const response = await loopit.get(`/loops/all?search=${search}`);
+  
+  dispatch({ type: "FETCH_SEARCH", payload: response.data.loops });
+};
+
 export const updateLoops = (collection, action, state, id) => {
   return {
     type: "UPDATE_LOOPS",
@@ -88,6 +94,12 @@ export const updateLoops = (collection, action, state, id) => {
       state,
       id,
     },
+  };
+};
+
+export const clearLoops = () => {
+  return {
+    type: "CLEAR_LOOPS",
   };
 };
 
