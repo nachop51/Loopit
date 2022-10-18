@@ -33,7 +33,7 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
           <div className="profile-stats-container">
             <div className="stats-container">
               <h3>Following</h3>
-              <h4>{account?.followings}</h4>
+              <h4>{account?.following}</h4>
             </div>
             <div className="stats-container">
               <h3>Followers</h3>

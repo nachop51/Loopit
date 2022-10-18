@@ -8,3 +8,12 @@
 .logo-img {
   @apply w-24 sm:w-28 md:w-32 lg:w-44;
 }
+
+.theme-btn {
+  @apply top-0 left-16 absolute;
+  @apply sm:left-20;
+  @apply md:left-24;
+  @apply lg:left-28;
+  top: 50%;
+  transform: translateY(-50%);
+}

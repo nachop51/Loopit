@@ -7,7 +7,7 @@ import { BsChat } from "react-icons/bs";
 import { updateLoops } from "../../../actions";
 import loopit from "../../../api/loopit";
 
-const Feedback = ({ loop, updateLoops, collection }) => {
+const Feedback = ({ loop, updateLoops, collection, likes, saves }) => {
   const [save, setSave] = useState(loop.save);
   const [like, setLike] = useState(loop.like);
 
@@ -44,8 +44,9 @@ const Feedback = ({ loop, updateLoops, collection }) => {
   return (
     <div className="loop-info">
       <div className="heading-comments">
-        <p>Likes</p>
+        <p>{likes} Likes</p>
         <p>Comments</p>
+        <p>{saves} Saves</p>
         <br />
       </div>
       <div className="loop-info-buttons">

@@ -1,11 +1,12 @@
 import loopit from "../api/loopit";
 
-export const logIn = (id, username) => {
+export const logIn = (id, username, theme) => {
   return {
     type: "LOG_IN",
     payload: {
       id,
       username,
+      theme,
     },
   };
 };
@@ -19,21 +20,21 @@ export const signOut = () => async (dispatch) => {
 export const checkUserAuth = () => async (dispatch) => {
   try {
     const response = await loopit.get("/auth/verify");
-
     const payload = {};
     switch (response.data.status) {
       case "authorized":
         payload.status = true;
         payload.id = response.data.id;
         payload.username = response.data.username;
+        payload.theme = response.data.theme;
         break;
       default:
         payload.status = false;
         payload.id = null;
         payload.username = null;
+        payload.theme = "light";
         break;
     }
-
     dispatch({
       type: "CHECK_USER_AUTH",
       payload,
@@ -41,7 +42,7 @@ export const checkUserAuth = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "CHECK_USER_AUTH",
-      payload: { status: false, id: null, username: null },
+      payload: { status: false, id: null, username: null, theme: "light" },
     });
   }
 };
@@ -87,5 +88,11 @@ export const updateLoops = (collection, action, state, id) => {
       state,
       id,
     },
+  };
+};
+
+export const switchTheme = () => {
+  return {
+    type: "SWITCH_THEME",
   };
 };
