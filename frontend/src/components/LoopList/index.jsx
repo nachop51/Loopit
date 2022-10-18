@@ -18,6 +18,7 @@ const LoopList = ({
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
   setHasData,
   loops,
   hasData,
@@ -42,6 +43,8 @@ const LoopList = ({
       mapFrom = loops.saved;
     } else if (collection === "created") {
       mapFrom = loops.created;
+    } else if (collection === "search") {
+      mapFrom = loops.search;
     }
     if (mapFrom.length === 0) {
       return (

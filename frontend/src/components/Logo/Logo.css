@@ -1,5 +1,5 @@
 .logo {
-  @apply top-0 left-6 absolute;
+  @apply top-0 left-6 relative;
   @apply sm:left-12;
   @apply md:left-14;
   @apply lg:left-16;

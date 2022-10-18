@@ -54,7 +54,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
   };
 
   return (
-    <>
+    <div>
       <div className={oC ? oC : "logo"}>
         <Link to={link}>
           <img
@@ -73,7 +73,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       >
         Change theme
       </button>
-    </>
+    </div>
   );
 };
 
