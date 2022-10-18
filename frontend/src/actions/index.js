@@ -54,9 +54,13 @@ export const setHasData = () => {
 };
 
 export const fetchUser = () => async (dispatch) => {
-  const response = await loopit.get("/users/me");
-
-  dispatch({ type: "FETCH_USER", payload: response.data.me });
+  try {
+    const response = await loopit.get("/users/me");
+    dispatch({ type: "FETCH_USER", payload: response.data.me });
+  } catch (error) {
+    await loopit.get("/auth/logout");
+    dispatch({ type: "FETCH_USER", payload: null });
+  }
 };
 
 export const fetchLoops = () => async (dispatch) => {
@@ -81,7 +85,7 @@ export const fetchCreated = (username) => async (dispatch) => {
 
 export const fetchSearch = (search) => async (dispatch) => {
   const response = await loopit.get(`/loops/all?search=${search}`);
-  
+
   dispatch({ type: "FETCH_SEARCH", payload: response.data.loops });
 };
 

@@ -6,11 +6,12 @@ import { switchTheme } from "../../actions";
 import "./Logo.css";
 
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 // oC means optionalClass
 const Logo = ({ link, oC, theme, switchTheme }) => {
   const handleMode = () => {
-    if (theme === "light") {
+    if (theme === "dark") {
       // ! DARK THEME
       // Primary color format: r, g, b
       document.documentElement.style.setProperty(
@@ -52,6 +53,10 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       document.documentElement.style.setProperty("--nav-background", "#f7f7f8");
     }
   };
+
+  useEffect(() => {
+    handleMode(theme);
+  });
 
   return (
     <div>

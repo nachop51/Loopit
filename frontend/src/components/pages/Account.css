@@ -10,14 +10,18 @@
 }
 
 .profile {
-  @apply flex flex-col items-center justify-center gap-4;
+  @apply flex flex-col justify-center gap-12 mb-12 items-stretch;
   @apply xl:flex-row;
 }
 
 .profile-ui {
   @apply bg-transparent bg-opacity-50 rounded-2xl p-10 flex flex-col items-center w-full;
-  border: 2px solid #fff;
+  border: 2px solid rgb(var(--primary-color));
   box-shadow: var(--shadow-light);
+}
+
+.profile-stats {
+  @apply flex flex-col justify-between w-full;
 }
 
 .profile-stats-pic {
