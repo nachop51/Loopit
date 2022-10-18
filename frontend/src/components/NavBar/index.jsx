@@ -4,12 +4,17 @@ import { useState } from "react";
 import { HiCode, HiOutlineCode } from "react-icons/hi";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { AiOutlineHome, AiFillHome } from "react-icons/ai";
-import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
-
+import { IoBookmark, IoBookmarkOutline, IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
 
 const Nav = ({ children }) => {
   const [active, setActive] = useState(window.location.pathname);
+  const [isVisible, setIsVisible] = useState(false);
+  const [search, setSearch] = useState("");
+
+  // let location = useLocation();
+  // const navigate = useNavigate();
 
   const routes = [
     { id: "/l", icon: <AiOutlineHome />, iconActive: <AiFillHome /> },
@@ -26,19 +31,48 @@ const Nav = ({ children }) => {
     },
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // if (location.pathname !== "/l/search") {
+    //   navigate("/l/search");
+    // }
+    console.log(search);
+  };
+
   return (
     <nav className="nav">
       {children ? children : null}
-      {routes.map(({ id, icon, iconActive }) => (
-        <Link
-          key={id}
-          to={id}
-          onClick={() => setActive(id)}
-          className={`nav-links ${active === id ? "active" : ""}`}
-        >
-          {active === id ? iconActive : icon}
-        </Link>
-      ))}
+      <div className="nav-container">
+        {routes.map(({ id, icon, iconActive }) => (
+          <Link
+            key={id}
+            to={id}
+            onClick={() => setActive(id)}
+            className={`nav-links ${active === id ? "active" : ""}`}
+          >
+            {active === id ? iconActive : icon}
+          </Link>
+        ))}
+      </div>
+      <div className="search">
+        <form onSubmit={handleSubmit} className="search-form">
+          <input
+            type="text"
+            className={`bar ${isVisible ? "show-bar" : ""}`}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button
+            type="button"
+            className="nav-links"
+            onClick={(e) => {
+              setIsVisible(!isVisible);
+            }}
+          >
+            <IoSearchSharp />
+          </button>
+        </form>
+      </div>
     </nav>
   );
 };

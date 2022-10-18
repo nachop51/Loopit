@@ -7,7 +7,6 @@ const Like = require("../models/likes");
 const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
-const { isErrored } = require("nodemailer/lib/xoauth2");
 
 // Falta: - Agregar metodo para buscar usuarios por username
 //        - Metodo para eliminar usuarios
@@ -21,7 +20,7 @@ const me = async (req, res) => {
     });
   }
   try {
-    const token_decode = await jwt.verify(token, key);
+    const token_decode = await jwt.decode(token, key);
     const user_id = token_decode.userId;
     const user = await User.findByPk(user_id, {
       attributes: ["email", "full_name"],
@@ -50,7 +49,7 @@ const me = async (req, res) => {
         data: user,
         loops: countLoops,
         saves: countSaves,
-        followings: countFollowings,
+        following: countFollowings,
         followers: countFollowers,
       },
     });
@@ -161,7 +160,7 @@ const updateUser = async (req, res) => {
     await user.save();
     res.status(200).json({
       status: "OK",
-      user: user,
+      user: "User updated",
     });
   } catch (error) {
     res.status(400).json({
@@ -449,12 +448,17 @@ const changeThemeMode = async (req, res) => {
         error: "Bad Request - User does not exist",
       });
     }
-    if (user.theme_mode === "light") {
-      user.theme_mode = "dark";
+    console.log(user.dataValues.theme);
+    if (user.theme === "light") {
+      user.theme = "dark";
     } else {
-      user.theme_mode = "light";
+      user.theme = "light";
     }
     await user.save();
+    res.status(200).json({
+      status: "OK",
+      theme_mode: user.theme,
+    });
   } catch (error) {
     res.status(400).json({
       status: "Error",
@@ -463,6 +467,72 @@ const changeThemeMode = async (req, res) => {
   }
 };
 
+const usersStats = async (req, res) => {
+  const token = req.cookies.token;
+  try {
+    let dicStatsCreate = {};
+    let dicStatsLiked = {};
+    let dicStatsSaved = {};
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
+    const statsCreated = await sequelize.query(
+      "Select Languages.name, count(*) as cantidad FROM Loops JOIN Languages ON Loops.language_id = Languages.id WHERE Loops.user_id = ? GROUP BY Languages.name;",
+      {
+        replacements: [user_id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    const totalLoops = await Loop.count({
+      where: { user_id: user_id },
+    });
+    statsCreated.forEach((language) => {
+      const porcentaje = (language.cantidad / totalLoops) * 100;
+      dicStatsCreate[language.name] = parseFloat(porcentaje.toFixed(2));
+    });
+
+    const statsLiked = await sequelize.query(
+      "Select Languages.name, count(*) as cantidad FROM Likes JOIN Loops ON Likes.loop_id = Loops.id JOIN Languages ON Loops.language_id = Languages.id WHERE Likes.user_id = ? GROUP BY Languages.name;",
+      {
+        replacements: [user_id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    const totalLiked = await Like.count({
+      where: { user_id: user_id },
+    });
+    statsLiked.forEach((language) => {
+      const porcentaje = (language.cantidad / totalLiked) * 100;
+      dicStatsLiked[language.name] = parseFloat(porcentaje.toFixed(2));
+    });
+
+    const statsSaved = await sequelize.query(
+      "Select Languages.name, count(*) as cantidad FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Languages ON Loops.language_id = Languages.id WHERE Saves.user_id = ? GROUP BY Languages.name;",
+      {
+        replacements: [user_id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    const totalSaved = await Save.count({
+      where: { user_id: user_id },
+    });
+    statsSaved.forEach((language) => {
+      const porcentaje = (language.cantidad / totalSaved) * 100;
+      dicStatsSaved[language.name] = parseFloat(porcentaje.toFixed(2));
+    });
+
+    res.status(200).json({
+      status: "OK",
+      created: dicStatsCreate,
+      Liked: dicStatsLiked,
+      Saved: dicStatsSaved,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
   me: me,
@@ -473,4 +543,5 @@ module.exports = {
   getFollowersByUser: getFollowersByUser,
   getLikesByUser: getLikesByUser,
   changeThemeMode: changeThemeMode,
+  usersStats: usersStats,
 };

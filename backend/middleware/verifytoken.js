@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const key = require("../config").key;
+const User = require("../models/users");
 
 //verify acces token and allow or deny access to the route
-const verifytoken = (req, res, next) => {
+const verifytoken = async (req, res, next) => {
   if (
     req.url === "/auth/login" ||
     req.url === "/auth/register" ||
@@ -11,13 +12,17 @@ const verifytoken = (req, res, next) => {
     next();
   } else {
     const token = req.cookies.token;
-    console.log(token)
+    console.log(token);
     if (!token) {
       return res.status(401).json({ error: "Access denied" });
     }
     try {
       const verificar = jwt.verify(token, key);
-      req.user = verificar;
+      const user_id = verificar.userId;
+      const user = await User.findByPk(user_id);
+      if (!user) {
+        return res.status(401).json({ error: "Access denied, invalid token" });
+      }
       next();
     } catch (error) {
       return res.status(401).json({ error: "Access denied, invalid token" });

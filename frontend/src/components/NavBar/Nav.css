@@ -1,14 +1,19 @@
 .nav {
-  @apply flex justify-center gap-4 fixed top-0 w-full z-50;
+  @apply flex justify-center fixed top-0 w-full z-50;
   background-color: var(--nav-background);
   backdrop-filter: blur(5px);
   box-shadow: 15px -12px 20px 0px rgb(0 0 0 / 80%);
+  transition: all 1s var(--animation-bezier);
+}
+
+.nav-container {
+  @apply flex flex-row;
 }
 
 .nav-links {
   @apply relative p-4 rounded-full flex text-3xl;
   color: rgb(var(--primary-color));
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s var(--animation-bezier);
 }
 
 .nav-links:hover {
@@ -40,11 +45,49 @@
 }
 
 .navbar-logo {
-  @apply absolute left-4;
+  @apply absolute left-4 h-full flex gap-10 items-center;
+}
+
+.navbar-logo a {
+  @apply h-full flex items-center;
+}
+
+.navbar-logo img {
+  @apply w-2/5;
+}
+
+.navbar-logo button {
+  position: absolute;
+  transform: translateX(-75%);
+}
+
+.search {
+  @apply absolute rounded-full flex items-center justify-end right-0;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.navbar-logo img {
-  @apply flex justify-center items-center w-2/5;
+.search-form {
+  @apply flex items-center justify-end;
+}
+
+.search-form input {
+  @apply bg-transparent focus:outline-none text-lg pl-4 py-2 rounded-full;
+  transform: translateX(21%);
+  border: 1px solid rgb(var(--primary-color));
+  color: var(--text-color);
+}
+
+.search-form button {
+  @apply text-2xl border-none bg-transparent relative cursor-pointer;
+  color: rgb(var(--primary-color));
+}
+
+.bar {
+  transition: all 0.5s var(--animation-bezier);
+  @apply invisible opacity-0 w-0;
+}
+
+.show-bar {
+  @apply visible opacity-100 w-full;
 }

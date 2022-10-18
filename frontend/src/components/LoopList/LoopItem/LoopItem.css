@@ -1,10 +1,10 @@
 .loop {
-  @apply p-4 relative rounded-2xl bg-white;
+  @apply w-10/12 p-4 relative rounded-2xl bg-white;
   border: 2px solid;
   border-color: rgb(var(--primary-color), 0.3);
   color: #333;
   box-shadow: var(--shadow-light);
-  width: 100%;
+  min-width: 80%;
 }
 
 .avatar {
@@ -40,12 +40,7 @@
 }
 
 .loop-buttons > * {
-  @apply flex w-10 h-10 text-2xl items-center justify-center rounded-full shadow-2xl;
-}
-
-.loop-buttons > *:not(.loop-buttons:last-child) {
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 4px 3px 8px 0px rgb(0 0 0 / 29%);
+  @apply flex w-10 h-10 text-2xl items-center justify-center rounded-full;
 }
 
 .loop-buttons > *:hover {

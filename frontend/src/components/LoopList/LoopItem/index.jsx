@@ -6,8 +6,6 @@ import Content from "./Content";
 import Feedback from "./Feedback";
 
 const LoopItem = ({ collection, loop }) => {
-  console.log(loop);
-
   const username = loop?.user?.username || "No name";
 
   return (
@@ -20,7 +18,13 @@ const LoopItem = ({ collection, loop }) => {
         language={loop.language.name}
       />
       <Content language={loop.language.name} content={loop.content} />
-      <Feedback loop={loop} collection={collection} />
+      <Feedback
+        likes={loop.countLikes}
+        saves={loop.countSaves}
+        comments={loop.countComments}
+        loop={loop}
+        collection={collection}
+      />
     </div>
   );
 };

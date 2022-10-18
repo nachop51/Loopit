@@ -1,10 +1,13 @@
 .logo {
-  @apply top-0 left-6 absolute;
-  @apply sm:left-12;
-  @apply md:left-14;
-  @apply lg:left-16;
+  @apply top-0 left-6 absolute flex gap-10 items-center;
 }
 
 .logo-img {
   @apply w-24 sm:w-28 md:w-32 lg:w-44;
+}
+
+.theme-btn {
+  @apply bg-transparent border-none text-4xl flex items-center justify-center left-24;
+  color: rgb(var(--primary-color));
+  transition: all 0.3s var(--animation-bezier);
 }

@@ -18,6 +18,8 @@ const LoopList = ({
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
+  oC = "",
   setHasData,
   loops,
   hasData,
@@ -42,6 +44,8 @@ const LoopList = ({
       mapFrom = loops.saved;
     } else if (collection === "created") {
       mapFrom = loops.created;
+    } else if (collection === "search") {
+      mapFrom = loops.search;
     }
     if (mapFrom.length === 0) {
       return (
@@ -71,7 +75,9 @@ const LoopList = ({
   };
 
   return (
-    <div className="loop-list">{!hasData ? skeleton() : handleRender()}</div>
+    <div className={"loop-list " + oC}>
+      {!hasData ? skeleton() : handleRender()}
+    </div>
   );
 };
 

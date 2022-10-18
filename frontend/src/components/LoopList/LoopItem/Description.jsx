@@ -7,7 +7,9 @@ const Description = ({ title, description, language }) => {
       <p className="description-title">{title}</p>
       <div className="sub-container">
         <span>{description}</span>
-        <span className={language + " default"}>{language}</span>
+        <span id="tag" className={language + " default"}>
+          {language}
+        </span>
       </div>
     </div>
   );
