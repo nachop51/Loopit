@@ -56,6 +56,7 @@ const register = async (req, res) => {
           state: "Registered",
           id: newUser.id,
           username: newUser.username,
+          theme: "light",
         });
     }
   } catch (error) {
@@ -109,6 +110,7 @@ const login = async (req, res) => {
         status: "logged",
         id: userExists.id,
         username: userExists.username,
+        theme: userExists.theme,
       });
   } catch (error) {
     return res.status(400).json({
