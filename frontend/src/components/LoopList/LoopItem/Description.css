@@ -1,9 +1,16 @@
+#tag {
+  @apply font-bold p-1 mt-2;
+  width: 18%;
+  margin: 0 auto;
+  box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.5);
+}
+
 .description-container {
   @apply pt-2;
 }
 
 .default {
-  @apply rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none bg-gray-400;
+  @apply text-slate-800 rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none bg-gray-400 capitalize;
 }
 
 .javascript {
