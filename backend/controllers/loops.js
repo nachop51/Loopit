@@ -154,44 +154,6 @@ const updateLoop = async (req, res) => {
     });
   }
 };
-
-const getLoopsbyID = async (req, res) => {
-  const { id } = req.params;
-  if (!id) {
-    return res.status(400).json({
-      status: "Error",
-      error: "Bad Request - missing data",
-    });
-  }
-  try {
-    console.log("holaaaaaa");
-    const response = await Loop.findAll({
-      where: { id: id },
-      include: [
-        {
-          model: User,
-          as: "user",
-          attributes: ["username"],
-        },
-        {
-          model: Language,
-          as: "language",
-          attributes: ["name"],
-        },
-      ],
-    });
-    return res.status(200).json({
-      status: "OK",
-      loops: response,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "Error",
-      error: error,
-    });
-  }
-};
-
 const getLoops = async (req, res) => {
   let { page, limit, language, username, search, id } = req.query;
   page = parseInt(page, 10);
@@ -229,17 +191,18 @@ const getLoops = async (req, res) => {
     };
   }
   if (search) {
-    dicSearch.name = { [Op.like]: `%${search}%` };
+    dicSearch = {
+      where: { name: { [Op.like]: `%${search}%` } },
+    };
   } else {
-    console.log("hola");
-    dicSearch = {};
+    if (id) {
+      dicSearch = {
+        where: { id: id },
+      };
+    } else {
+      dicSearch = {};
+    }
   }
-  if (id) {
-    dicSearch.id = id;
-  } else {
-    dicSearch = {};
-  }
-  console.log(dicSearch);
   try {
     const loops = await Loop.findAll({
       limit: limit,
@@ -253,7 +216,7 @@ const getLoops = async (req, res) => {
         "created_at",
       ],
       include: [dicUsername, dicLanguage],
-      where: { ...dicSearch },
+      ...dicSearch,
       order: [["created_at", "DESC"]],
     });
     if (!loops) {
@@ -373,6 +336,5 @@ module.exports = {
   deleteLoop: deleteLoop,
   updateLoop: updateLoop,
   getLoops: getLoops,
-  getLoopsbyID: getLoopsbyID,
   getLoopComments: getLoopComments,
 };
