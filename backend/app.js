@@ -38,7 +38,7 @@ const port = process.env.PORT;
 //config cors for allow cross origin resource sharing for origin localhost:3001 with credentials
 app.use(
   cors({
-    origin: "https://loopit-mvp.com/",
+    origin: "http://localhost:3001",
     credentials: true,
   })
 );

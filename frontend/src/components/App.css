@@ -14,6 +14,8 @@
   --text-light: #666;
   --text-color: #444;
   --text-dark: #222;
+
+  --animation-bezier: cubic-bezier(0.71, 0.01, 0.01, 1.35);
 }
 
 *:not(.editor) {
@@ -37,7 +39,7 @@ body {
   background: var(--background-color);
   background-size: cover;
   background-repeat: no-repeat;
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.2, 0.75);
+  transition: all 0.5s var(--animation-bezier);
 }
 
 .btn-animation {
