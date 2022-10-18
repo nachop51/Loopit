@@ -15,7 +15,7 @@ const addComment = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.verify(token, key);
+    const token_decode = jwt.decode(token, key);
     const user_id = token_decode.userId;
     const loop = await Loop.findByPk(loop_id);
     console.log("holaaaaaa");

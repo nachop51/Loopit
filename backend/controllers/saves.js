@@ -15,7 +15,7 @@ const addSave = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.verify(token, key);
+    const token_decode = jwt.decode(token, key);
     const user_id = token_decode.userId;
     const loop = await Loop.findByPk(loop_id);
     if (!loop) {
@@ -57,7 +57,7 @@ const deleteSave = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.verify(token, key);
+    const token_decode = jwt.decode(token, key);
     const user_id = token_decode.userId;
     const save = await Save.findOne({
       where: { user_id: user_id, loop_id: loop_id },
