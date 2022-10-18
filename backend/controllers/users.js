@@ -22,7 +22,7 @@ const me = async (req, res) => {
     });
   }
   try {
-    const token_decode = await jwt.verify(token, key);
+    const token_decode = await jwt.decode(token, key);
     const user_id = token_decode.userId;
     const user = await User.findByPk(user_id, {
       attributes: ["email", "full_name"],
