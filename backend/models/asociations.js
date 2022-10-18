@@ -1,6 +1,7 @@
 const User = require("./users");
 const Loop = require("./loops");
 const Language = require("./languages");
+const Save = require("./saves");
 
 //define relationships one to many between user and loops
 User.hasMany(Loop, {
@@ -15,22 +16,6 @@ Loop.belongsTo(User, {
   targetId: "id",
 });
 
-//define relationships many to many between loops and user (favorites)
-Loop.belongsToMany(User, {
-  as: "usersFavorites",
-  through: "Favorites",
-  foreignKey: "loop_id",
-  otherKey: "user_id",
-  onDelete: "cascade",
-});
-User.belongsToMany(Loop, {
-  as: "loopsFavorites",
-  through: "Favorites",
-  foreignKey: "user_id",
-  otherKey: "loop_id",
-  onDelete: "cascade",
-});
-
 // define relatioship one to many between language and loops
 Language.hasMany(Loop, {
   as: "loops",
@@ -43,20 +28,5 @@ Loop.belongsTo(Language, {
   foreignKey: "language_id",
   targetId: "id",
 });
-
-// Loop.belongsToMany(User, {
-//   as: "usersFavorites",
-//   through: "loop_language",
-//   foreignKey: "loop_id",
-//   otherKey: "user_id",
-//   onDelete: "cascade",
-// });
-// Language.belongsToMany(Loop, {
-//   as: "loopsFavorites",
-//   through: "loop_language",
-//   foreignKey: "language_id",
-//   otherKey: "loop_id",
-//   onDelete: "cascade",
-// });
 
 // define relationship many to many between loops and user (followers)

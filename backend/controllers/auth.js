@@ -33,30 +33,31 @@ const register = async (req, res) => {
       });
     } else {
       let passEncrypt = await bcrypt.hash(password, 8);
-      const newUser =  await User.create({
-      username: username,
-      full_name: fullname,
-      email: email,
-      password: passEncrypt,
-    });
-    const token = jwt.sign(
-      {
+      const newUser = await User.create({
         username: username,
-        userId: newUser.id,
-      },
-      key,
-      {
-        expiresIn: "7d",
-      }
-    );
-    return res
-      .status(200)
-      .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-      .json({
-        state: "Registered",
-        id: newUser.id,
-        username: newUser.username,
+        full_name: fullname,
+        email: email,
+        password: passEncrypt,
       });
+      const token = jwt.sign(
+        {
+          username: username,
+          userId: newUser.id,
+        },
+        key,
+        {
+          expiresIn: "1d",
+        }
+      );
+      return res
+        .status(200)
+        .cookie("token", token, { maxAge: 604800000, httpOnly: true })
+        .json({
+          state: "Registered",
+          id: newUser.id,
+          username: newUser.username,
+          theme: "light",
+        });
     }
   } catch (error) {
     res.status(400).json({
@@ -85,7 +86,7 @@ const login = async (req, res) => {
         error: "Bad request - failed credentials",
       });
     }
-    const passMatch = bcrypt.compare(password, userExists.password);
+    const passMatch = await bcrypt.compare(password, userExists.password);
     if (!passMatch) {
       return res.status(404).json({
         status: "Error",
@@ -105,7 +106,12 @@ const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, { maxAge: 604800000, httpOnly: true })
-      .json({ status: "logged", id: userExists.id  ,username: userExists.username});
+      .json({
+        status: "logged",
+        id: userExists.id,
+        username: userExists.username,
+        theme: userExists.theme,
+      });
   } catch (error) {
     return res.status(400).json({
       status: "Error",
@@ -128,9 +134,15 @@ const verifyTokenUser = async (req, res) => {
     const verified = jwt.verify(token, key);
     const tokenInfo = jwt.decode(token);
     const username = tokenInfo.username;
+    const userInfo = await User.findOne({
+      where: { username: username },
+      attributes: ["theme", "id", "username"],
+    });
     res.status(200).json({
       status: "authorized",
-      username: username,
+      id: userInfo.id,
+      username: userInfo.username,
+      theme: userInfo.theme,
     });
   } catch (error) {
     res.status(200).json({

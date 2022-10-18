@@ -1,21 +1,17 @@
 import "./Loopit.css";
-import useAuth from "../../hooks/useAuth";
-import LoadingSpinner from "../../assets/loading_spinner.gif";
-// import Footer from "../Footer";
-import LoopList from "./LoopList";
+import LoopList from "../LoopList";
+import Aside from "./Aside";
 
-const LoopitApp = ({ userStatus }) => {
-  useAuth(userStatus);
-
-  if (!userStatus) {
-    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
-  }
-
+const LoopitApp = () => {
   return (
     <>
-      <div className="loop-container">
-        <LoopList />
-      </div>
+      <main className="loops">
+        <h1 className="heading-primary">Loops</h1>
+        <div className="loop-container">
+          <LoopList collection="all" />
+          <Aside />
+        </div>
+      </main>
     </>
   );
 };

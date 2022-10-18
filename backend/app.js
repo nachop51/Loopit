@@ -7,10 +7,12 @@ const cors = require("cors");
 const routeAuth = require("./routes/routeAuth");
 const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");
-const routeFavorite = require("./routes/routeFavorites");
+const routeSaves = require("./routes/routeSaves");
 const routeLanguages = require("./routes/routeLanguages");
 const routeFollower = require("./routes/routeFollowers");
 const routeMail = require("./routes/routeMail");
+const routeLike = require("./routes/routeLike");
+const routeComment = require("./routes/routeComment");
 //import middleware that will be used in the app for authentication of tokens
 const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
@@ -21,17 +23,18 @@ require("dotenv").config({ path: "./.env" });
 const { sequelize } = require("./database/db");
 //import models from models folder and associate them
 require("./models/asociations.js");
-const { User } = require("./models/users");
-const { Loop } = require("./models/loops");
+const User = require("./models/users");
+const Loop = require("./models/loops");
+const Language = require("./models/languages");
+const Follower = require("./models/followers");
+const Save = require("./models/saves");
+const Like = require("./models/likes");
+const Comment = require("./models/comments");
+//import bcrypt to hash passwords
 
 const port = process.env.PORT;
 
 //middlewares
-app.use(cookieParser());
-app.use("/", verifytoken);
-app.use(express.urlencoded({ extended: false }));
-//parse date request to json and append it to req.body
-app.use(express.json());
 //config cors for allow cross origin resource sharing for origin localhost:3001 with credentials
 app.use(
   cors({
@@ -39,15 +42,21 @@ app.use(
     credentials: true,
   })
 );
-
-//define routes of the app
+app.use(cookieParser());
+//parse date request to json and append it to req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/loops", routeLoop);
 app.use("/auth", routeAuth);
-app.use("/user", routeUser);
-app.use("/loop", routeLoop);
-app.use("/favorite", routeFavorite);
-app.use("/language", routeLanguages);
-app.use("/follower", routeFollower);
+app.use("/users", routeUser);
+app.use("/saves", routeSaves);
+app.use("/languages", routeLanguages);
+app.use("/followers", routeFollower);
 app.use("/mail", routeMail);
+app.use("/likes", routeLike);
+app.use("/comments", routeComment);
+//verify token
+app.use("/", verifytoken);
 
 //sync database and start server
 app.listen(3000, () => {

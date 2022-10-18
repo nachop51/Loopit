@@ -1,0 +1,31 @@
+.heading-about {
+  @apply text-4xl text-white font-bold;
+}
+
+.container {
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.178);
+  min-height: 100vh;
+  padding: 60px 30px;
+  /* align-content: center; */
+  justify-content: center;
+}
+
+.about-us {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 7rem;
+}
+
+.card {
+  width: 400px;
+  height: 100%;
+  background-color: transparent;
+  border: 2px solid #fff;
+  box-shadow: 0.5px 0.5px 12px rgba(255, 255, 255, 0.178);
+}

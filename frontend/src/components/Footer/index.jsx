@@ -12,7 +12,7 @@ const Footer = () => {
           <img src={image} alt="logo-footer" width={80} />
         </Link>
 
-        <Link id="link-about" className="/about">
+        <Link to="/about" id="link-about" className="/about">
           <span>About us</span>
         </Link>
 
@@ -25,7 +25,9 @@ const Footer = () => {
           </a>
         </p>
       </div>
-      <p data-testid="footer-heading">All rights reserved &copy;Loopit 2022</p>
+      <p data-testid="footer-heading" className="footer-copy">
+        All rights reserved &copy;Loopit 2022
+      </p>
     </footer>
   );
 };

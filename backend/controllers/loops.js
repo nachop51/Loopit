@@ -1,205 +1,378 @@
 const Loop = require("../models/loops");
 const Language = require("../models/languages");
 const User = require("../models/users");
-const { where } = require("sequelize");
+const Save = require("../models/saves");
+const Like = require("../models/likes");
+const Comment = require("../models/comments");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+const { url } = require("inspector");
+const jwt = require("jsonwebtoken");
+const { sequelize } = require("../database/db");
+const { key } = "../config";
 
-// Creados: - Agregar un loop
-//          - Eliminar un loop
-// Falta: - Update a loop
-
-const addLoop = (req, res) => {
-  const { name, description, content, language_id, filename, user_id } =
-    req.body;
-  if (
-    !name ||
-    !description ||
-    !content ||
-    !language_id ||
-    !filename ||
-    !user_id
-  ) {
+const addLoop = async (req, res) => {
+  const { name, description, content, language, filename } = req.body;
+  const token = req.cookies.token;
+  if (!name || !content || !language) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - Missing data",
     });
   }
-  Loop.create({
-    name: name,
-    description: description,
-    content: content,
-    language_id: language_id,
-    filename: filename,
-    user_id: user_id,
-  })
-    .then((loops) => {
-      res.status(200).json({
-        state: "Added",
-        data: loops.dataValues,
-      });
-    })
-    .catch((error) => {
-      let errorBD = error.fields;
-      if (errorBD[0] === "user_id") {
-        res.status(400).json({
-          status: "Error",
-          error: "Bad Request - This user does not exist",
-        });
-      } else if (errorBD[0] === "language_id") {
-        res.status(400).json({
-          status: "Error",
-          error: "Bad Request - This language does not exist",
-        });
-      } else {
-        res.status(400).json({
-          status: "Error",
-          error: error,
-        });
-      }
+  try {
+    const language_id = await Language.findOne({
+      where: { name: language },
     });
+    if (!language_id) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Language does not exist",
+      });
+    }
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
+    const new_loop = await Loop.create({
+      name: name,
+      description: description,
+      content: content,
+      filename: filename,
+      user_id: user_id,
+      language_id: language_id.id,
+    });
+    return res.status(200).json({
+      status: "OK",
+      loop: new_loop,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
-const deleteLoop = (req, res) => {
-  const { id } = req.body;
+const deleteLoop = async (req, res) => {
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
-  Loop.destroy({
-    where: { id: id },
-  }).then((results) => {
+  try {
+    const loop_destroy = await Loop.findByPk(id);
+    if (!loop_destroy) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - loop does not exist",
+      });
+    }
+    const save_destroy = await Save.destroy({
+      where: { loop_id: id },
+    });
+    const comment_destroy = await Comment.destroy({
+      where: { loop_id: id },
+    });
+    const like_destroy = await Like.destroy({
+      where: { loop_id: id },
+    });
+    await loop_destroy.destroy();
     res.status(200).json({
       status: "OK",
       data: [],
     });
-  });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
-const updateLoop = (req, res) => {
-  const { id } = req.body;
+const updateLoop = async (req, res) => {
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
-  delete req.body.id;
-  delete req.body.user_id;
-  Loop.update(req.body, {
-    where: { id: id },
-  })
-    .then((results) => {
-      res.status(200).json({
-        status: "OK",
-        data: [],
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
+  try {
+    const loop = await Loop.findByPk(id);
+    if (!loop) {
+      return res.status(400).json({
         status: "Error",
-        error: error,
+        error: "Bad Request - Loop does not exist",
       });
+    }
+    const { name, description, content, language, filename, user_id } =
+      req.body;
+    if (name) {
+      loop.name = name;
+    }
+    if (description) {
+      loop.description = description;
+    }
+    if (content) {
+      loop.content = content;
+    }
+    if (language) {
+      const language_id = await Language.findOne({
+        where: { name: language },
+      });
+      if (!language_id) {
+        return res.status(400).json({
+          status: "Error",
+          error: "Bad Request - Language does not exist",
+        });
+      }
+      loop.language_id = language_id.id;
+    }
+    if (filename) {
+      loop.filename = filename;
+    }
+    if (user_id) {
+      const user = await User.findBypk(user_id);
+      if (!user) {
+        return res.status(400).json({
+          status: "Error",
+          error: "Bad Request - User does not exist",
+        });
+      }
+      loop.user_id = user_id;
+    }
+    await loop.save();
+    res.status(200).json({
+      status: "OK",
+      loop: loop,
     });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
+const getLoopsbyID = async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - missing data",
+    });
+  }
+  try {
+    console.log("holaaaaaa");
+    const response = await Loop.findAll({
+      where: { id: id },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        },
+      ],
+    });
+    return res.status(200).json({
+      status: "OK",
+      loops: response,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const getLoops = async (req, res) => {
-  const { language } = req.params;
-  if (language) {
-    try {
-      const response  = await   Loop.findAll({
-        attributes: ["id", "name", "description", "content", "filename"],
-        include: [
-          {
-            model: Language,
-            as: "language",
-            attributes: ["name"],
-            where: { name: language },
-          },
-          {
-            model: User,
-            as: "user",
-            attributes: ["username"],
-          },
-        ],
-      });
-      return res.status(200).json({
-        status: "OK",
-        loops: response,
-      });
-    } catch (error) {
+  let { page, limit, language, username, search, id } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  let dicLanguage = {};
+  let dicUsername = {};
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  if (!language) {
+    dicLanguage = {
+      model: Language,
+      as: "language",
+      attributes: ["name"],
+    };
+  } else {
+    dicLanguage = {
+      model: Language,
+      as: "language",
+      attributes: ["name"],
+      where: { name: language },
+    };
+  }
+  if (!username) {
+    dicUsername = {
+      model: User,
+      as: "user",
+      attributes: ["username"],
+    };
+  } else {
+    dicUsername = {
+      model: User,
+      as: "user",
+      attributes: ["username"],
+      where: { username: username },
+    };
+  }
+  if (search) {
+    dicSearch.name = { [Op.like]: `%${search}%` };
+  } else {
+    console.log("hola");
+    dicSearch = {};
+  }
+  if (id) {
+    dicSearch.id = id;
+  } else {
+    dicSearch = {};
+  }
+  console.log(dicSearch);
+  try {
+    const loops = await Loop.findAll({
+      limit: limit,
+      offset: page * limit - limit,
+      attributes: [
+        "id",
+        "name",
+        "description",
+        "content",
+        "filename",
+        "created_at",
+      ],
+      include: [dicUsername, dicLanguage],
+      where: { ...dicSearch },
+      order: [["created_at", "DESC"]],
+    });
+    if (!loops) {
       return res.status(400).json({
         status: "Error",
-        error: error,
+        error: "Loop list is empty",
       });
-    }    
-  }
-  Loop.findAll({
-    attributes: ["id", "name", "description", "content", "filename"],
-    include: [
-      {
-        model: Language,
-        as: "language",
-        attributes: ["name", "id"],
-      },
-      {
-        model: User,
-        as: "user",
-        attributes: ["username"],
-      }
-    ],
-  })
-    .then((loops) => {
-      res.status(200).json({
-        status: "OK",
-        loops: loops,
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        status: "Error",
-        error: error,
-      });
+    }
+    //get info of user
+    const token = req.cookies.token;
+    const token_decode = jwt.decode(token, key);
+    const user_id = token_decode.userId;
+    const likesUser = await Like.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
     });
+    const savesUser = await Save.findAll({
+      where: { user_id: user_id },
+      attributes: ["loop_id"],
+    });
+    //this part check if the user has liked or saved the loop
+    loops.forEach((loop) => {
+      loop.dataValues.like = false;
+      loop.dataValues.save = false;
+      for (let a = 0; a < likesUser.length; a++) {
+        if (loop.id === likesUser[a].loop_id) {
+          loop.dataValues.like = true;
+          break;
+        } else {
+          loop.dataValues.like = false;
+        }
+      }
+      for (let a = 0; a < savesUser.length; a++) {
+        if (loop.id === savesUser[a].loop_id) {
+          loop.dataValues.save = true;
+          break;
+        } else {
+          loop.dataValues.save = false;
+        }
+      }
+    });
+    // in this part we count the number of likes and saves
+    for (let i = 0; i < loops.length; i++) {
+      const countLikesLoop = await Like.count({
+        where: { loop_id: loops[i].id },
+      });
+      const countSavesLoop = await Save.count({
+        where: { loop_id: loops[i].id },
+      });
+      const countComment = await Comment.count({
+        where: { loop_id: loops[i].id },
+      });
+      loops[i].dataValues.countLikes = countLikesLoop;
+      loops[i].dataValues.countSaves = countSavesLoop;
+      loops[i].dataValues.countComments = countComment;
+    }
+
+    //total number of loops for pagination
+    const countLoops = await Loop.count({
+      include: [dicUsername, dicLanguage],
+    });
+    const totalPages = Math.ceil(countLoops / limit);
+    return res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      loops: loops,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
-// const getLoopsByLanguage = (req, res) => {
-//   const { language } = req.params;
-//   console.log(req.params)
-//   if (!language) {
-//     return res.status(400).json({
-//       status: "Error",
-//       error: "Bad Request - Missing data",
-//     });
-//   }
-//   Loop.findAll({
-//     attributes: ["id", "name", "description", "content", "filename"],
-//     include: [
-//       {
-//         model: Language,
-//         as: "language",
-//         attributes: ["name"],
-//         where: { name: language },
-//       },
-//     ],
-//   })
-//     .then((loops) => {
-//       res.status(200).json({
-//         status: "OK",
-//         loops: loops,
-//       });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({
-//         status: "Error",
-//         error: error,
-//       });
-//     });
-// };
+const getLoopComments = async (req, res) => {
+  const { loop_id } = req.params;
+  if (!loop_id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - missing data",
+    });
+  }
+  try {
+    const loop = await Loop.findByPk(loop_id);
+    if (!loop) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Loop does not exist",
+      });
+    }
+    const comments = await sequelize.query(
+      "SELECT Comments.id, Comments.content, Users.username, Comments.created_at FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE Comments.loop_id = ?;",
+      {
+        replacements: [loop_id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    console.log("holaaaaaa");
+    return res.status(200).json({
+      status: "OK",
+      comments: comments,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
 
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
   updateLoop: updateLoop,
   getLoops: getLoops,
+  getLoopsbyID: getLoopsbyID,
+  getLoopComments: getLoopComments,
 };

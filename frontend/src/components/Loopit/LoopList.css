@@ -1,7 +1,0 @@
-.loop-list {
-  @apply flex flex-col;
-}
-
-.loop-list > *:not(:first-child) {
-  @apply border-t-4 border-solid border-white border-x-0 border-b-0;
-}

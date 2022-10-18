@@ -3,8 +3,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  filter: blur(0.8px);
+  opacity: 0.5;
+  width: 25%;
+}
+
+.heading-home {
+  @apply text-center text-white font-bold text-4xl pb-8;
+}
+
+.loops {
+  @apply min-h-screen;
 }
 
 .loop-container {
-  @apply m-auto mb-20 mt-32 w-2/3 rounded-xl;
+  @apply flex flex-row justify-center gap-6;
 }

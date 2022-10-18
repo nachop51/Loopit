@@ -1,7 +1,23 @@
 const routeUser = require("express").Router();
-const { getUsers } = require("../controllers/users");
+const {
+  getUsers,
+  getSaveUser,
+  updateUser,
+  me,
+  getUserByusername,
+  getFollowersByUser,
+  getLikesByUser,
+  changeThemeMode,
+} = require("../controllers/users");
 
 //define routes for user
-routeUser.get("/users/", getUsers);
+routeUser.get("/me", me);
+routeUser.put("/update/:id", updateUser);
+routeUser.get("/all", getUsers);
+routeUser.get("/profile/:username", getUserByusername);
+routeUser.get("/saves", getSaveUser);
+routeUser.get("/followers/:id", getFollowersByUser);
+routeUser.get("/likes", getLikesByUser);
+routeUser.get("changeThemeMode", changeThemeMode);
 
 module.exports = routeUser;

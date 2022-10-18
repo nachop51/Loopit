@@ -1,44 +1,38 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Logo from "./Logo";
-import Nav from "./Loopit/Nav";
-import LandingPage from "./LandingPage";
-import LoopitApp from "./Loopit";
-import CreateLoop from "./Loopit/pages/CreateLoop";
+import LandingPage from "./LandingPage/";
 import { checkUserAuth } from "../actions";
-import LoadingSpinner from "../assets/loading_spinner.gif";
-import Favorites from "./Loopit/pages/Favorites";
+import Appliaction from "./Appliaction";
+import LoadingSpinner from "../assets/nobg.gif";
+import ErrorPage from "./404";
+import About from "./About/";
 
-const App = ({ isSignedIn, checkUserAuth }) => {
-  const [stateNav, setStateNav] = useState(false);
-  let location = useLocation();
-
+const App = ({ isSignedIn, checkUserAuth, id }) => {
   useEffect(() => {
     checkUserAuth();
   }, [checkUserAuth]);
 
-  useEffect(() => {
-    if (window.location.pathname === "/home") setStateNav(true);
-    else setStateNav(false);
-  }, [location]);
-
   if (isSignedIn === null) {
-    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
+    return (
+      <div style={{ width: "100vw", height: "100vh" }}>
+        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+      </div>
+    );
   }
 
   return (
     <>
-      <Logo />
-      {!stateNav && <Nav />}
       <Routes>
-        <Route path="/home" element={<LandingPage />} />
-        <Route path="/" element={<LoopitApp userStatus={isSignedIn} />} />
-        <Route path="/create-loop" element={<CreateLoop />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route index element={<LandingPage />} />
+        <Route
+          path="l/*"
+          element={<Appliaction userStatus={isSignedIn} id={id} />}
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
@@ -47,6 +41,7 @@ const App = ({ isSignedIn, checkUserAuth }) => {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    id: state.auth.id,
   };
 };
 

@@ -4,15 +4,18 @@ const {
   deleteLoop,
   updateLoop,
   getLoops,
-  getLoopsByLanguage,
+  getLoopsbyID,
+  getLoopComments,
+  searchLoops,
 } = require("../controllers/loops");
 const { route } = require("./routeAuth");
 
 //define routes for loops
 routeLoops.post("/add", addLoop);
-routeLoops.delete("/delete", deleteLoop);
-routeLoops.put("/update", updateLoop);
-routeLoops.get("/all/:language", getLoops);
+routeLoops.delete("/delete/:id", deleteLoop);
+routeLoops.put("/update/:id", updateLoop);
 routeLoops.get("/all", getLoops);
+routeLoops.get("/loop/:id", getLoopsbyID);
+routeLoops.get("/comments/:loop_id", getLoopComments);
 
 module.exports = routeLoops;

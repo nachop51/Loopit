@@ -1,0 +1,88 @@
+.loop {
+  @apply p-4 relative rounded-2xl bg-white;
+  border: 2px solid;
+  border-color: rgb(var(--primary-color), 0.3);
+  color: #333;
+  box-shadow: var(--shadow-light);
+  width: 100%;
+}
+
+.avatar {
+  @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.avatar-img {
+  @apply rounded-full w-full;
+}
+
+.description {
+  @apply text-center p-4;
+}
+
+.description-title {
+  @apply text-center text-2xl font-bold capitalize pb-2 text-slate-600;
+}
+
+/* language + description */
+.sub-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info {
+  @apply relative flex flex-row flex-nowrap gap-3;
+}
+
+.loop-buttons {
+  @apply absolute top-5 right-4 flex flex-row flex-nowrap gap-2 rounded-full;
+}
+
+.loop-buttons > * {
+  @apply flex w-10 h-10 text-2xl items-center justify-center rounded-full;
+}
+
+.loop-buttons > *:hover {
+  background-color: rgba(var(--primary-color), 0.3);
+}
+
+.loop-content {
+  @apply py-5 px-4 rounded-md mt-2 shadow-2xl;
+  background-color: #15151ee8;
+  color: rgb(255, 250, 205);
+}
+
+.loop-info-buttons {
+  @apply flex flex-row justify-between gap-3;
+}
+
+.loop-info-buttons > * {
+  @apply m-auto;
+}
+
+/** COMMENTS */
+.action-comment {
+  @apply font-semibold text-lg cursor-pointer select-none flex items-center justify-center bg-transparent border-none;
+}
+
+.action-comment .icon {
+  @apply text-2xl m-0.5;
+}
+
+.comment-button {
+  @apply text-black font-bold bg-transparent cursor-pointer text-lg;
+  border: none;
+}
+
+.save-active {
+  color: rgb(var(--primary-color));
+}
+
+.action-comment .recommend-active {
+  color: rgb(var(--primary-color));
+}
+
+.heading-comments {
+  @apply mt-4 text-base font-bold;
+}
