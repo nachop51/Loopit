@@ -6,13 +6,11 @@ import Content from "./Content";
 import Feedback from "./Feedback";
 
 const LoopItem = ({ collection, loop }) => {
-  console.log(loop);
-
   const username = loop?.user?.username || "No name";
 
   return (
     <div className="loop">
-      <User username={username} time={loop.create_at} />
+      <User username={username} time={loop.created_at} />
       <Interact content={loop.content} filename={loop.filename} />
       <Description
         title={loop.name}
@@ -20,7 +18,12 @@ const LoopItem = ({ collection, loop }) => {
         language={loop.language.name}
       />
       <Content language={loop.language.name} content={loop.content} />
-      <Feedback loop={loop} collection={collection} />
+      <Feedback
+        likes={loop.countLikes}
+        saves={loop.countSaves}
+        loop={loop}
+        collection={collection}
+      />
     </div>
   );
 };

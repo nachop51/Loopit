@@ -26,7 +26,8 @@
 }
 
 .profile-stats-heading {
-  @apply mr-auto text-white mb-2;
+  @apply mr-auto mb-2;
+  color: var(--text-color);
 }
 
 .profile-stats-container {
@@ -34,12 +35,17 @@
 }
 
 .profile-stats-container div {
-  @apply bg-slate-800 text-white p-4 rounded-md;
+  @apply p-4 rounded-md;
+  background-color: rgb(var(--primary-color), 0.1);
+  color: rgb(var(--primary-color));
 }
 
 .profile-data h2 {
-  /* @apply text-slate-600 pb-6; */
   color: rgb(var(--primary-color));
+}
+
+.stats-container {
+  transition: all 0.4s;
 }
 
 .stats-container h3,
@@ -47,12 +53,8 @@
   @apply text-center select-none;
 }
 
-.stats-container {
-  transition: all 0.4s;
-}
-
 .stats-container:hover {
-  box-shadow: 0.3px 0.3px 20px rgba(225, 225, 225, 0.4);
+  box-shadow: 0.3px 0.3px 20px rgb(0, 0, 0, 0.2);
 }
 
 .stats-container h3 {
@@ -60,19 +62,21 @@
 }
 
 .profile-data-container {
-  @apply flex flex-col items-start gap-4;
+  @apply flex flex-col items-start gap-4 w-full my-4;
 }
 
 .profile-data-item {
-  @apply flex flex-col items-start gap-2;
-}
-
-.profile-data-item h4 {
-  @apply text-neutral-600;
+  @apply flex flex-col items-start mr-auto;
 }
 
 .profile-data-item h3 {
-  @apply text-slate-900;
+  @apply text-xl;
+  color: var(--text-color);
+}
+
+.profile-data-item h4 {
+  @apply text-lg;
+  color: var(--text-dark);
 }
 
 .profile-btn-edit,
@@ -90,6 +94,6 @@
 
 .profile-btn-edit:hover,
 .profile-btn-sign-out:hover {
-  background-color: rgba(225, 225, 225, 0.2);
+  background-color: rgba(225, 225, 225, 0.15);
   color: #444;
 }

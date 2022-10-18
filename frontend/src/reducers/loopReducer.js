@@ -2,12 +2,11 @@ const initialState = {
   all: [],
   saved: [],
   created: [],
+  search: [],
   hasData: false,
 };
 
 const loopReducer = (state = initialState, action) => {
-  console.log(action);
-  console.log(state);
   switch (action.type) {
     case "SET_HAS_DATA":
       return {
@@ -30,6 +29,12 @@ const loopReducer = (state = initialState, action) => {
       return {
         ...state,
         created: action.payload,
+        hasData: true,
+      };
+    case "FETCH_SEARCH":
+      return {
+        ...state,
+        search: action.payload,
         hasData: true,
       };
     case "UPDATE_LOOPS":
@@ -65,11 +70,19 @@ const loopReducer = (state = initialState, action) => {
       }
       updatedLoops.hasData = true;
       return updatedLoops;
+    case "CLEAR_LOOPS":
+      return {
+        all: [],
+        saved: [],
+        created: [],
+        hasData: false,
+      };
     case "SIGN_OUT":
       return {
         all: [],
         saved: [],
         created: [],
+        hasData: false,
       };
     default:
       return state;
