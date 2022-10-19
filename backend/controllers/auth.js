@@ -57,6 +57,7 @@ const register = async (req, res) => {
           id: newUser.id,
           username: newUser.username,
           theme: "light",
+          editorTheme: "vs-dark",
         });
     }
   } catch (error) {
@@ -111,6 +112,7 @@ const login = async (req, res) => {
         id: userExists.id,
         username: userExists.username,
         theme: userExists.theme,
+        editorTheme: userExists.editorTheme,
       });
   } catch (error) {
     return res.status(400).json({
@@ -146,6 +148,7 @@ const verifyTokenUser = async (req, res) => {
       id: userInfo.id,
       username: userInfo.username,
       theme: userInfo.theme,
+      editorTheme: userInfo.editorTheme,
     });
   } catch (error) {
     res.status(400).json({

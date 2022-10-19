@@ -23,6 +23,7 @@ const verifytoken = async (req, res, next) => {
       if (!user) {
         return res.status(401).json({ error: "Access denied, invalid token" });
       }
+      req.id = user_id;
       next();
     } catch (error) {
       return res.status(401).json({ error: "Access denied, invalid token" });

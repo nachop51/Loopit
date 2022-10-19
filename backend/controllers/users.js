@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken");
 //        - Metodo para eliminar usuarios
 
 const me = async (req, res) => {
+  console.log(req.id);
   const { token } = req.cookies;
   if (!token) {
     return res.status(301).json({
@@ -173,6 +174,7 @@ const updateUser = async (req, res) => {
 };
 
 const getUserByusername = async (req, res) => {
+  console.log(req.id);
   const username = req.params.username;
   if (!username) {
     return res.status(400).json({
@@ -181,7 +183,6 @@ const getUserByusername = async (req, res) => {
     });
   }
   try {
-    console.log("hola");
     const user = await User.findOne({
       where: { username: username },
       attributes: ["id", "username", "email", "full_name"],
@@ -204,7 +205,9 @@ const getUserByusername = async (req, res) => {
     const followers = await Follower.count({
       where: { follow_id: user.id },
     })
-    const follow =
+    const ifFollow = await Follower.findOne({
+      where: { user_id: req.user.id, follow_id: user.id },
+    })
     res.status(200).json({
       status: "OK",
       user: {
@@ -213,7 +216,7 @@ const getUserByusername = async (req, res) => {
         saves: countSave,
         following: following,
         followers: followers,
-        follow: follow
+        follow: ifFollow ? true : false,
       },
     });
   } catch (error) {
