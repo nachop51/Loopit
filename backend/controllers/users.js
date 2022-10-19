@@ -180,7 +180,7 @@ const getUserByusername = async (req, res) => {
   }
   try {
     console.log("hola");
-    const user = await User.findAll({
+    const user = await User.findOne({
       where: { username: username },
       attributes: ["id", "username", "email", "full_name"],
     });
@@ -191,17 +191,25 @@ const getUserByusername = async (req, res) => {
       });
     }
     const countSave = await Save.count({
-      where: { user_id: user[0].id },
+      where: { user_id: user.id },
     });
     const countLoop = await Loop.count({
-      where: { user_id: user[0].id },
+      where: { user_id: user.id },
     });
+    const following = await Follower.count({
+      where: { user_id: user.id },
+    })
+    const followers = await Follower.count({
+      where: { follow_id: user.id },
+    })
     res.status(200).json({
       status: "OK",
       user: {
-        personal_info: user[0],
+        personal_info: user,
         loops: countLoop,
         saves: countSave,
+        following: following,
+        followers: followers,
       },
     });
   } catch (error) {

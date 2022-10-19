@@ -2,6 +2,7 @@ import "./Account.css";
 import LoadingSpinner from "../../../assets/nobg.gif";
 import LoopList from "../../LoopList/";
 import { fetchUser, signOut } from "../../../actions";
+import ProfileItem from "./ProfileItem";
 import DataItem from "./DataItem";
 import EditUser from "./EditUser";
 
@@ -38,36 +39,12 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
     <main className="account">
       <h1 className="account-title">My account</h1>
       <div className="profile">
-        <div className="profile-ui profile-stats">
-          <img
-            className="profile-stats-pic"
-            src="https://avatars.githubusercontent.com/u/79727818?v=4"
-            alt="Profile"
-          />
-          <h2 className="profile-stats-heading">Stats:</h2>
-          <div className="profile-stats-container">
-            <DataItem
-              name="Followers"
-              stat={account.followers}
-              className="stats-container"
-            />
-            <DataItem
-              name="Following"
-              stat={account.following}
-              className="stats-container"
-            />
-            <DataItem
-              name="Loops saved"
-              stat={account.saves}
-              className="stats-container"
-            />
-            <DataItem
-              name="Loops created"
-              stat={account.loops}
-              className="stats-container"
-            />
-          </div>
-        </div>
+        <ProfileItem
+          followers={account.followers}
+          following={account.following}
+          loops={account.loops}
+          saves={account.saves}
+        />
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>
           <div className="profile-data-container">
