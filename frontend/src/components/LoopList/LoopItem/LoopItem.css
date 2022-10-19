@@ -26,10 +26,6 @@
 }
 
 /* language + description */
-.sub-container {
-  display: flex;
-  flex-direction: column;
-}
 
 .user-info {
   @apply relative flex flex-row flex-nowrap gap-3;

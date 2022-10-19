@@ -9,6 +9,10 @@
   @apply pt-2;
 }
 
+.sub-container {
+  @apply flex flex-col gap-4;
+}
+
 .default {
   @apply text-slate-800 rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none bg-gray-400 capitalize;
 }
@@ -21,6 +25,6 @@
   background-color: rgb(255, 94, 66);
 }
 
-.css {
+.python {
   background-color: rgb(0, 102, 255);
 }
