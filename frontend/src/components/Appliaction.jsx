@@ -11,6 +11,7 @@ import Saved from "./pages/Saved";
 import Account from "./pages/Account";
 import ErrorPage from "./404";
 import Footer from "./Footer";
+import Comments from "./pages/Comments/Comments";
 // import SearchLoops from "./SearchLoops";
 
 const Appliaction = ({ userStatus, id }) => {
@@ -39,6 +40,9 @@ const Appliaction = ({ userStatus, id }) => {
         <Route path="account" element={<Account />} />
         {/* <Route path="search" element={<SearchLoops search={search} />} /> */}
         <Route path="users/*" element={<Account />} />
+        <Route path="comments">
+          <Route path=":id" element={<Comments />} />
+        </Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
       <Footer />
