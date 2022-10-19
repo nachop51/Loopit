@@ -115,9 +115,7 @@ const getUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const token = req.cookies.token;
-  const token_decode = jwt.decode(token, key);
-  const user_id = token_decode.userId;
+  const id = req.id;
   if (!id) {
     return res.status(400).json({
       status: "Error",
@@ -126,7 +124,7 @@ const updateUser = async (req, res) => {
   }
   try {
     const { full_name, email, username } = req.body;
-    const user = await User.findByPk(user_id);
+    const user = await User.findByPk(id);
     if (!user) {
       return res.status(400).json({
         status: "Error",
@@ -201,13 +199,13 @@ const getUserByusername = async (req, res) => {
     });
     const following = await Follower.count({
       where: { user_id: user.id },
-    })
+    });
     const followers = await Follower.count({
       where: { follow_id: user.id },
-    })
+    });
     const ifFollow = await Follower.findOne({
       where: { user_id: req.user.id, follow_id: user.id },
-    })
+    });
     res.status(200).json({
       status: "OK",
       user: {
