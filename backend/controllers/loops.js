@@ -214,6 +214,9 @@ const getLoops = async (req, res) => {
         "content",
         "filename",
         "created_at",
+        "count_likes",
+        "count_comments",
+        "count_saves",
       ],
       include: [dicUsername, dicLanguage],
       ...dicSearch,
@@ -239,21 +242,21 @@ const getLoops = async (req, res) => {
     });
     //this part check if the user has liked or saved the loop
     const idLikes = likesUser.map((like) => like.loop_id);
-    const idSaves = savesUser.map((save) => save.loop_id); 
-    const id_loops = loops.map(loop =>{
-      return loop.dataValues.id
+    const idSaves = savesUser.map((save) => save.loop_id);
+    const id_loops = loops.map((loop) => {
+      return loop.dataValues.id;
     });
-    const ifLike = idLikes.filter(value => id_loops.includes(value));
-    const ifSave = idSaves.filter(value => id_loops.includes(value));
+    const ifLike = idLikes.filter((value) => id_loops.includes(value));
+    const ifSave = idSaves.filter((value) => id_loops.includes(value));
     const loopsData = loops.map((loop) => {
-      if(ifLike.includes(loop.dataValues.id)){
+      if (ifLike.includes(loop.dataValues.id)) {
         loop.dataValues.like = true;
-      }else{
+      } else {
         loop.dataValues.like = false;
       }
-      if(ifSave.includes(loop.dataValues.id)){
+      if (ifSave.includes(loop.dataValues.id)) {
         loop.dataValues.ifSave = true;
-      }else{
+      } else {
         loop.dataValues.ifSave = false;
       }
       return true;
@@ -303,7 +306,7 @@ const getLoopComments = async (req, res) => {
         type: sequelize.QueryTypes.SELECT,
       }
     );
-    const looop = await Loop.findByPk(loop_id,{
+    const looop = await Loop.findByPk(loop_id, {
       include: [
         {
           model: User,
@@ -314,8 +317,8 @@ const getLoopComments = async (req, res) => {
           model: Language,
           as: "language",
           attributes: ["name"],
-        }
-      ]
+        },
+      ],
     });
     const token_decode = jwt.decode(req.cookies.token, key);
     const user_id = token_decode.userId;
@@ -324,13 +327,13 @@ const getLoopComments = async (req, res) => {
     });
     const SaveOrNone = await Save.findOne({
       where: { loop_id: loop_id, user_id: user_id },
-    })
+    });
     const countLikesLoop = await Like.count({
       where: { loop_id: loop_id },
     });
     const countSavesLoop = await Save.count({
       where: { loop_id: loop_id },
-    })
+    });
     let like = false;
     let save = false;
     if (LikeOrNone) {
@@ -342,7 +345,7 @@ const getLoopComments = async (req, res) => {
     console.log(looop);
     looop.dataValues.like = like;
     looop.dataValues.save = save;
-    looop.dataValues.countLikes =  countLikesLoop;
+    looop.dataValues.countLikes = countLikesLoop;
     looop.dataValues.countSaves = countSavesLoop;
     looop.dataValues.comments = comments;
     return res.status(200).json({
