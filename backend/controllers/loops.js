@@ -238,27 +238,24 @@ const getLoops = async (req, res) => {
       attributes: ["loop_id"],
     });
     //this part check if the user has liked or saved the loop
-    // loops.forEach((loop) => {
-    //   loop.dataValues.like = false;
-    //   loop.dataValues.save = false;
-    //   for (let a = 0; a < likesUser.length; a++) {
-    //     if (loop.id === likesUser[a].loop_id) {
-    //       loop.dataValues.like = true;
-    //       break;
-    //     } else {
-    //       loop.dataValues.like = false;
-    //     }
-    //   }
-    //   for (let a = 0; a < savesUser.length; a++) {
-    //     if (loop.id === savesUser[a].loop_id) {
-    //       loop.dataValues.save = true;
-    //       break;
-    //     } else {
-    //       loop.dataValues.save = false;
-    //     }
-    //   }
-    // });
-  
+    const id_loops = loops.map(loop =>{
+      return loop.dataValues.id
+    });
+
+    id_loops.every((id) => {
+        if (likesUser.includes(id)) {
+          loop.dataValues.like = true;
+          return false;
+        } else {
+          loop.dataValues.like = false;
+        }
+        if (savesUser.includes(id)) {
+          loop.dataValues.save = true;
+          return false;
+        } else {
+          loop.dataValues.save = false;
+        }
+      });  
     // //total number of loops for pagination
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
