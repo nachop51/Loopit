@@ -238,43 +238,28 @@ const getLoops = async (req, res) => {
       attributes: ["loop_id"],
     });
     //this part check if the user has liked or saved the loop
-    loops.forEach((loop) => {
-      loop.dataValues.like = false;
-      loop.dataValues.save = false;
-      for (let a = 0; a < likesUser.length; a++) {
-        if (loop.id === likesUser[a].loop_id) {
-          loop.dataValues.like = true;
-          break;
-        } else {
-          loop.dataValues.like = false;
-        }
-      }
-      for (let a = 0; a < savesUser.length; a++) {
-        if (loop.id === savesUser[a].loop_id) {
-          loop.dataValues.save = true;
-          break;
-        } else {
-          loop.dataValues.save = false;
-        }
-      }
-    });
-    // in this part we count the number of likes and saves
-    for (let i = 0; i < loops.length; i++) {
-      const countLikesLoop = await Like.count({
-        where: { loop_id: loops[i].id },
-      });
-      const countSavesLoop = await Save.count({
-        where: { loop_id: loops[i].id },
-      });
-      const countComment = await Comment.count({
-        where: { loop_id: loops[i].id },
-      });
-      loops[i].dataValues.countLikes = countLikesLoop;
-      loops[i].dataValues.countSaves = countSavesLoop;
-      loops[i].dataValues.countComments = countComment;
-    }
-
-    //total number of loops for pagination
+    // loops.forEach((loop) => {
+    //   loop.dataValues.like = false;
+    //   loop.dataValues.save = false;
+    //   for (let a = 0; a < likesUser.length; a++) {
+    //     if (loop.id === likesUser[a].loop_id) {
+    //       loop.dataValues.like = true;
+    //       break;
+    //     } else {
+    //       loop.dataValues.like = false;
+    //     }
+    //   }
+    //   for (let a = 0; a < savesUser.length; a++) {
+    //     if (loop.id === savesUser[a].loop_id) {
+    //       loop.dataValues.save = true;
+    //       break;
+    //     } else {
+    //       loop.dataValues.save = false;
+    //     }
+    //   }
+    // });
+  
+    // //total number of loops for pagination
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
     });

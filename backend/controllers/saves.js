@@ -35,6 +35,17 @@ const addSave = async (req, res) => {
       user_id: user_id,
       loop_id: loop.id,
     });
+    if (!new_save) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - save already exists",
+      });
+    }
+    const add_countSaves = await Loop.update({
+      count_saves: loop.count_saves + 1,
+    },{
+      where: { id: loop.id },
+    })
     res.status(200).json({
       status: "OK",
       data: new_save,

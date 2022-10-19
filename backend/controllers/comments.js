@@ -38,6 +38,13 @@ const addComment = async (req, res) => {
       loop_id: loop_id,
       content: content,
     });
+    const add_countComments = await Loop.update({
+      count_comments: loop.count_comments + 1,
+    },{
+      where: {
+        id: loop_id,
+      }
+    })
     res.status(200).json({
       status: "OK",
       data: new_comment,

@@ -40,6 +40,11 @@ const addLike = async (req, res) => {
         error: "Bad Request - like already exists",
       });
     }
+    const add_countLike = await Loop.update({ count_likes: loop.count_likes + 1 }, {
+      where: {
+        id: loop_id,
+      }
+    });
     res.status(200).json({
       status: "OK",
       data: new_like,
@@ -88,6 +93,11 @@ const deleteLike = async (req, res) => {
         user_id: user_id,
         loop_id: loop_id,
       },
+    });
+    const rest_countLikes = await Loop.update({ count_likes: loop.count_likes - 1 }, {
+      where: {
+        id: loop_id,
+      }
     });
     res.status(200).json({
       status: "OK",
