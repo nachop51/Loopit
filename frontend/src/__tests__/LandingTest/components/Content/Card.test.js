@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
-import Card from "../../../../components/Content/Card";
+import Card from "../../../Landing/components/Content/Card";
 import { render, screen } from "@testing-library/react";
 
 describe("Correcto renderizado y contenido de las tarjetas features", () => {

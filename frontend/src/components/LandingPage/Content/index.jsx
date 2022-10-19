@@ -4,7 +4,7 @@ import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 import Laptop from "../../../assets/mockup-dark.png";
 import Phone from "../../../assets/mockup-mobile.png";
 import Card from "./Card";
-import TitleAnimation from "./TitleAnimation";
+import TitleAnimation from "../../LandingPage/TitleAnimation";
 import "./Content.css";
 
 const Content = () => {

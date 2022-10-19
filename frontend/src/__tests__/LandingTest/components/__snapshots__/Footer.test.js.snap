@@ -19,7 +19,7 @@ exports[`Footer renders correctly Debe existir un componente Footer en el dom 1`
       </a>
       <a
         class="/about"
-        href="/"
+        href="/about"
         id="link-about"
       >
         <span>
@@ -67,6 +67,7 @@ exports[`Footer renders correctly Debe existir un componente Footer en el dom 1`
       </p>
     </div>
     <p
+      class="footer-copy"
       data-testid="footer-heading"
     >
       All rights reserved ©Loopit 2022
