@@ -6,6 +6,7 @@ import { BsChat } from "react-icons/bs";
 
 import { updateLoops } from "../../../actions";
 import loopit from "../../../api/loopit";
+import { useNavigate } from "react-router-dom";
 
 const Feedback = ({
   loop,
@@ -17,6 +18,8 @@ const Feedback = ({
 }) => {
   const [save, setSave] = useState(loop.save);
   const [like, setLike] = useState(loop.like);
+
+  const navigate = useNavigate();
 
   const handleSave = async () => {
     try {
@@ -61,7 +64,10 @@ const Feedback = ({
           <MdRecommend className={like ? "icon recommend-active" : "icon"} />
           <span>&nbsp;Like</span>
         </button>
-        <button className="action-comment comment-button">
+        <button
+          className="action-comment comment-button"
+          onClick={() => navigate("/l/comments/" + loop.id)}
+        >
           <BsChat className="icon" />
           <span>&nbsp;Comment</span>
         </button>

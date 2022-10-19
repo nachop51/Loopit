@@ -2,15 +2,30 @@ import "./Account.css";
 import LoadingSpinner from "../../../assets/nobg.gif";
 import LoopList from "../../LoopList/";
 import { fetchUser, signOut } from "../../../actions";
+import ProfileItem from "./ProfileItem";
 import DataItem from "./DataItem";
+import EditUser from "./EditUser";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 const Account = ({ auth, account, fetchUser, signOut }) => {
+  const [isEditable, setIsEditable] = useState(false);
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    full_name: "",
+  });
+
   useEffect(() => {
     if (!account) fetchUser();
-  }, [fetchUser, account]);
+    else
+      setData({
+        username: auth.username,
+        email: account.data?.email,
+        full_name: account.data?.full_name,
+      });
+  }, [fetchUser, account, auth.username]);
 
   if (account === null) {
     return (
@@ -24,59 +39,57 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
     <main className="account">
       <h1 className="account-title">My account</h1>
       <div className="profile">
-        <div className="profile-ui profile-stats">
-          <img
-            className="profile-stats-pic"
-            src="https://avatars.githubusercontent.com/u/79727818?v=4"
-            alt="Profile"
-          />
-          <h2 className="profile-stats-heading">Stats:</h2>
-          <div className="profile-stats-container">
-            <DataItem
-              name="Followers"
-              stat={account.followers}
-              className="stats-container"
-            />
-            <DataItem
-              name="Following"
-              stat={account.following}
-              className="stats-container"
-            />
-            <DataItem
-              name="Loops saved"
-              stat={account.saves}
-              className="stats-container"
-            />
-            <DataItem
-              name="Loops created"
-              stat={account.loops}
-              className="stats-container"
-            />
-          </div>
-        </div>
+        <ProfileItem
+          followers={account.followers}
+          following={account.following}
+          loops={account.loops}
+          saves={account.saves}
+        />
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>
           <div className="profile-data-container">
-            <DataItem
-              name="Username:"
-              stat={auth.username}
-              className="profile-data-item"
-            />
-            <DataItem
-              name="Email:"
-              stat={account.data?.email}
-              className="profile-data-item"
-            />
-            <DataItem
-              name="Full name:"
-              stat={account.data?.full_name}
-              className="profile-data-item"
-            />
+            {isEditable === false ? (
+              <>
+                <DataItem
+                  name="Username:"
+                  stat={auth.username}
+                  className="profile-data-item"
+                />
+                <DataItem
+                  name="Email:"
+                  stat={account.data?.email}
+                  className="profile-data-item"
+                />
+                <DataItem
+                  name="Full name:"
+                  stat={account.data?.full_name}
+                  className="profile-data-item"
+                />
+              </>
+            ) : (
+              <>
+                <EditUser
+                  userInfo={data}
+                  setIsEditable={setIsEditable}
+                  isEditable={isEditable}
+                />
+              </>
+            )}
           </div>
-          <button className="profile-btn-edit">Edit</button>
-          <button onClick={() => signOut()} className="profile-btn-sign-out">
-            Sign Out
-          </button>
+          <div className="button-container">
+            {!isEditable && (
+              <button
+                className="profile-btn-edit"
+                onClick={() => setIsEditable(true)}
+              >
+                Edit
+              </button>
+            )}
+
+            <button onClick={() => signOut()} className="profile-btn-sign-out">
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
       <LoopList collection="created" />

@@ -1,4 +1,4 @@
-import LoopList from "../LoopList";
+import LoopList from "../../LoopList";
 
 import "./Saved.css";
 

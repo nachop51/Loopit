@@ -9,8 +9,6 @@ import bgLight from "../../assets/violet1.svg";
 import bgDark from "../../assets/layered-waves-haikei (3).svg";
 
 const Footer = ({ theme }) => {
-  console.log(theme);
-
   return (
     <footer
       className="footer-container"
@@ -26,10 +24,18 @@ const Footer = ({ theme }) => {
           <span>About us</span>
         </Link>
         <p className="container-icons">
-          <a href="https://www.instagram.com/loopit.mvp/">
+          <a
+            href="https://www.instagram.com/loopit.mvp/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <GrInstagram />
           </a>
-          <a href="https://twitter.com/HolbertonLoopit">
+          <a
+            href="https://twitter.com/HolbertonLoopit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <GrTwitter />
           </a>
         </p>

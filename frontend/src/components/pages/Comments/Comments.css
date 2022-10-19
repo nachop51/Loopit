@@ -1,0 +1,3 @@
+.comments {
+  @apply flex justify-center items-center flex-col mb-96;
+}
