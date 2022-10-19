@@ -5,6 +5,7 @@ import { Form, Field } from "react-final-form";
 import DataItem from "./DataItem";
 import loopit from "../../../api/loopit";
 import { connect } from "react-redux";
+import { updateUser } from "../../../actions";
 
 const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
   const onSubmit = async ({ username, email, fullname }) => {
