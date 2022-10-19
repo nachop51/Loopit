@@ -43,21 +43,20 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use("/api", verifytoken);
 //parse date request to json and append it to req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/loops", routeLoop);
-app.use("/auth", routeAuth);
-app.use("/users", routeUser);
-app.use("/saves", routeSaves);
-app.use("/languages", routeLanguages);
-app.use("/followers", routeFollower);
-app.use("/mail", routeMail);
-app.use("/likes", routeLike);
-app.use("/comments", routeComment);
+app.use("/api/loops", routeLoop);
+app.use("/api/auth", routeAuth);
+app.use("/api/users", routeUser);
+app.use("/api/saves", routeSaves);
+app.use("/api/languages", routeLanguages);
+app.use("/api/followers", routeFollower);
+app.use("/api/mail", routeMail);
+app.use("/api/likes", routeLike);
+app.use("/api/comments", routeComment);
 //verify token
-app.use("/", verifytoken);
-
 //sync database and start server
 app.listen(3000, () => {
   sequelize.sync().then(() => {

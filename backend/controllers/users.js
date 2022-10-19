@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken");
 //        - Metodo para eliminar usuarios
 
 const me = async (req, res) => {
+  console.log(req.id);
   const { token } = req.cookies;
   if (!token) {
     return res.status(301).json({
@@ -114,7 +115,9 @@ const getUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { id } = req.params;
+  const token = req.cookies.token;
+  const token_decode = jwt.decode(token, key);
+  const user_id = token_decode.userId;
   if (!id) {
     return res.status(400).json({
       status: "Error",
@@ -123,7 +126,7 @@ const updateUser = async (req, res) => {
   }
   try {
     const { full_name, email, username } = req.body;
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
         status: "Error",
@@ -171,6 +174,7 @@ const updateUser = async (req, res) => {
 };
 
 const getUserByusername = async (req, res) => {
+  console.log(req.id);
   const username = req.params.username;
   if (!username) {
     return res.status(400).json({
@@ -179,8 +183,7 @@ const getUserByusername = async (req, res) => {
     });
   }
   try {
-    console.log("hola");
-    const user = await User.findAll({
+    const user = await User.findOne({
       where: { username: username },
       attributes: ["id", "username", "email", "full_name"],
     });
@@ -191,17 +194,29 @@ const getUserByusername = async (req, res) => {
       });
     }
     const countSave = await Save.count({
-      where: { user_id: user[0].id },
+      where: { user_id: user.id },
     });
     const countLoop = await Loop.count({
-      where: { user_id: user[0].id },
+      where: { user_id: user.id },
     });
+    const following = await Follower.count({
+      where: { user_id: user.id },
+    })
+    const followers = await Follower.count({
+      where: { follow_id: user.id },
+    })
+    const ifFollow = await Follower.findOne({
+      where: { user_id: req.user.id, follow_id: user.id },
+    })
     res.status(200).json({
       status: "OK",
       user: {
-        personal_info: user[0],
+        personal_info: user,
         loops: countLoop,
         saves: countSave,
+        following: following,
+        followers: followers,
+        follow: ifFollow ? true : false,
       },
     });
   } catch (error) {
