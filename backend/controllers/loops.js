@@ -312,15 +312,17 @@ const getLoopComments = async (req, res) => {
       });
     }
     const comments = await sequelize.query(
-      "SELECT Comments.id, Comments.content, Users.username, Comments.created_at FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE Comments.loop_id = ?;",
+      "SELECT Comments.id, Comments.content, Users.username, Comments.created_at FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE Comments.loop_id = ? ORDER BY Comments.created_at DESC;",
       {
         replacements: [loop_id],
         type: sequelize.QueryTypes.SELECT,
       }
     );
+    const looop = await Loop.findByPk(loop_id);
     console.log("holaaaaaa");
     return res.status(200).json({
       status: "OK",
+      loop: looop,
       comments: comments,
     });
   } catch (error) {
