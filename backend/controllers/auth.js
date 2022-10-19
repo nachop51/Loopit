@@ -133,9 +133,9 @@ const verifyTokenUser = async (req, res) => {
       });
     const verified = jwt.verify(token, key);
     const tokenInfo = jwt.decode(token, key);
-    const username = tokenInfo.username;
+    const id = tokenInfo.userId;
     const userInfo = await User.findOne({
-      where: { username: username },
+      where: { id: id },
       attributes: ["theme", "id", "username"],
     });
     if (!userInfo) {
