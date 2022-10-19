@@ -20,7 +20,12 @@ export const signOut = () => async (dispatch) => {
 export const checkUserAuth = () => async (dispatch) => {
   try {
     const response = await loopit.get("/auth/verify");
-    const payload = {};
+    const payload = {
+      status: false,
+      id: null,
+      username: null,
+      theme: "light",
+    };
     switch (response.data.status) {
       case "authorized":
         payload.status = true;
@@ -29,10 +34,6 @@ export const checkUserAuth = () => async (dispatch) => {
         payload.theme = response.data.theme;
         break;
       default:
-        payload.status = false;
-        payload.id = null;
-        payload.username = null;
-        payload.theme = "light";
         break;
     }
     dispatch({

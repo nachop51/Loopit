@@ -50,8 +50,9 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
       navigate("/");
     } catch (error) {
       if (error.message.includes("Network")) {
-        setError(true);
+        console.log("Network error");
       }
+      setError(true);
     }
   };
 

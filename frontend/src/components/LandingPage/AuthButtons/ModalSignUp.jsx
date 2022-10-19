@@ -69,7 +69,8 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         password: pass,
       });
       if (response.status === 200) {
-        logIn(response.data.username);
+        console.log(response.data);
+        logIn(response.data.id, response.data.username, response.data.theme);
         navigate("/");
       }
     } catch (error) {
