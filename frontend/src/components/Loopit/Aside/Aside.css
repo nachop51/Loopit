@@ -18,8 +18,9 @@
 } */
 
 .item-container {
-  @apply rounded-md mb-6 text-slate-600 font-medium shadow-2xl;
+  @apply rounded-md mb-6 font-medium shadow-2xl;
   border: 2px solid rgb(var(--primary-color), 0.3);
+  color: var(--text-dark);
   padding: 1rem 2rem;
 }
 
