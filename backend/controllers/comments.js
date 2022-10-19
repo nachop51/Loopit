@@ -25,7 +25,6 @@ const addComment = async (req, res) => {
         Error: "Bad Request - loop does not exist",
       });
     }
-    console.log("holaaaa");
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
@@ -74,6 +73,14 @@ const deleteComment = async (req, res) => {
       });
     }
     await comment_destroy.destroy();
+    const loop = await Loop.findByPk(comment_destroy.loop_id);
+    const rest_countCommments = await Loop.update({
+      count_comments: loop.count_comments - 1,
+    },{
+      where: {
+        id: comment_destroy.loop_id,
+      }
+    })
     res.status(200).json({
       status: "OK",
       data: [],

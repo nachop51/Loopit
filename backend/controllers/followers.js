@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { key } = require("../config");
 
 const addFollower = async (req, res) => {
-  const { follow_id } = req.body;
+  const { follow_id } = req.params;
   const token = req.cookies.token;
   if (!follow_id) {
     return res.status(400).json({
