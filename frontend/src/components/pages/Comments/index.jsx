@@ -25,7 +25,7 @@ const Comments = () => {
       {loop && (
         <div className="comments">
           <h1 className="heading-primary">Comments</h1>
-          <LoopItem loop={loop} collection={"all"} />
+          <LoopItem loop={loop} collection={"created"} />
           <LoadEditor
             width={40}
             height={100}
