@@ -1,21 +1,30 @@
 import "./Footer.css";
-import { GrInstagram, GrTwitter } from "react-icons/gr";
-
-import { Link } from "react-router-dom";
 import image from "../../assets/logo2.png";
 
-const Footer = () => {
+import { connect } from "react-redux";
+import { GrInstagram, GrTwitter } from "react-icons/gr";
+import { Link } from "react-router-dom";
+
+import bgLight from "../../assets/violet1.svg";
+import bgDark from "../../assets/layered-waves-haikei (3).svg";
+
+const Footer = ({ theme }) => {
+  console.log(theme);
+
   return (
-    <footer className="footer-container">
+    <footer
+      className="footer-container"
+      style={{
+        backgroundImage: `url(${theme === "light" ? bgLight : bgDark})`,
+      }}
+    >
       <div className="footer-content">
-        <Link to="/home">
+        <Link to="/">
           <img src={image} alt="logo-footer" width={80} />
         </Link>
-
         <Link to="/about" id="link-about" className="/about">
           <span>About us</span>
         </Link>
-
         <p className="container-icons">
           <a href="https://www.instagram.com/loopit.mvp/">
             <GrInstagram />
@@ -32,4 +41,10 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+const mapStateToProps = (state) => {
+  return {
+    theme: state.auth.theme,
+  };
+};
+
+export default connect(mapStateToProps)(Footer);

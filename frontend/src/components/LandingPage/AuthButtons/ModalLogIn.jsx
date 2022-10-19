@@ -47,13 +47,11 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
       });
       setError(false);
       logIn(response.data.id, response.data.username, response.data.theme);
-      closeModal();
       navigate("/");
     } catch (error) {
       if (error.message.includes("Network")) {
-        console.log("network error");
+        setError(true);
       }
-      setError(true);
     }
   };
 
