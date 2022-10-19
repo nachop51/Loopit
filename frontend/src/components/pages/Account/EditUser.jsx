@@ -4,6 +4,7 @@ import "./EditUser.css";
 import { Form, Field } from "react-final-form";
 import DataItem from "./DataItem";
 import loopit from "../../../api/loopit";
+import { connect } from "react-redux";
 
 const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
   const onSubmit = async ({ username, email, fullname }) => {
@@ -86,4 +87,10 @@ const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
   );
 };
 
-export default ModalEdit;
+const mapStateToProps = (state) => {
+  return {
+    // nose
+  };
+};
+
+export default connect(mapStateToProps, { updateUser })(ModalEdit);

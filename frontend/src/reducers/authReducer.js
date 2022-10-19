@@ -36,6 +36,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         theme: state.theme === "light" ? "dark" : "light",
       };
+    case "UPDATE_USER":
+      return { ...state, username: action.payload.username };
     default:
       return state;
   }
