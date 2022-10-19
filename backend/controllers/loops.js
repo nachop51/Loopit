@@ -158,51 +158,64 @@ const getLoops = async (req, res) => {
   let { page, limit, language, username, search, id } = req.query;
   page = parseInt(page, 10);
   limit = parseInt(limit, 10);
-  let dicLanguage = {};
-  let dicUsername = {};
+  // let dicLanguage = {};
+  // let dicUsername = {};
   if (!page) page = 1;
   if (!limit) limit = 10;
-  if (!language) {
-    dicLanguage = {
-      model: Language,
-      as: "language",
-      attributes: ["name"],
-    };
-  } else {
-    dicLanguage = {
-      model: Language,
-      as: "language",
-      attributes: ["name"],
-      where: { name: language },
-    };
-  }
-  if (!username) {
-    dicUsername = {
-      model: User,
-      as: "user",
-      attributes: ["username"],
-    };
-  } else {
-    dicUsername = {
-      model: User,
-      as: "user",
-      attributes: ["username"],
-      where: { username: username },
-    };
-  }
-  if (search) {
-    dicSearch = {
-      where: { name: { [Op.like]: `%${search}%` } },
-    };
-  } else {
-    if (id) {
-      dicSearch = {
-        where: { id: id },
+  // if (!language) {
+  //   dicLanguage = {
+  //     model: Language,
+  //     as: "language",
+  //     attributes: ["name"],
+  //   };
+  // } else {
+  //   dicLanguage = {
+  //     model: Language,
+  //     as: "language",
+  //     attributes: ["name"],
+  //     where: { name: language },
+  //   };
+  // }
+  // if (!username) {
+  //   dicUsername = {
+  //     model: User,
+  //     as: "user",
+  //     attributes: ["username"],
+  //   };
+  // } else {
+  //   dicUsername = {
+  //     model: User,
+  //     as: "user",
+  //     attributes: ["username"],
+  //     where: { username: username },
+  //   };
+  // }
+  // if (search) {
+  //   dicSearch = {
+  //     where: { name: { [Op.like]: `%${search}%` } },
+  //   };
+  // } else {
+  //   if (id) {
+  //     dicSearch = {
+  //       where: { id: id },
+  //     };
+  //   } else {
+  //     dicSearch = {};
+  //   }
+  // }
+ 
+  const dicUsername = {
+        model: User,
+        as: "user",
+        attributes: ["username"],
       };
-    } else {
-      dicSearch = {};
-    }
+  const dicLanguage = {
+        model: Language,
+        as: "language",
+        attributes: ["name"],
   }
+  const dicSearch = {};
+  console.log("holaaaa");
   try {
     const loops = await Loop.findAll({
       limit: limit,
