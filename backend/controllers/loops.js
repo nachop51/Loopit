@@ -318,7 +318,20 @@ const getLoopComments = async (req, res) => {
         type: sequelize.QueryTypes.SELECT,
       }
     );
-    const looop = await Loop.findByPk(loop_id);
+    const looop = await Loop.findByPk(loop_id,{
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        }
+      ]
+    });
     const token_decode = jwt.decode(req.cookies.token, key);
     const user_id = token_decode.userId;
     const LikeOrNone = await Like.findOne({
@@ -341,14 +354,15 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
+    console.log(looop);
+    looop.dataValues.like = like;
+    looop.dataValues.save = save;
+    looop.dataValues.countLikes =  countLikesLoop;
+    looop.dataValues.countSaves = countSavesLoop;
+    looop.dataValues.comments = comments;
     return res.status(200).json({
       status: "OK",
       loop: looop,
-      like: like,
-      save: save,
-      countLikes: countLikesLoop,
-      countSaves: countSavesLoop,
-      comments: comments,
     });
   } catch (error) {
     res.status(400).json({
