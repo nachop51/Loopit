@@ -80,6 +80,13 @@ const deleteSave = async (req, res) => {
       });
     }
     await save.destroy();
+    const loop = await Loop.findByPk(loop_id);
+    const rest_countSaves = await Loop.update({
+      count_saves: loop.count_saves - 1,
+    },
+    {
+      where: { id: loop.id },
+    })
     res.status(200).json({
       status: "OK",
       data: [],
