@@ -225,7 +225,7 @@ const getLoops = async (req, res) => {
         error: "Loop list is empty",
       });
     }
-    //get info of user
+    ////////////////////////////////////////
     const token = req.cookies.token;
     const token_decode = jwt.decode(token, key);
     const user_id = token_decode.userId;
@@ -238,28 +238,31 @@ const getLoops = async (req, res) => {
       attributes: ["loop_id"],
     });
     //this part check if the user has liked or saved the loop
+    const idLikes = likesUser.map((like) => like.loop_id);
+    const idSaves = savesUser.map((save) => save.loop_id); 
     const id_loops = loops.map(loop =>{
       return loop.dataValues.id
     });
-
-    id_loops.every((id) => {
-        if (likesUser.includes(id)) {
-          loop.dataValues.like = true;
-          return false;
-        } else {
-          loop.dataValues.like = false;
-        }
-        if (savesUser.includes(id)) {
-          loop.dataValues.save = true;
-          return false;
-        } else {
-          loop.dataValues.save = false;
-        }
-      });  
+    const ifLike = idLikes.filter(value => id_loops.includes(value));
+    const ifSave = idSaves.filter(value => id_loops.includes(value));
+    const loopsData = loops.map((loop) => {
+      if(ifLike.includes(loop.dataValues.id)){
+        loop.dataValues.like = true;
+      }else{
+        loop.dataValues.like = false;
+      }
+      if(ifSave.includes(loop.dataValues.id)){
+        loop.dataValues.ifSave = true;
+      }else{
+        loop.dataValues.ifSave = false;
+      }
+      return true;
+    });
     // //total number of loops for pagination
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
     });
+    //////////////////////////////////
     const totalPages = Math.ceil(countLoops / limit);
     return res.status(200).json({
       status: "OK",

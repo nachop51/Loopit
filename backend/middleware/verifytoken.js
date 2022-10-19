@@ -12,13 +12,13 @@ const verifytoken = async (req, res, next) => {
     next();
   } else {
     const token = req.cookies.token;
-    console.log(token);
     if (!token) {
       return res.status(401).json({ error: "Access denied" });
     }
     try {
       const verificar = jwt.verify(token, key);
-      const user_id = verificar.userId;
+      const token_decode = jwt.decode(token, key);
+      const user_id = token_decode.userId;
       const user = await User.findByPk(user_id);
       if (!user) {
         return res.status(401).json({ error: "Access denied, invalid token" });
