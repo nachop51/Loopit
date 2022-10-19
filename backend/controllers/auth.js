@@ -128,7 +128,7 @@ const verifyTokenUser = async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token)
-      return res.status(200).json({
+      return res.status(400).json({
         status: "token not found",
       });
     const verified = jwt.verify(token, key);
@@ -139,7 +139,7 @@ const verifyTokenUser = async (req, res) => {
       attributes: ["theme", "id", "username"],
     });
     if (!userInfo) {
-      return res.status(200).json({ status: "token not found" });
+      return res.status(400).json({ status: "token not found" });
     }
     res.status(200).json({
       status: "authorized",
@@ -148,7 +148,7 @@ const verifyTokenUser = async (req, res) => {
       theme: userInfo.theme,
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(400).json({
       status: "no authorized",
     });
   }
