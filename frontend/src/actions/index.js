@@ -11,6 +11,17 @@ export const logIn = (id, username, theme) => {
   };
 };
 
+export const updateUser = (username, email, fullname) => {
+  return {
+    type: "UPDATE_USER",
+    payload: {
+      username,
+      email,
+      fullname,
+    },
+  };
+};
+
 export const signOut = () => async (dispatch) => {
   await loopit.get("/auth/logout");
 
