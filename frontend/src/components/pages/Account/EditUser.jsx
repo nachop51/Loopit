@@ -24,6 +24,8 @@ const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
           email: email,
           full_name: fullname,
         });
+
+        console.log(res);
       } catch (error) {
         console.log(`${error}`);
       }
@@ -90,7 +92,7 @@ const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
 
 const mapStateToProps = (state) => {
   return {
-    // nose
+    userInfo: state.auth,
   };
 };
 
