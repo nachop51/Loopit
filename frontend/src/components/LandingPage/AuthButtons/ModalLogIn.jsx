@@ -7,9 +7,11 @@ import { logIn } from "../../../actions";
 import { validateUser } from "./validations";
 import useEsc from "../../../hooks/useEsc";
 import loopit from "../../../api/loopit";
+import { useNavigate } from "react-router-dom";
 
 const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEsc(show, closeModal);
 
@@ -46,6 +48,7 @@ const ModalLogIn = ({ show, closeModal, openTheOther, logIn }) => {
       setError(false);
       logIn(response.data.id, response.data.username, response.data.theme);
       closeModal();
+      navigate("/");
     } catch (error) {
       if (error.message.includes("Network")) {
         console.log("network error");

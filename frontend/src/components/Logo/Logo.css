@@ -1,8 +1,5 @@
 .logo {
-  @apply top-0 left-6 absolute;
-  @apply sm:left-12;
-  @apply md:left-14;
-  @apply lg:left-16;
+  @apply top-0 left-6 absolute flex gap-10 items-center;
 }
 
 .logo-img {
@@ -10,12 +7,7 @@
 }
 
 .theme-btn {
-  @apply top-0 left-16 absolute bg-transparent border-none text-4xl flex items-center justify-center;
-  @apply sm:left-20;
-  @apply md:left-24;
-  @apply lg:left-28;
-  top: 50%;
-  transform: translateY(-50%);
+  @apply bg-transparent border-none text-4xl flex items-center justify-center left-24;
   color: rgb(var(--primary-color));
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s var(--animation-bezier);
 }
