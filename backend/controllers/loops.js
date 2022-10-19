@@ -319,10 +319,35 @@ const getLoopComments = async (req, res) => {
       }
     );
     const looop = await Loop.findByPk(loop_id);
-    console.log("holaaaaaa");
+    const token_decode = jwt.decode(req.cookies.token, key);
+    const user_id = token_decode.userId;
+    const LikeOrNone = await Like.findOne({
+      where: { loop_id: loop_id, user_id: user_id },
+    });
+    const SaveOrNone = await Save.findOne({
+      where: { loop_id: loop_id, user_id: user_id },
+    })
+    const countLikesLoop = await Like.count({
+      where: { loop_id: loop_id },
+    });
+    const countSavesLoop = await Save.count({
+      where: { loop_id: loop_id },
+    })
+    let like = false;
+    let save = false;
+    if (LikeOrNone) {
+      like = true;
+    }
+    if (SaveOrNone) {
+      save = true;
+    }
     return res.status(200).json({
       status: "OK",
       loop: looop,
+      like: like,
+      save: save,
+      countLikes: countLikesLoop,
+      countSaves: countSavesLoop,
       comments: comments,
     });
   } catch (error) {
