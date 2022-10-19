@@ -158,64 +158,51 @@ const getLoops = async (req, res) => {
   let { page, limit, language, username, search, id } = req.query;
   page = parseInt(page, 10);
   limit = parseInt(limit, 10);
-  // let dicLanguage = {};
-  // let dicUsername = {};
+  let dicLanguage = {};
+  let dicUsername = {};
   if (!page) page = 1;
   if (!limit) limit = 10;
-  // if (!language) {
-  //   dicLanguage = {
-  //     model: Language,
-  //     as: "language",
-  //     attributes: ["name"],
-  //   };
-  // } else {
-  //   dicLanguage = {
-  //     model: Language,
-  //     as: "language",
-  //     attributes: ["name"],
-  //     where: { name: language },
-  //   };
-  // }
-  // if (!username) {
-  //   dicUsername = {
-  //     model: User,
-  //     as: "user",
-  //     attributes: ["username"],
-  //   };
-  // } else {
-  //   dicUsername = {
-  //     model: User,
-  //     as: "user",
-  //     attributes: ["username"],
-  //     where: { username: username },
-  //   };
-  // }
-  // if (search) {
-  //   dicSearch = {
-  //     where: { name: { [Op.like]: `%${search}%` } },
-  //   };
-  // } else {
-  //   if (id) {
-  //     dicSearch = {
-  //       where: { id: id },
-  //     };
-  //   } else {
-  //     dicSearch = {};
-  //   }
-  // }
- 
-  const dicUsername = {
-        model: User,
-        as: "user",
-        attributes: ["username"],
-      };
-  const dicLanguage = {
-        model: Language,
-        as: "language",
-        attributes: ["name"],
+  if (!language) {
+    dicLanguage = {
+      model: Language,
+      as: "language",
+      attributes: ["name"],
+    };
+  } else {
+    dicLanguage = {
+      model: Language,
+      as: "language",
+      attributes: ["name"],
+      where: { name: language },
+    };
   }
-  const dicSearch = {};
-  console.log("holaaaa");
+  if (!username) {
+    dicUsername = {
+      model: User,
+      as: "user",
+      attributes: ["username"],
+    };
+  } else {
+    dicUsername = {
+      model: User,
+      as: "user",
+      attributes: ["username"],
+      where: { username: username },
+    };
+  }
+  if (search) {
+    dicSearch = {
+      where: { name: { [Op.like]: `%${search}%` } },
+    };
+  } else {
+    if (id) {
+      dicSearch = {
+        where: { id: id },
+      };
+    } else {
+      dicSearch = {};
+    }
+  }
   try {
     const loops = await Loop.findAll({
       limit: limit,
@@ -331,7 +318,20 @@ const getLoopComments = async (req, res) => {
         type: sequelize.QueryTypes.SELECT,
       }
     );
-    const looop = await Loop.findByPk(loop_id);
+    const looop = await Loop.findByPk(loop_id,{
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        }
+      ]
+    });
     const token_decode = jwt.decode(req.cookies.token, key);
     const user_id = token_decode.userId;
     const LikeOrNone = await Like.findOne({
@@ -354,14 +354,15 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
+    console.log(looop);
+    looop.dataValues.like = like;
+    looop.dataValues.save = save;
+    looop.dataValues.countLikes =  countLikesLoop;
+    looop.dataValues.countSaves = countSavesLoop;
+    looop.dataValues.comments = comments;
     return res.status(200).json({
       status: "OK",
       loop: looop,
-      like: like,
-      save: save,
-      countLikes: countLikesLoop,
-      countSaves: countSavesLoop,
-      comments: comments,
     });
   } catch (error) {
     res.status(400).json({
