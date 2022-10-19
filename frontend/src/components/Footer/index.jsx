@@ -17,10 +17,10 @@ const Footer = () => {
         </Link>
 
         <p className="container-icons">
-          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">
+          <a href="https://www.instagram.com/loopit.mvp/">
             <GrInstagram />
           </a>
-          <a href="#twiter">
+          <a href="https://twitter.com/HolbertonLoopit">
             <GrTwitter />
           </a>
         </p>

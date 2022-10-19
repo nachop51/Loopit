@@ -68,16 +68,16 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
             alt="Loopit logo"
           />
         </Link>
+        <button
+          className="theme-btn"
+          onClick={() => {
+            switchTheme();
+            handleMode(theme);
+          }}
+        >
+          {theme === "light" ? <WiDaySunny /> : <WiMoonWaxingCrescent3 />}
+        </button>
       </div>
-      <button
-        className="theme-btn"
-        onClick={() => {
-          switchTheme();
-          handleMode(theme);
-        }}
-      >
-        {theme === "light" ? <WiDaySunny /> : <WiMoonWaxingCrescent3 />}
-      </button>
     </div>
   );
 };
