@@ -59,7 +59,7 @@
 
 .navbar-logo button {
   @apply absolute bg-transparent border-none text-4xl flex items-center justify-center left-4;
-  @apply sm:left-1/2 md:absolute md:left-3/4 lg:left-3/4;
+  @apply sm:left-1/2 md:absolute md:left-3/4 lg:left-2/3;
 }
 
 .search {

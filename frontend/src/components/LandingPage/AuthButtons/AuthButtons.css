@@ -1,6 +1,8 @@
 .buttons-container {
-  @apply absolute flex top-3 right-3 flex-col;
-  @apply sm:top-9 sm:right-6 sm:flex-row;
+  @apply absolute top-4 right-12;
+  @apply sm:top-5 sm:right-12;
+  @apply md:top-7 md:right-12;
+  @apply lg:top-12 lg:right-12;
 }
 
 .button:first-child {

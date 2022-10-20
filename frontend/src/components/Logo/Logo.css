@@ -1,9 +1,16 @@
 .logo {
-  @apply top-0 left-6 absolute flex gap-10 items-center;
+  /* @apply top-0 left-6 absolute flex gap-10 items-center ml-14; */
+  @apply absolute top-0 flex items-center ml-14;
+  @apply sm:w-full;
 }
 
 .logo-img {
   @apply w-2/5;
+  @apply sm:w-1/2;
+  @apply md:w-2/4;
+  @apply lg:w-3/4;
+  @apply xl:w-4/5;
+  @apply 2xl:w-full;
 }
 
 .theme-btn {
