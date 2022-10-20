@@ -10,6 +10,7 @@ import CardAbout from "./CardAbout";
 const info = [
   {
     name: "Danielle Serafim",
+    rol: "UI / UX Designer",
     description:
       "Danielle Serafim is a BrazilianNe-born, w York-based artist. She received her BFA from Parsons School of Design in 2016 and her MFA from the School of Visual Arts in 2018. Her work has been exhibited in New York, Los Angeles, and Brazil. She is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.danielleserafim.com/",
@@ -18,6 +19,7 @@ const info = [
   },
   {
     name: "Nacho Peralta",
+    rol: "Full Stack Developer",
     description:
       "Nacho Peralta is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.nachoperalta.com/",
@@ -26,6 +28,7 @@ const info = [
   },
   {
     name: "Vale",
+    rol: "Full Stack Developer",
     description:
       "Vale is a multidisciplinary artist based in New York City. She received her BFA from Parsons School of Design in 2016 and her MFA from the School of Visual Arts in 2018. Her work has been exhibited in New York, Los Angeles, and Brazil. She is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.vale.com/",
@@ -34,6 +37,7 @@ const info = [
   },
   {
     name: "Mateo",
+    rol: "Project Manager",
     description:
       "Mateo is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.mateo.com/",
@@ -42,6 +46,7 @@ const info = [
   },
   {
     name: "Santi",
+    rol: "Frontend Developer",
     description:
       "Santi is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.santi.com/",

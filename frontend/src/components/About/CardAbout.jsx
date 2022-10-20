@@ -1,11 +1,26 @@
+import { BsLinkedin, BsInstagram, BsGithub } from "react-icons/bs";
+
 const CardAbout = ({ user }) => {
   return (
     <div className="card-container">
       <div className="card-image-container">
-        <img className="card-image" src={user.img} alt={user.name} />
-        <div className="card-circle"></div>
+        <div className="card-circle">
+          <img className="card-image" src={user.img} alt={user.name} />
+        </div>
       </div>
-      <h1 className="card-title">Hola</h1>
+      <h1 className="card-title">{user.rol}</h1>
+      <div className="redes-container">
+        <a href={user.link} target="_blank" rel="noreferrer">
+          <BsLinkedin className="icons" />
+        </a>
+        <a href={user.link} target="_blank" rel="noreferrer">
+          <BsInstagram className="icons" />
+        </a>
+        <a href={user.link} target="_blank" rel="noreferrer">
+          <BsGithub className="icons" />
+        </a>
+      </div>
+      {/* <p className="card-description">{user.description}</p> */}
     </div>
   );
 };
