@@ -44,7 +44,7 @@ const addFollower = async (req, res) => {
 };
 
 const deleteFollower = async (req, res) => {
-  const { username } = req.body;
+  const { username } = req.params;
   if (!username) {
     return res.status(400).json({
       status: "Error",
@@ -63,7 +63,6 @@ const deleteFollower = async (req, res) => {
     const follower = await Follower.findOne({
       where: { user_id: user_id, username: username },
     });
-    console.log(follower);
     if (!follower) {
       return res.status(400).json({
         status: "Error",
