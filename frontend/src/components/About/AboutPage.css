@@ -1,62 +1,39 @@
 .about {
-  margin-bottom: 300px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply w-full;
 }
 
-.about-card {
-  background-color: white;
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  width: 950px;
-  justify-content:flex-wrap;
-  align-items: center;
-  border-radius:20px ;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  transition: 1s;
+.about-container {
+  @apply flex flex-row w-full flex-wrap justify-evenly gap-8 mt-20;
 }
 
-.about-images {
-  transition: 1s;
+.card-container {
+  @apply inline-block p-8 rounded-lg basis-10/12;
+  @apply sm:basis-8/12;
+  @apply md:basis-6/12;
+  @apply lg:basis-4/12;
+  @apply xl:basis-4/12;
+  @apply 2xl:basis-2/12;
+  background: linear-gradient(
+    155deg,
+    rgb(var(--primary-color), 0.5),
+    rgb(var(--primary))
+  );
 }
 
-.about-images:hover {
-  transform: scale(1.1);
-}
-.about-card:hover {
-  transform: scale(1.1);
-}
-
-.about-info {
-  padding: 20px;
-  height: 455px;
-  width: 600px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@media screen and (max-width: 1530px) {
+  .card-container {
+    @apply basis-3/12;
+  }
 }
 
-.img-about {
-  max-width: 400px;
-  width: 300px;
+.card-image-container {
+  @apply flex justify-center;
 }
 
-.button-about {
-  width: 30px;
-  height: 30px;
-  border: 0px;
+.card-image {
+  @apply w-full rounded-full;
 }
 
-.buttonPrev {
-  font-size: 50px;
+.card-title {
+  @apply text-white text-4xl font-bold;
 }
-
-.buttonNext {
-  font-size: 50px;
-}
-
