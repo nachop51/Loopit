@@ -1,6 +1,7 @@
 //init of express app
 const express = require("express");
 const app = express();
+require("dotenv").config({ path: "./.env" });
 //import cors to allow cross origin resource sharing
 const cors = require("cors");
 //import routes from routes folder
@@ -18,7 +19,7 @@ const verifytoken = require("./middleware/verifytoken");
 //import cookie parser to parse cookies
 const cookieParser = require("cookie-parser");
 //import detenv to use environment variables
-require("dotenv").config({ path: "./.env" });
+
 //imports config file for database connection and sequelize
 const { sequelize } = require("./database/db");
 //import models from models folder and associate them
@@ -59,6 +60,7 @@ app.use("/api/comments", routeComment);
 //verify token
 //sync database and start server
 app.listen(3000, () => {
+  console.log(process.env.KEY);
   sequelize.sync().then(() => {
     console.log("base de datos creada");
   });

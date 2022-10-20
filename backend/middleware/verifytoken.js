@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const key = require("../config").key;
+const key = process.env.key;
 const User = require("../models/users");
 
 //verify acces token and allow or deny access to the route

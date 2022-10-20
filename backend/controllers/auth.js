@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const key = require("../config").key;
+const key = process.env.KEY;
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
@@ -70,6 +70,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { user, password } = req.body;
+  console.log(key);
   if (!user || !password) {
     return res.status(400).json({
       status: "Error",

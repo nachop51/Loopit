@@ -6,10 +6,7 @@ const Like = require("../models/likes");
 const Comment = require("../models/comments");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-const { url } = require("inspector");
-const jwt = require("jsonwebtoken");
 const { sequelize } = require("../database/db");
-const { key } = "../config";
 
 const addLoop = async (req, res) => {
   const { name, description, content, language, filename } = req.body;

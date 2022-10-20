@@ -1,12 +1,9 @@
 const User = require("../models/users");
 const Loop = require("../models/loops");
-const Language = require("../models/languages");
 const Save = require("../models/saves");
 const Follower = require("../models/followers");
 const Like = require("../models/likes");
 const { sequelize } = require("../database/db");
-const { key } = require("../config");
-const jwt = require("jsonwebtoken");
 
 const me = async (req, res) => {
   if (!req.id) {
