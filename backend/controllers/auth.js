@@ -136,7 +136,7 @@ const verifyTokenUser = async (req, res) => {
     const token_decode = jwt.decode(token, key);
     const userInfo = await User.findOne({
       where: { id: token_decode.userId },
-      attributes: ["theme", "id", "username"],
+      attributes: ["theme", "id", "username", "editorTheme"],
     });
     if (!userInfo) {
       return res.status(400).json({ status: "token not found" });

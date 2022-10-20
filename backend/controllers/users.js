@@ -8,9 +8,6 @@ const { sequelize } = require("../database/db");
 const { key } = require("../config");
 const jwt = require("jsonwebtoken");
 
-// Falta: - Agregar metodo para buscar usuarios por username
-//        - Metodo para eliminar usuarios
-
 const me = async (req, res) => {
   if (!req.id) {
     return res.status(301).json({
@@ -175,7 +172,6 @@ const updateUser = async (req, res) => {
 };
 
 const getUserByusername = async (req, res) => {
-  console.log(req.id);
   const username = req.params.username;
   if (!username) {
     return res.status(400).json({
@@ -207,7 +203,7 @@ const getUserByusername = async (req, res) => {
       where: { follow_id: user.id },
     });
     const ifFollow = await Follower.findOne({
-      where: { user_id: req.user.id, follow_id: user.id },
+      where: { user_id: req.id, follow_id: user.id },
     });
     res.status(200).json({
       status: "OK",
