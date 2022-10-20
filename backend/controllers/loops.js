@@ -13,7 +13,6 @@ const { key } = "../config";
 
 const addLoop = async (req, res) => {
   const { name, description, content, language, filename } = req.body;
-  const token = req.cookies.token;
   if (!name || !content || !language) {
     return res.status(400).json({
       status: "Error",
@@ -30,8 +29,7 @@ const addLoop = async (req, res) => {
         error: "Bad Request - Language does not exist",
       });
     }
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const new_loop = await Loop.create({
       name: name,
       description: description,
@@ -229,9 +227,7 @@ const getLoops = async (req, res) => {
       });
     }
     ////////////////////////////////////////
-    const token = req.cookies.token;
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = user_id;
     const likesUser = await Like.findAll({
       where: { user_id: user_id },
       attributes: ["loop_id"],
@@ -320,8 +316,7 @@ const getLoopComments = async (req, res) => {
         },
       ],
     });
-    const token_decode = jwt.decode(req.cookies.token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const LikeOrNone = await Like.findOne({
       where: { loop_id: loop_id, user_id: user_id },
     });

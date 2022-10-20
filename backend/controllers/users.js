@@ -12,17 +12,14 @@ const jwt = require("jsonwebtoken");
 //        - Metodo para eliminar usuarios
 
 const me = async (req, res) => {
-  console.log(req.id);
-  const { token } = req.cookies;
-  if (!token) {
+  if (!req.id) {
     return res.status(301).json({
       status: "error",
       error: "Bad Request - Missing data",
     });
   }
   try {
-    const token_decode = await jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const user = await User.findByPk(user_id, {
       attributes: ["email", "full_name"],
     });
@@ -33,10 +30,10 @@ const me = async (req, res) => {
       });
     }
     const countLoops = await Loop.count({
-      where: { user_id: token_decode.userId },
+      where: { user_id: user_id },
     });
     const countSaves = await Save.count({
-      where: { user_id: token_decode.userId },
+      where: { user_id: user_id },
     });
     const countFollowings = await Follower.count({
       where: { user_id: user_id },
@@ -115,9 +112,7 @@ const getUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const token = req.cookies.token;
-  const token_decode = jwt.decode(token, key);
-  const user_id = token_decode.userId;
+  const id = req.id;
   if (!id) {
     return res.status(400).json({
       status: "Error",
@@ -125,8 +120,8 @@ const updateUser = async (req, res) => {
     });
   }
   try {
-    const { full_name, email, username } = req.body;
-    const user = await User.findByPk(user_id);
+    const { full_name, email, username, theme, editorTheme } = req.body;
+    const user = await User.findByPk(id);
     if (!user) {
       return res.status(400).json({
         status: "Error",
@@ -143,7 +138,7 @@ const updateUser = async (req, res) => {
       if (emailExist) {
         return res.status(400).json({
           status: "Error",
-          error: "Bad Request - Username already exist",
+          error: "Bad Request - email already exist",
         });
       }
       user.email = email;
@@ -159,6 +154,12 @@ const updateUser = async (req, res) => {
         });
       }
       user.username = username;
+    }
+    if (theme) {
+      user.theme = theme;
+    }
+    if (editorTheme) {
+      user.editorTheme = editorTheme;
     }
     await user.save();
     res.status(200).json({
@@ -201,13 +202,13 @@ const getUserByusername = async (req, res) => {
     });
     const following = await Follower.count({
       where: { user_id: user.id },
-    })
+    });
     const followers = await Follower.count({
       where: { follow_id: user.id },
-    })
+    });
     const ifFollow = await Follower.findOne({
       where: { user_id: req.user.id, follow_id: user.id },
-    })
+    });
     res.status(200).json({
       status: "OK",
       user: {
@@ -228,15 +229,13 @@ const getUserByusername = async (req, res) => {
 };
 
 const getSaveUser = async (req, res) => {
-  const token = req.cookies.token;
   let { limit, page } = req.query;
   page = parseInt(page, 10);
   limit = parseInt(limit, 10);
   if (!page) page = 1;
   if (!limit) limit = 10;
   try {
-    const token_decode = await jwt.decode(token, key);
-    const id_user = token_decode.userId;
+    const id_user = req.id;
     const data = await sequelize.query(
       "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC;",
       {
@@ -271,7 +270,7 @@ const getSaveUser = async (req, res) => {
       };
       listloops.push(loop);
     }
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const likesUser = await Like.findAll({
       where: { user_id: user_id },
       attributes: ["loop_id"],
@@ -390,15 +389,13 @@ const getFollowersByUser = async (req, res) => {
 };
 
 const getLikesByUser = async (req, res) => {
-  const token = req.cookies.token;
   let { limit, page } = req.query;
   page = parseInt(page, 10);
   limit = parseInt(limit, 10);
   if (!page) page = 1;
   if (!limit) limit = 10;
   try {
-    const token_decode = await jwt.decode(token, key);
-    const id_user = token_decode.userId;
+    const id_user = req.id;
     const data = await sequelize.query(
       "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Likes JOIN Loops ON Likes.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Likes.user_id = ?;",
       {
@@ -453,10 +450,8 @@ const getLikesByUser = async (req, res) => {
 };
 
 const changeThemeMode = async (req, res) => {
-  const token = req.cookies.token;
   try {
-    const token_decode = jwt.decode(token, key);
-    const user = await User.findByPk(token_decode.userId);
+    const user = await User.findByPk(req.id);
     if (!user) {
       return res.status(400).json({
         status: "Error",
@@ -483,13 +478,11 @@ const changeThemeMode = async (req, res) => {
 };
 
 const usersStats = async (req, res) => {
-  const token = req.cookies.token;
   try {
     let dicStatsCreate = {};
     let dicStatsLiked = {};
     let dicStatsSaved = {};
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const statsCreated = await sequelize.query(
       "Select Languages.name, count(*) as cantidad FROM Loops JOIN Languages ON Loops.language_id = Languages.id WHERE Loops.user_id = ? GROUP BY Languages.name;",
       {

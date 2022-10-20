@@ -5,7 +5,6 @@ const { key } = require("../config");
 
 const addFollower = async (req, res) => {
   const { follow_id } = req.params;
-  const token = req.cookies.token;
   if (!follow_id) {
     return res.status(400).json({
       status: "Error",
@@ -13,8 +12,7 @@ const addFollower = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
@@ -47,7 +45,6 @@ const addFollower = async (req, res) => {
 
 const deleteFollower = async (req, res) => {
   const { username } = req.body;
-  const token = req.cookies.token;
   if (!username) {
     return res.status(400).json({
       status: "Error",
@@ -55,8 +52,7 @@ const deleteFollower = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({

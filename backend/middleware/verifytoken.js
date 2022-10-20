@@ -7,7 +7,8 @@ const verifytoken = async (req, res, next) => {
   if (
     req.url === "/auth/login" ||
     req.url === "/auth/register" ||
-    req.url === "/auth/verify"
+    req.url === "/auth/verify" ||
+    req.url === "/auth/logout"
   ) {
     next();
   } else {
