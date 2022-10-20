@@ -44,8 +44,8 @@ const addFollower = async (req, res) => {
 };
 
 const deleteFollower = async (req, res) => {
-  const { username } = req.params;
-  if (!username) {
+  const { id } = req.params;
+  if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
@@ -61,7 +61,7 @@ const deleteFollower = async (req, res) => {
       });
     }
     const follower = await Follower.findOne({
-      where: { user_id: user_id, username: username },
+      where: { user_id: user_id, follow_id: id },
     });
     if (!follower) {
       return res.status(400).json({
