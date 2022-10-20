@@ -41,12 +41,12 @@
   align-items: center;
 }
 
-img {
+.img-about {
   max-width: 400px;
   width: 300px;
 }
 
-button {
+.button-about {
   width: 30px;
   height: 30px;
   border: 0px;
