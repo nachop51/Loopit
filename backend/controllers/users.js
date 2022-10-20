@@ -256,9 +256,9 @@ const getSaveUser = async (req, res) => {
         description: i.description,
         content: i.content,
         filename: i.filename,
-        create_likes: i.count_likes,
-        create_comments: i.count_comments,
-        create_saves: i.count_saves,
+        count_likes: i.count_likes,
+        count_comments: i.count_comments,
+        count_saves: i.count_saves,
         created_at: i.created_at,
         user: {
           username: i.username,
