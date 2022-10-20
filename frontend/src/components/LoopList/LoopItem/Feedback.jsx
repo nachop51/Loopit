@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
 import { BsChat } from "react-icons/bs";
+import "./Feedback.css";
 
 import { updateLoops } from "../../../actions";
 import loopit from "../../../api/loopit";
@@ -54,10 +55,16 @@ const Feedback = ({
   return (
     <div className="loop-info">
       <div className="heading-comments">
-        <p>{likes} Likes</p>
-        <p>{comments} Comments</p>
-        <p>{saves} Saves</p>
-        <br />
+        <p>
+          <MdRecommend /> {likes}
+        </p>
+        <p>
+          <IoBookmark /> {comments} Comments
+        </p>
+        <p>
+          <BsChat /> {saves}
+        </p>
+        {/* <br /> */}
       </div>
       <div className="loop-info-buttons">
         <button className="action-comment" onClick={handleLike}>

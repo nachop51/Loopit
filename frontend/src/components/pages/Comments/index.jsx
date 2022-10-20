@@ -44,8 +44,8 @@ const Comments = () => {
       {loop ? (
         <div className="comments">
           <h1 className="heading-primary">Comments</h1>
-          <LoopItem loop={loop} collection={"created"} />
 
+          <LoopItem loop={loop} collection={"created"} />
           <div className="comments-list">
             <div className="comments-container">
               <div className="commment-author">

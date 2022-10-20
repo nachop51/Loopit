@@ -73,7 +73,7 @@
 }
 
 .search-form input {
-  @apply bg-transparent focus:outline-none text-lg pl-4 py-2 rounded-full;
+  @apply bg-transparent focus:outline-none text-lg pl-4 py-2 rounded-lg;
   transform: translateX(21%);
   border: 1px solid rgb(var(--primary-color));
   color: var(--text-color);
