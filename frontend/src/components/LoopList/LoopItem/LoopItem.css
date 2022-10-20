@@ -13,10 +13,6 @@
   cursor: pointer;
 }
 
-.avatar-img {
-  @apply rounded-full w-full;
-}
-
 .description {
   @apply text-center p-4;
 }

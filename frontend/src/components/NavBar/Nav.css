@@ -57,8 +57,8 @@
 }
 
 .navbar-logo button {
-  position: absolute;
-  transform: translateX(-75%);
+  @apply bg-transparent border-none text-4xl flex items-center justify-center left-24;
+  @apply md:absolute md:left-20 lg:left-24;
 }
 
 .search {
