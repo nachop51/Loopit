@@ -13,18 +13,13 @@ import About from "./About/";
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   useEffect(() => {
     checkUserAuth();
-  }, [checkUserAuth]);
+  }, [checkUserAuth, isSignedIn]);
 
   if (isSignedIn === null) {
     return (
-      <div style={{ width: "100vw", height: "100vh" }}>
-        <img
-          src={LoadingSpinner}
-          alt="Spinner"
-          className="spinner"
-          width={80}
-        />
-      </div>
+      <>
+        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+      </>
     );
   }
 
