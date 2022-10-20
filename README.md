@@ -29,40 +29,48 @@ Profile Page:
 
 # Features
 With loopit, you will have access to the following features:
-	* Create your own profile
-	* Create loops with the CodeWriter
-	* Give a thumbs up to different loops
-	* Save loops and see them later
-	* Follow different developers
-	* See stats about your progress in the page
-	* Change between Light mode and dark mode as your preference
+<ul>
+	<li>Create your own profile</li>
+	<li>Create loops with the CodeWriter</li>
+	<li>Give a thumbs up to different loops</li>
+	<li>Save loops and see them later</li>
+	<li>Follow different developers</li>
+	<li>See stats about your progress in the page</li>
+	<li>Change between Light mode and dark mode as your preference</li>
+</ul>
 
 # Technical aspects
 For the creation of Loopit, the team was divided into two groups, to work on the backend and the frontend. 
 
 For the development of the backend, the stack used was: 
-	* NodeJS
-	* ExpressJS
-	* MySQL
-	* Sequelize
-	* AWS
-	* JWT (Json Web Token)
-	* NGINX 
-	* Github and Github Actions (this one for test purposes)
+<ul>
+	<li>NodeJS</li>
+	<li>ExpressJS</li>
+	<li>MySQL</li>
+	<li>Sequelize</li>
+	<li>AWS</li>
+	<li>JWT (Json Web Token)</li>
+	<li>NGINX </li>
+	<li>Github and Github Actions (this one for test purposes)</li>
+</ul>
 
 For the development of the frontend, the stack used was:
-	* ReactJS
-	* CSS
-	* Tailwind CSS
-	* Jest (for test purposes)
-	* Figma
+<ul>
+	<li>ReactJS</li>
+	<li>CSS</li>
+	<li>Tailwind CSS</li>
+	<li>Jest (for test purposes)</li>
+	<li>Figma</li>
+</ul>
 
 # Authors
-[Mateo Arbini](https://www.linkedin.com/in/mateo-arbini-1493691a8/) - Project Manager / Backend developer
-[Valentin Repetto](https://www.linkedin.com/in/valentin-repetto-6aa6711a0/) - Backend Developer
-[Ignacio Peralta](https://www.linkedin.com/in/ignacio-peralta-dev/) - Full Stack Developer
-[Santiago Neira](https://www.linkedin.com/in/santiago-neira-4479501b7/) - Frontend Developer
-[Danielle Serafim](https://www.linkedin.com/in/danielle-serafim-850888156/) - Frontend Developer
+<ul>
+<li>[Mateo Arbini](https://www.linkedin.com/in/mateo-arbini-1493691a8/) - Project Manager / Backend developer</li>
+<li>[Valentin Repetto](https://www.linkedin.com/in/valentin-repetto-6aa6711a0/) - Backend Developer</li>
+<li>[Ignacio Peralta](https://www.linkedin.com/in/ignacio-peralta-dev/) - Full Stack Developer</li>
+<li>[Santiago Neira](https://www.linkedin.com/in/santiago-neira-4479501b7/) - Frontend Developer</li>
+<li>[Danielle Serafim](https://www.linkedin.com/in/danielle-serafim-850888156/) - Frontend Developer</li>
+</ul>
 
 # License
 This project is published only for educational purposes. It must not be distributed without permission of the authors.
