@@ -75,3 +75,7 @@ body {
 .btn-expand {
   @apply w-40;
 }
+
+.btn-full {
+  @apply w-full;
+}

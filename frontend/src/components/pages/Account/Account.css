@@ -97,8 +97,8 @@
 
 .profile-btn-edit:hover,
 .profile-btn-sign-out:hover {
-  background-color: var(--text-color);
-  color: var(--text-light);
+  background-color: #fff;
+  color: rgb(var(--primary-color));
 }
 
 .button-container {
