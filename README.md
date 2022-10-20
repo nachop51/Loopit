@@ -65,11 +65,11 @@ For the development of the frontend, the stack used was:
 
 # Authors
 <ul>
-<li>[Mateo Arbini](https://www.linkedin.com/in/mateo-arbini-1493691a8/) - Project Manager / Backend developer</li>
-<li>[Valentin Repetto](https://www.linkedin.com/in/valentin-repetto-6aa6711a0/) - Backend Developer</li>
-<li>[Ignacio Peralta](https://www.linkedin.com/in/ignacio-peralta-dev/) - Full Stack Developer</li>
-<li>[Santiago Neira](https://www.linkedin.com/in/santiago-neira-4479501b7/) - Frontend Developer</li>
-<li>[Danielle Serafim](https://www.linkedin.com/in/danielle-serafim-850888156/) - Frontend Developer</li>
+<li><a href="https://www.linkedin.com/in/mateo-arbini-1493691a8/">Mateo Arbini</a> - Project Manager / Backend developer</li>
+<li><a href="https://www.linkedin.com/in/valentin-repetto-6aa6711a0/">Valentin Repetto</a> - Backend developer</li>
+<li><a href="https://www.linkedin.com/in/santiago-neira-4479501b7/">Santiago Neira</a> - Full Stack developer</li>
+<li><a href="https://www.linkedin.com/in/ignacio-peralta-dev/">Ignacio Peralta</a> - Frontend developer</li>
+<li><a href="https://www.linkedin.com/in/danielle-serafim-850888156/">Danielle Serafim</a> - Frontend developer</li>
 </ul>
 
 # License
