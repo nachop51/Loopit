@@ -1,3 +1,35 @@
 .comments {
   @apply flex justify-center items-center flex-col mb-96;
 }
+
+.add-comment-container {
+  @apply w-5/6 flex justify-center items-center flex-col pt-5 pb-5 mt-28 rounded-xl;
+  background-color: #ccc;
+}
+
+.heading-secondary {
+  @apply text-3xl font-bold text-center text-slate-700;
+}
+
+.comments-list {
+  @apply w-5/6 flex justify-center items-start flex-col px-5 py-5 mt-28 rounded-xl gap-6;
+  background-color: transparent;
+}
+
+.comment-list_comment {
+  @apply w-full justify-center items-center;
+}
+
+.comments-container {
+  @apply w-full px-5 py-5 rounded-lg;
+  background-color: #fff;
+}
+
+.comments-container p {
+  @apply text-center;
+}
+
+.add-comment-btn {
+  @apply w-2/5 flex justify-center items-center flex-col pt-2 pb-2 mt-10 rounded-xl;
+  background-color: var(--background-color);
+}
