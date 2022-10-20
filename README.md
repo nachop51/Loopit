@@ -1,6 +1,6 @@
 # Loopit - Mvp Specification!
 
-<img src= "https://acortar.link/dnq4oA" width= 70% >
+<img src= "https://acortar.link/dnq4oA" width= 70% />
 
 Loopit is a social media platform for programmers to share their code with the world. Create a profile, upload your code, and share it with your friends and followers.
 
@@ -9,23 +9,23 @@ Once the user enters loopit-mvp.com, he must either register if he does not have
 
 Landing Page:
 
-<img src= "https://acortar.link/aW40VX" width= 88% >
+<img src= "https://acortar.link/aW40VX" width= 88% />
 
 Main Page:
 
-<img src= "https://acortar.link/uZP5Hw" width= 88% >
+<img src= "https://acortar.link/uZP5Hw" width= 88% />
 
 Saved Page:
 
-<img src= "https://acortar.link/Xz54O3" width= 88% >
+<img src= "https://acortar.link/Xz54O3" width= 88% />
 
 CodeWriter Page:
 
-<img src= "https://acortar.link/dZ9qfk" width= 88% >
+<img src= "https://acortar.link/dZ9qfk" width= 88% />
 
 Profile Page:
 
-<img src= "https://acortar.link/Chb6lf" width= 88% >
+<img src= "https://acortar.link/Chb6lf" width= 88% />
 
 # Features
 With loopit, you will have access to the following features:
@@ -76,4 +76,4 @@ For the development of the frontend, the stack used was:
 This project is published only for educational purposes. It must not be distributed without permission of the authors.
 <br>
 <br>
-<img src= "https://acortar.link/BOSKF8" width= 70%>
+<img src= "https://acortar.link/BOSKF8" width= 70%/>
