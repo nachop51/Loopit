@@ -57,6 +57,7 @@ const register = async (req, res) => {
           id: newUser.id,
           username: newUser.username,
           theme: "light",
+          editorTheme: "vs-dark",
         });
     }
   } catch (error) {
@@ -111,6 +112,7 @@ const login = async (req, res) => {
         id: userExists.id,
         username: userExists.username,
         theme: userExists.theme,
+        editorTheme: userExists.editorTheme,
       });
   } catch (error) {
     return res.status(400).json({
@@ -128,27 +130,26 @@ const verifyTokenUser = async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token)
-      return res.status(200).json({
+      return res.status(400).json({
         status: "token not found",
       });
-    const verified = jwt.verify(token, key);
-    const tokenInfo = jwt.decode(token, key);
-    const username = tokenInfo.username;
+    const token_decode = jwt.decode(token, key);
     const userInfo = await User.findOne({
-      where: { username: username },
-      attributes: ["theme", "id", "username"],
+      where: { id: token_decode.userId },
+      attributes: ["theme", "id", "username", "editorTheme"],
     });
     if (!userInfo) {
-      return res.status(200).json({ status: "token not found" });
+      return res.status(400).json({ status: "token not found" });
     }
     res.status(200).json({
       status: "authorized",
       id: userInfo.id,
       username: userInfo.username,
       theme: userInfo.theme,
+      editorTheme: userInfo.editorTheme,
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(400).json({
       status: "no authorized",
     });
   }

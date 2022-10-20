@@ -7,7 +7,6 @@ const { sequelize } = require("../database/db");
 
 const addComment = async (req, res) => {
   const { content, loop_id } = req.body;
-  const token = req.cookies.token;
   if (!content || !loop_id) {
     return res.status(400).json({
       status: "Error",
@@ -15,8 +14,7 @@ const addComment = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const loop = await Loop.findByPk(loop_id);
     console.log("holaaaaaa");
     if (!loop) {
@@ -25,7 +23,6 @@ const addComment = async (req, res) => {
         Error: "Bad Request - loop does not exist",
       });
     }
-    console.log("holaaaa");
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
@@ -38,6 +35,16 @@ const addComment = async (req, res) => {
       loop_id: loop_id,
       content: content,
     });
+    const add_countComments = await Loop.update(
+      {
+        count_comments: loop.count_comments + 1,
+      },
+      {
+        where: {
+          id: loop_id,
+        },
+      }
+    );
     res.status(200).json({
       status: "OK",
       data: new_comment,
@@ -67,6 +74,17 @@ const deleteComment = async (req, res) => {
       });
     }
     await comment_destroy.destroy();
+    const loop = await Loop.findByPk(comment_destroy.loop_id);
+    const rest_countCommments = await Loop.update(
+      {
+        count_comments: loop.count_comments - 1,
+      },
+      {
+        where: {
+          id: comment_destroy.loop_id,
+        },
+      }
+    );
     res.status(200).json({
       status: "OK",
       data: [],

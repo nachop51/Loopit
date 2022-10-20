@@ -13,7 +13,7 @@ const {
 
 //define routes for user
 routeUser.get("/me", me);
-routeUser.put("/update/:id", updateUser);
+routeUser.put("/update", updateUser);
 routeUser.get("/all", getUsers);
 routeUser.get("/profile/:username", getUserByusername);
 routeUser.get("/saves", getSaveUser);
