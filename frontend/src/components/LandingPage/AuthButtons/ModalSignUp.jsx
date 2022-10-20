@@ -69,11 +69,12 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         password: pass,
       });
       if (response.status === 200) {
-        logIn(response.data.username);
+        console.log(response.data);
+        logIn(response.data.id, response.data.username, response.data.theme);
         navigate("/");
       }
     } catch (error) {
-      if (error.message.includes("Network")) {
+      if (error.message.includes("Network") || error.message.includes("400")) {
         return { [FORM_ERROR]: "Something went wrong, try again later..." };
       }
       let errors = {};

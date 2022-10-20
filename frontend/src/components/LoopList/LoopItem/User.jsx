@@ -1,4 +1,6 @@
+import "./User.css";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const User = ({ username, time }) => {
   const calulateTime = () => {
@@ -21,17 +23,19 @@ const User = ({ username, time }) => {
 
   return (
     <div className="user-info">
-      <div className="avatar">
-        <img
-          src="https://i.pravatar.cc/300"
-          className="avatar-img"
-          alt="user-profile"
-        />
-      </div>
-      <div>
-        <h3>{username}</h3>
-        <span>{calulateTime()}</span>
-      </div>
+      <Link to={"/l/users/" + username} className="user-info_link-profile">
+        <div className="avatar">
+          <img
+            src="https://i.pravatar.cc/300"
+            className="avatar-img"
+            alt="user-profile"
+          />
+        </div>
+        <div>
+          <h3 className="user-info_username">{username}</h3>
+          <span className="user-info_time">{calulateTime()}</span>
+        </div>
+      </Link>
     </div>
   );
 

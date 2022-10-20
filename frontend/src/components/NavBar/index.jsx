@@ -5,16 +5,16 @@ import { HiCode, HiOutlineCode } from "react-icons/hi";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { AiOutlineHome, AiFillHome } from "react-icons/ai";
 import { IoBookmark, IoBookmarkOutline, IoSearchSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
-// import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Nav = ({ children }) => {
   const [active, setActive] = useState(window.location.pathname);
   const [isVisible, setIsVisible] = useState(false);
   const [search, setSearch] = useState("");
 
-  // let location = useLocation();
-  // const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const routes = [
     { id: "/l", icon: <AiOutlineHome />, iconActive: <AiFillHome /> },
@@ -31,12 +31,13 @@ const Nav = ({ children }) => {
     },
   ];
 
+  useEffect(() => {
+    setActive(location.pathname);
+  }, [location]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (location.pathname !== "/l/search") {
-    //   navigate("/l/search");
-    // }
-    console.log(search);
+    navigate("/l/search/" + search);
   };
 
   return (

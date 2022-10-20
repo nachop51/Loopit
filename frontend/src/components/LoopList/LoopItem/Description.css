@@ -1,6 +1,6 @@
 #tag {
-  @apply font-bold p-1 mt-2;
-  width: 18%;
+  @apply font-bold p-1 mt-2 w-2/4;
+  @apply md:w-1/5 lg:w-1/4 xl:w-1/5;
   margin: 0 auto;
   box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.5);
 }

@@ -18,7 +18,12 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
   if (isSignedIn === null) {
     return (
       <div style={{ width: "100vw", height: "100vh" }}>
-        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+        <img
+          src={LoadingSpinner}
+          alt="Spinner"
+          className="spinner"
+          width={80}
+        />
       </div>
     );
   }
