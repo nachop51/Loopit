@@ -17,15 +17,15 @@ Main Page:
 
 Saved Page:
 
-<img src= "https://acortar.link/Xz54O3" width= 85% />
+<img src= "https://acortar.link/0UxA4h" width= 85% />
 
 CodeWriter Page:
 
-<img src= "https://acortar.link/dZ9qfk" width= 85% />
+<img src= "https://acortar.link/znvwsA" width= 85% />
 
 Profile Page:
 
-<img src= "https://acortar.link/Chb6lf" width= 85% />
+<img src= "https://acortar.link/H7zvmr" width= 85% />
 
 # Features
 With loopit, you will have access to the following features:
