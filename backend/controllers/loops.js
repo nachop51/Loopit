@@ -227,7 +227,7 @@ const getLoops = async (req, res) => {
       });
     }
     ////////////////////////////////////////
-    const user_id = user_id;
+    const user_id = req.id;
     const likesUser = await Like.findAll({
       where: { user_id: user_id },
       attributes: ["loop_id"],
