@@ -1,6 +1,6 @@
 # Loopit - Mvp Specification
 
-<img src= "https://acortar.link/flq5No" width= 65% />
+<img src= "https://acortar.link/KCbOTj" width= 65% />
 
 Loopit is a social media platform for programmers to share their code with the world. Create a profile, upload your code, and share it with your friends and followers.
 
@@ -76,4 +76,5 @@ For the development of the frontend, the stack used was:
 This project is published only for educational purposes. It must not be distributed without permission of the authors.
 <br>
 <br>
-<img src= "https://acortar.link/BOSKF8" width= 70%/>
+<br>
+<img src= "https://acortar.link/OiGoBB" width= 70%/>
