@@ -128,13 +128,14 @@ const logout = (req, res) => {
 
 const verifyTokenUser = async (req, res) => {
   try {
+    const token = req.cookies.token;
     if (!token)
       return res.status(400).json({
         status: "token not found",
       });
-    const id = req.id;
+    const token_decode = jwt.decode(token, key);
     const userInfo = await User.findOne({
-      where: { id: id },
+      where: { id: token_decode.userId },
       attributes: ["theme", "id", "username"],
     });
     if (!userInfo) {
