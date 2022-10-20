@@ -105,8 +105,8 @@ export const fetchCreated = (username) => async (dispatch) => {
   }
 };
 
-export const fetchSearch = (user) => async (dispatch) => {
-  const response = await loopit.get(`/loops/all?username=${user}`);
+export const fetchSearch = (user, option) => async (dispatch) => {
+  const response = await loopit.get(`/loops/all?${option}=${user}`);
 
   dispatch({ type: "FETCH_SEARCH", payload: response.data.loops });
 };

@@ -14,7 +14,6 @@ const User = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await loopit.get(`/users/profile/${username}`);
-      console.log(response.data);
       setUser(response.data.user);
       setFollowing(response.data.user.follow);
     };

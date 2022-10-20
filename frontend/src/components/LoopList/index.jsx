@@ -21,6 +21,7 @@ const LoopList = ({
   fetchCreated,
   fetchSearch,
   user,
+  search,
   oC = "",
   setHasData,
   loops,
@@ -36,7 +37,15 @@ const LoopList = ({
     } else if (collection === "created") {
       fetchCreated(username);
     } else if (collection === "search") {
-      fetchSearch(user);
+      const params = {};
+      if (user) {
+        params.term = user;
+        params.option = "username";
+      } else {
+        params.term = search;
+        params.option = "search";
+      }
+      fetchSearch(params.term, params.option);
     }
   }, [
     fetchLoops,
@@ -47,6 +56,7 @@ const LoopList = ({
     collection,
     fetchSearch,
     user,
+    search,
   ]);
 
   const handleRender = () => {

@@ -15,8 +15,6 @@ const LoadEditor = ({ width, height, language, setCode, auth }) => {
     setCode(value);
   };
 
-  console.log(auth);
-
   return (
     <Editor
       width={width}

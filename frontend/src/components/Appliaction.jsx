@@ -13,7 +13,7 @@ import Saved from "./pages/Saved/";
 import Account from "./pages/Account";
 import Comments from "./pages/Comments";
 import Users from "./pages/Users";
-// import SearchLoops from "./SearchLoops";
+import SearchLoops from "./SearchLoops";
 
 const Appliaction = ({ userStatus, id }) => {
   useAuth(userStatus);
@@ -39,15 +39,19 @@ const Appliaction = ({ userStatus, id }) => {
         <Route path="create-loop" element={<CreateLoop user_id={id} />} />
         <Route path="saved" element={<Saved />} />
         <Route path="account" element={<Account />} />
-        {/* <Route path="search" element={<SearchLoops search={search} />} /> */}
         <Route path="users">
           <Route path=":username" element={<Users />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
         <Route path="comments">
           <Route path=":id" element={<Comments />} />
-          <Route path="*" element={<ErrorPage />}></Route>
+          <Route path="*" element={<ErrorPage />} />
         </Route>
-        <Route path="*" element={<ErrorPage />}></Route>
+        <Route path="search">
+          <Route path=":term" element={<SearchLoops />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
     </>
