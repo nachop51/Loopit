@@ -9,23 +9,23 @@ Once the user enters loopit-mvp.com, he must either register if he does not have
 
 Landing Page:
 
-<img src= "https://acortar.link/T8zUEg" width= 85% />
+<img src= "https://acortar.link/GXiQPU" width= 85% />
 
 Main Page:
 
-<img src= "https://acortar.link/uZP5Hw" width= 85% />
+<img src= "https://acortar.link/szhzpr" width= 85% />
 
 Saved Page:
 
-<img src= "https://acortar.link/0UxA4h" width= 85% />
+<img src= "https://acortar.link/L0cbCz" width= 85% />
 
 CodeWriter Page:
 
-<img src= "https://acortar.link/znvwsA" width= 85% />
+<img src= "https://acortar.link/kNZKn3" width= 85% />
 
 Profile Page:
 
-<img src= "https://acortar.link/H7zvmr" width= 85% />
+<img src= "https://acortar.link/SFXwaB" width= 85% />
 
 # Features
 With loopit, you will have access to the following features:
@@ -67,8 +67,8 @@ For the development of the frontend, the stack used was:
 <ul>
 <li><a href="https://www.linkedin.com/in/mateo-arbini-1493691a8/">Mateo Arbini</a> - Project Manager / Backend developer</li>
 <li><a href="https://www.linkedin.com/in/valentin-repetto-6aa6711a0/">Valentin Repetto</a> - Backend developer</li>
-<li><a href="https://www.linkedin.com/in/santiago-neira-4479501b7/">Santiago Neira</a> - Full Stack developer</li>
-<li><a href="https://www.linkedin.com/in/ignacio-peralta-dev/">Ignacio Peralta</a> - Frontend developer</li>
+<li><a href="https://www.linkedin.com/in/santiago-neira-4479501b7/">Santiago Neira</a> - Frontend developer</li>
+<li><a href="https://www.linkedin.com/in/ignacio-peralta-dev/">Ignacio Peralta</a> - Full Stack developer</li>
 <li><a href="https://www.linkedin.com/in/danielle-serafim-850888156/">Danielle Serafim</a> - Frontend developer</li>
 </ul>
 
