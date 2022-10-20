@@ -1,9 +1,6 @@
 const User = require("../models/users");
 const Loop = require("../models/loops");
 const Comment = require("../models/comments");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
-const { sequelize } = require("../database/db");
 
 const addComment = async (req, res) => {
   const { content, loop_id } = req.body;
