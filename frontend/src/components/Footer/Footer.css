@@ -1,15 +1,7 @@
 .footer-container {
-  background-position-y: 100%;
+  background-position-y: 75%;
   min-height: 22rem;
   @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full;
-}
-
-@media (min-width: 1460px) {
-  .footer-container {
-    /* background: url("../../assets/layered-waves-haikei.svg") no-repeat; */
-    background-position-y: 75%;
-    background-size: cover;
-  }
 }
 
 .footer-content {

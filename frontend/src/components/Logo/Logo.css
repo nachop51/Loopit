@@ -1,10 +1,10 @@
 .logo {
-  /* @apply top-0 left-6 absolute flex gap-10 items-center ml-14; */
-  @apply absolute top-0 flex items-center ml-14;
-  @apply sm:w-full;
+  @apply top-0 left-4 absolute flex items-center;
+  @apply sm:left-12 gap-4;
+  @apply lg:left-14;
 }
 
-.logo-img {
+.logo a {
   @apply w-2/5;
   @apply sm:w-1/2;
   @apply md:w-2/4;
@@ -13,8 +13,13 @@
   @apply 2xl:w-full;
 }
 
+.logo-img {
+  @apply w-full;
+}
+
 .theme-btn {
-  @apply bg-transparent border-none text-4xl flex items-center justify-center left-24;
+  @apply bg-transparent border-none text-4xl flex items-center justify-center;
+  @apply sm:text-6xl;
   color: rgb(var(--primary-color));
   transition: all 0.3s var(--animation-bezier);
 }

@@ -22,9 +22,9 @@ const Appliaction = ({ userStatus, id }) => {
 
   if (!userStatus) {
     return (
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <>
         <img src={LoadingSpinner} alt="Spinner" className="spinner" />
-      </div>
+      </>
     );
   }
 

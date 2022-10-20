@@ -5,6 +5,7 @@
 
 .intro {
   @apply mx-4;
+  @apply sm:mx-0;
   @apply grid;
   @apply md:place-items-center;
   @apply lg:gap-16;

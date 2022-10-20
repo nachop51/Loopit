@@ -3,6 +3,7 @@ import loopit from "../../../api/loopit";
 import LoopItem from "../../LoopList/LoopItem";
 import LoadEditor from "../../Editor";
 import User from "../../LoopList/LoopItem/User";
+import LoadingSpinner from "../../../assets/nobg.gif";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -20,6 +21,23 @@ const Comments = () => {
     };
     fetchLoop();
   }, [id]);
+
+  if (!loop) {
+    return (
+      <>
+        <img src={LoadingSpinner} alt="Spinner" className="spinner" />
+      </>
+    );
+  }
+
+  const handleSubmit = () => {
+    if (code === "" || code.length > 1000) {
+      return;
+    }
+
+    loopit.post(`/loops/${id}/comments`, { code });
+    setCode("");
+  };
 
   return (
     <div>

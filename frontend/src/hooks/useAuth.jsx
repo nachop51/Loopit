@@ -8,7 +8,7 @@ const useAuth = (userStatus) => {
     if (!userStatus) {
       navigate("/");
     }
-  });
+  }, [userStatus, navigate]);
 };
 
 export default useAuth;
