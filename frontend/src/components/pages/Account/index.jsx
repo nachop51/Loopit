@@ -65,11 +65,22 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
                   stat={account.data?.full_name}
                   className="profile-data-item"
                 />
+                <h4 className="edit-user-preferences">Preferences</h4>
+                <DataItem
+                  name="Dark mode:"
+                  stat={auth.theme === "dark" ? "On" : "Off"}
+                  className="profile-data-item"
+                />
+                <DataItem
+                  name="Editor dark theme:"
+                  stat={auth.editorTheme === "vs-dark" ? "On" : "Off"}
+                  className="profile-data-item"
+                />
               </>
             ) : (
               <>
                 <EditUser
-                  userInfo={data}
+                  user={data}
                   setIsEditable={setIsEditable}
                   isEditable={isEditable}
                 />

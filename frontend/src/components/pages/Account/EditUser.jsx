@@ -1,43 +1,53 @@
-import React from "react";
 // import "./Account.css";
 import "./EditUser.css";
-import { Form, Field } from "react-final-form";
 import DataItem from "./DataItem";
 import loopit from "../../../api/loopit";
-import { connect } from "react-redux";
 import { updateUser } from "../../../actions";
 
-const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
-  const onSubmit = async ({ username, email, fullname }) => {
-    console.log(username, email, fullname);
+import { useState } from "react";
+import { Form, Field } from "react-final-form";
+import { connect } from "react-redux";
 
+const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
+  const [theme, setTheme] = useState(auth.theme);
+  const [editorTheme, setEditorTheme] = useState(auth.editorTheme);
+
+  const onSubmit = async ({ username, email, fullname }) => {
     if (
-      username === userInfo.username &&
-      email === userInfo.email &&
-      fullname === userInfo.full_name
+      username === auth.username &&
+      email === user.email &&
+      fullname === user.full_name &&
+      theme === auth.theme &&
+      editorTheme === auth.editorTheme
     )
-      alert("no cambiaste nada :)");
+      setIsEditable(false);
     else {
       try {
-        const res = await loopit.put("/users/update", {
-          username: username,
-          email: email,
-          full_name: fullname,
-        });
+        const params = {};
+        if (username !== auth.username) params.username = username;
+        if (email !== user.email) params.email = email;
+        if (fullname !== user.full_name) params.full_name = fullname;
+        if (theme !== auth.theme) params.theme = theme;
+        if (editorTheme !== auth.editorTheme) params.editorTheme = editorTheme;
 
-        console.log(res);
+        // ^ After checking if the user has changed any of the fields, we send the request to the backend.
+        console.log(params);
+        await loopit.put("/users/update", params);
+        updateUser(username, email, fullname, theme, editorTheme);
       } catch (error) {
-        console.log(`${error}`);
+        console.log(error);
       }
       setIsEditable(false);
     }
   };
 
-  const { username, email, full_name } = userInfo;
+  const { email, full_name } = user;
+  const username = auth.username;
+
   const buildInput = ({ meta, input, label }) => {
     return (
-      <div>
-        <label>{label}</label>
+      <div className="edit-user-div">
+        <label>{label}:</label>
         <input {...input} />
       </div>
     );
@@ -63,22 +73,74 @@ const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <h3>Username:</h3>
+            <form onSubmit={handleSubmit} className="edit-user">
               <Field
                 name="username"
                 component={buildInput}
                 initialValue={username}
+                label="Username"
               />
-              <h3>Email:</h3>
-              <Field name="email" component={buildInput} initialValue={email} />
-              <h3>Full Name:</h3>
+              <Field
+                name="email"
+                component={buildInput}
+                initialValue={email}
+                label="Email"
+              />
               <Field
                 name="fullname"
                 component={buildInput}
                 initialValue={full_name}
+                label="Full Name"
               />
-
+              <h4 className="edit-user-preferences">Preferences</h4>
+              <div className="edit-user-div">
+                <label htmlFor="theme">Page theme:</label>
+                <select
+                  id="theme"
+                  name="theme"
+                  value={theme}
+                  onChange={(e) => {
+                    setTheme(e.target.value);
+                    return e.target.innerHTML;
+                  }}
+                >
+                  {theme === "dark" ? (
+                    <>
+                      <option value="dark">Dark</option>
+                      <option value="light">Light</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="light">Light</option>
+                      <option value="dark">Dark</option>
+                    </>
+                  )}
+                </select>
+              </div>
+              <div className="edit-user-div">
+                <label htmlFor="editorTheme">Editor theme:</label>
+                <select
+                  id="editorTheme"
+                  name="editorTheme"
+                  value={editorTheme}
+                  onChange={(e) => {
+                    setEditorTheme(e.target.value);
+                    return e.target.innerHTML;
+                  }}
+                >
+                  {editorTheme === "vs-dark" ? (
+                    <>
+                      <option value="vs-dark">Dark theme</option>
+                      <option value="light">Light theme</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="light">Light theme</option>
+                      <option value="vs-dark">Dark theme</option>
+                    </>
+                  )}
+                </select>
+              </div>
               <div className="button-container">
                 <button className="profile-btn-edit">Confirm</button>
               </div>
@@ -92,8 +154,8 @@ const ModalEdit = ({ userInfo, isEditable, setIsEditable }) => {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.auth,
+    auth: state.auth,
   };
 };
 
-export default connect(mapStateToProps, { updateUser })(ModalEdit);
+export default connect(mapStateToProps, { updateUser })(EditUser);

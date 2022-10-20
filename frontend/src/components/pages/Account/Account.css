@@ -10,8 +10,8 @@
 }
 
 .profile {
-  @apply flex flex-col justify-center gap-12 mb-12 items-stretch;
-  @apply xl:flex-row;
+  @apply flex flex-col justify-center gap-12 mb-12 !items-stretch;
+  @apply md:flex-row;
 }
 
 .profile-ui {
@@ -93,16 +93,14 @@
 }
 
 .profile-btn-edit {
-  margin-top: 2rem;
 }
 
 .profile-btn-edit:hover,
 .profile-btn-sign-out:hover {
-  background-color: rgba(225, 225, 225, 0.15);
-  color: #444;
+  background-color: var(--text-color);
+  color: var(--text-light);
 }
 
 .button-container {
-  align-content: center;
-  width: 90%;
+  @apply flex flex-col items-center justify-center w-full;
 }

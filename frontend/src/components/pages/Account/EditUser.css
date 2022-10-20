@@ -1,3 +1,35 @@
 .profile-data-container {
   display: flex;
 }
+
+.edit-user {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.edit-user-div label {
+  @apply block text-xl font-bold;
+  color: var(--text-color);
+}
+
+.edit-user-div input {
+  @apply w-full text-lg font-medium rounded-xl border border-solid p-2;
+  border-color: rgb(var(--primary-color));
+  color: var(--text-light);
+}
+
+.edit-user-div input:focus {
+  @apply outline-none;
+}
+
+.edit-user-preferences {
+  @apply text-center my-4 text-xl mx-auto;
+  color: rgb(var(--primary-color));
+}
+
+.edit-user-div select {
+  @apply w-full text-lg font-medium rounded-xl border border-solid p-2;
+  border-color: rgb(var(--primary-color));
+  color: var(--text-light);
+}

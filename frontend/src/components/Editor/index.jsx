@@ -1,8 +1,10 @@
-import Editor from "@monaco-editor/react";
 import LoadingSpinner from "../../assets/nobg.gif";
-import { useRef } from "react";
 
-const LoadEditor = ({ width, height, language, setCode }) => {
+import { useRef } from "react";
+import Editor from "@monaco-editor/react";
+import { connect } from "react-redux";
+
+const LoadEditor = ({ width, height, language, setCode, auth }) => {
   const editorRef = useRef(null);
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -13,11 +15,14 @@ const LoadEditor = ({ width, height, language, setCode }) => {
     setCode(value);
   };
 
+  console.log(auth);
+
   return (
     <Editor
+      width={width}
       height={height}
       language={language || "javascript"}
-      theme="vs-dark"
+      theme={auth.editorTheme}
       loading={<img src={LoadingSpinner} alt="Spinner" className="spinner" />}
       options={{
         fontFamily: "Consolas",
@@ -31,4 +36,10 @@ const LoadEditor = ({ width, height, language, setCode }) => {
   );
 };
 
-export default LoadEditor;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(LoadEditor);

@@ -74,7 +74,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         navigate("/");
       }
     } catch (error) {
-      if (error.message.includes("Network")) {
+      if (error.message.includes("Network") || error.message.includes("400")) {
         return { [FORM_ERROR]: "Something went wrong, try again later..." };
       }
       let errors = {};
