@@ -27,8 +27,8 @@ const Comments = () => {
           <h1 className="heading-primary">Comments</h1>
           <LoopItem loop={loop} collection={"created"} />
           <LoadEditor
-            width={40}
-            height={100}
+            width={"40vw"}
+            height={"40vh"}
             language={loop.language.name}
             setCode={setCode}
           />

@@ -5,6 +5,7 @@ import {
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
   setHasData,
 } from "../../actions";
 
@@ -19,6 +20,7 @@ const LoopList = ({
   fetchSaves,
   fetchCreated,
   fetchSearch,
+  user,
   oC = "",
   setHasData,
   loops,
@@ -33,8 +35,19 @@ const LoopList = ({
       fetchSaves();
     } else if (collection === "created") {
       fetchCreated(username);
+    } else if (collection === "search") {
+      fetchSearch(user);
     }
-  }, [fetchLoops, fetchSaves, fetchCreated, username, setHasData, collection]);
+  }, [
+    fetchLoops,
+    fetchSaves,
+    fetchCreated,
+    username,
+    setHasData,
+    collection,
+    fetchSearch,
+    user,
+  ]);
 
   const handleRender = () => {
     let mapFrom = [];
@@ -93,5 +106,6 @@ export default connect(mapStateToProps, {
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
   setHasData,
 })(LoopList);
