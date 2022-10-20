@@ -49,8 +49,8 @@
 }
 
 .navbar-logo a {
-  @apply hidden w-4/5 h-full flex items-center;
-  @apply sm:flex md:flex lg:flex xl:flex 2xl:flex lg:w-full;
+  @apply hidden w-4/5 h-full items-center;
+  @apply sm:flex lg:w-full;
 }
 
 .navbar-logo img {
@@ -58,8 +58,8 @@
 }
 
 .navbar-logo button {
-  @apply absolute bg-transparent border-none text-4xl flex items-center justify-center left-4;
-  @apply sm:left-1/2 md:absolute md:left-3/4 lg:left-2/3;
+  @apply absolute bg-transparent border-none text-4xl flex items-center justify-center left-0;
+  @apply sm:left-1/2;
 }
 
 .search {
