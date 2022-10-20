@@ -70,7 +70,6 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { user, password } = req.body;
-  console.log(key);
   if (!user || !password) {
     return res.status(400).json({
       status: "Error",
