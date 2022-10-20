@@ -1,6 +1,6 @@
-# Loopit - Mvp Specification!
+# Loopit - Mvp Specification
 
-<img src= "https://acortar.link/dnq4oA" width= 70% />
+<img src= "https://acortar.link/flq5No" width= 70% />
 
 Loopit is a social media platform for programmers to share their code with the world. Create a profile, upload your code, and share it with your friends and followers.
 
