@@ -1,5 +1,6 @@
 .loop {
-  @apply w-10/12 p-4 relative rounded-2xl bg-white;
+  width: 95%;
+  @apply sm:w-10/12 p-4 relative rounded-2xl bg-white;
   border: 2px solid;
   border-color: rgb(var(--primary-color), 0.3);
   color: #333;
