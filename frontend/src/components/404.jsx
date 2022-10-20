@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
+import Footer from "./Footer";
 
 const divStyle = {
   display: "flex",
@@ -12,18 +14,19 @@ const h2Style = {
   textAlign: "center",
   fontSize: "3rem",
   fontWeight: "bold",
-  color: "#fff",
+  color: "var(--text-color)",
 };
 
 const pStyle = {
   fontSize: "1.5rem",
-  color: "#fff",
+  color: "var(--text-light)",
   marginBottom: "2rem",
 };
 
 const ErrorPage = () => {
   return (
     <>
+      <Logo />
       <div style={divStyle}>
         <div>
           <h2 style={h2Style}>404 Error</h2>
@@ -35,6 +38,7 @@ const ErrorPage = () => {
           <button className="btn btn-expand">Go back to home</button>
         </Link>
       </div>
+      <Footer />
     </>
   );
 };
