@@ -248,7 +248,6 @@ const getSaveUser = async (req, res) => {
       });
     }
     const listloops = [];
-    console.log(data);
     for (let i of data) {
       const loop = {
         id: i.loop_id,
@@ -299,18 +298,6 @@ const getSaveUser = async (req, res) => {
         }
       }
     });
-    // in this part we count the number of likes and saves
-    for (let i = 0; i < listloops.length; i++) {
-      const countLikesLoop = await Like.count({
-        where: { loop_id: listloops[i].id },
-      });
-      const countSavesLoop = await Save.count({
-        where: { loop_id: listloops[i].id },
-      });
-      listloops[i].countLikes = countLikesLoop;
-      listloops[i].countSaves = countSavesLoop;
-    }
-    console.log("holaaaa");
     const countSaves = await Save.count({
       where: { user_id: id_user },
     });
