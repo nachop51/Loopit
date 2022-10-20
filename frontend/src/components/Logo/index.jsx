@@ -59,25 +59,23 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
   });
 
   return (
-    <div>
-      <div className={oC ? oC : "logo"}>
-        <Link to={link}>
-          <img
-            className="logo-img"
-            src={theme === "light" ? logo : blueLogo}
-            alt="Loopit logo"
-          />
-        </Link>
-        <button
-          className="theme-btn"
-          onClick={() => {
-            switchTheme();
-            handleMode(theme);
-          }}
-        >
-          {theme === "light" ? <WiDaySunny /> : <WiMoonWaxingCrescent3 />}
-        </button>
-      </div>
+    <div className={oC ? oC : "logo"}>
+      <Link to={link}>
+        <img
+          className="logo-img"
+          src={theme === "light" ? logo : blueLogo}
+          alt="Loopit logo"
+        />
+      </Link>
+      <button
+        className="theme-btn"
+        onClick={() => {
+          switchTheme();
+          handleMode(theme);
+        }}
+      >
+        {theme === "light" ? <WiDaySunny /> : <WiMoonWaxingCrescent3 />}
+      </button>
     </div>
   );
 };

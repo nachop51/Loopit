@@ -44,7 +44,7 @@ select.editor-req {
 }
 
 .show-editor-error {
-  @apply text-red-500 opacity-100 visible text-center text-sm mb-4;
+  @apply text-red-500 opacity-100 visible text-center text-sm mt-6 mb-2;
 }
 
 .inputs-required {
