@@ -120,7 +120,7 @@ const updateUser = async (req, res) => {
     });
   }
   try {
-    const { full_name, email, username } = req.body;
+    const { full_name, email, username, theme, editorTheme } = req.body;
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(400).json({
@@ -154,6 +154,12 @@ const updateUser = async (req, res) => {
         });
       }
       user.username = username;
+    }
+    if (theme) {
+      user.theme = theme;
+    }
+    if (editorTheme) {
+      user.editorTheme = editorTheme;
     }
     await user.save();
     res.status(200).json({
