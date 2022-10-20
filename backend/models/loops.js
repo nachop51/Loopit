@@ -27,6 +27,21 @@ const Loop = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: true,
     },
+    count_likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    count_comments: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    count_saves: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   },
   {
     // Other model options go here

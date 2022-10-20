@@ -13,7 +13,6 @@ const { key } = "../config";
 
 const addLoop = async (req, res) => {
   const { name, description, content, language, filename } = req.body;
-  const token = req.cookies.token;
   if (!name || !content || !language) {
     return res.status(400).json({
       status: "Error",
@@ -30,8 +29,7 @@ const addLoop = async (req, res) => {
         error: "Bad Request - Language does not exist",
       });
     }
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const new_loop = await Loop.create({
       name: name,
       description: description,
@@ -214,6 +212,9 @@ const getLoops = async (req, res) => {
         "content",
         "filename",
         "created_at",
+        "count_likes",
+        "count_comments",
+        "count_saves",
       ],
       include: [dicUsername, dicLanguage],
       ...dicSearch,
@@ -225,10 +226,8 @@ const getLoops = async (req, res) => {
         error: "Loop list is empty",
       });
     }
-    //get info of user
-    const token = req.cookies.token;
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    ////////////////////////////////////////
+    const user_id = req.id;
     const likesUser = await Like.findAll({
       where: { user_id: user_id },
       attributes: ["loop_id"],
@@ -238,46 +237,31 @@ const getLoops = async (req, res) => {
       attributes: ["loop_id"],
     });
     //this part check if the user has liked or saved the loop
-    loops.forEach((loop) => {
-      loop.dataValues.like = false;
-      loop.dataValues.save = false;
-      for (let a = 0; a < likesUser.length; a++) {
-        if (loop.id === likesUser[a].loop_id) {
-          loop.dataValues.like = true;
-          break;
-        } else {
-          loop.dataValues.like = false;
-        }
-      }
-      for (let a = 0; a < savesUser.length; a++) {
-        if (loop.id === savesUser[a].loop_id) {
-          loop.dataValues.save = true;
-          break;
-        } else {
-          loop.dataValues.save = false;
-        }
-      }
+    const idLikes = likesUser.map((like) => like.loop_id);
+    const idSaves = savesUser.map((save) => save.loop_id);
+    const id_loops = loops.map((loop) => {
+      return loop.dataValues.id;
     });
-    // in this part we count the number of likes and saves
-    for (let i = 0; i < loops.length; i++) {
-      const countLikesLoop = await Like.count({
-        where: { loop_id: loops[i].id },
-      });
-      const countSavesLoop = await Save.count({
-        where: { loop_id: loops[i].id },
-      });
-      const countComment = await Comment.count({
-        where: { loop_id: loops[i].id },
-      });
-      loops[i].dataValues.countLikes = countLikesLoop;
-      loops[i].dataValues.countSaves = countSavesLoop;
-      loops[i].dataValues.countComments = countComment;
-    }
-
-    //total number of loops for pagination
+    const ifLike = idLikes.filter((value) => id_loops.includes(value));
+    const ifSave = idSaves.filter((value) => id_loops.includes(value));
+    const loopsData = loops.map((loop) => {
+      if (ifLike.includes(loop.dataValues.id)) {
+        loop.dataValues.like = true;
+      } else {
+        loop.dataValues.like = false;
+      }
+      if (ifSave.includes(loop.dataValues.id)) {
+        loop.dataValues.ifSave = true;
+      } else {
+        loop.dataValues.ifSave = false;
+      }
+      return true;
+    });
+    // //total number of loops for pagination
     const countLoops = await Loop.count({
       include: [dicUsername, dicLanguage],
     });
+    //////////////////////////////////
     const totalPages = Math.ceil(countLoops / limit);
     return res.status(200).json({
       status: "OK",
@@ -312,16 +296,56 @@ const getLoopComments = async (req, res) => {
       });
     }
     const comments = await sequelize.query(
-      "SELECT Comments.id, Comments.content, Users.username, Comments.created_at FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE Comments.loop_id = ?;",
+      "SELECT Comments.id, Comments.content, Users.username, Comments.created_at FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE Comments.loop_id = ? ORDER BY Comments.created_at DESC;",
       {
         replacements: [loop_id],
         type: sequelize.QueryTypes.SELECT,
       }
     );
-    console.log("holaaaaaa");
+    const looop = await Loop.findByPk(loop_id, {
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        },
+      ],
+    });
+    const user_id = req.id;
+    const LikeOrNone = await Like.findOne({
+      where: { loop_id: loop_id, user_id: user_id },
+    });
+    const SaveOrNone = await Save.findOne({
+      where: { loop_id: loop_id, user_id: user_id },
+    });
+    const countLikesLoop = await Like.count({
+      where: { loop_id: loop_id },
+    });
+    const countSavesLoop = await Save.count({
+      where: { loop_id: loop_id },
+    });
+    let like = false;
+    let save = false;
+    if (LikeOrNone) {
+      like = true;
+    }
+    if (SaveOrNone) {
+      save = true;
+    }
+    console.log(looop);
+    looop.dataValues.like = like;
+    looop.dataValues.save = save;
+    looop.dataValues.countLikes = countLikesLoop;
+    looop.dataValues.countSaves = countSavesLoop;
+    looop.dataValues.comments = comments;
     return res.status(200).json({
       status: "OK",
-      comments: comments,
+      loop: looop,
     });
   } catch (error) {
     res.status(400).json({

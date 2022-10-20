@@ -33,6 +33,10 @@ const User = sequelize.define(
       type: DataTypes.STRING(20),
       defaultValue: "light",
     },
+    editorTheme: {
+      type: DataTypes.STRING(20),
+      defaultValue: "vs-dark",
+    },
   },
   {
     // Other model options go here

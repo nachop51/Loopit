@@ -43,6 +43,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use("/api", verifytoken);
 //parse date request to json and append it to req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -56,8 +57,6 @@ app.use("/api/mail", routeMail);
 app.use("/api/likes", routeLike);
 app.use("/api/comments", routeComment);
 //verify token
-app.use("/api", verifytoken);
-
 //sync database and start server
 app.listen(3000, () => {
   sequelize.sync().then(() => {
