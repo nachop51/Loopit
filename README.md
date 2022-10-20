@@ -1,6 +1,6 @@
 # Loopit - Mvp Specification
 
-<img src= "https://acortar.link/flq5No" width= 70% />
+<img src= "https://acortar.link/flq5No" width= 65% />
 
 Loopit is a social media platform for programmers to share their code with the world. Create a profile, upload your code, and share it with your friends and followers.
 
@@ -9,23 +9,23 @@ Once the user enters loopit-mvp.com, he must either register if he does not have
 
 Landing Page:
 
-<img src= "https://acortar.link/aW40VX" width= 88% />
+<img src= "https://acortar.link/T8zUEg" width= 85% />
 
 Main Page:
 
-<img src= "https://acortar.link/uZP5Hw" width= 88% />
+<img src= "https://acortar.link/uZP5Hw" width= 85% />
 
 Saved Page:
 
-<img src= "https://acortar.link/Xz54O3" width= 88% />
+<img src= "https://acortar.link/Xz54O3" width= 85% />
 
 CodeWriter Page:
 
-<img src= "https://acortar.link/dZ9qfk" width= 88% />
+<img src= "https://acortar.link/dZ9qfk" width= 85% />
 
 Profile Page:
 
-<img src= "https://acortar.link/Chb6lf" width= 88% />
+<img src= "https://acortar.link/Chb6lf" width= 85% />
 
 # Features
 With loopit, you will have access to the following features:
