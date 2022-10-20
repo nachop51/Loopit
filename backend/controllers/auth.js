@@ -133,6 +133,7 @@ const verifyTokenUser = async (req, res) => {
       return res.status(400).json({
         status: "token not found",
       });
+    const verify = await jwt.verify(token, key);
     const token_decode = jwt.decode(token, key);
     const userInfo = await User.findOne({
       where: { id: token_decode.userId },
