@@ -2,8 +2,6 @@ const User = require("../models/users");
 const Loop = require("../models/loops");
 const Save = require("../models/saves");
 const { sequelize } = require("../database/db");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
 
 const addSave = async (req, res) => {
   const { loop_id } = req.body;

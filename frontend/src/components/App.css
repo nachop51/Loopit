@@ -1,6 +1,7 @@
 :root {
   --background-color: #efeff1;
 
+  --primary: 145, 71, 255;
   --primary-color: 145, 71, 255; /* Violet */
   --secondary-color: #f2f2f2;
 

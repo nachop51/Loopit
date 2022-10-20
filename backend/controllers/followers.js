@@ -1,7 +1,5 @@
 const Follower = require("../models/followers");
 const User = require("../models/users");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
 
 const addFollower = async (req, res) => {
   const { follow_id } = req.params;
