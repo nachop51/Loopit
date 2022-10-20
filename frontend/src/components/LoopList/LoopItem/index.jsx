@@ -19,9 +19,9 @@ const LoopItem = ({ collection, loop }) => {
       />
       <Content language={loop.language.name} content={loop.content} />
       <Feedback
-        likes={loop.countLikes}
-        saves={loop.countSaves}
-        comments={loop.countComments}
+        likes={loop.count_likes}
+        saves={loop.count_saves}
+        comments={loop.count_comments}
         loop={loop}
         collection={collection}
       />

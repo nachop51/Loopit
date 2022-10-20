@@ -233,7 +233,7 @@ const getSaveUser = async (req, res) => {
   try {
     const id_user = req.id;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC;",
+      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name, Loops.count_likes, count_comments, count_saves FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC;",
       {
         limit: limit,
         offset: page * limit - limit,
@@ -256,6 +256,9 @@ const getSaveUser = async (req, res) => {
         description: i.description,
         content: i.content,
         filename: i.filename,
+        count_likes: i.count_likes,
+        count_comments: i.count_comments,
+        count_saves: i.count_saves,
         created_at: i.created_at,
         user: {
           username: i.username,
