@@ -1,35 +1,36 @@
+import { BsArrowReturnRight } from "react-icons/bs";
 import "./Aside.css";
+import AsideItem from "./AsideItem";
 
 const Aside = ({ oC }) => {
+  const populates = [
+    {
+      id: 0,
+      title: "Fizz Buzz",
+      content: "The best way to learn to code is to code.",
+    },
+    {
+      id: 1,
+      title: "Palindrome",
+      content: "the most common interview question.",
+    },
+    {
+      id: 2,
+      title: "Crud",
+      content: "the base of all web applications.",
+    },
+    {
+      id: 3,
+      title: "Hello world in cobol",
+      content: "the old way of saying hello world.",
+    },
+  ];
   return (
     <aside className={"aside " + oC}>
       <div className="aside-container">
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">
-            Loopit is a social media platform for programmers to share their
-            code with the world?
-          </p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">Loopit is a social media ?</p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">Loopit is a social media</p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">
-            Create a profile, upload your code, and share it with your friends,
-            followers and the world.
-          </p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
+        {populates.map((item) => {
+          return <AsideItem populates={item} key={item.id} />;
+        })}
       </div>
     </aside>
   );
