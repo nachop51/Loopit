@@ -1,5 +1,5 @@
 .editor {
-  @apply relative w-screen pb-48;
+  @apply relative w-screen pb-12;
 }
 
 .editor-container {

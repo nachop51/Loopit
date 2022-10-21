@@ -54,10 +54,7 @@
 /* * FEATURES */
 .features {
   /* background-image: linear-gradient(170deg, #d0eeff, #f6feff 50%, #d0eeff); */
-  @apply pt-8 pb-24 mb-10;
-  margin-bottom: 2.5rem;
-  padding-top: 2rem;
-  padding-bottom: 6rem;
+  @apply pt-8;
   border-radius: 0 0 1.2rem 1.2rem;
   /* background: radial-gradient(#ffffff45, #ffffff00); */
 

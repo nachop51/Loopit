@@ -18,9 +18,10 @@ const Comments = () => {
     const fetchLoop = async () => {
       try {
         const response = await loopit.get(`/loops/comments/${id}`);
-        response.data.loop.countComments = response.data.loop.comments.length;
+        console.log(response.data.loop);
         setLoop(response.data.loop);
-      } catch {
+      } catch (error) {
+        console.log(error);
         setLoop(false);
       }
     };
@@ -34,7 +35,6 @@ const Comments = () => {
       const fetchLoop = async () => {
         try {
           const response = await loopit.get(`/loops/comments/${id}`);
-          response.data.loop.countComments = response.data.loop.comments.length;
           setLoop(response.data.loop);
         } catch {
           setLoop(false);
@@ -93,7 +93,7 @@ const Comments = () => {
         <div className="comments-list">
           <div className="comments-container">
             <div className="comments-list">
-              {loop.comments.map((comment) => {
+              {loop.Comments.map((comment) => {
                 return (
                   <div className="comment" key={comment.id}>
                     <div className="commment-author">
