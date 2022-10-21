@@ -4,7 +4,7 @@
 
 .add-comment-container {
   @apply w-5/6 flex justify-center items-center flex-col pt-5 pb-5 rounded-xl my-4;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.015);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -14,8 +14,8 @@
 }
 
 .comments-container {
-  @apply w-5/6 px-5 py-5 rounded-lg border-solid border-2;
-  background-color: #fff;
+  @apply w-5/6 px-5 py-20 rounded-lg border-solid border-2;
+  background-color: transparent;
   border-color: rgb(var(--primary-color));
 }
 
