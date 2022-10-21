@@ -12,9 +12,10 @@
   --shadow-light: 0.5px 0.5px 20px rgba(0, 0, 0, 0.2);
   --shadow-dark: 0.5px 0.5px 20px rgba(225, 225, 225, 0.2);
 
-  --text-light: #666;
+  --text-light: #fff;
   --text-color: #444;
-  --text-dark: #222;
+  --text-dark: #fff;
+  --text-oscuro: #222;
 
   --animation-bezier: cubic-bezier(0.71, 0.01, 0.01, 1.35);
 }
