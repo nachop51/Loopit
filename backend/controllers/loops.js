@@ -346,6 +346,14 @@ const loopsMoreLiked = async (req, res) => {
     const loops = await Loop.findAll({
       order: [["count_likes", "DESC"]],
       limit: 5,
+      attributes: [
+        "id",
+        "name",
+        "description",
+        "count_likes",
+        "count_comments",
+        "count_saves",
+      ],
       include: [
         {
           model: User,
