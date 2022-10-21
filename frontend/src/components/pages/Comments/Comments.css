@@ -42,5 +42,6 @@
 
 .add-comment-btn {
   @apply w-2/5 flex justify-center items-center flex-col pt-2 pb-2 mt-10 rounded-xl;
-  background-color: var(--background-color);
+  background-color: rgb(var(--primary-color));
+  color: var(--text-white);
 }
