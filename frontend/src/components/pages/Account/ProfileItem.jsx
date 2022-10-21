@@ -1,11 +1,18 @@
 import DataItem from "./DataItem";
 
-const ProfileItem = ({ followers, following, saves, loops, children }) => {
+const ProfileItem = ({
+  followers,
+  following,
+  saves,
+  loops,
+  children,
+  username,
+}) => {
   return (
     <div className="profile-ui profile-stats">
       <img
         className="profile-stats-pic"
-        src="https://avatars.githubusercontent.com/u/79727818?v=4"
+        src={`https://avatars.dicebear.com/api/personas/${username}.svg`}
         alt="Profile"
       />
       {children ? children : null}

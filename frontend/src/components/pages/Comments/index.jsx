@@ -7,6 +7,8 @@ import LoadingSpinner from "../../../assets/nobg.gif";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const Comments = () => {
   const { id } = useParams();
@@ -90,10 +92,12 @@ const Comments = () => {
             Create
           </button>
         </div>
-        <div className="comments-list">
-          <div className="comments-container">
-            <div className="comments-list">
-              {loop.Comments.map((comment) => {
+        <div className="comments-container">
+          <div className="comments-list">
+            {loop.Comments.length === 0 ? (
+              <h2>No comments to show</h2>
+            ) : (
+              loop.Comments.map((comment) => {
                 return (
                   <div className="comment" key={comment.id}>
                     <div className="commment-author">
@@ -102,13 +106,25 @@ const Comments = () => {
                         time={comment.created_at}
                       />
                     </div>
-                    <div className="comment-list_comment">
-                      <p>{comment.content}</p>
+                    <div className="loop-content">
+                      <SyntaxHighlighter
+                        language={loop.language.name}
+                        style={atomOneDark}
+                        showLineNumbers
+                        lineProps={{
+                          style: {
+                            whiteSpace: "pre-line",
+                            width: "100%",
+                          },
+                        }}
+                      >
+                        {comment.content}
+                      </SyntaxHighlighter>
                     </div>
                   </div>
                 );
-              })}
-            </div>
+              })
+            )}
           </div>
         </div>
       </div>

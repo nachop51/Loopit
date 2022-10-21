@@ -53,18 +53,19 @@
 
 /* * FEATURES */
 .features {
-  /* background-image: linear-gradient(170deg, #d0eeff, #f6feff 50%, #d0eeff); */
   @apply pt-8;
-  border-radius: 0 0 1.2rem 1.2rem;
-  /* background: radial-gradient(#ffffff45, #ffffff00); */
-
-  border-radius: 20px;
 }
 
 .feature-box {
   background: transparent;
   border: 1px solid rgb(var(--primary-color));
   box-shadow: 1px 1px 10px rgb(225, 225, 225, 0.4);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.feature-box:hover {
+  background-color: rgb(var(--primary-color), 0.15);
+  transform: translateY(-10px);
 }
 
 .feature-icon {

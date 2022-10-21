@@ -9,14 +9,7 @@ import { IoBookmark } from "react-icons/io5";
 import { BsChat } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const Feedback = ({
-  loop,
-  updateLoops,
-  collection,
-  likes,
-  saves,
-  comments,
-}) => {
+const Feedback = ({ loop, updateLoops, collection }) => {
   const [save, setSave] = useState(loop.save);
   const [like, setLike] = useState(loop.like);
 
@@ -54,13 +47,13 @@ const Feedback = ({
     <div className="loop-info">
       <div className="heading-comments">
         <p>
-          <MdRecommend /> {like ? likes + 1 : likes}
+          <MdRecommend /> {like ? loop.count_likes + 1 : loop.count_likes}
         </p>
         <p>
-          <BsChat /> {comments}
+          <BsChat /> {loop.count_comments}
         </p>
         <p>
-          <IoBookmark /> {save ? saves + 1 : saves}
+          <IoBookmark /> {save ? loop.count_saves + 1 : loop.count_saves}
         </p>
       </div>
       <div className="loop-info-buttons">

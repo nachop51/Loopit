@@ -1,9 +1,9 @@
 .comments {
-  @apply flex justify-center items-center flex-col mb-96;
+  @apply flex justify-center items-center flex-col mb-96 w-full;
 }
 
 .add-comment-container {
-  @apply w-5/6 flex justify-center items-center flex-col pt-5 pb-5 rounded-xl;
+  @apply w-5/6 flex justify-center items-center flex-col pt-5 pb-5 rounded-xl my-4;
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -13,18 +13,19 @@
   color: rgb(var(--secondary-color));
 }
 
+.comments-container {
+  @apply w-5/6 px-5 py-5 rounded-lg border-solid border-2;
+  background-color: #fff;
+  border-color: rgb(var(--primary-color));
+}
+
 .comments-list {
-  @apply w-5/6 flex justify-center items-start flex-col px-5 py-5 rounded-xl gap-6;
+  @apply w-full flex justify-center items-start flex-col rounded-xl gap-6;
   background-color: transparent;
 }
 
 .comment-list_comment {
   @apply w-full justify-center items-center;
-}
-
-.comments-container {
-  @apply w-full px-5 py-5 rounded-lg;
-  background-color: #fff;
 }
 
 .comments-container p {

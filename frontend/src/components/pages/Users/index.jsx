@@ -62,9 +62,10 @@ const User = () => {
           following={user.following}
           loops={user.loops}
           saves={user.saves}
+          username={user.personal_info.username}
         >
-          <h3>@{user.personal_info?.username}</h3>
-          <h3>{user.personal_info?.full_name}</h3>
+          <h3>@{user.personal_info.username}</h3>
+          <h3>{user.personal_info.full_name}</h3>
           <button
             onClick={handleFollow}
             className="btn btn-animation btn-primary follow-user"
