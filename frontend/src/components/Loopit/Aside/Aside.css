@@ -39,6 +39,6 @@
 }
 
 .heading-comments {
-  @apply flex gap-5 py-5 text-lg;
+  @apply flex gap-5 py-5 text-lg justify-center items-center;
   @apply sm:justify-center;
 }
