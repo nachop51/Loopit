@@ -21,37 +21,23 @@ const User = ({ username, time }) => {
     return "Just now";
   };
 
-  if (!username) return <h1>Loading...</h1>;
-  else
-    return (
-      <div className="user-info">
-        <Link to={"/l/users/" + username} className="user-info_link-profile">
-          <div className="avatar">
-            <img
-              src={`https://avatars.dicebear.com/api/personas/${username}.svg`}
-              className="avatar-img"
-              alt="user-profile"
-            />
-          </div>
-          <div>
-            <h3 className="user-info_username">{username}</h3>
-            <span className="user-info_time">{calulateTime()}</span>
-          </div>
-        </Link>
-      </div>
-    );
-
-  // return (
-  //   <div className="user-info-esq">
-  //     <div className="avatar">
-  //       <Skeleton />
-  //     </div>
-  //     <div>
-  //       <h3>{<Skeleton />}</h3>
-  //       <span>{<Skeleton />}</span>
-  //     </div>
-  //   </div>
-  // );
+  return (
+    <div className="user-info">
+      <Link to={"/l/users/" + username} className="user-info_link-profile">
+        <div className="avatar">
+          <img
+            src={`https://avatars.dicebear.com/api/personas/${username}.svg`}
+            className="avatar-img"
+            alt="user-profile"
+          />
+        </div>
+        <div>
+          <h3 className="user-info_username">{username}</h3>
+          <span className="user-info_time">{calulateTime()}</span>
+        </div>
+      </Link>
+    </div>
+  );
 };
 
 User.propTypes = {

@@ -23,7 +23,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#aaa");
       // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#444");
+      document.documentElement.style.setProperty("--text-light", "#fff");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
