@@ -47,6 +47,7 @@ const addSave = async (req, res) => {
     );
     res.status(200).json({
       status: "OK",
+      count_saves: loop.count_saves + 1,
       data: new_save,
     });
   } catch (error) {
@@ -88,6 +89,7 @@ const deleteSave = async (req, res) => {
     );
     res.status(200).json({
       status: "OK",
+      count_saves: loop.count_saves - 1,
       data: [],
     });
   } catch (error) {

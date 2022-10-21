@@ -248,9 +248,9 @@ const getLoops = async (req, res) => {
         loop.dataValues.like = false;
       }
       if (ifSave.includes(loop.dataValues.id)) {
-        loop.dataValues.ifSave = true;
+        loop.dataValues.Save = true;
       } else {
-        loop.dataValues.ifSave = false;
+        loop.dataValues.Save = false;
       }
       return true;
     });
@@ -320,12 +320,6 @@ const getLoopComments = async (req, res) => {
     const SaveOrNone = await Save.findOne({
       where: { loop_id: loop_id, user_id: user_id },
     });
-    const countLikesLoop = await Like.count({
-      where: { loop_id: loop_id },
-    });
-    const countSavesLoop = await Save.count({
-      where: { loop_id: loop_id },
-    });
     let like = false;
     let save = false;
     if (LikeOrNone) {
@@ -334,12 +328,6 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
-    console.log(looop);
-    looop.dataValues.like = like;
-    looop.dataValues.save = save;
-    looop.dataValues.countLikes = countLikesLoop;
-    looop.dataValues.countSaves = countSavesLoop;
-    looop.dataValues.comments = comments;
     return res.status(200).json({
       status: "OK",
       loop: looop,
@@ -352,10 +340,47 @@ const getLoopComments = async (req, res) => {
   }
 };
 
+const loopsMoreLiked = async (req, res) => {
+  try {
+    const loops = await Loop.findAll({
+      order: [["count_likes", "DESC"]],
+      limit: 5,
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        },
+      ],
+    });
+    if (!loops) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Loop list is empty",
+      });
+    }
+    return res.status(200).json({
+      status: "OK",
+      loops: loops,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
   updateLoop: updateLoop,
   getLoops: getLoops,
   getLoopComments: getLoopComments,
+  loopsMoreLiked: loopsMoreLiked,
 };
