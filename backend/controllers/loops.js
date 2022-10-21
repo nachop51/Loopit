@@ -320,12 +320,6 @@ const getLoopComments = async (req, res) => {
     const SaveOrNone = await Save.findOne({
       where: { loop_id: loop_id, user_id: user_id },
     });
-    const countLikesLoop = await Like.count({
-      where: { loop_id: loop_id },
-    });
-    const countSavesLoop = await Save.count({
-      where: { loop_id: loop_id },
-    });
     let like = false;
     let save = false;
     if (LikeOrNone) {
@@ -334,12 +328,6 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
-    console.log(looop);
-    looop.dataValues.like = like;
-    looop.dataValues.save = save;
-    looop.dataValues.countLikes = countLikesLoop;
-    looop.dataValues.countSaves = countSavesLoop;
-    looop.dataValues.comments = comments;
     return res.status(200).json({
       status: "OK",
       loop: looop,
