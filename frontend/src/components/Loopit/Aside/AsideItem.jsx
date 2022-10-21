@@ -2,6 +2,7 @@ import { BsChat } from "react-icons/bs";
 import { IoBookmark } from "react-icons/io5";
 import { MdRecommend } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import User from "../../LoopList/LoopItem/User";
 
 const AsideItem = ({ item }) => {
   const navigate = useNavigate();
@@ -9,9 +10,10 @@ const AsideItem = ({ item }) => {
   return (
     <>
       <div className="item-container">
+        <User username={item.user.username} time={item.created_at} />
         <h2 className="aside-title">{item.name}</h2>
 
-        <p className="aside-text">item.description</p>
+        <p className="aside-text">{item.description}</p>
         <div className="heading-comments">
           <p>
             <MdRecommend /> {item.count_likes}

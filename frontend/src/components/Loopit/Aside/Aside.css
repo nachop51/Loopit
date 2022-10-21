@@ -8,19 +8,13 @@
 }
 
 .aside-container {
-  @apply flex flex-col rounded-sm px-12 pt-10 mr-2 text-center items-center justify-start;
+  @apply flex flex-col rounded-sm pr-12 pt-10 mr-2 text-center items-center justify-start;
   height: 90%;
+  width: 100%;
   /* background-color: rgba(0, 0, 0, 0.045); */
   /* background-color: #fff; */
 }
 /** Dark article **/
-/* 
-.item-container {
-  @apply rounded-md my-2.5 text-slate-100 font-extralight shadow-2xl;
-  border: 2px solid #fff;
-  padding: 1rem 2rem;
-  box-shadow: 1px 1px 12px rgba(255, 255, 255, 0.4);
-} */
 
 .item-container {
   @apply rounded-xl mb-6 font-medium shadow-2xl bg-transparent;
@@ -41,4 +35,9 @@
 .heading-comments {
   @apply flex gap-5 py-5 text-lg justify-center items-center;
   @apply sm:justify-center;
+}
+
+.heading-aside {
+  @apply text-2xl font-bold text-center;
+  color: rgb(var(--primary-color));
 }
