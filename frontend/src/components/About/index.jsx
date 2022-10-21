@@ -10,7 +10,7 @@ import CardAbout from "./CardAbout";
 const info = [
   {
     name: "Danielle Serafim",
-    rol: "UI / UX Designer",
+    rol: "Developer - UI Designer",
     description:
       "Danielle Serafim is a BrazilianNe-born, w York-based artist. She received her BFA from Parsons School of Design in 2016 and her MFA from the School of Visual Arts in 2018. Her work has been exhibited in New York, Los Angeles, and Brazil. She is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.danielleserafim.com/",
@@ -28,7 +28,7 @@ const info = [
   },
   {
     name: "Vale",
-    rol: "Full Stack Developer",
+    rol: "Backend Developer",
     description:
       "Vale is a multidisciplinary artist based in New York City. She received her BFA from Parsons School of Design in 2016 and her MFA from the School of Visual Arts in 2018. Her work has been exhibited in New York, Los Angeles, and Brazil. She is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.vale.com/",
@@ -37,7 +37,7 @@ const info = [
   },
   {
     name: "Mateo",
-    rol: "Project Manager",
+    rol: "Backend Developer / Project Manager",
     description:
       "Mateo is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.mateo.com/",
@@ -46,7 +46,7 @@ const info = [
   },
   {
     name: "Santi",
-    rol: "Frontend Developer",
+    rol: "Frontend Developer / UX",
     description:
       "Santi is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
     link: "https://www.santi.com/",
@@ -59,6 +59,7 @@ const About = () => {
     <>
       <Logo link="/" />
       <main className="about">
+        <h1 className="heading-primary">Our team Project</h1>
         <div className="about-container">
           {info.map((item, i) => {
             return <CardAbout user={item} key={i} />;

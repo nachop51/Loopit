@@ -16,6 +16,7 @@
   --text-color: #444;
   --text-dark: #fff;
   --text-oscuro: #222;
+  --text-white: #fff;
 
   --animation-bezier: cubic-bezier(0.71, 0.01, 0.01, 1.35);
 }
