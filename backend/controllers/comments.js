@@ -1,9 +1,6 @@
 const User = require("../models/users");
 const Loop = require("../models/loops");
 const Comment = require("../models/comments");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
-const { sequelize } = require("../database/db");
 
 const addComment = async (req, res) => {
   const { content, loop_id } = req.body;
@@ -47,6 +44,7 @@ const addComment = async (req, res) => {
     );
     res.status(200).json({
       status: "OK",
+      count_comments: loop.count_comments + 1,
       data: new_comment,
     });
   } catch (error) {
@@ -87,6 +85,7 @@ const deleteComment = async (req, res) => {
     );
     res.status(200).json({
       status: "OK",
+      count_comments: loop.count_comments - 1,
       data: [],
     });
   } catch (error) {

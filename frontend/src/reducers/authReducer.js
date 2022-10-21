@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   id: null,
   username: null,
   theme: "light",
+  editorTheme: "vs-dark",
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -14,6 +15,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         id: action.payload.id,
         username: action.payload.username,
         theme: action.payload.theme,
+        editorTheme: action.payload.editorTheme,
       };
     case "SIGN_OUT":
       return {
@@ -22,6 +24,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         id: null,
         username: null,
         theme: "light",
+        editorTheme: "vs-dark",
       };
     case "CHECK_USER_AUTH":
       return {
@@ -35,6 +38,13 @@ const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         theme: state.theme === "light" ? "dark" : "light",
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        username: action.payload.username,
+        theme: action.payload.theme,
+        editorTheme: action.payload.editorTheme,
       };
     default:
       return state;

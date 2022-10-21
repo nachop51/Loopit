@@ -1,5 +1,6 @@
 .loop {
-  @apply w-10/12 p-4 relative rounded-2xl bg-white;
+  width: 95%;
+  @apply sm:w-10/12 p-4 relative rounded-2xl bg-white;
   border: 2px solid;
   border-color: rgb(var(--primary-color), 0.3);
   color: #333;
@@ -11,10 +12,6 @@
   @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none;
   z-index: 2;
   cursor: pointer;
-}
-
-.avatar-img {
-  @apply rounded-full w-full;
 }
 
 .description {

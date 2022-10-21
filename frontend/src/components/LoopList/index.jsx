@@ -5,6 +5,7 @@ import {
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
   setHasData,
 } from "../../actions";
 
@@ -19,6 +20,8 @@ const LoopList = ({
   fetchSaves,
   fetchCreated,
   fetchSearch,
+  user,
+  search,
   oC = "",
   setHasData,
   loops,
@@ -33,8 +36,28 @@ const LoopList = ({
       fetchSaves();
     } else if (collection === "created") {
       fetchCreated(username);
+    } else if (collection === "search") {
+      const params = {};
+      if (user) {
+        params.term = user;
+        params.option = "username";
+      } else {
+        params.term = search;
+        params.option = "search";
+      }
+      fetchSearch(params.term, params.option);
     }
-  }, [fetchLoops, fetchSaves, fetchCreated, username, setHasData, collection]);
+  }, [
+    fetchLoops,
+    fetchSaves,
+    fetchCreated,
+    username,
+    setHasData,
+    collection,
+    fetchSearch,
+    user,
+    search,
+  ]);
 
   const handleRender = () => {
     let mapFrom = [];
@@ -63,7 +86,12 @@ const LoopList = ({
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
       return (
         <div className="loop" key={i}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             {/* <Skeleton width={20} className="circle" /> */}
             <Skeleton width={90} />
             <Skeleton height={90} />
@@ -93,5 +121,6 @@ export default connect(mapStateToProps, {
   fetchLoops,
   fetchSaves,
   fetchCreated,
+  fetchSearch,
   setHasData,
 })(LoopList);

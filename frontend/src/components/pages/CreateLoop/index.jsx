@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 
-import loopit from "../../api/loopit";
-import LoadEditor from "../Editor";
+import loopit from "../../../api/loopit";
+import LoadEditor from "../../Editor";
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,13 +14,19 @@ const CreateLoop = ({ user_id }) => {
   const navigate = useNavigate();
 
   const onSubmit = async ({ name, description, filename }) => {
-    if (code.length > 3000) return null;
+    if (!name) {
+      return { [FORM_ERROR]: "Title is required" };
+    }
 
     if (!language || language === "default") {
       return { [FORM_ERROR]: "Language is required" };
     }
     if (!code || code === "") {
-      return null;
+      return { [FORM_ERROR]: "Code is required" };
+    }
+
+    if (code.length > 3000) {
+      return { [FORM_ERROR]: "Code is too long, maximum: 3000 characters" };
     }
 
     const params = {
@@ -31,10 +37,6 @@ const CreateLoop = ({ user_id }) => {
     };
     if (description) params.description = description;
     if (filename) params.filename = filename;
-    console.log(
-      "🚀 ~ file: CreateLoop.jsx ~ line 35 ~ onSubmit ~ params",
-      params
-    );
     try {
       await loopit.post("/loops/add", params);
 

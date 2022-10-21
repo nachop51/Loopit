@@ -1,12 +1,26 @@
 import loopit from "../api/loopit";
 
-export const logIn = (id, username, theme) => {
+export const logIn = (id, username, theme, editorTheme) => {
   return {
     type: "LOG_IN",
     payload: {
       id,
       username,
       theme,
+      editorTheme,
+    },
+  };
+};
+
+export const updateUser = (username, email, fullname, theme, editorTheme) => {
+  return {
+    type: "UPDATE_USER",
+    payload: {
+      username,
+      email,
+      fullname,
+      theme,
+      editorTheme,
     },
   };
 };
@@ -18,21 +32,25 @@ export const signOut = () => async (dispatch) => {
 };
 
 export const checkUserAuth = () => async (dispatch) => {
+  const payload = {
+    status: false,
+    id: null,
+    username: null,
+    theme: "light",
+    editorTheme: "vs-dark",
+  };
+
   try {
     const response = await loopit.get("/auth/verify");
-    const payload = {};
     switch (response.data.status) {
       case "authorized":
         payload.status = true;
         payload.id = response.data.id;
         payload.username = response.data.username;
         payload.theme = response.data.theme;
+        payload.editorTheme = response.data.editorTheme;
         break;
       default:
-        payload.status = false;
-        payload.id = null;
-        payload.username = null;
-        payload.theme = "light";
         break;
     }
     dispatch({
@@ -42,7 +60,7 @@ export const checkUserAuth = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "CHECK_USER_AUTH",
-      payload: { status: false, id: null, username: null, theme: "light" },
+      payload,
     });
   }
 };
@@ -87,8 +105,8 @@ export const fetchCreated = (username) => async (dispatch) => {
   }
 };
 
-export const fetchSearch = (search) => async (dispatch) => {
-  const response = await loopit.get(`/loops/all?search=${search}`);
+export const fetchSearch = (user, option) => async (dispatch) => {
+  const response = await loopit.get(`/loops/all?${option}=${user}`);
 
   dispatch({ type: "FETCH_SEARCH", payload: response.data.loops });
 };

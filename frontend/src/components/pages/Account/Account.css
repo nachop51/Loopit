@@ -10,12 +10,12 @@
 }
 
 .profile {
-  @apply flex flex-col justify-center gap-12 mb-12 items-stretch;
-  @apply xl:flex-row;
+  @apply flex flex-col justify-center gap-12 mb-12 !items-stretch;
+  @apply md:flex-row;
 }
 
 .profile-ui {
-  @apply bg-transparent bg-opacity-50 rounded-2xl p-10 flex flex-col items-center w-full;
+  @apply justify-between bg-transparent bg-opacity-50 rounded-2xl p-10 flex flex-col items-center w-full;
   border: 2px solid rgb(var(--primary-color));
   box-shadow: var(--shadow-light);
 }
@@ -93,11 +93,14 @@
 }
 
 .profile-btn-edit {
-  margin-top: 2rem;
 }
 
 .profile-btn-edit:hover,
 .profile-btn-sign-out:hover {
-  background-color: rgba(225, 225, 225, 0.15);
-  color: #444;
+  background-color: #fff;
+  color: rgb(var(--primary-color));
+}
+
+.button-container {
+  @apply flex flex-col items-center justify-center w-full;
 }

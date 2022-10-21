@@ -6,3 +6,7 @@
 .loop-list > *:not(:first-child) {
   @apply mt-6;
 }
+
+.no-loops {
+  color: var(--text-color);
+}

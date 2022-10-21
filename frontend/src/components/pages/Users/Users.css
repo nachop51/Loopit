@@ -1,0 +1,7 @@
+.profile {
+  @apply flex justify-center items-center;
+}
+
+.follow-user {
+  @apply my-3;
+}

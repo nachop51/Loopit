@@ -29,7 +29,6 @@
   @apply min-h-screen py-24 relative;
 }
 
-/* TODO: Define a selection color */
 *::selection {
   background: rgb(var(--primary-color), 0.5);
   color: white;
@@ -74,4 +73,8 @@ body {
 
 .btn-expand {
   @apply w-40;
+}
+
+.btn-full {
+  @apply w-full;
 }

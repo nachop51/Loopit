@@ -2,8 +2,6 @@ const User = require("../models/users");
 const Loop = require("../models/loops");
 const Save = require("../models/saves");
 const { sequelize } = require("../database/db");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
 
 const addSave = async (req, res) => {
   const { loop_id } = req.body;
@@ -49,6 +47,7 @@ const addSave = async (req, res) => {
     );
     res.status(200).json({
       status: "OK",
+      count_saves: loop.count_saves + 1,
       data: new_save,
     });
   } catch (error) {
@@ -90,6 +89,7 @@ const deleteSave = async (req, res) => {
     );
     res.status(200).json({
       status: "OK",
+      count_saves: loop.count_saves - 1,
       data: [],
     });
   } catch (error) {
