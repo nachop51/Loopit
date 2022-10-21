@@ -8,9 +8,10 @@
 }
 
 .aside-container {
-  @apply rounded-xl px-12 text-center;
-  height: 80vh;
-  /* background-color: rgba(221, 221, 221, 0.024); */
+  @apply flex flex-col rounded-sm px-12 pt-10 mr-2 text-center items-center justify-start;
+  height: 90%;
+  /* background-color: rgba(0, 0, 0, 0.045); */
+  /* background-color: #fff; */
 }
 /** Dark article **/
 /* 
@@ -22,14 +23,22 @@
 } */
 
 .item-container {
-  @apply rounded-md mb-6 font-medium shadow-2xl;
+  @apply rounded-xl mb-6 font-medium shadow-2xl bg-transparent;
   border: 2px solid rgb(var(--primary-color), 0.3);
-  color: var(--text-dark);
+  color: var(--text-light);
   padding: 1rem 2rem;
+  width: 80%;
+  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
+  color: #fff;
 }
 
 .aside-view-yarn {
   @apply font-bold;
   text-align: end;
   color: var(--primary-color);
+}
+
+.heading-comments {
+  @apply flex gap-5 py-5 text-lg;
+  @apply sm:justify-center;
 }
