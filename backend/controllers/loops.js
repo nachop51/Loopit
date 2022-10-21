@@ -248,9 +248,9 @@ const getLoops = async (req, res) => {
         loop.dataValues.like = false;
       }
       if (ifSave.includes(loop.dataValues.id)) {
-        loop.dataValues.Save = true;
+        loop.dataValues.save = true;
       } else {
-        loop.dataValues.Save = false;
+        loop.dataValues.save = false;
       }
       return true;
     });
