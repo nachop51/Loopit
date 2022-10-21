@@ -328,10 +328,10 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
+    looop.dataValues.Comment = comments;
     return res.status(200).json({
       status: "OK",
       loop: looop,
-      comments: comments,
     });
   } catch (error) {
     res.status(400).json({
