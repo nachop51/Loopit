@@ -328,7 +328,7 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
-    looop.dataValues.Comment = comments;
+    looop.dataValues.Comments = comments;
     return res.status(200).json({
       status: "OK",
       loop: looop,
