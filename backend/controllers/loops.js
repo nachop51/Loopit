@@ -331,6 +331,7 @@ const getLoopComments = async (req, res) => {
     return res.status(200).json({
       status: "OK",
       loop: looop,
+      comments: comments,
     });
   } catch (error) {
     res.status(400).json({
