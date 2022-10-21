@@ -92,3 +92,15 @@
 .show-bar {
   @apply visible opacity-100 w-full;
 }
+
+#hide-navigation {
+  transform: translateX(-90%);
+  @apply md:transform-none lg:transform-none xl:transform-none 2xl:transform-none;
+}
+
+#hide-navigation-search {
+  @apply sm:transform w-1/2;
+  transform: translateX(35%);
+  @apply md:transform-none lg:transform-none xl:transform-none 2xl:transform-none;
+  @apply md:w-full lg:w-full xl:w-full 2xl:w-full;
+}

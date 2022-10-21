@@ -47,6 +47,7 @@ const Nav = ({ children }) => {
       <div className="nav-container">
         {routes.map(({ id, icon, iconActive }) => (
           <Link
+            id={`${isVisible ? "hide-navigation" : ""}`}
             key={id}
             to={id}
             onClick={() => setActive(id)}
@@ -59,6 +60,7 @@ const Nav = ({ children }) => {
       <div className="search">
         <form onSubmit={handleSubmit} className="search-form">
           <input
+            id={`${isVisible ? "hide-navigation-search" : ""}`}
             type="text"
             className={`bar ${isVisible ? "show-bar" : ""}`}
             value={search}
