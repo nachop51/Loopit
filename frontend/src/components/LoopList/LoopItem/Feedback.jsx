@@ -1,12 +1,12 @@
-import { useState } from "react";
+import "./Feedback.css";
+import { updateLoops } from "../../../actions";
+import loopit from "../../../api/loopit";
+
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
 import { BsChat } from "react-icons/bs";
-import "./Feedback.css";
-
-import { updateLoops } from "../../../actions";
-import loopit from "../../../api/loopit";
 import { useNavigate } from "react-router-dom";
 
 const Feedback = ({
@@ -26,11 +26,10 @@ const Feedback = ({
     try {
       if (save) {
         await loopit.post("/saves/delete", { loop_id: loop.id });
-        setSave(!save);
       } else {
         await loopit.post("/saves/add", { loop_id: loop.id });
-        setSave(!save);
       }
+      setSave(!save);
       updateLoops(collection, "save", !save, loop.id);
     } catch (error) {
       console.log(error);
@@ -41,11 +40,10 @@ const Feedback = ({
     try {
       if (!like) {
         await loopit.post("/likes/add", { loop_id: loop.id });
-        setLike(!like);
       } else {
         await loopit.post("/likes/delete", { loop_id: loop.id });
-        setLike(!like);
       }
+      setLike(!like);
       updateLoops(collection, "like", !like, loop.id);
     } catch (error) {
       console.log(error);
@@ -56,13 +54,13 @@ const Feedback = ({
     <div className="loop-info">
       <div className="heading-comments">
         <p>
-          <MdRecommend /> {likes}
+          <MdRecommend /> {like ? likes + 1 : likes}
         </p>
         <p>
           <BsChat /> {comments}
         </p>
         <p>
-          <IoBookmark /> {saves}
+          <IoBookmark /> {save ? saves + 1 : saves}
         </p>
       </div>
       <div className="loop-info-buttons">
