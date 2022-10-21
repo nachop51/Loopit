@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Description = ({ title, description, language }) => {
   return (
     <div className="description">
-      <p className="description-title">{title}</p>
+      <h2 className="description-title">{title}</h2>
       <div className="sub-container">
         <span>{description}</span>
         <span id="tag" className={language + " default"}>

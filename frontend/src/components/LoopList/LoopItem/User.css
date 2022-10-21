@@ -1,11 +1,10 @@
 .user-info_link-profile {
-  @apply text-slate-800;
-  display: flex;
-  text-decoration: none;
+  @apply flex no-underline;
 }
 
 .user-info_username {
-  @apply px-2 pt-2 text-slate-600 text-xl;
+  @apply px-2 pt-2 text-xl;
+  color: var(--text-color);
 }
 
 .user-info_time {

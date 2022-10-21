@@ -74,7 +74,7 @@ const User = () => {
           </button>
         </ProfileItem>
       </div>
-      <LoopList collection="search" user={user.personal_info?.username} />
+      <LoopList collection="search" user={user.personal_info.username} />
     </main>
   );
 };

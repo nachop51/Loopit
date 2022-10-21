@@ -42,6 +42,7 @@ const loopReducer = (state = initialState, action) => {
         all: [],
         saved: [],
         created: [],
+        search: [],
       };
       let mapFrom = [];
       if (action.payload.collection === "all") {
@@ -50,6 +51,8 @@ const loopReducer = (state = initialState, action) => {
         mapFrom = JSON.parse(JSON.stringify(state.saved));
       } else if (action.payload.collection === "created") {
         mapFrom = JSON.parse(JSON.stringify(state.created));
+      } else if (action.payload.collection === "search") {
+        mapFrom = JSON.parse(JSON.stringify(state.search));
       }
       for (let i = 0; i < mapFrom.length; i++) {
         if (mapFrom[i].id === action.payload.id) {
@@ -67,6 +70,8 @@ const loopReducer = (state = initialState, action) => {
         updatedLoops.saved = mapFrom;
       } else if (action.payload.collection === "created") {
         updatedLoops.created = mapFrom;
+      } else if (action.payload.collection === "search") {
+        updatedLoops.search = mapFrom;
       }
       updatedLoops.hasData = true;
       return updatedLoops;
@@ -75,6 +80,7 @@ const loopReducer = (state = initialState, action) => {
         all: [],
         saved: [],
         created: [],
+        search: [],
         hasData: false,
       };
     case "SIGN_OUT":
@@ -82,6 +88,7 @@ const loopReducer = (state = initialState, action) => {
         all: [],
         saved: [],
         created: [],
+        search: [],
         hasData: false,
       };
     default:

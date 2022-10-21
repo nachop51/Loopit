@@ -37,6 +37,7 @@ const Nav = ({ children }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (search === "") return;
     navigate("/l/search/" + search);
   };
 
