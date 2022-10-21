@@ -2,7 +2,7 @@ import "./Feedback.css";
 import { updateLoops } from "../../../actions";
 import loopit from "../../../api/loopit";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
