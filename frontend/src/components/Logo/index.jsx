@@ -18,6 +18,10 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "--primary-color",
         "55, 129, 243"
       );
+      document.documentElement.style.setProperty(
+        "--footer-color",
+        "55, 129, 243, 0.25"
+      );
       // Text color format: #hex
       document.documentElement.style.setProperty("--text-color", "#fff");
       // Text dark color format: #hex
@@ -36,6 +40,11 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       // Primary color format: r, g, b
       document.documentElement.style.setProperty(
         "--primary-color",
+        "145, 71, 255"
+      );
+
+      document.documentElement.style.setProperty(
+        "--footer-color",
         "145, 71, 255"
       );
       // Text color format: #hex

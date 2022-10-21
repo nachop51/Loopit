@@ -1,6 +1,6 @@
 .footer-container {
   @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full pt-6;
-  background: rgb(var(--primary-color), 0.25);
+  background: rgb(var(--footer-color));
 }
 
 .footer-content {

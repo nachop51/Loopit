@@ -11,7 +11,7 @@ const AsideItem = ({ item }) => {
       <div className="item-container">
         <h2 className="aside-title">{item.name}</h2>
 
-        <p className="aside-text">const...</p>
+        <p className="aside-text">item.description</p>
         <div className="heading-comments">
           <p>
             <MdRecommend /> {item.count_likes}
