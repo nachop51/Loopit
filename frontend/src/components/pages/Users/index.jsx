@@ -23,7 +23,7 @@ const User = () => {
       }
     };
     fetchUser();
-  }, [username]);
+  }, [username, following]);
 
   const handleFollow = async () => {
     try {

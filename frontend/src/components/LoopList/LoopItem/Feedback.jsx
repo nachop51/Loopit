@@ -60,12 +60,15 @@ const Feedback = ({
           <MdRecommend /> {likes}
         </p>
         <p>
+<<<<<<< HEAD
           <IoBookmark /> {comments}
+=======
+          <BsChat /> {comments}
+>>>>>>> aece6cd371a9f148de19c1432e4435421868965c
         </p>
         <p>
-          <BsChat /> {saves}
+          <IoBookmark /> {saves}
         </p>
-        {/* <br /> */}
       </div>
       <div className="loop-info-buttons">
         <button className="action-comment" onClick={handleLike}>

@@ -28,7 +28,7 @@ const LoadEditor = ({ width, height, language, setCode, auth }) => {
         tabSize: 2,
       }}
       onMount={handleEditorDidMount}
-      defaultValue={"// here goes your code\n"}
+      defaultValue={""}
       onChange={handleEditorChange}
     />
   );
