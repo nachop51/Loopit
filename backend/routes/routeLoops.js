@@ -5,6 +5,7 @@ const {
   updateLoop,
   getLoops,
   getLoopComments,
+  loopsMoreLiked,
 } = require("../controllers/loops");
 const { route } = require("./routeAuth");
 
@@ -14,5 +15,6 @@ routeLoops.delete("/delete/:id", deleteLoop);
 routeLoops.put("/update/:id", updateLoop);
 routeLoops.get("/all", getLoops);
 routeLoops.get("/comments/:loop_id", getLoopComments);
+routeLoops.get("/moreLiked", loopsMoreLiked);
 
 module.exports = routeLoops;

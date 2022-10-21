@@ -248,9 +248,9 @@ const getLoops = async (req, res) => {
         loop.dataValues.like = false;
       }
       if (ifSave.includes(loop.dataValues.id)) {
-        loop.dataValues.ifSave = true;
+        loop.dataValues.Save = true;
       } else {
-        loop.dataValues.ifSave = false;
+        loop.dataValues.Save = false;
       }
       return true;
     });
@@ -340,10 +340,47 @@ const getLoopComments = async (req, res) => {
   }
 };
 
+const loopsMoreLiked = async (req, res) => {
+  try {
+    const loops = await Loop.findAll({
+      order: [["count_likes", "DESC"]],
+      limit: 5,
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        },
+      ],
+    });
+    if (!loops) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Loop list is empty",
+      });
+    }
+    return res.status(200).json({
+      status: "OK",
+      loops: loops,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
   updateLoop: updateLoop,
   getLoops: getLoops,
   getLoopComments: getLoopComments,
+  loopsMoreLiked: loopsMoreLiked,
 };

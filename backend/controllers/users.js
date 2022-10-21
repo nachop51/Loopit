@@ -524,6 +524,7 @@ const usersStats = async (req, res) => {
     });
   }
 };
+
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
   me: me,
