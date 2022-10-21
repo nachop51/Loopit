@@ -21,23 +21,25 @@ const User = ({ username, time }) => {
     return "Just now";
   };
 
-  return (
-    <div className="user-info">
-      <Link to={"/l/users/" + username} className="user-info_link-profile">
-        <div className="avatar">
-          <img
-            src={`https://avatars.dicebear.com/api/personas/${username}.svg`}
-            className="avatar-img"
-            alt="user-profile"
-          />
-        </div>
-        <div>
-          <h3 className="user-info_username">{username}</h3>
-          <span className="user-info_time">{calulateTime()}</span>
-        </div>
-      </Link>
-    </div>
-  );
+  if (!username) return <h1>Loading...</h1>;
+  else
+    return (
+      <div className="user-info">
+        <Link to={"/l/users/" + username} className="user-info_link-profile">
+          <div className="avatar">
+            <img
+              src={`https://avatars.dicebear.com/api/personas/${username}.svg`}
+              className="avatar-img"
+              alt="user-profile"
+            />
+          </div>
+          <div>
+            <h3 className="user-info_username">{username}</h3>
+            <span className="user-info_time">{calulateTime()}</span>
+          </div>
+        </Link>
+      </div>
+    );
 
   // return (
   //   <div className="user-info-esq">
