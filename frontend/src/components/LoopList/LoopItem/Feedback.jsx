@@ -8,7 +8,6 @@ import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
 import { BsChat } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Feedback = ({
   loop,
@@ -58,11 +57,7 @@ const Feedback = ({
           <MdRecommend /> {like ? likes + 1 : likes}
         </p>
         <p>
-<<<<<<< HEAD
-          <IoBookmark /> {comments}
-=======
           <BsChat /> {comments}
->>>>>>> aece6cd371a9f148de19c1432e4435421868965c
         </p>
         <p>
           <IoBookmark /> {save ? saves + 1 : saves}
