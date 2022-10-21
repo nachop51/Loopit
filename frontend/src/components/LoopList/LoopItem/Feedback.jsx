@@ -8,6 +8,7 @@ import "./Feedback.css";
 import { updateLoops } from "../../../actions";
 import loopit from "../../../api/loopit";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Feedback = ({
   loop,
@@ -59,7 +60,7 @@ const Feedback = ({
           <MdRecommend /> {likes}
         </p>
         <p>
-          <IoBookmark /> {comments} Comments
+          <IoBookmark /> {comments}
         </p>
         <p>
           <BsChat /> {saves}
