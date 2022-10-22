@@ -60,10 +60,13 @@
   @apply text-gray-200 text-lg font-medium;
 }
 
-.redes-container {
-  @apply flex flex-row justify-center items-center gap-4 pt-10 pb-6;
+.links-container {
+  @apply mt-auto flex flex-row justify-center items-center gap-4 pt-10 pb-6;
 }
 
-.icons {
-  @apply text-2xl text-slate-800;
+.icons,
+.icons:active,
+.icons:visited {
+  @apply text-4xl;
+  color: var(--text-white);
 }

@@ -9,14 +9,14 @@ const CardAbout = ({ user }) => {
         </div>
       </div>
       <h1 className="card-title">{user.rol}</h1>
-      <div className="redes-container">
-        <a href={user.link} target="_blank" rel="noreferrer">
+      <div className="links-container">
+        <a href={user.linkedIn} target="_blank" rel="noreferrer">
           <BsLinkedin className="icons" />
         </a>
-        <a href={user.link} target="_blank" rel="noreferrer">
+        <a href={user.instagram} target="_blank" rel="noreferrer">
           <BsInstagram className="icons" />
         </a>
-        <a href={user.link} target="_blank" rel="noreferrer">
+        <a href={user.github} target="_blank" rel="noreferrer">
           <BsGithub className="icons" />
         </a>
       </div>
