@@ -10,7 +10,7 @@
 
 .heading-secondary {
   @apply text-3xl font-bold text-center;
-  color: rgb(var(--secondary-color));
+  color: rgb(var(--primary-color));
 }
 
 .comments-container {
