@@ -525,6 +525,24 @@ const usersStats = async (req, res) => {
   }
 };
 
+const loopsUsersFollowing = async (req, res) => {
+  let { limit, page } = req.query;
+  page = parseInt(page, 10);
+  limit = parseInt(limit, 10);
+  if (!page) page = 1;
+  if (!limit) limit = 10;
+  try {
+    const loops = await sequelize.query(
+      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as Language FROM Followers JOIN Users ON User.id = Users.id JOIN JOIN Loops ON Loops.user_id = Followers.user_id JOIN Languages ON Languages.id = Loops.language_id WHERE Followers.user_id = ?;"
+    );
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
+};
+
 // Here we export the module, in order to use it in routes/routeUser
 module.exports = {
   me: me,
