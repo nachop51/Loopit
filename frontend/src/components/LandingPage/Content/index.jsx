@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
-import Laptop from "../../../assets/mockup-dark.png";
-import Phone from "../../../assets/mockup-mobile.png";
+// import Laptop from "../../../assets/sombra-negra-mockup-blanco.png";
+import Laptop from "../../../assets/sombra-blanca-mockup-dark.png";
+
+// import Phone from "../../../assets/mockup-mobile.png";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
@@ -34,7 +36,7 @@ const Content = () => {
           </button>
         </article>
         <article className="intro-images">
-          <img className="intro-images__phone" src={Phone} alt="Phone" />
+          {/* <img className="intro-images__phone" src={Phone} alt="Phone" /> */}
           <img className="intro-images__laptop" src={Laptop} alt="Laptop" />
         </article>
       </section>
