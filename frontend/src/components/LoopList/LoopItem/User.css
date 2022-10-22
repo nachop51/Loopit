@@ -1,0 +1,21 @@
+.user-info_link-profile {
+  @apply flex no-underline;
+}
+
+.user-info_username {
+  @apply px-2 pt-2 text-xl;
+  color: var(--text-color);
+}
+
+.user-info_time {
+  @apply pl-3;
+  color: rgb(var(--primary-color));
+}
+
+.avatar {
+  @apply w-12 h-12 rounded-full;
+}
+
+.avatar-img {
+  @apply rounded-full w-full;
+}

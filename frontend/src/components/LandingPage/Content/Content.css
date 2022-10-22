@@ -5,6 +5,7 @@
 
 .intro {
   @apply mx-4;
+  @apply sm:mx-0;
   @apply grid;
   @apply md:place-items-center;
   @apply lg:gap-16;
@@ -43,7 +44,9 @@
 
 .intro-images__laptop {
   @apply mb-4;
-  @apply w-full sm:w-2/3  md:w-2/3 lg:w-5/6; /* * xl: for extra large screens */
+  /* @apply w-full sm:w-2/3  md:w-2/3 lg:w-5/6;  */
+  @apply w-full;
+  /* * xl: for extra large screens */
 }
 
 .intro-images__phone {
@@ -52,21 +55,19 @@
 
 /* * FEATURES */
 .features {
-  /* background-image: linear-gradient(170deg, #d0eeff, #f6feff 50%, #d0eeff); */
-  @apply pt-8 pb-24 mb-10;
-  margin-bottom: 2.5rem;
-  padding-top: 2rem;
-  padding-bottom: 6rem;
-  border-radius: 0 0 1.2rem 1.2rem;
-  /* background: radial-gradient(#ffffff45, #ffffff00); */
-
-  border-radius: 20px;
+  @apply pt-8;
 }
 
 .feature-box {
   background: transparent;
   border: 1px solid rgb(var(--primary-color));
   box-shadow: 1px 1px 10px rgb(225, 225, 225, 0.4);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.feature-box:hover {
+  background-color: rgb(var(--primary-color), 0.15);
+  transform: translateY(-10px);
 }
 
 .feature-icon {
@@ -86,6 +87,6 @@
 }
 
 .row {
-  @apply grid grid-cols-1 place-items-center gap-8 mt-16;
-  @apply xl:grid-cols-3 xl:px-48;
+  @apply grid grid-cols-1 items-stretch place-items-center gap-8 mt-16 mb-20;
+  @apply 2xl:grid-cols-3 xl:px-48;
 }

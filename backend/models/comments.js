@@ -11,7 +11,7 @@ const Comment = sequelize.define(
       primaryKey: true,
     },
     content: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT("medium"),
       allowNull: false,
     },
     user_id: {

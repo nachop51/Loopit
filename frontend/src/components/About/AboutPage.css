@@ -1,31 +1,69 @@
-.heading-about {
-  @apply text-4xl text-white font-bold;
+.about {
+  @apply w-full;
 }
 
-.container {
-  width: 90%;
-  text-align: center;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.178);
-  min-height: 100vh;
-  padding: 60px 30px;
-  /* align-content: center; */
-  justify-content: center;
+.about-container {
+  @apply flex flex-row w-full flex-wrap justify-evenly gap-8 mt-20 mb-20;
 }
 
-.about-us {
+.card-container {
   display: flex;
-  justify-content: space-between;
-  width: 90%;
-  height: 400px;
-  margin: 0 auto;
-  margin-top: 7rem;
+  flex-direction: column;
+  align-items: center;
+  /* @apply flex flex-col items-center justify-center; */
+  @apply flex p-8 rounded-lg basis-6/12 text-center;
+  @apply sm:basis-8/12;
+  @apply md:basis-6/12;
+  @apply lg:basis-4/12;
+  @apply xl:basis-4/12;
+  @apply 2xl:basis-2/12;
+  background: linear-gradient(
+    155deg,
+    rgb(var(--primary-color), 0.5),
+    rgb(var(--primary))
+  );
+  box-shadow: var(--shadow-dark);
 }
 
-.card {
-  width: 400px;
-  height: 100%;
-  background-color: transparent;
-  border: 2px solid #fff;
-  box-shadow: 0.5px 0.5px 12px rgba(255, 255, 255, 0.178);
+.card-image-container {
+  @apply flex justify-center items-center rounded-full bg-violet-600 shadow-2xl mb-4;
+  width: 230px;
+  height: 230px;
+}
+
+@media screen and (max-width: 1530px) {
+  .card-container {
+    @apply basis-3/12;
+  }
+}
+
+/* .card-image-container {
+  @apply flex justify-center;
+} */
+
+.card-circle {
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.card-image {
+  @apply w-full;
+}
+
+.card-title {
+  @apply text-white text-4xl font-bold;
+}
+
+.card-description {
+  @apply text-gray-200 text-lg font-medium;
+}
+
+.redes-container {
+  @apply flex flex-row justify-center items-center gap-4 pt-10 pb-6;
+}
+
+.icons {
+  @apply text-2xl text-slate-800;
 }

@@ -1,8 +1,9 @@
 .nav {
-  @apply flex justify-between gap-4 fixed top-0 w-full z-50;
+  @apply flex justify-center fixed top-0 w-full z-50;
   background-color: var(--nav-background);
   backdrop-filter: blur(5px);
   box-shadow: 15px -12px 20px 0px rgb(0 0 0 / 80%);
+  transition: all 1s var(--animation-bezier);
 }
 
 .nav-container {
@@ -12,7 +13,7 @@
 .nav-links {
   @apply relative p-4 rounded-full flex text-3xl;
   color: rgb(var(--primary-color));
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s var(--animation-bezier);
 }
 
 .nav-links:hover {
@@ -44,29 +45,64 @@
 }
 
 .navbar-logo {
-  @apply absolute left-4;
+  @apply absolute left-4 h-full flex gap-10 items-center;
+}
+
+.navbar-logo a {
+  @apply hidden w-4/5 h-full items-center;
+  @apply sm:flex lg:w-full;
+}
+
+.navbar-logo img {
+  @apply w-2/5;
+}
+
+.navbar-logo button {
+  @apply absolute bg-transparent border-none text-4xl flex items-center justify-center left-0;
+  @apply sm:left-1/2;
+}
+
+.search {
+  @apply absolute rounded-full flex items-center justify-end right-0;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.navbar-logo img {
-  @apply flex justify-center items-center w-2/5;
+.search-form {
+  @apply flex items-center justify-end;
 }
 
-.search {
-  @apply relative rounded-full flex items-center justify-end;
+.search-form input {
+  @apply bg-transparent focus:outline-none text-lg pl-4 py-2 rounded-lg;
+  transform: translateX(21%);
+  border: 1px solid rgb(var(--primary-color));
+  color: var(--text-color);
+  background-color: var(--nav-background);
 }
 
-.search button {
-  @apply text-3xl border-none bg-transparent relative cursor-pointer;
+.search-form button {
+  @apply text-2xl border-none bg-transparent relative cursor-pointer;
   color: rgb(var(--primary-color));
 }
 
 .bar {
-  transition: all 0.3s;
-  @apply w-0 opacity-0 invisible;
+  transition: all 0.5s var(--animation-bezier);
+  @apply invisible opacity-0 w-0;
 }
 
 .show-bar {
   @apply visible opacity-100 w-full;
+}
+
+/* #hide-navigation {
+  transform: translateX(-90%);
+  @apply md:transform-none lg:transform-none xl:transform-none 2xl:transform-none;
+} */
+
+#hide-navigation-search {
+  z-index: 50;
+  width: 80%;
+  transform: translate(-3%, 90%);
+  @apply lg:transform-none xl:transform-none 2xl:transform-none;
+  @apply md:w-full lg:w-full xl:w-full 2xl:w-full;
 }

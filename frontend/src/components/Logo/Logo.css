@@ -1,19 +1,25 @@
 .logo {
-  @apply top-0 left-6 relative;
-  @apply sm:left-12;
-  @apply md:left-14;
-  @apply lg:left-16;
+  @apply top-0 left-4 absolute flex items-center;
+  @apply sm:left-12 gap-4;
+  @apply lg:left-14;
+}
+
+.logo a {
+  @apply w-2/5;
+  @apply sm:w-1/2;
+  @apply md:w-2/4;
+  @apply lg:w-3/4;
+  @apply xl:w-4/5;
+  @apply 2xl:w-full;
 }
 
 .logo-img {
-  @apply w-24 sm:w-28 md:w-32 lg:w-44;
+  @apply w-full;
 }
 
 .theme-btn {
-  @apply top-0 left-16 absolute;
-  @apply sm:left-20;
-  @apply md:left-24;
-  @apply lg:left-28;
-  top: 50%;
-  transform: translateY(-50%);
+  @apply bg-transparent border-none text-4xl flex items-center justify-center;
+  @apply sm:text-6xl;
+  color: rgb(var(--primary-color));
+  transition: all 0.3s var(--animation-bezier);
 }

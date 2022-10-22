@@ -1,27 +1,7 @@
 .footer-container {
-  background: url("../../assets/layered-waves-haikei (3).svg") no-repeat;
-  background-position-y: 100%;
-  min-height: 22rem;
-  @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full;
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    background: url("../../assets/layered-waves-haikei.png") no-repeat;
-    background-position-y: 100%;
-    background-size: cover;
-  }
-}
-
-@media (max-width: 1024px) {
-}
-
-@media (min-width: 1460px) {
-  .footer-container {
-    /* background: url("../../assets/layered-waves-haikei.svg") no-repeat; */
-    background-position-y: 75%;
-    background-size: cover;
-  }
+  @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full pt-6;
+  background: rgb(var(--footer-color));
+  box-shadow: -4px -4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .footer-content {
@@ -30,17 +10,20 @@
 }
 
 .footer-container p a {
-  @apply text-white no-underline text-xl p-2;
+  @apply no-underline text-xl p-2;
   @apply xl:text-2xl;
+  color: var(--text-white);
 }
 
 .footer-container span {
-  @apply text-white font-medium mb-2;
+  @apply font-medium mb-2;
+  color: var(--text-white);
 }
 
 .footer-copy {
-  @apply text-gray-400 text-center text-xs mb-4;
+  @apply text-center text-xs mb-4 font-normal;
   @apply lg:text-xs xl:text-sm;
+  color: var(--text-white);
 }
 
 #link-about {

@@ -1,45 +1,31 @@
 import "./Aside.css";
+import AsideItem from "./AsideItem";
+import { useState, useEffect } from "react";
+import loopit from "../../../api/loopit";
 
-const Aside = () => {
+const Aside = ({ oC }) => {
+  const [populates, setPopulates] = useState([]);
+
+  const fetchPopulates = async () => {
+    try {
+      const response = await loopit.get("/loops/moreLiked");
+      console.log(response.data.loops);
+      setPopulates(response.data.loops);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopulates();
+  }, []);
   return (
-    <aside className="aside">
+    <aside className={"aside " + oC}>
+      <h2 className="heading-aside">Popular</h2>
       <div className="aside-container">
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">
-            Loopit is a social media platform for programmers to share their
-            code with the world. Create a profile, upload your code, and share
-            it with your friends, followers and the world.
-          </p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">
-            Loopit is a social media platform for programmers to share their
-            code with the world. Create a profile, upload your code, and share
-            it with your friends, followers and the world.
-          </p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">
-            Loopit is a social media platform for programmers to share their
-            code with the world. Create a profile, upload your code, and share
-            it with your friends, followers and the world.
-          </p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
-        <div className="item-container">
-          <h2 className="aside-title">About Loopit</h2>
-          <p className="aside-text">
-            Loopit is a social media platform for programmers to share their
-            code with the world. Create a profile, upload your code, and share
-            it with your friends, followers and the world.
-          </p>
-          <p className="aside-view-yarn">Follow thread</p>
-        </div>
+        {populates.map((item) => {
+          return <AsideItem item={item} key={item.id} />;
+        })}
       </div>
     </aside>
   );

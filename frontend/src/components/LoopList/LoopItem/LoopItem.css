@@ -1,10 +1,11 @@
 .loop {
-  @apply w-10/12 p-4 relative rounded-2xl bg-white;
-  @apply xl:w-2/3;
-  border: 2px solid;
-  border-color: rgb(var(--primary-color), 0.3);
-  color: #333;
+  width: 95%;
+  @apply sm:w-10/12 p-4 relative rounded-2xl border-2 border-solid;
   box-shadow: var(--shadow-light);
+  border-color: rgb(var(--primary-color), 0.3);
+  color: var(--text-color);
+  min-width: 80%;
+  background-color: var(--background-color);
 }
 
 .avatar {
@@ -13,23 +14,7 @@
   cursor: pointer;
 }
 
-.avatar-img {
-  @apply rounded-full w-full;
-}
-
-.description {
-  @apply text-center p-4;
-}
-
-.description-title {
-  @apply text-center text-2xl font-bold capitalize pb-2 text-slate-600;
-}
-
 /* language + description */
-.sub-container {
-  display: flex;
-  flex-direction: column;
-}
 
 .user-info {
   @apply relative flex flex-row flex-nowrap gap-3;
@@ -64,6 +49,7 @@
 /** COMMENTS */
 .action-comment {
   @apply font-semibold text-lg cursor-pointer select-none flex items-center justify-center bg-transparent border-none;
+  color: var(--text-color);
 }
 
 .action-comment .icon {
@@ -71,8 +57,9 @@
 }
 
 .comment-button {
-  @apply text-black font-bold bg-transparent cursor-pointer text-lg;
+  @apply font-bold bg-transparent cursor-pointer text-lg;
   border: none;
+  color: var(--text-color);
 }
 
 .save-active {

@@ -80,7 +80,6 @@ export const validatePassword = (password) => {
   } else if (!password.match(/[0-9]/)) {
     errors = "Password must contain at least one number";
   }
-  // if (!password.match(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/)) return false;
   return errors;
 };
 

@@ -8,8 +8,8 @@ const LoopitApp = () => {
       <main className="loops">
         <h1 className="heading-primary">Loops</h1>
         <div className="loop-container">
-          <LoopList collection="all" />
-          <Aside />
+          <LoopList collection="all" oC="a" />
+          <Aside oC="b" />
         </div>
       </main>
     </>

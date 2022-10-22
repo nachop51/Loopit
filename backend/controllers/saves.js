@@ -2,12 +2,9 @@ const User = require("../models/users");
 const Loop = require("../models/loops");
 const Save = require("../models/saves");
 const { sequelize } = require("../database/db");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
 
 const addSave = async (req, res) => {
   const { loop_id } = req.body;
-  const token = req.cookies.token;
   if (!loop_id) {
     return res.status(400).json({
       status: "Error",
@@ -15,8 +12,7 @@ const addSave = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.verify(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const loop = await Loop.findByPk(loop_id);
     if (!loop) {
       return res.status(400).json({
@@ -35,8 +31,23 @@ const addSave = async (req, res) => {
       user_id: user_id,
       loop_id: loop.id,
     });
+    if (!new_save) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - save already exists",
+      });
+    }
+    const add_countSaves = await Loop.update(
+      {
+        count_saves: loop.count_saves + 1,
+      },
+      {
+        where: { id: loop.id },
+      }
+    );
     res.status(200).json({
       status: "OK",
+      count_saves: loop.count_saves + 1,
       data: new_save,
     });
   } catch (error) {
@@ -49,7 +60,6 @@ const addSave = async (req, res) => {
 
 const deleteSave = async (req, res) => {
   const { loop_id } = req.body;
-  const token = req.cookies.token;
   if (!loop_id) {
     return res.status(400).json({
       status: "Error",
@@ -57,8 +67,7 @@ const deleteSave = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.verify(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const save = await Save.findOne({
       where: { user_id: user_id, loop_id: loop_id },
     });
@@ -69,8 +78,18 @@ const deleteSave = async (req, res) => {
       });
     }
     await save.destroy();
+    const loop = await Loop.findByPk(loop_id);
+    const rest_countSaves = await Loop.update(
+      {
+        count_saves: loop.count_saves - 1,
+      },
+      {
+        where: { id: loop.id },
+      }
+    );
     res.status(200).json({
       status: "OK",
+      count_saves: loop.count_saves - 1,
       data: [],
     });
   } catch (error) {

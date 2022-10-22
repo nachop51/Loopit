@@ -1,8 +1,12 @@
 .loop-list {
-  @apply flex flex-col items-center pb-96;
-  min-width: 40%;
+  @apply flex flex-col items-center pb-20;
+  width: 100%;
 }
 
 .loop-list > *:not(:first-child) {
   @apply mt-6;
+}
+
+.no-loops {
+  color: var(--text-color);
 }

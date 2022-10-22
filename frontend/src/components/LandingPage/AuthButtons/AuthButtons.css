@@ -1,6 +1,10 @@
 .buttons-container {
-  @apply absolute flex top-3 right-3 flex-col;
-  @apply sm:top-9 sm:right-6 sm:flex-row;
+  top: 1.5rem;
+  right: 1rem;
+  @apply absolute;
+  @apply sm:top-5 sm:right-12;
+  @apply md:top-7 md:right-12;
+  @apply lg:top-12 lg:right-12;
 }
 
 .button:first-child {
@@ -9,4 +13,9 @@
 
 .button.go {
   @apply w-56 mt-12 mx-auto text-white font-bold text-lg;
+}
+
+.heading-secondary {
+  @apply text-3xl font-bold text-center;
+  color: var(--primary-color);
 }

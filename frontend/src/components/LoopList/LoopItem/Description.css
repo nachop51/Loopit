@@ -1,12 +1,26 @@
+#tag {
+  @apply font-bold p-1 mt-2 w-2/4;
+  @apply md:w-1/5 lg:w-1/4 xl:w-1/5;
+  margin: 0 auto;
+  box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.5);
+  color: var(--text-color);
+}
+
+.description {
+  @apply text-center p-4;
+}
+
 .description-container {
   @apply pt-2;
 }
 
-#tag {
-  @apply font-bold p-1 mt-2;
-  width: 18%;
-  margin: 0 auto;
-  box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.5);
+.description-title {
+  @apply text-center text-2xl font-bold capitalize pb-2;
+  color: var(--text-color);
+}
+
+.sub-container {
+  @apply flex flex-col gap-4;
 }
 
 .default {
@@ -21,6 +35,6 @@
   background-color: rgb(255, 94, 66);
 }
 
-.css {
+.python {
   background-color: rgb(0, 102, 255);
 }

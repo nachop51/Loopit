@@ -1,32 +1,41 @@
+import "./Logo.css";
 import logo from "../../assets/primary-logo.png";
 import blueLogo from "../../assets/BlueLogo.png";
-import { connect } from "react-redux";
-
 import { switchTheme } from "../../actions";
-import "./Logo.css";
 
+import { WiDaySunny, WiMoonWaxingCrescent3 } from "react-icons/wi";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 // oC means optionalClass
 const Logo = ({ link, oC, theme, switchTheme }) => {
   const handleMode = () => {
-    if (theme === "light") {
+    if (theme === "dark") {
       // ! DARK THEME
       // Primary color format: r, g, b
       document.documentElement.style.setProperty(
         "--primary-color",
         "55, 129, 243"
       );
+      document.documentElement.style.setProperty(
+        "--footer-color",
+        "55, 129, 243, 0.25"
+      );
       // Text color format: #hex
       document.documentElement.style.setProperty("--text-color", "#fff");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#aaa");
       // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#444");
+      document.documentElement.style.setProperty("--text-light", "#fff");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
         "#15151e"
+      );
+      document.documentElement.style.setProperty(
+        "--shadow-dark",
+        "4px 4px 12px rgba(225, 225, 225, 0.18)"
       );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#15151e");
@@ -35,6 +44,11 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       // Primary color format: r, g, b
       document.documentElement.style.setProperty(
         "--primary-color",
+        "145, 71, 255"
+      );
+
+      document.documentElement.style.setProperty(
+        "--footer-color",
         "145, 71, 255"
       );
       // Text color format: #hex
@@ -48,22 +62,28 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "--background-color",
         "#efeff1"
       );
+      document.documentElement.style.setProperty(
+        "--shadow-dark",
+        "4px 4px 12px rgba(0, 0, 0, 0.25)"
+      );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#f7f7f8");
     }
   };
 
+  useEffect(() => {
+    handleMode(theme);
+  });
+
   return (
-    <div>
-      <div className={oC ? oC : "logo"}>
-        <Link to={link}>
-          <img
-            className="logo-img"
-            src={theme === "light" ? logo : blueLogo}
-            alt="Loopit logo"
-          />
-        </Link>
-      </div>
+    <div className={oC ? oC : "logo"}>
+      <Link to={link}>
+        <img
+          className="logo-img"
+          src={theme === "light" ? logo : blueLogo}
+          alt="Loopit logo"
+        />
+      </Link>
       <button
         className="theme-btn"
         onClick={() => {
@@ -71,7 +91,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
           handleMode(theme);
         }}
       >
-        Change theme
+        {theme === "light" ? <WiDaySunny /> : <WiMoonWaxingCrescent3 />}
       </button>
     </div>
   );

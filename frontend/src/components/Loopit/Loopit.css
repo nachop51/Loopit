@@ -17,5 +17,13 @@
 }
 
 .loop-container {
-  @apply flex flex-row justify-center gap-6;
+  @apply flex flex-row justify-center;
+}
+
+.a {
+  flex: 3;
+}
+
+.b {
+  flex: 2;
 }

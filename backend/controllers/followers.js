@@ -1,11 +1,8 @@
 const Follower = require("../models/followers");
 const User = require("../models/users");
-const jwt = require("jsonwebtoken");
-const { key } = require("../config");
 
 const addFollower = async (req, res) => {
-  const { follow_id } = req.body;
-  const token = req.cookies.token;
+  const { follow_id } = req.params;
   if (!follow_id) {
     return res.status(400).json({
       status: "Error",
@@ -13,8 +10,7 @@ const addFollower = async (req, res) => {
     });
   }
   try {
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
@@ -46,17 +42,15 @@ const addFollower = async (req, res) => {
 };
 
 const deleteFollower = async (req, res) => {
-  const { username } = req.body;
-  const token = req.cookies.token;
-  if (!username) {
+  const { id } = req.params;
+  if (!id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - missing data",
     });
   }
   try {
-    const token_decode = jwt.decode(token, key);
-    const user_id = token_decode.userId;
+    const user_id = req.id;
     const user = await User.findByPk(user_id);
     if (!user) {
       return res.status(400).json({
@@ -65,9 +59,8 @@ const deleteFollower = async (req, res) => {
       });
     }
     const follower = await Follower.findOne({
-      where: { user_id: user_id, username: username },
+      where: { user_id: user_id, follow_id: id },
     });
-    console.log(follower);
     if (!follower) {
       return res.status(400).json({
         status: "Error",
