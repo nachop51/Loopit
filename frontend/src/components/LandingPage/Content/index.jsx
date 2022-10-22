@@ -6,7 +6,7 @@ import Laptop from "../../../assets/sombra-blanca-mockup-dark.png";
 
 // import Phone from "../../../assets/mockup-mobile.png";
 import Card from "./Card";
-import TitleAnimation from "../../LandingPage/TitleAnimation";
+import TitleAnimation from "../../LandingPage/Content/TitleAnimation";
 import "./Content.css";
 
 const Content = () => {
