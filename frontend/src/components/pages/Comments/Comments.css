@@ -17,6 +17,7 @@
   @apply w-5/6 px-5 py-20 rounded-lg border-solid border-2;
   background-color: transparent;
   border-color: rgb(var(--primary-color));
+  box-shadow: var(--shadow-dark);
 }
 
 .comments-list {
@@ -44,4 +45,18 @@
   @apply w-2/5 flex justify-center items-center flex-col pt-2 pb-2 mt-10 rounded-xl;
   background-color: rgb(var(--primary-color));
   color: var(--text-white);
+}
+
+.no-comments-container {
+  @apply flex justify-center;
+}
+
+.no-comments-container h2 {
+  @apply text-2xl;
+}
+
+.icon-comments {
+  @apply text-5xl text-center px-2 pb-2;
+  transform: translateY(-5px);
+  color: rgb(var(--primary-color));
 }

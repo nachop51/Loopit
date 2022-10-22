@@ -33,6 +33,10 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "--background-color",
         "#15151e"
       );
+      document.documentElement.style.setProperty(
+        "--shadow-dark",
+        "4px 4px 12px rgba(225, 225, 225, 0.18)"
+      );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#15151e");
     } else {
@@ -57,6 +61,10 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       document.documentElement.style.setProperty(
         "--background-color",
         "#efeff1"
+      );
+      document.documentElement.style.setProperty(
+        "--shadow-dark",
+        "4px 4px 12px rgba(0, 0, 0, 0.25)"
       );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#f7f7f8");

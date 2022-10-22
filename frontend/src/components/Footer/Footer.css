@@ -1,6 +1,7 @@
 .footer-container {
   @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full pt-6;
   background: rgb(var(--footer-color));
+  box-shadow: -4px -4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .footer-content {

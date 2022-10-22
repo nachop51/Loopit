@@ -47,7 +47,6 @@ const Nav = ({ children }) => {
       <div className="nav-container">
         {routes.map(({ id, icon, iconActive }) => (
           <Link
-            id={`${isVisible ? "hide-navigation" : ""}`}
             key={id}
             to={id}
             onClick={() => setActive(id)}

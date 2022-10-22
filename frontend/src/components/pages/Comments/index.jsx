@@ -4,6 +4,7 @@ import LoopItem from "../../LoopList/LoopItem";
 import LoadEditor from "../../Editor";
 import User from "../../LoopList/LoopItem/User";
 import LoadingSpinner from "../../../assets/nobg.gif";
+import { FaCommentSlash } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -95,7 +96,11 @@ const Comments = () => {
         <div className="comments-container">
           <div className="comments-list">
             {loop.Comments.length === 0 ? (
-              <h2>No comments to show</h2>
+              <div className="no-comments-container">
+                {" "}
+                <FaCommentSlash className="icon-comments" />{" "}
+                <h2 className="heading-primary">No comments yet</h2>
+              </div>
             ) : (
               loop.Comments.map((comment) => {
                 return (

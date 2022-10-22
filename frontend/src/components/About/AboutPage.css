@@ -7,7 +7,11 @@
 }
 
 .card-container {
-  @apply inline-block p-8 rounded-lg basis-6/12 text-center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* @apply flex flex-col items-center justify-center; */
+  @apply flex p-8 rounded-lg basis-6/12 text-center;
   @apply sm:basis-8/12;
   @apply md:basis-6/12;
   @apply lg:basis-4/12;
@@ -18,12 +22,13 @@
     rgb(var(--primary-color), 0.5),
     rgb(var(--primary))
   );
+  box-shadow: var(--shadow-dark);
 }
 
 .card-image-container {
   @apply flex justify-center items-center rounded-full bg-violet-600 shadow-2xl mb-4;
-  width: 350px;
-  height: 350px;
+  width: 230px;
+  height: 230px;
 }
 
 @media screen and (max-width: 1530px) {
@@ -37,8 +42,8 @@
 } */
 
 .card-circle {
-  width: 300px;
-  height: 300px;
+  width: 220px;
+  height: 220px;
   overflow: hidden;
   border-radius: 100%;
 }
