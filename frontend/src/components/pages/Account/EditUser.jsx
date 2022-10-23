@@ -3,6 +3,11 @@ import "./EditUser.css";
 import DataItem from "./DataItem";
 import loopit from "../../../api/loopit";
 import { updateUser } from "../../../actions";
+import {
+  validateEmail,
+  validateFullname,
+  validateUserRegister,
+} from "../../LandingPage/AuthButtons/validations";
 
 import { useState } from "react";
 import { Form, Field } from "react-final-form";
@@ -79,18 +84,21 @@ const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
                 component={buildInput}
                 initialValue={username}
                 label="Username"
+                validate={validateUserRegister}
               />
               <Field
                 name="email"
                 component={buildInput}
                 initialValue={email}
                 label="Email"
+                validate={validateEmail}
               />
               <Field
                 name="fullname"
                 component={buildInput}
                 initialValue={full_name}
                 label="Full Name"
+                validate={validateFullname}
               />
               <h4 className="edit-user-preferences">Preferences</h4>
               <div className="edit-user-div">

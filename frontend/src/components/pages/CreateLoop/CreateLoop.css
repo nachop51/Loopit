@@ -4,7 +4,6 @@
 
 .editor-container {
   @apply rounded-lg p-6 bg-slate-800 bg-opacity-80;
-  width: 98%;
   @apply ml-auto m-auto text-center;
   @apply sm:w-4/6;
   @apply md:w-4/6 ml-auto mr-10;

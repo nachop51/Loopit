@@ -26,8 +26,6 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       document.documentElement.style.setProperty("--text-color", "#fff");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#aaa");
-      // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#fff");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
@@ -35,7 +33,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       );
       document.documentElement.style.setProperty(
         "--shadow-dark",
-        "4px 4px 12px rgba(225, 225, 225, 0.18)"
+        "1px 1px 10px rgb(225, 225, 225, 0.4)"
       );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#15151e");
@@ -47,6 +45,8 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "145, 71, 255"
       );
 
+      document.documentElement.style.setProperty("--text-light", "#777");
+
       document.documentElement.style.setProperty(
         "--footer-color",
         "145, 71, 255"
@@ -55,8 +55,6 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       document.documentElement.style.setProperty("--text-color", "#444");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#222");
-      // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#666");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
@@ -64,7 +62,7 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       );
       document.documentElement.style.setProperty(
         "--shadow-dark",
-        "4px 4px 12px rgba(0, 0, 0, 0.25)"
+        "3px 3px 10px rgb(70, 22, 125, 0.4)"
       );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#f7f7f8");

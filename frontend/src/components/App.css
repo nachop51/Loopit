@@ -70,12 +70,12 @@ body {
 }
 
 .btn {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-2 mx-2 cursor-pointer shadow-md font-bold text-xs;
-  @apply sm:w-20 sm:text-base;
+  @apply rounded-lg bg-white border-none text-gray-800 border-2 border-gray-800 p-3 mx-2 cursor-pointer shadow-md font-bold text-xs;
+  @apply sm:w-20 sm:text-base sm:p-2;
   @apply md:w-28;
   @apply lg:w-32 lg:text-lg;
   color: rgb(var(--primary-color));
+  box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {

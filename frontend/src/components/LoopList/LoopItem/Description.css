@@ -15,7 +15,8 @@
 }
 
 .description-title {
-  @apply text-center text-2xl font-bold capitalize pb-2;
+  @apply text-xl;
+  @apply text-center sm:text-2xl md:text-2xl lg:text-2xl font-bold capitalize pb-2;
   color: var(--text-color);
 }
 

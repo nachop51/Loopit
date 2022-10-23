@@ -25,7 +25,9 @@
 }
 
 .profile-stats-pic {
-  @apply w-72 rounded-full mb-4;
+  @apply w-28 rounded-full mb-4;
+  @apply sm:w-40 md:w-60 lg:w-72 rounded-full mb-4;
+
   border: 2px solid rgb(var(--primary-color), 0.3);
 }
 
@@ -90,9 +92,6 @@
   cursor: pointer;
   background-color: rgb(var(--primary-color), 0.8);
   border: 1px solid rgb(var(--primary-color));
-}
-
-.profile-btn-edit {
 }
 
 .profile-btn-edit:hover,

@@ -11,7 +11,8 @@
 }
 
 .nav-links {
-  @apply relative p-4 rounded-full flex text-3xl;
+  @apply text-xl;
+  @apply relative p-4 rounded-full flex sm:text-3xl;
   color: rgb(var(--primary-color));
   transition: all 0.3s var(--animation-bezier);
 }

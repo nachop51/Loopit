@@ -4,6 +4,7 @@
 }
 
 .heading-primary {
-  @apply font-bold text-4xl text-center pb-10;
+  @apply text-2xl;
+  @apply font-bold sm:text-3xl md:text-4xl lg:text-4xl text-center pb-10;
   color: rgb(var(--primary-color));
 }
