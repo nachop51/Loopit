@@ -227,14 +227,13 @@ const getSaveUser = async (req, res) => {
   limit = parseInt(limit, 10);
   if (!page) page = 1;
   if (!limit) limit = 10;
+  console.log(page, limit);
   try {
     const id_user = req.id;
     const data = await sequelize.query(
-      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name, Loops.count_likes, count_comments, count_saves FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC;",
+      "SELECT Saves.loop_id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as language_name, Loops.count_likes, count_comments, count_saves FROM Saves JOIN Loops ON Saves.loop_id = Loops.id JOIN Users ON Loops.user_id = Users.id JOIN Languages ON Languages.id = Loops.language_id WHERE Saves.user_id = ? ORDER BY Loops.created_at DESC LIMIT ? OFFSET ?;",
       {
-        limit: limit,
-        offset: page * limit - limit,
-        replacements: [id_user],
+        replacements: [id_user, limit, page * limit - limit],
         type: sequelize.QueryTypes.SELECT,
       }
     );
