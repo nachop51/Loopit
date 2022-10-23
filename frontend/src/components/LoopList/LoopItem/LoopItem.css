@@ -17,11 +17,12 @@
 /* language + description */
 
 .user-info {
-  @apply relative flex flex-row flex-nowrap gap-3;
+  @apply relative flex flex-row flex-nowrap gap-3 text-xs;
 }
 
 .loop-buttons {
-  @apply absolute top-5 right-4 flex flex-row flex-nowrap gap-2 rounded-full;
+  @apply absolute right-0.5 top-6;
+  @apply absolute sm:top-5 sm:right-4 flex flex-row flex-nowrap gap-2 rounded-full;
 }
 
 .loop-buttons > * {
@@ -55,6 +56,17 @@
 
 .action-comment .icon {
   @apply text-2xl m-0.5;
+  @apply md:text-3xl lg:text-3xl xl:text-3xl;
+}
+
+.comment-button span {
+  @apply hidden;
+  @apply sm:inline md:inline lg:inline;
+}
+
+.action-comment span {
+  @apply hidden;
+  @apply sm:inline md:inline lg:inline sm:text-xs md:text-sm lg:text-base;
 }
 
 .comment-button {
