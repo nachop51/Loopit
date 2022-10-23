@@ -47,13 +47,13 @@ const Feedback = ({ loop, updateLoops, collection }) => {
     <div className="loop-info">
       <div className="heading-comments">
         <p>
-          <MdRecommend /> {like ? loop.count_likes + 1 : loop.count_likes}
+          <MdRecommend /> {loop.count_likes}
         </p>
         <p>
           <BsChat /> {loop.count_comments}
         </p>
         <p>
-          <IoBookmark /> {save ? loop.count_saves + 1 : loop.count_saves}
+          <IoBookmark /> {loop.count_saves}
         </p>
       </div>
       <div className="loop-info-buttons">

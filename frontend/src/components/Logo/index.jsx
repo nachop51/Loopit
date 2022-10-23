@@ -26,8 +26,6 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       document.documentElement.style.setProperty("--text-color", "#fff");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#aaa");
-      // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#fff");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
@@ -55,8 +53,6 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
       document.documentElement.style.setProperty("--text-color", "#444");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#222");
-      // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#666");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
