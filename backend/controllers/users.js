@@ -533,8 +533,48 @@ const loopsUsersFollowing = async (req, res) => {
   if (!limit) limit = 10;
   try {
     const loops = await sequelize.query(
-      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as Language FROM Followers JOIN Users ON User.id = Users.id JOIN JOIN Loops ON Loops.user_id = Followers.user_id JOIN Languages ON Languages.id = Loops.language_id WHERE Followers.user_id = ?;"
+      "SELECT Loops.id, Loops.name, Loops.description, Loops.content, Loops.filename, Users.username, Loops.created_at, Loops.updated_at, Languages.name as Language FROM Followers JOIN Users ON User.id = Users.id JOIN JOIN Loops ON Loops.user_id = Followers.follow_id JOIN Languages ON Languages.id = Loops.language_id WHERE Followers.user_id = ?;",
+      {
+        replacements: [req.id],
+        type: sequelize.QueryTypes.SELECT,
+      }
     );
+    if (!loops) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - No loops liked by the user yet",
+      });
+    }
+    const countLoops = await Loop.count({
+      where: { user_id: req.id },
+    });
+    const totalPages = Math.ceil(countLoops / limit);
+    const listloops = [];
+    for (let i of loops) {
+      const loop = {
+        id: i.id,
+        name: i.name,
+        description: i.description,
+        content: i.content,
+        filename: i.filename,
+        created_at: i.created_at,
+        user: {
+          username: i.username,
+        },
+        language: {
+          name: i.language_name,
+        },
+      };
+      listloops.push(loop);
+    }
+    res.status(200).json({
+      status: "OK",
+      pages: {
+        now: page,
+        total: totalPages,
+      },
+      loops: listloops,
+    });
   } catch (error) {
     res.status(400).json({
       status: "Error",
@@ -554,4 +594,5 @@ module.exports = {
   getLikesByUser: getLikesByUser,
   changeThemeMode: changeThemeMode,
   usersStats: usersStats,
+  loopsUsersFollowing: loopsUsersFollowing,
 };

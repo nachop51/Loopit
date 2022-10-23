@@ -9,6 +9,7 @@ const {
   getLikesByUser,
   changeThemeMode,
   usersStats,
+  loopsUsersFollowing,
 } = require("../controllers/users");
 
 //define routes for user
@@ -21,4 +22,6 @@ routeUser.get("/followers/:id", getFollowersByUser);
 routeUser.get("/likes", getLikesByUser);
 routeUser.get("/changeThemeMode", changeThemeMode);
 routeUser.get("/stats", usersStats);
+routeUser.get("/loopsFollows", loopsUsersFollowing);
+
 module.exports = routeUser;

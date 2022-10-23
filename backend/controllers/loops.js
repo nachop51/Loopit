@@ -328,6 +328,8 @@ const getLoopComments = async (req, res) => {
     if (SaveOrNone) {
       save = true;
     }
+    looop.dataValues.like = like;
+    looop.dataValues.save = save;
     looop.dataValues.Comments = comments;
     return res.status(200).json({
       status: "OK",
