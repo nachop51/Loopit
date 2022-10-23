@@ -1,7 +1,7 @@
 .footer-container {
-  background-position-y: 75%;
-  min-height: 22rem;
-  @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full;
+  @apply flex flex-col justify-end bg-cover absolute bottom-0 w-full pt-6;
+  background: rgb(var(--footer-color));
+  box-shadow: -4px -4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .footer-content {
@@ -10,18 +10,20 @@
 }
 
 .footer-container p a {
-  @apply text-white no-underline text-xl p-2;
+  @apply no-underline text-xl p-2;
   @apply xl:text-2xl;
+  color: var(--text-white);
 }
 
 .footer-container span {
-  @apply text-white font-medium mb-2;
+  @apply font-medium mb-2;
+  color: var(--text-white);
 }
 
 .footer-copy {
   @apply text-center text-xs mb-4 font-normal;
   @apply lg:text-xs xl:text-sm;
-  color: #fff;
+  color: var(--text-white);
 }
 
 #link-about {

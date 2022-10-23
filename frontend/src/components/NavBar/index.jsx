@@ -37,6 +37,7 @@ const Nav = ({ children }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (search === "") return;
     navigate("/l/search/" + search);
   };
 
@@ -58,6 +59,7 @@ const Nav = ({ children }) => {
       <div className="search">
         <form onSubmit={handleSubmit} className="search-form">
           <input
+            id={`${isVisible ? "hide-navigation-search" : ""}`}
             type="text"
             className={`bar ${isVisible ? "show-bar" : ""}`}
             value={search}

@@ -5,17 +5,9 @@ import { connect } from "react-redux";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
-import bgLight from "../../assets/violet1.svg";
-import bgDark from "../../assets/layered-waves-haikei (3).svg";
-
 const Footer = ({ theme }) => {
   return (
-    <footer
-      className="footer-container"
-      style={{
-        backgroundImage: `url(${theme === "light" ? bgLight : bgDark})`,
-      }}
-    >
+    <footer className="footer-container">
       <div className="footer-content">
         <Link to="/">
           <img src={image} alt="logo-footer" width={80} />

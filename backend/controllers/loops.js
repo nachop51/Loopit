@@ -353,6 +353,7 @@ const loopsMoreLiked = async (req, res) => {
         "count_likes",
         "count_comments",
         "count_saves",
+        "created_at",
       ],
       include: [
         {

@@ -1,5 +1,7 @@
 .buttons-container {
-  @apply absolute top-4 right-12;
+  top: 1.5rem;
+  right: 1rem;
+  @apply absolute;
   @apply sm:top-5 sm:right-12;
   @apply md:top-7 md:right-12;
   @apply lg:top-12 lg:right-12;

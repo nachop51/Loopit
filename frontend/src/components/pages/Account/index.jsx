@@ -44,6 +44,7 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
           following={account.following}
           loops={account.loops}
           saves={account.saves}
+          username={auth.username}
         />
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>

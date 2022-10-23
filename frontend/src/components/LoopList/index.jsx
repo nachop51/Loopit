@@ -70,6 +70,7 @@ const LoopList = ({
     } else if (collection === "search") {
       mapFrom = loops.search;
     }
+
     if (mapFrom.length === 0) {
       return (
         <div className="no-loops">
@@ -83,7 +84,7 @@ const LoopList = ({
   };
 
   const skeleton = () => {
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
+    return [0, 10].map((i) => {
       return (
         <div className="loop" key={i}>
           <div

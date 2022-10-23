@@ -26,7 +26,7 @@ const User = ({ username, time }) => {
       <Link to={"/l/users/" + username} className="user-info_link-profile">
         <div className="avatar">
           <img
-            src="https://i.pravatar.cc/300"
+            src={`https://avatars.dicebear.com/api/personas/${username}.svg`}
             className="avatar-img"
             alt="user-profile"
           />
@@ -38,18 +38,6 @@ const User = ({ username, time }) => {
       </Link>
     </div>
   );
-
-  // return (
-  //   <div className="user-info-esq">
-  //     <div className="avatar">
-  //       <Skeleton />
-  //     </div>
-  //     <div>
-  //       <h3>{<Skeleton />}</h3>
-  //       <span>{<Skeleton />}</span>
-  //     </div>
-  //   </div>
-  // );
 };
 
 User.propTypes = {

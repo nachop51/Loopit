@@ -84,7 +84,7 @@ export const fetchUser = () => async (dispatch) => {
 export const fetchLoops = () => async (dispatch) => {
   const response = await loopit.get("/loops/all", {
     params: {
-      limit: 50,
+      limit: 6,
     },
   });
 

@@ -1,48 +1,75 @@
 import "./AboutPage.css";
-import imgDani from "../../assets/Dani.jpg";
-import imgNacho from "../../assets/Nacho.jpg";
+import imgDani from "../../assets/danielle_serafim_1-min.jpg";
+import imgNacho from "../../assets/Nacho_Peralta_2.jpg";
 import imgVale from "../../assets/Vale.jpg";
-import imgMateo from "../../assets/Mateo.jpg";
+import imgMateo from "../../assets/Mateo.jpeg";
 import imgSanti from "../../assets/Santi.jpg";
-import { Carousel } from "react-responsive-carousel";
 import Logo from "../Logo";
 import Footer from "../Footer";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import CardAbout from "./CardAbout";
+const info = [
+  {
+    name: "Danielle Serafim",
+    rol: "Developer - UI Designer",
+    description:
+      "Danielle Serafim is a BrazilianNe-born, w York-based artist. She received her BFA from Parsons School of Design in 2016 and her MFA from the School of Visual Arts in 2018. Her work has been exhibited in New York, Los Angeles, and Brazil. She is currently a resident artist at the Lower East Side Printshop in New York City.",
+    img: imgDani,
+    linkedIn: "https://www.linkedin.com/in/danielle-serafim-850888156/",
+    instagram: "https://www.instagram.com/_danielleigyr/",
+    github: "https://github.com/DaAsuncion",
+  },
+  {
+    name: "Nacho Peralta",
+    rol: "Full Stack Developer",
+    description:
+      "Nacho Peralta is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
+    img: imgNacho,
+    linkedIn: "https://www.linkedin.com/in/ignacio-peralta-dev/",
+    instagram: "https://www.instagram.com/nachop51/",
+    github: "https://github.com/Nachop51",
+  },
+  {
+    name: "Vale",
+    rol: "Backend Developer",
+    description:
+      "Vale is a multidisciplinary artist based in New York City. She received her BFA from Parsons School of Design in 2016 and her MFA from the School of Visual Arts in 2018. Her work has been exhibited in New York, Los Angeles, and Brazil. She is currently a resident artist at the Lower East Side Printshop in New York City.",
+    img: imgVale,
+    linkedIn: "https://www.linkedin.com/in/valentin-repetto-6aa6711a0/",
+    instagram: "https://www.instagram.com/valerepetto14/",
+    github: "https://github.com/valerepetto14",
+  },
+  {
+    name: "Mateo",
+    rol: "Backend Developer / Project Manager",
+    description:
+      "Mateo is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
+    img: imgMateo,
+    linkedIn: "https://www.linkedin.com/in/mateo-arbini-1493691a8/",
+    instagram: "https://www.instagram.com/mateoarbini/",
+    github: "https://github.com/MateoArbini",
+  },
+  {
+    name: "Santi",
+    rol: "Frontend Developer / UX",
+    description:
+      "Santi is a multidisciplinary artist based in New York City. He received his BFA from Parsons School of Design in 2016 and his MFA from the School of Visual Arts in 2018. His work has been exhibited in New York, Los Angeles, and Brazil. He is currently a resident artist at the Lower East Side Printshop in New York City.",
+    img: imgSanti,
+    linkedIn: "https://www.linkedin.com/in/santiago-neira-4479501b7/",
+    instagram: "https://www.instagram.com/santiago.neira.771/",
+    github: "https://github.com/sanei1509",
+  },
+];
 const About = () => {
   return (
     <>
       <Logo link="/" />
-      <main className="about-carousel">
-        <Carousel
-          autoPlay
-          interval={5000}
-          showArrows
-          swipeable
-          infiniteLoop
-          centerMode
-        >
-          <div>
-            <img src={imgDani} alt="Dani" />
-            <p className="legend">Dani</p>
-          </div>
-          <div>
-            <img src={imgNacho} alt="Nacho" />
-            <p className="legend">Nacho</p>
-          </div>
-          <div>
-            <img src={imgVale} alt="Vale" />
-            <p className="legend">Vale</p>
-          </div>
-          <div>
-            <img src={imgMateo} alt="Mateo" />
-            <p className="legend">Mateo</p>
-          </div>
-          <div>
-            <img src={imgSanti} alt="Santi" />
-            <p className="legend">Santi</p>
-          </div>
-        </Carousel>
+      <main className="about">
+        <h1 className="heading-primary">Our team Project</h1>
+        <div className="about-container">
+          {info.map((item, i) => {
+            return <CardAbout user={item} key={i} />;
+          })}
+        </div>
       </main>
       <Footer />
     </>

@@ -18,16 +18,22 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "--primary-color",
         "55, 129, 243"
       );
+      document.documentElement.style.setProperty(
+        "--footer-color",
+        "55, 129, 243, 0.25"
+      );
       // Text color format: #hex
       document.documentElement.style.setProperty("--text-color", "#fff");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#aaa");
-      // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#444");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
         "#15151e"
+      );
+      document.documentElement.style.setProperty(
+        "--shadow-dark",
+        "4px 4px 12px rgba(225, 225, 225, 0.18)"
       );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#15151e");
@@ -38,16 +44,23 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "--primary-color",
         "145, 71, 255"
       );
+
+      document.documentElement.style.setProperty(
+        "--footer-color",
+        "145, 71, 255"
+      );
       // Text color format: #hex
       document.documentElement.style.setProperty("--text-color", "#444");
       // Text dark color format: #hex
       document.documentElement.style.setProperty("--text-dark", "#222");
-      // Text light color format: #hex
-      document.documentElement.style.setProperty("--text-light", "#666");
       // Background color format: #hex
       document.documentElement.style.setProperty(
         "--background-color",
         "#efeff1"
+      );
+      document.documentElement.style.setProperty(
+        "--shadow-dark",
+        "4px 4px 12px rgba(0, 0, 0, 0.25)"
       );
       // Navbar color format: #hex
       document.documentElement.style.setProperty("--nav-background", "#f7f7f8");

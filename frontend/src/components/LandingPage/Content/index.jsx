@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
-import Laptop from "../../../assets/mockup-dark.png";
-import Phone from "../../../assets/mockup-mobile.png";
+// import Laptop from "../../../assets/sombra-negra-mockup-blanco.png";
+import Laptop from "../../../assets/sombra-blanca-mockup-dark.png";
+
+// import Phone from "../../../assets/mockup-mobile.png";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
@@ -34,7 +36,7 @@ const Content = () => {
           </button>
         </article>
         <article className="intro-images">
-          <img className="intro-images__phone" src={Phone} alt="Phone" />
+          {/* <img className="intro-images__phone" src={Phone} alt="Phone" /> */}
           <img className="intro-images__laptop" src={Laptop} alt="Laptop" />
         </article>
       </section>
@@ -42,19 +44,19 @@ const Content = () => {
         <TitleAnimation title="Awesome features!" width={17} />
         <div className="row">
           <Card
-            label="Share your code!"
+            label="Follow other programmers"
             text="Share your code with the world and get feedback from other programmers."
           >
             <FiShare2 className="feature-icon" />
           </Card>
           <Card
-            label="Copy"
+            label="Easily search code"
             text="Instantly copy code snippets to your clipboard."
           >
             <FiCopy className="feature-icon" />
           </Card>
           <Card
-            label="Download the code!"
+            label="Save your favorite solutions"
             text="Download the code to your computer in just one click!"
           >
             <FiDownload className="feature-icon" />
