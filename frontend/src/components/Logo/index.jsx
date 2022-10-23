@@ -45,6 +45,8 @@ const Logo = ({ link, oC, theme, switchTheme }) => {
         "145, 71, 255"
       );
 
+      document.documentElement.style.setProperty("--text-light", "#aaa");
+
       document.documentElement.style.setProperty(
         "--footer-color",
         "145, 71, 255"
