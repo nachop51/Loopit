@@ -61,7 +61,8 @@
 .feature-box {
   background: transparent;
   border: 1px solid rgb(var(--primary-color));
-  box-shadow: 1px 1px 10px rgb(225, 225, 225, 0.4);
+  box-shadow: var(--shadow-dark);
+  /* box-shadow: 1px 1px 10px rgb(225, 225, 225, 0.4); */
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 

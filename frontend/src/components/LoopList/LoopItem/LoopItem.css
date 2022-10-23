@@ -33,7 +33,8 @@
 }
 
 .loop-content {
-  @apply py-5 px-4 rounded-md mt-2 shadow-2xl;
+  @apply py-5 px-4 rounded-md mt-2 shadow-2xl text-xs;
+  @apply sm:text-sm md:text-base lg:text-base;
   background-color: #15151ee8;
   color: rgb(255, 250, 205);
 }
