@@ -5,13 +5,13 @@
 
 .user-info_username {
   @apply px-1 pt-1 text-sm;
-  @apply sm:px-2 sm:pt-2 text-base;
-  @apply md:px-2 sm:pt-2 text-lg;
+  @apply sm:px-2 sm:pt-2 md:text-base;
+  @apply md:px-2 sm:pt-2 lg:text-lg;
   color: var(--text-color);
 }
 
 .user-info_time {
-  @apply pl-2;
+  @apply pl-2 text-sm;
   color: rgb(var(--primary-color));
 }
 

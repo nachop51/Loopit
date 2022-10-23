@@ -9,7 +9,8 @@
 }
 
 .heading-secondary {
-  @apply text-3xl font-bold text-center;
+  @apply text-xl;
+  @apply md:text-2xl lg:text-3xl font-bold text-center;
   color: rgb(var(--primary-color));
 }
 
@@ -34,7 +35,8 @@
 }
 
 .loop-content-comment {
-  @apply ml-6;
+  @apply mt-2 text-sm md:text-base lg:text-base 2xl:text-lg;
+  /* @apply sm:ml-6; */
 }
 
 .comments-container p {

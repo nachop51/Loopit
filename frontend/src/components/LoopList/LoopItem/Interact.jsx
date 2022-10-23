@@ -15,9 +15,19 @@ const Interact = ({ content, filename }) => {
     a.remove();
   };
 
+  const handleShare = () => {
+    const shareData = {
+      title: "Loop",
+      text: "Loop",
+      url: "http://localhost:3001/l",
+    };
+
+    navigator.share(shareData);
+  };
+
   return (
     <div className="loop-buttons">
-      <div title="Share">
+      <div title="Share" onClick={handleShare}>
         <RiShareForwardFill />
       </div>
       <div
