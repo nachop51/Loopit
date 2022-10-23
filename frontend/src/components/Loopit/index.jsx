@@ -6,9 +6,10 @@ const LoopitApp = () => {
   return (
     <>
       <main className="loops">
-        <h1 className="heading-primary">Loops</h1>
         <div className="loop-container">
-          <LoopList collection="all" oC="a" />
+          <LoopList collection="all" oC="a">
+            <h1 className="heading-primary">Loops</h1>
+          </LoopList>
           <Aside oC="b" />
         </div>
       </main>

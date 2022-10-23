@@ -21,8 +21,8 @@ const Aside = ({ oC }) => {
   }, []);
   return (
     <aside className={"aside " + oC}>
-      <h2 className="heading-aside">Popular</h2>
       <div className="aside-container">
+        <h2 className="heading-aside">Popular</h2>
         {populates.map((item) => {
           return <AsideItem item={item} key={item.id} />;
         })}
