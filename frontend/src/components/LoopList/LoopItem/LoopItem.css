@@ -92,3 +92,7 @@
 .heading-comments {
   @apply mt-4 text-base font-bold;
 }
+
+.heading-comments p {
+  @apply text-center;
+}
