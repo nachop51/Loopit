@@ -17,6 +17,6 @@ routeLoops.put("/update/:id", updateLoop);
 routeLoops.get("/all", getLoops);
 routeLoops.get("/comments/:loop_id", getLoopComments);
 routeLoops.get("/moreLiked", loopsMoreLiked);
-routeLoops.get("/random", loopsRandom);
+routeLoops.get("/public", loopsRandom);
 
 module.exports = routeLoops;
