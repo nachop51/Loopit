@@ -27,6 +27,7 @@ const LoopList = ({
   loops,
   hasData,
   username,
+  children,
 }) => {
   useEffect(() => {
     setHasData();
@@ -105,6 +106,7 @@ const LoopList = ({
 
   return (
     <div className={"loop-list " + oC}>
+      {children}
       {!hasData ? skeleton() : handleRender()}
     </div>
   );

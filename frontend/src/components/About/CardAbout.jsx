@@ -8,7 +8,8 @@ const CardAbout = ({ user }) => {
           <img className="card-image" src={user.img} alt={user.name} />
         </div>
       </div>
-      <h1 className="card-title">{user.rol}</h1>
+      <h2 className="card-title">{user.name}</h2>
+      <h3 className="card-rol">{user.rol}</h3>
       <div className="links-container">
         <a href={user.linkedIn} target="_blank" rel="noreferrer">
           <BsLinkedin className="icons" />

@@ -1,11 +1,17 @@
 .loop {
   width: 95%;
-  @apply sm:w-10/12 p-4 relative rounded-2xl border-2 border-solid;
+  @apply p-4 relative rounded-2xl border-2 border-solid;
   box-shadow: var(--shadow-light);
   border-color: rgb(var(--primary-color), 0.3);
   color: var(--text-color);
   min-width: 80%;
   background-color: var(--background-color);
+}
+
+@media (min-width: 640px) {
+  .loop {
+    width: 85%;
+  }
 }
 
 .avatar {
