@@ -314,13 +314,8 @@ const getSaveUser = async (req, res) => {
   }
 };
 
-const getFollowersByUser = async (req, res) => {
+const getFollowingsByUser = async (req, res) => {
   const { id } = req.params;
-  let { limit, page } = req.query;
-  page = parseInt(page, 10);
-  limit = parseInt(limit, 10);
-  if (!page) page = 1;
-  if (!limit) limit = 10;
   if (!id) {
     return res.status(400).json({
       status: "Error",
@@ -336,10 +331,8 @@ const getFollowersByUser = async (req, res) => {
       });
     }
     const data = await sequelize.query(
-      "SELECT Users.id, Users.username, Users.email, Users.full_name FROM Followers JOIN Users ON Followers.user_id = Users.id WHERE Followers.user_id = ?;",
+      "SELECT Users.id, Users.username  FROM Followers JOIN Users ON Followers.user_id = Users.id WHERE Followers.user_id = ?;",
       {
-        limit: limit,
-        offset: page * limit - limit,
         replacements: [id],
         type: sequelize.QueryTypes.SELECT,
       }
@@ -350,17 +343,9 @@ const getFollowersByUser = async (req, res) => {
         error: "Bad Request - followers empty",
       });
     }
-    const countFollowers = await Follower.count({
-      where: { user_id: id },
-    });
-    const totalPages = Math.ceil(countFollowers / limit);
     return res.status(200).json({
       status: "OK",
-      pages: {
-        now: page,
-        total: totalPages,
-      },
-      followers: data,
+      followings: data,
     });
   } catch (error) {
     res.status(400).json({
@@ -368,6 +353,42 @@ const getFollowersByUser = async (req, res) => {
       error: error,
     });
   }
+};
+
+const getFollowersByUser = async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({
+      status: "Error",
+      error: "Bad Request - Missing data",
+    });
+  }
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
+    const data = await sequelize.query(
+      "SELECT Users.id, Users.username FROM Followers JOIN Users ON Followers.user_id = Users.id WHERE Followers.follow_id = ?;",
+      {
+        replacements: [id],
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    if (!data) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - following empty",
+      });
+    }
+    res.status(200).json({
+      status: "OK",
+      followers: data,
+    });
+  } catch (error) {}
 };
 
 const getLikesByUser = async (req, res) => {
@@ -594,4 +615,5 @@ module.exports = {
   changeThemeMode: changeThemeMode,
   usersStats: usersStats,
   loopsUsersFollowing: loopsUsersFollowing,
+  getFollowingsByUser: getFollowingsByUser,
 };
