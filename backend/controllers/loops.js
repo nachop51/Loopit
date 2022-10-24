@@ -388,6 +388,51 @@ const loopsMoreLiked = async (req, res) => {
   }
 };
 
+const loopsRandom = async (req, res) => {
+  try {
+    const loops = await Loop.findAll({
+      order: sequelize.random(),
+      limit: 20,
+      attributes: [
+        "id",
+        "name",
+        "description",
+        "count_likes",
+        "count_comments",
+        "count_saves",
+        "created_at",
+      ],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Language,
+          as: "language",
+          attributes: ["name"],
+        },
+      ],
+    });
+    if (!loops) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Loop list is empty",
+      });
+    }
+    return res.status(200).json({
+      status: "OK",
+      loops: loops,
+    });
+  }catch(error){
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    })
+  }
+};
+
 module.exports = {
   addLoop: addLoop,
   deleteLoop: deleteLoop,
@@ -395,4 +440,5 @@ module.exports = {
   getLoops: getLoops,
   getLoopComments: getLoopComments,
   loopsMoreLiked: loopsMoreLiked,
+  loopsRandom: loopsRandom,
 };
