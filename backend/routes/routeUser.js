@@ -20,7 +20,7 @@ routeUser.get("/all", getUsers);
 routeUser.get("/profile/:username", getUserByusername);
 routeUser.get("/saves", getSaveUser);
 routeUser.get("/followers/:id", getFollowersByUser);
-routeUser.get("/followings/:id", getFollowingsByUser);
+routeUser.get("/following/:id", getFollowingsByUser);
 routeUser.get("/likes", getLikesByUser);
 routeUser.get("/changeThemeMode", changeThemeMode);
 routeUser.get("/stats", usersStats);
