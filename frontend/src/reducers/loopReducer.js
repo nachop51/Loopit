@@ -3,39 +3,65 @@ const initialState = {
   saved: [],
   created: [],
   search: [],
-  hasData: false,
+  hasMore: true,
 };
 
 const loopReducer = (state = initialState, action) => {
+  let setHasMore;
   switch (action.type) {
-    case "SET_HAS_DATA":
-      return {
-        ...state,
-        hasData: false,
-      };
     case "FETCH_LOOPS":
+      if (action.payload !== undefined) {
+        setHasMore = action.payload.length !== 0;
+      } else {
+        setHasMore = false;
+      }
       return {
         ...state,
-        all: action.payload,
-        hasData: true,
+        hasMore: setHasMore,
+        all:
+          state.hasMore !== true ? state.all : state.all.concat(action.payload),
       };
     case "FETCH_SAVED":
+      if (action.payload !== undefined) {
+        setHasMore = action.payload.length !== 0;
+      } else {
+        setHasMore = false;
+      }
       return {
         ...state,
-        saved: action.payload,
-        hasData: true,
+        hasMore: setHasMore,
+        saved:
+          state.hasMore !== true
+            ? state.saved
+            : state.saved.concat(action.payload),
       };
     case "FETCH_CREATED":
+      if (action.payload !== undefined) {
+        setHasMore = action.payload.length !== 0;
+      } else {
+        setHasMore = false;
+      }
       return {
         ...state,
-        created: action.payload,
-        hasData: true,
+        hasMore: setHasMore,
+        created:
+          state.hasMore !== true
+            ? state.created
+            : state.created.concat(action.payload),
       };
     case "FETCH_SEARCH":
+      if (action.payload !== undefined) {
+        setHasMore = action.payload.length !== 0;
+      } else {
+        setHasMore = false;
+      }
       return {
         ...state,
-        search: action.payload,
-        hasData: true,
+        hasMore: setHasMore,
+        search:
+          state.hasMore !== true
+            ? state.search
+            : state.search.concat(action.payload),
       };
     case "UPDATE_LOOPS":
       let updatedLoops = {
@@ -73,15 +99,13 @@ const loopReducer = (state = initialState, action) => {
       } else if (action.payload.collection === "search") {
         updatedLoops.search = mapFrom;
       }
-      updatedLoops.hasData = true;
+      updatedLoops.hasMore = true;
       return updatedLoops;
-    case "CLEAR_LOOPS":
+    case "CLEAR_SEARCH":
       return {
-        all: [],
-        saved: [],
-        created: [],
+        ...state,
         search: [],
-        hasData: false,
+        hasMore: true,
       };
     case "SIGN_OUT":
       return {
@@ -89,7 +113,7 @@ const loopReducer = (state = initialState, action) => {
         saved: [],
         created: [],
         search: [],
-        hasData: false,
+        hasMore: false,
       };
     default:
       return state;
