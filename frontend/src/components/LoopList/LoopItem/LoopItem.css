@@ -11,9 +11,7 @@
 }
 
 .infinite-scroll-component__outerdiv {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  @apply w-full h-full overflow-auto mt-6;
 }
 
 @media (min-width: 640px) {
@@ -23,9 +21,8 @@
 }
 
 .avatar {
-  @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none;
+  @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none cursor-pointer;
   z-index: 2;
-  cursor: pointer;
 }
 
 /* language + description */
@@ -51,7 +48,6 @@
   @apply py-5 px-4 rounded-md mt-2 shadow-2xl text-xs;
   @apply sm:text-sm md:text-base lg:text-base;
   background-color: #15151ee8;
-  color: rgb(255, 250, 205);
 }
 
 .loop-info-buttons {

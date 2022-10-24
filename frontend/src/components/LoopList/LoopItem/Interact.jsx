@@ -4,7 +4,7 @@ import { MdContentCopy } from "react-icons/md";
 import { HiDownload } from "react-icons/hi";
 import PropTypes from "prop-types";
 
-const Interact = ({ content, filename }) => {
+const Interact = ({ content, filename, title, id }) => {
   const createToDownload = () => {
     const a = document.createElement("a");
     const blob = new Blob([content], { type: "txt" });
@@ -17,9 +17,9 @@ const Interact = ({ content, filename }) => {
 
   const handleShare = () => {
     const shareData = {
-      title: "Loop",
-      text: "Loop",
-      url: "http://localhost:3001/l",
+      title,
+      text: content,
+      url: `http://www.loopit-mvp.com/l/comments/${id}`,
     };
 
     navigator.share(shareData);
