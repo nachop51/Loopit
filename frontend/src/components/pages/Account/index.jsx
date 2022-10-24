@@ -98,14 +98,17 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
                 Edit
               </button>
             )}
-
             <button onClick={() => signOut()} className="profile-btn-sign-out">
               Sign Out
             </button>
           </div>
         </div>
       </div>
-      <LoopList collection="created" />
+      <LoopList collection="created">
+        <h2 className="heading-primary" id="loops-title">
+          Your loops
+        </h2>
+      </LoopList>
     </main>
   );
 };

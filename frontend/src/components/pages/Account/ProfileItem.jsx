@@ -1,6 +1,8 @@
-import { useState } from "react";
 import DataItem from "./DataItem";
 import ModalUsers from "./ModalUsers";
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProfileItem = ({
   followers,
@@ -32,12 +34,20 @@ const ProfileItem = ({
           <h3>Following</h3>
           <h4>{following}</h4>
         </div>
-        <DataItem name="Loops saved" stat={saves} className="stats-container" />
-        <DataItem
-          name="Loops created"
-          stat={loops}
-          className="stats-container"
-        />
+        <Link to="/l/saved">
+          <DataItem
+            name="Loops saved"
+            stat={saves}
+            className="stats-container"
+          />
+        </Link>
+        <a href="#loops-title">
+          <DataItem
+            name="Loops created"
+            stat={loops}
+            className="stats-container"
+          />
+        </a>
       </div>
       <ModalUsers
         isOpen={modalFollowers}

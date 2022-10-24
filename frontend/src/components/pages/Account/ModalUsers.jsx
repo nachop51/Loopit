@@ -20,10 +20,6 @@ const ModalUsers = ({ isOpen, closeModal, mode, id }) => {
     fetch();
   }, [setUsers, id, mode]);
 
-  if (users === []) {
-    return <img src={LoadingSpinner} alt="Spinner" className="spinner" />;
-  }
-
   return (
     <div onClick={closeModal} className={`modal ${isOpen ? "show" : ""}`}>
       <div onClick={(e) => e.stopPropagation()}>
