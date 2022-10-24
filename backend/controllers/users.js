@@ -331,7 +331,7 @@ const getFollowingsByUser = async (req, res) => {
       });
     }
     const data = await sequelize.query(
-      "SELECT Users.id, Users.username  FROM Followers JOIN Users ON Followers.user_id = Users.id WHERE Followers.user_id = ?;",
+      "SELECT Users.id, Users.username  FROM Followers JOIN Users ON Followers.follow_id = Users.id WHERE Followers.user_id = ?;",
       {
         replacements: [id],
         type: sequelize.QueryTypes.SELECT,
