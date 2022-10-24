@@ -103,3 +103,22 @@
 .button-container {
   @apply flex flex-col items-center justify-center w-full;
 }
+
+.users-container {
+  @apply flex flex-col items-start justify-center p-4 overflow-y-auto;
+  max-height: 80vh;
+  color: var(--text-color);
+}
+
+.users-container::-webkit-scrollbar {
+  display: none;
+}
+
+button.button-follow {
+  @apply w-auto h-10 text-sm;
+}
+
+.modal-users-title {
+  text-transform: capitalize;
+  color: var(--text-white);
+}

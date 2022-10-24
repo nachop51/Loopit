@@ -45,6 +45,7 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
           loops={account.loops}
           saves={account.saves}
           username={auth.username}
+          id={auth.id}
         />
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>

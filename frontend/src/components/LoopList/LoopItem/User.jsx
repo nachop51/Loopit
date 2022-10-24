@@ -2,7 +2,7 @@ import "./User.css";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const User = ({ username, time }) => {
+const User = ({ username, time, children }) => {
   const calulateTime = () => {
     const date = new Date(time);
     const now = new Date();
@@ -33,16 +33,17 @@ const User = ({ username, time }) => {
         </div>
         <div>
           <h3 className="user-info_username">{username}</h3>
-          <span className="user-info_time">{calulateTime()}</span>
+          <span className="user-info_time">{time ? calulateTime() : null}</span>
         </div>
       </Link>
+      {children ? children : null}
     </div>
   );
 };
 
 User.propTypes = {
   username: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
 };
 
 export default User;

@@ -57,6 +57,7 @@ const LoopList = ({
     }, 1000);
   };
 
+  // TODO: Add a spinner instead of a skeleton.
   const skeleton = () => {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
       return (
@@ -91,38 +92,6 @@ const LoopList = ({
   ) : (
     <h2>Oops, looks like there's no loops to show</h2>
   );
-
-  // useEffect(() => {
-  //   setHasData();
-  //   if (collection === "all") {
-  //     fetchLoops();
-  //   } else if (collection === "saved") {
-  //     fetchSaves();
-  //   } else if (collection === "created") {
-  //     fetchCreated(username);
-  //   } else if (collection === "search") {
-  //     const params = {};
-  //     if (user) {
-  //       params.term = user;
-  //       params.option = "username";
-  //     } else {
-  //       params.term = search;
-  //       params.option = "search";
-  //     }
-  //     fetchSearch(params.term, params.option);
-  //   }
-
-  // const handleRender = () => {
-  //   let mapFrom = [];
-  //   if (collection === "all") {
-  //     mapFrom = loops.all;
-  //   } else if (collection === "saved") {
-  //     mapFrom = loops.saved;
-  //   } else if (collection === "created") {
-  //     mapFrom = loops.created;
-  //   } else if (collection === "search") {
-  //     mapFrom = loops.search;
-  //   }
 
   return (
     <div className={"loop-list " + oC}>
