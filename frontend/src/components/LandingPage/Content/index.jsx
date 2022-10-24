@@ -12,8 +12,8 @@ import "./Content.css";
 const Content = () => {
   const navigate = useNavigate();
 
-  const goApp = () => {
-    navigate("/l");
+  const goApp = (link) => {
+    navigate(link);
   };
 
   return (
@@ -28,12 +28,20 @@ const Content = () => {
             code with the world. Create a profile, upload your code, and share
             it with your friends and followers.
           </p>
-          <button
-            className="intro-text__button btn btn-animation btn-primary"
-            onClick={goApp}
-          >
-            Go to app
-          </button>
+          <div className="intro-text__button-container">
+            <button
+              className="intro-text__button btn btn-animation btn-primary"
+              onClick={goApp("/l")}
+            >
+              Go to app
+            </button>
+            <button
+              className="intro-text__button btn btn-animation"
+              onClick={goApp("/public")}
+            >
+              Preview
+            </button>
+          </div>
         </article>
         <article className="intro-images">
           {/* <img className="intro-images__phone" src={Phone} alt="Phone" /> */}
