@@ -12,9 +12,19 @@ const Footer = ({ theme }) => {
         <Link to="/">
           <img src={image} alt="logo-footer" width={80} />
         </Link>
-        <Link to="/about" id="link-about" className="/about">
-          <span>About us</span>
-        </Link>
+        <div className="">
+          <Link to="/about" id="link-about" className="/about">
+            <span>About us&nbsp;</span>
+          </Link>
+          |
+          <a
+            href="mailto:loopitshare@gmail.com"
+            id="link-about"
+            className="/about"
+          >
+            <span>&nbsp;Report bug</span>
+          </a>
+        </div>
         <p className="container-icons">
           <a
             href="https://www.instagram.com/loopit.mvp/"
