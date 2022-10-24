@@ -9,7 +9,6 @@ const Aside = ({ oC }) => {
   const fetchPopulates = async () => {
     try {
       const response = await loopit.get("/loops/moreLiked");
-      console.log(response.data.loops);
       setPopulates(response.data.loops);
     } catch (e) {
       console.log(e);

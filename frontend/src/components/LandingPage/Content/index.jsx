@@ -9,7 +9,7 @@ import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
 import "./Content.css";
 
-const Content = () => {
+const Content = ({ userStatus, openModal }) => {
   const navigate = useNavigate();
 
   const goApp = (link) => {
@@ -31,13 +31,16 @@ const Content = () => {
           <div className="intro-text__button-container">
             <button
               className="intro-text__button btn btn-animation btn-primary"
-              onClick={goApp("/l")}
+              onClick={() => {
+                if (userStatus) goApp("/l");
+                else openModal();
+              }}
             >
               Go to app
             </button>
             <button
               className="intro-text__button btn btn-animation"
-              onClick={goApp("/public")}
+              onClick={() => goApp("/public")}
             >
               Preview
             </button>

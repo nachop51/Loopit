@@ -27,7 +27,7 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
   return (
     <>
       <Routes>
-        <Route index element={<LandingPage />} />
+        <Route index element={<LandingPage userStatus={isSignedIn} />} />
         <Route
           path="l/*"
           element={<Appliaction userStatus={isSignedIn} id={id} />}
