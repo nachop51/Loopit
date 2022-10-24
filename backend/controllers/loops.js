@@ -396,6 +396,7 @@ const loopsRandom = async (req, res) => {
       attributes: [
         "id",
         "name",
+        "content",
         "description",
         "count_likes",
         "count_comments",
