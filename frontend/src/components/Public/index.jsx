@@ -32,7 +32,7 @@ const Public = () => {
       <AuthButtons />
       <h1 className="heading-primary">Public loops</h1>
       {loops.map((loop) => (
-        <LoopItem collection={"all"} key={loop._id} loop={loop} />
+        <LoopItem collection={"all"} key={loop.id} loop={loop} />
       ))}
       <Footer />
     </>
