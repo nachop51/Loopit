@@ -81,35 +81,45 @@ export const fetchUser = () => async (dispatch) => {
   }
 };
 
-export const fetchLoops = () => async (dispatch) => {
-  const response = await loopit.get("/loops/all", {
-    params: {
-      limit: 6,
-    },
-  });
+/**
+ *
+ * @param {string} collection Fetch from all, saved, created, search
+ * @param {int} page Page number
+ * @param {string} option Option to fetch from OPTIONAL
+ * @param {string} value Value to fetch from OPTIONAL
+ */
+export const fetchLoops =
+  (collection, page, option, value) => async (dispatch) => {
+    let endpoint = "";
+    const params = {
+      limit: 10,
+      page,
+    };
+    let action = "FETCH_LOOPS";
 
-  dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
-};
+    if (collection === "all") {
+      endpoint = "/loops/all";
+    } else if (collection === "saved") {
+      endpoint = "/users/saves";
+      action = "FETCH_SAVED";
+    } else if (collection === "created") {
+      endpoint = `/loops/all?username=${value}`;
+      action = "FETCH_CREATED";
+    } else if (collection === "search") {
+      endpoint = `/loops/all?${option}=${value}`;
+      action = "FETCH_SEARCH";
+    }
 
-export const fetchSaves = () => async (dispatch) => {
-  const response = await loopit.get("/users/saves");
+    try {
+      const response = await loopit.get(endpoint, {
+        params,
+      });
 
-  dispatch({ type: "FETCH_SAVED", payload: response.data.loops });
-};
-
-export const fetchCreated = (username) => async (dispatch) => {
-  if (username) {
-    const response = await loopit.get(`/loops/all?username=${username}`);
-
-    dispatch({ type: "FETCH_CREATED", payload: response.data.loops });
-  }
-};
-
-export const fetchSearch = (user, option) => async (dispatch) => {
-  const response = await loopit.get(`/loops/all?${option}=${user}`);
-
-  dispatch({ type: "FETCH_SEARCH", payload: response.data.loops });
-};
+      dispatch({ type: action, payload: response.data.loops });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 export const updateLoops = (collection, action, state, id) => {
   return {
@@ -123,9 +133,9 @@ export const updateLoops = (collection, action, state, id) => {
   };
 };
 
-export const clearLoops = () => {
+export const clearSearch = () => {
   return {
-    type: "CLEAR_LOOPS",
+    type: "CLEAR_SEARCH",
   };
 };
 
