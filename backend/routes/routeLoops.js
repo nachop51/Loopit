@@ -6,6 +6,7 @@ const {
   getLoops,
   getLoopComments,
   loopsMoreLiked,
+  loopsRandom,
 } = require("../controllers/loops");
 const { route } = require("./routeAuth");
 
@@ -16,5 +17,6 @@ routeLoops.put("/update/:id", updateLoop);
 routeLoops.get("/all", getLoops);
 routeLoops.get("/comments/:loop_id", getLoopComments);
 routeLoops.get("/moreLiked", loopsMoreLiked);
+routeLoops.get("/random", loopsRandom);
 
 module.exports = routeLoops;
