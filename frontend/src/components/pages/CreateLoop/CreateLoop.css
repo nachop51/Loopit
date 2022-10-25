@@ -9,6 +9,7 @@
   @apply md:w-4/6 ml-auto mr-10;
   @apply lg:w-9/12 m-auto;
   background-color: var(--background-editor);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .monaco-editor * {
@@ -65,6 +66,7 @@ select.editor-req {
 
 .inputs-required input,
 .inputs-required select {
+  border: var(--editor-input-border);
   background-color: var(--editor-inputs);
   color: var(--editor-input-text);
   @apply !border-gray-700;

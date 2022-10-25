@@ -79,7 +79,12 @@ const CreateLoop = ({ user_id, editorTheme }) => {
     );
     document.documentElement.style.setProperty(
       "--editor-input-text",
-      "#15151e",
+      "#15151e"
+    );
+
+    document.documentElement.style.setProperty(
+      "--editor-input-border",
+      "rgb(220, 220, 220)"
     );
   } else {
     document.documentElement.style.setProperty(
@@ -93,7 +98,11 @@ const CreateLoop = ({ user_id, editorTheme }) => {
     document.documentElement.style.setProperty("--editor-inputs", "#15151e");
     document.documentElement.style.setProperty(
       "--editor-input-text",
-      "rgb(220, 220, 220)",
+      "rgb(220, 220, 220)"
+    );
+    document.documentElement.style.setProperty(
+      "--editor-input-border",
+      "default"
     );
   }
   return (
