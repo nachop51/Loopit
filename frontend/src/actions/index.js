@@ -42,6 +42,7 @@ export const checkUserAuth = () => async (dispatch) => {
 
   try {
     const response = await loopit.get("/auth/verify");
+    console.log(response.data);
     switch (response.data.status) {
       case "authorized":
         payload.status = true;

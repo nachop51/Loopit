@@ -22,7 +22,7 @@
 
   /**EDITOR**/
   --background-editor: rgb(30, 41, 59);
-  --input-container-editor: rgb(30, 41, 59);
+  --input-container-editor: rgb(30 41 59 / 0.8);
 }
 
 *:not(.editor) {

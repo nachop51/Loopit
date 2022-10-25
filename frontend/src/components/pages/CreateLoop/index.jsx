@@ -66,9 +66,35 @@ const CreateLoop = ({ user_id, editorTheme }) => {
 
     document.documentElement.style.setProperty(
       "--input-container-editor",
-      "#000"
+      "rgb(220, 220, 220)"
+    );
+
+    document.documentElement.style.setProperty(
+      "--input-editor",
+      "rgb(220, 220, 220)"
+    );
+    document.documentElement.style.setProperty(
+      "--editor-inputs",
+      "rgb(240, 240, 240)"
+    );
+    document.documentElement.style.setProperty(
+      "--editor-input-text",
+      "#15151e",
     );
   } else {
+    document.documentElement.style.setProperty(
+      "--background-editor",
+      "rgb(30, 41, 59)"
+    );
+    document.documentElement.style.setProperty(
+      "--input-container-editor",
+      "rgb(30 41 59 / 0.8)"
+    );
+    document.documentElement.style.setProperty("--editor-inputs", "#15151e");
+    document.documentElement.style.setProperty(
+      "--editor-input-text",
+      "rgb(220, 220, 220)",
+    );
   }
   return (
     <main className="editor">

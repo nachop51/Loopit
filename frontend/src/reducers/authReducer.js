@@ -33,6 +33,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         id: action.payload.id,
         username: action.payload.username,
         theme: action.payload.theme,
+        editorTheme: action.payload.editorTheme,
       };
     case "SWITCH_THEME":
       return {

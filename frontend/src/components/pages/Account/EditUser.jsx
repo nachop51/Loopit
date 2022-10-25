@@ -143,11 +143,11 @@ const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
                   {editorTheme === "vs-dark" ? (
                     <>
                       <option value="vs-dark">Dark theme</option>
-                      <option value="light">Light theme</option>
+                      <option value="vs-light">Light theme</option>
                     </>
                   ) : (
                     <>
-                      <option value="light">Light theme</option>
+                      <option value="vs-light">Light theme</option>
                       <option value="vs-dark">Dark theme</option>
                     </>
                   )}
