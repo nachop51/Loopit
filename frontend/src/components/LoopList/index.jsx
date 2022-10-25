@@ -1,7 +1,7 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
 // import loopit from "../../api/loopit";
-import { fetchLoops, clearSearch } from "../../actions";
+import { fetchLoops, clearLoops } from "../../actions";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -20,39 +20,43 @@ const LoopList = ({
   children, // * children from parent
   oC = "", // * optional class
   username, // ! This is the username of the logged in user
-  clearSearch,
+  clearLoops,
 }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (collection === "all") {
-      fetchLoops(collection, 1);
-    } else if (collection === "saved") {
-      fetchLoops(collection, 1);
-    } else if (collection === "created") {
-      fetchLoops(collection, 1, null, username);
+    clearLoops();
+    let firstParam, secondParam;
+    if (collection === "created") {
+      firstParam = "username";
+      if (user) {
+        secondParam = user;
+      } else {
+        secondParam = username;
+      }
     } else if (collection === "search") {
-      clearSearch();
-      if (user) fetchLoops(collection, 1, "username", user);
-      else fetchLoops(collection, 1, "search", search);
+      secondParam = search;
     }
-    setPage((prevState) => prevState + 1);
-  }, [collection, fetchLoops, search, user, username, clearSearch]);
+    fetchLoops(collection, 1, firstParam, secondParam);
+    setPage(2);
+  }, [collection, fetchLoops, search, user, username, clearLoops]);
 
   const fetchMoreLoops = () => {
-    setPage((prevState) => prevState + 1);
     setTimeout(() => {
       if (hasMore) {
-        if (collection === "all") {
-          fetchLoops(collection, page);
-        } else if (collection === "saved") {
-          fetchLoops(collection, page);
-        } else if (collection === "created") {
-          fetchLoops(collection, page, null, username);
+        let firstParam, secondParam;
+        if (collection === "created") {
+          firstParam = "username";
+          if (user) {
+            secondParam = user;
+          } else {
+            secondParam = username;
+          }
         } else if (collection === "search") {
-          if (user) fetchLoops(collection, page, "username", user);
-          else fetchLoops(collection, page, "search", search);
+          secondParam = search;
         }
+        fetchLoops(collection, page, firstParam, secondParam);
+        setPage(page + 1);
       }
     }, 1000);
   };
@@ -100,20 +104,9 @@ const LoopList = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  let loops;
-
-  if (ownProps.collection === "all") {
-    loops = state.loops.all;
-  } else if (ownProps.collection === "saved") {
-    loops = state.loops.saved;
-  } else if (ownProps.collection === "created") {
-    loops = state.loops.created;
-  } else if (ownProps.collection === "search") {
-    loops = state.loops.search;
-  }
+const mapStateToProps = (state) => {
   return {
-    loops,
+    loops: state.loops.loops,
     hasMore: state.loops.hasMore,
     username: state.auth.username,
   };
@@ -121,5 +114,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(mapStateToProps, {
   fetchLoops,
-  clearSearch,
+  clearLoops,
 })(LoopList);

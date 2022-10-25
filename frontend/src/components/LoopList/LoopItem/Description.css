@@ -16,7 +16,7 @@
 
 .description-title {
   @apply text-xl;
-  @apply text-center sm:text-2xl md:text-2xl lg:text-2xl font-bold capitalize pb-2;
+  @apply text-center sm:text-2xl md:text-2xl lg:text-2xl font-bold pb-2;
   color: var(--text-color);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .default {
-  @apply text-slate-800 rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none bg-gray-400 capitalize;
+  @apply text-slate-800 rounded-full mx-1 px-3 font-mono font-bold shadow-2xl select-none bg-gray-400;
 }
 
 .javascript {

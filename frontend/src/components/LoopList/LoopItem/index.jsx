@@ -23,7 +23,7 @@ const LoopItem = ({ collection, loop }) => {
         language={loop.language.name}
       />
       <Content language={loop.language.name} content={loop.content} />
-      <Feedback loop={loop} collection={collection} />
+      <Feedback loop={loop} />
     </div>
   );
 };

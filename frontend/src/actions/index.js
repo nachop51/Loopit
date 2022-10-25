@@ -42,7 +42,6 @@ export const checkUserAuth = () => async (dispatch) => {
 
   try {
     const response = await loopit.get("/auth/verify");
-    console.log(response.data);
     switch (response.data.status) {
       case "authorized":
         payload.status = true;
@@ -64,12 +63,6 @@ export const checkUserAuth = () => async (dispatch) => {
       payload,
     });
   }
-};
-
-export const setHasData = () => {
-  return {
-    type: "SET_HAS_DATA",
-  };
 };
 
 export const fetchUser = () => async (dispatch) => {
@@ -96,47 +89,33 @@ export const fetchLoops =
       limit: 10,
       page,
     };
-    let action = "FETCH_LOOPS";
 
     if (collection === "all") {
       endpoint = "/loops/all";
     } else if (collection === "saved") {
       endpoint = "/users/saves";
-      action = "FETCH_SAVED";
     } else if (collection === "created") {
       endpoint = `/loops/all?username=${value}`;
-      action = "FETCH_CREATED";
     } else if (collection === "search") {
-      endpoint = `/loops/all?${option}=${value}`;
-      action = "FETCH_SEARCH";
+      endpoint = `/loops/all?search=${value}`;
     }
+
+    console.log(collection, page, option, value);
 
     try {
       const response = await loopit.get(endpoint, {
         params,
       });
 
-      dispatch({ type: action, payload: response.data.loops });
+      dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
     } catch (error) {
       console.log(error);
     }
   };
 
-export const updateLoops = (collection, action, state, id) => {
+export const clearLoops = () => {
   return {
-    type: "UPDATE_LOOPS",
-    payload: {
-      action,
-      collection,
-      state,
-      id,
-    },
-  };
-};
-
-export const clearSearch = () => {
-  return {
-    type: "CLEAR_SEARCH",
+    type: "CLEAR_LOOPS",
   };
 };
 

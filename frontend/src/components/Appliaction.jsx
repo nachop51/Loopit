@@ -18,8 +18,6 @@ import SearchLoops from "./SearchLoops";
 const Appliaction = ({ userStatus, id }) => {
   useAuth(userStatus);
 
-  // const [search, setSearch] = useState("");
-
   if (!userStatus) {
     return (
       <>
@@ -30,7 +28,6 @@ const Appliaction = ({ userStatus, id }) => {
 
   return (
     <>
-      {/* <Nav setSearch={setSearch} search={search}> */}
       <Nav>
         <Logo link="/l" oC="navbar-logo" />
       </Nav>
