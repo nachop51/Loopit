@@ -8,7 +8,8 @@ const verifytoken = async (req, res, next) => {
     req.url === "/auth/login" ||
     req.url === "/auth/register" ||
     req.url === "/auth/verify" ||
-    req.url === "/auth/logout"
+    req.url === "/auth/logout" ||
+    req.url === "/loops/public"
   ) {
     next();
   } else {
