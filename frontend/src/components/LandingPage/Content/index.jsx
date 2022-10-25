@@ -56,19 +56,19 @@ const Content = ({ userStatus, openModal }) => {
         <div className="row">
           <Card
             label="Follow other programmers"
-            text="Share your code with the world and get feedback from other programmers."
+            text="Follow other programmers and see their latest loops."
           >
             <FiShare2 className="feature-icon" />
           </Card>
           <Card
             label="Easily search code"
-            text="Instantly copy code snippets to your clipboard."
+            text="Search for code by language, title, or username."
           >
             <FiCopy className="feature-icon" />
           </Card>
           <Card
             label="Save your favorite solutions"
-            text="Download the code to your computer in just one click!"
+            text="Save loops to your profile to view later."
           >
             <FiDownload className="feature-icon" />
           </Card>
