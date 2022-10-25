@@ -39,10 +39,10 @@ const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
         console.log(params);
         await loopit.put("/users/update", params);
         updateUser(username, email, fullname, theme, editorTheme);
+        setIsEditable(false);
       } catch (error) {
         console.log(error);
       }
-      setIsEditable(false);
     }
   };
 
@@ -51,7 +51,11 @@ const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
 
   const buildInput = ({ meta, input, label }) => {
     return (
-      <div className="edit-user-div">
+      <div
+        className={`edit-user-div ${
+          meta.error && meta.touched ? "error-validator" : ""
+        }`}
+      >
         <label>{label}:</label>
         <input {...input} />
       </div>
@@ -139,11 +143,11 @@ const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
                   {editorTheme === "vs-dark" ? (
                     <>
                       <option value="vs-dark">Dark theme</option>
-                      <option value="light">Light theme</option>
+                      <option value="vs-light">Light theme</option>
                     </>
                   ) : (
                     <>
-                      <option value="light">Light theme</option>
+                      <option value="vs-light">Light theme</option>
                       <option value="vs-dark">Dark theme</option>
                     </>
                   )}

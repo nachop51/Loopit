@@ -9,6 +9,7 @@ import Appliaction from "./Appliaction";
 import LoadingSpinner from "../assets/nobg.gif";
 import ErrorPage from "./404";
 import About from "./About/";
+import Public from "./Public/";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   useEffect(() => {
@@ -26,12 +27,13 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
   return (
     <>
       <Routes>
-        <Route index element={<LandingPage />} />
+        <Route index element={<LandingPage userStatus={isSignedIn} />} />
         <Route
           path="l/*"
           element={<Appliaction userStatus={isSignedIn} id={id} />}
         />
         <Route path="/about" element={<About />} />
+        <Route path="/public" element={<Public />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

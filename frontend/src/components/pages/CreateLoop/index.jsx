@@ -2,13 +2,13 @@ import "./CreateLoop.css";
 import { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 
 import loopit from "../../../api/loopit";
 import LoadEditor from "../../Editor";
 
-import { useNavigate } from "react-router-dom";
-
-const CreateLoop = ({ user_id }) => {
+const CreateLoop = ({ user_id, editorTheme }) => {
   const [language, setLanguage] = useState("javascript");
   const [code, setCode] = useState("");
   const navigate = useNavigate();
@@ -58,6 +58,44 @@ const CreateLoop = ({ user_id }) => {
     );
   };
 
+  if (editorTheme !== "vs-dark") {
+    document.documentElement.style.setProperty(
+      "--background-editor",
+      "rgb(220, 220, 220)"
+    );
+
+    document.documentElement.style.setProperty(
+      "--input-container-editor",
+      "rgb(220, 220, 220)"
+    );
+
+    document.documentElement.style.setProperty(
+      "--input-editor",
+      "rgb(220, 220, 220)"
+    );
+    document.documentElement.style.setProperty(
+      "--editor-inputs",
+      "rgb(240, 240, 240)"
+    );
+    document.documentElement.style.setProperty(
+      "--editor-input-text",
+      "#15151e",
+    );
+  } else {
+    document.documentElement.style.setProperty(
+      "--background-editor",
+      "rgb(30, 41, 59)"
+    );
+    document.documentElement.style.setProperty(
+      "--input-container-editor",
+      "rgb(30 41 59 / 0.8)"
+    );
+    document.documentElement.style.setProperty("--editor-inputs", "#15151e");
+    document.documentElement.style.setProperty(
+      "--editor-input-text",
+      "rgb(220, 220, 220)",
+    );
+  }
   return (
     <main className="editor">
       <h1 className="heading-primary">Create your loop!</h1>
@@ -198,4 +236,9 @@ const CreateLoop = ({ user_id }) => {
   );
 };
 
-export default CreateLoop;
+const mapStateToProps = (state) => {
+  return {
+    editorTheme: state.auth.editorTheme,
+  };
+};
+export default connect(mapStateToProps)(CreateLoop);

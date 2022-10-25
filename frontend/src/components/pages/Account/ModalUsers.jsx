@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import LoadingSpinner from "../../../assets/nobg.gif";
 import User from "../../LoopList/LoopItem/User";
 import loopit from "../../../api/loopit";
 
