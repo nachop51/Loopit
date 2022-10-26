@@ -1,15 +1,13 @@
 import "./Feedback.css";
-import { updateLoops } from "../../../actions";
 import loopit from "../../../api/loopit";
 
 import { useState } from "react";
-import { connect } from "react-redux";
 import { MdRecommend } from "react-icons/md";
 import { IoBookmark } from "react-icons/io5";
 import { BsChat } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const Feedback = ({ loop, updateLoops, collection }) => {
+const Feedback = ({ loop }) => {
   const [save, setSave] = useState(loop.save);
   const [like, setLike] = useState(loop.like);
 
@@ -23,7 +21,6 @@ const Feedback = ({ loop, updateLoops, collection }) => {
         await loopit.post("/saves/add", { loop_id: loop.id });
       }
       setSave(!save);
-      updateLoops(collection, "save", !save, loop.id);
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +34,6 @@ const Feedback = ({ loop, updateLoops, collection }) => {
         await loopit.post("/likes/delete", { loop_id: loop.id });
       }
       setLike(!like);
-      updateLoops(collection, "like", !like, loop.id);
     } catch (error) {
       console.log(error);
     }
@@ -77,4 +73,4 @@ const Feedback = ({ loop, updateLoops, collection }) => {
   );
 };
 
-export default connect(null, { updateLoops })(Feedback);
+export default Feedback;

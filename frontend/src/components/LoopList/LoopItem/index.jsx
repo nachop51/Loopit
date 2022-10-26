@@ -11,14 +11,19 @@ const LoopItem = ({ collection, loop }) => {
   return (
     <div className="loop">
       <User username={username} time={loop.created_at} />
-      <Interact content={loop.content} filename={loop.filename} />
+      <Interact
+        content={loop.content}
+        filename={loop.filename}
+        id={loop.id}
+        title={loop.name}
+      />
       <Description
         title={loop.name}
         description={loop.description}
         language={loop.language.name}
       />
       <Content language={loop.language.name} content={loop.content} />
-      <Feedback loop={loop} collection={collection} />
+      <Feedback loop={loop} />
     </div>
   );
 };

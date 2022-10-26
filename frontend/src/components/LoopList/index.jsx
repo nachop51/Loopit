@@ -1,90 +1,69 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
 // import loopit from "../../api/loopit";
-import {
-  fetchLoops,
-  fetchSaves,
-  fetchCreated,
-  fetchSearch,
-  setHasData,
-} from "../../actions";
+import { fetchLoops, clearLoops } from "../../actions";
 
-import { connect } from "react-redux";
-import { useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
+import { connect } from "react-redux";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const LoopList = ({
-  collection,
-  fetchLoops,
-  fetchSaves,
-  fetchCreated,
-  fetchSearch,
-  user,
-  search,
-  oC = "",
-  setHasData,
-  loops,
-  hasData,
-  username,
+  collection, // all, saved, created, search
+  fetchLoops, // ^ function to fetch data
+  user, // & username or search query
+  search, // & search option
+  loops, // & loops from store
+  hasMore, // & hasMore from store
+  children, // * children from parent
+  oC = "", // * optional class
+  username, // ! This is the username of the logged in user
+  clearLoops,
 }) => {
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    setHasData();
-    if (collection === "all") {
-      fetchLoops();
-    } else if (collection === "saved") {
-      fetchSaves();
-    } else if (collection === "created") {
-      fetchCreated(username);
-    } else if (collection === "search") {
-      const params = {};
+    clearLoops();
+    let firstParam, secondParam;
+    if (collection === "created") {
+      firstParam = "username";
       if (user) {
-        params.term = user;
-        params.option = "username";
+        secondParam = user;
       } else {
-        params.term = search;
-        params.option = "search";
+        secondParam = username;
       }
-      fetchSearch(params.term, params.option);
-    }
-  }, [
-    fetchLoops,
-    fetchSaves,
-    fetchCreated,
-    username,
-    setHasData,
-    collection,
-    fetchSearch,
-    user,
-    search,
-  ]);
-
-  const handleRender = () => {
-    let mapFrom = [];
-    if (collection === "all") {
-      mapFrom = loops.all;
-    } else if (collection === "saved") {
-      mapFrom = loops.saved;
-    } else if (collection === "created") {
-      mapFrom = loops.created;
     } else if (collection === "search") {
-      mapFrom = loops.search;
+      secondParam = search;
     }
+    fetchLoops(collection, 1, firstParam, secondParam);
+    setPage(2);
+  }, [collection, fetchLoops, search, user, username, clearLoops]);
 
-    if (mapFrom.length === 0) {
-      return (
-        <div className="no-loops">
-          <h2>No loops to show</h2>
-        </div>
-      );
-    }
-    return mapFrom.map((loop) => {
-      return <LoopItem collection={collection} key={loop.id} loop={loop} />;
-    });
+  const fetchMoreLoops = () => {
+    setTimeout(() => {
+      if (hasMore) {
+        let firstParam, secondParam;
+        if (collection === "created") {
+          firstParam = "username";
+          if (user) {
+            secondParam = user;
+          } else {
+            secondParam = username;
+          }
+        } else if (collection === "search") {
+          secondParam = search;
+        }
+        fetchLoops(collection, page, firstParam, secondParam);
+        setPage(page + 1);
+      }
+    }, 1000);
   };
 
+  // TODO: Add a spinner instead of a skeleton.
   const skeleton = () => {
-    return [0, 10].map((i) => {
+    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
       return (
         <div className="loop" key={i}>
           <div
@@ -93,7 +72,6 @@ const LoopList = ({
               flexDirection: "column",
             }}
           >
-            {/* <Skeleton width={20} className="circle" /> */}
             <Skeleton width={90} />
             <Skeleton height={90} />
           </div>
@@ -103,25 +81,38 @@ const LoopList = ({
     });
   };
 
+  const renderLoops = loops ? (
+    <InfiniteScroll
+      dataLength={loops.length}
+      next={fetchMoreLoops}
+      hasMore={hasMore}
+      loader={skeleton()}
+    >
+      {loops.map((loop) => {
+        return <LoopItem collection={collection} key={loop.id} loop={loop} />;
+      })}
+    </InfiniteScroll>
+  ) : (
+    <h2>Oops, looks like there's no loops to show</h2>
+  );
+
   return (
     <div className={"loop-list " + oC}>
-      {!hasData ? skeleton() : handleRender()}
+      {children ? children : null}
+      {renderLoops}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    loops: state.loops,
-    hasData: state.loops.hasData,
+    loops: state.loops.loops,
+    hasMore: state.loops.hasMore,
     username: state.auth.username,
   };
 };
 
 export default connect(mapStateToProps, {
   fetchLoops,
-  fetchSaves,
-  fetchCreated,
-  fetchSearch,
-  setHasData,
+  clearLoops,
 })(LoopList);

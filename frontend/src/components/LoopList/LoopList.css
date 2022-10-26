@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-.loop-list > *:not(:first-child) {
+.loop-list > div.loop {
   @apply mt-6;
 }
 

@@ -3,11 +3,13 @@
 }
 
 .editor-container {
-  @apply rounded-lg p-6 bg-slate-800 bg-opacity-80;
+  @apply rounded-lg p-6 bg-opacity-80;
   @apply ml-auto m-auto text-center;
   @apply sm:w-4/6;
   @apply md:w-4/6 ml-auto mr-10;
   @apply lg:w-9/12 m-auto;
+  background-color: var(--background-editor);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .monaco-editor * {
@@ -26,7 +28,8 @@
 }
 
 .editor-form {
-  @apply m-auto text-center pb-4 bg-slate-800 bg-opacity-80;
+  @apply m-auto text-center pb-4 bg-opacity-80;
+  background-color: (var(--input-container-editor));
 }
 
 .editor-form input {
@@ -35,7 +38,7 @@
 
 .editor-form input::placeholder,
 .editor-form select {
-  @apply text-slate-100 text-opacity-30;
+  color: var(--editor-input-text);
 }
 
 .editor-req::placeholder,
@@ -48,8 +51,9 @@ select.editor-req {
 }
 
 .inputs-required {
-  @apply flex justify-between p-2 bg-slate-800 bg-opacity-80;
+  @apply flex justify-between p-2;
   border-radius: 0.5rem 0.5rem 0 0;
+  background-color: var(--input-container-editor);
 }
 
 .inputs-required input {
@@ -62,15 +66,17 @@ select.editor-req {
 
 .inputs-required input,
 .inputs-required select {
-  color: #ccc;
-  background: #15151e;
+  border: var(--editor-input-border);
+  background-color: var(--editor-inputs);
+  color: var(--editor-input-text);
   @apply !border-gray-700;
 }
 
 input#filename,
 input#description {
-  @apply text-slate-100 p-3 mb-0;
-  background-color: #15151e;
+  @apply p-3 mb-0;
+  background-color: var(--editor-inputs);
+  color: var(--editor-input-text);
   border: 1.5px solid rgba(255, 255, 255, 0.137);
   box-shadow: 2px 2px 12px rgba(255, 255, 255, 0.137);
 }

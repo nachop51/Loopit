@@ -25,7 +25,9 @@
 }
 
 .profile-stats-pic {
-  @apply w-72 rounded-full mb-4;
+  @apply w-28 rounded-full mb-4;
+  @apply sm:w-40 md:w-60 lg:w-72 rounded-full mb-4;
+
   border: 2px solid rgb(var(--primary-color), 0.3);
 }
 
@@ -35,7 +37,7 @@
 }
 
 .profile-stats-container {
-  @apply grid grid-cols-2 gap-3;
+  @apply grid grid-cols-2 gap-3 cursor-pointer;
 }
 
 .profile-stats-container div {
@@ -54,11 +56,11 @@
 
 .stats-container h3,
 .stats-container h4 {
-  @apply text-center select-none;
+  @apply text-center select-none no-underline;
 }
 
 .stats-container:hover {
-  box-shadow: 0.3px 0.3px 20px rgb(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-dark);
 }
 
 .stats-container h3 {
@@ -92,9 +94,6 @@
   border: 1px solid rgb(var(--primary-color));
 }
 
-.profile-btn-edit {
-}
-
 .profile-btn-edit:hover,
 .profile-btn-sign-out:hover {
   background-color: #fff;
@@ -103,4 +102,23 @@
 
 .button-container {
   @apply flex flex-col items-center justify-center w-full;
+}
+
+.users-container {
+  @apply flex flex-col items-start justify-center p-4 overflow-y-auto;
+  max-height: 80vh;
+  color: var(--text-color);
+}
+
+.users-container::-webkit-scrollbar {
+  display: none;
+}
+
+button.button-follow {
+  @apply w-auto h-10 text-sm;
+}
+
+.modal-users-title {
+  text-transform: capitalize;
+  color: var(--text-white);
 }

@@ -111,7 +111,7 @@ const Comments = () => {
                         time={comment.created_at}
                       />
                     </div>
-                    <div className="loop-content">
+                    <div className="loop-content-comment">
                       <SyntaxHighlighter
                         language={loop.language.name}
                         style={atomOneDark}

@@ -1,5 +1,8 @@
 .profile {
-  @apply flex justify-center items-center;
+  width: 90%;
+  @apply flex flex-wrap content-center justify-center items-center text-xs;
+  @apply sm:w-auto md:w-auto lg:w-auto sm:text-sm md:text-base lg:text-base;
+  flex-wrap: nowrap;
 }
 
 .follow-user {

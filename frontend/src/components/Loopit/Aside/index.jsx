@@ -9,7 +9,6 @@ const Aside = ({ oC }) => {
   const fetchPopulates = async () => {
     try {
       const response = await loopit.get("/loops/moreLiked");
-      console.log(response.data.loops);
       setPopulates(response.data.loops);
     } catch (e) {
       console.log(e);
@@ -21,8 +20,8 @@ const Aside = ({ oC }) => {
   }, []);
   return (
     <aside className={"aside " + oC}>
-      <h2 className="heading-aside">Popular</h2>
       <div className="aside-container">
+        <h2 className="heading-aside">Popular</h2>
         {populates.map((item) => {
           return <AsideItem item={item} key={item.id} />;
         })}

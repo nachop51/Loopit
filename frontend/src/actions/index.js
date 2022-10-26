@@ -65,12 +65,6 @@ export const checkUserAuth = () => async (dispatch) => {
   }
 };
 
-export const setHasData = () => {
-  return {
-    type: "SET_HAS_DATA",
-  };
-};
-
 export const fetchUser = () => async (dispatch) => {
   try {
     const response = await loopit.get("/users/me");
@@ -81,47 +75,43 @@ export const fetchUser = () => async (dispatch) => {
   }
 };
 
-export const fetchLoops = () => async (dispatch) => {
-  const response = await loopit.get("/loops/all", {
-    params: {
-      limit: 6,
-    },
-  });
+/**
+ *
+ * @param {string} collection Fetch from all, saved, created, search
+ * @param {int} page Page number
+ * @param {string} option Option to fetch from OPTIONAL
+ * @param {string} value Value to fetch from OPTIONAL
+ */
+export const fetchLoops =
+  (collection, page, option, value) => async (dispatch) => {
+    let endpoint = "";
+    const params = {
+      limit: 10,
+      page,
+    };
 
-  dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
-};
+    if (collection === "all") {
+      endpoint = "/loops/all";
+    } else if (collection === "saved") {
+      endpoint = "/users/saves";
+    } else if (collection === "created") {
+      endpoint = `/loops/all?username=${value}`;
+    } else if (collection === "search") {
+      endpoint = `/loops/all?search=${value}`;
+    }
 
-export const fetchSaves = () => async (dispatch) => {
-  const response = await loopit.get("/users/saves");
+    console.log(collection, page, option, value);
 
-  dispatch({ type: "FETCH_SAVED", payload: response.data.loops });
-};
+    try {
+      const response = await loopit.get(endpoint, {
+        params,
+      });
 
-export const fetchCreated = (username) => async (dispatch) => {
-  if (username) {
-    const response = await loopit.get(`/loops/all?username=${username}`);
-
-    dispatch({ type: "FETCH_CREATED", payload: response.data.loops });
-  }
-};
-
-export const fetchSearch = (user, option) => async (dispatch) => {
-  const response = await loopit.get(`/loops/all?${option}=${user}`);
-
-  dispatch({ type: "FETCH_SEARCH", payload: response.data.loops });
-};
-
-export const updateLoops = (collection, action, state, id) => {
-  return {
-    type: "UPDATE_LOOPS",
-    payload: {
-      action,
-      collection,
-      state,
-      id,
-    },
+      dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
+    } catch (error) {
+      console.log(error);
+    }
   };
-};
 
 export const clearLoops = () => {
   return {

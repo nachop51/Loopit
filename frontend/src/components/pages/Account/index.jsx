@@ -45,6 +45,7 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
           loops={account.loops}
           saves={account.saves}
           username={auth.username}
+          id={auth.id}
         />
         <div className="profile-ui profile-data">
           <h2>Personal information:</h2>
@@ -97,14 +98,17 @@ const Account = ({ auth, account, fetchUser, signOut }) => {
                 Edit
               </button>
             )}
-
             <button onClick={() => signOut()} className="profile-btn-sign-out">
               Sign Out
             </button>
           </div>
         </div>
       </div>
-      <LoopList collection="created" />
+      <LoopList collection="created">
+        <h2 className="heading-primary" id="loops-title">
+          Your loops
+        </h2>
+      </LoopList>
     </main>
   );
 };

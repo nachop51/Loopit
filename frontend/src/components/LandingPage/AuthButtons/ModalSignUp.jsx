@@ -98,7 +98,7 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
     <div className={`modal ${show ? "show" : ""}`} onClick={closeModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Sign Up</h2>
-        <h4>Create a new account</h4>
+        <h4>Become a looper!</h4>
 
         <Form
           onSubmit={onSubmit}
