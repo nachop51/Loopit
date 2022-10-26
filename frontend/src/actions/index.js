@@ -100,8 +100,6 @@ export const fetchLoops =
       endpoint = `/loops/all?search=${value}`;
     }
 
-    console.log(collection, page, option, value);
-
     try {
       const response = await loopit.get(endpoint, {
         params,
