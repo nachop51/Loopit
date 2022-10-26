@@ -37,17 +37,10 @@ const addSave = async (req, res) => {
         error: "Bad Request - save already exists",
       });
     }
-    const add_countSaves = await Loop.update(
-      {
-        count_saves: loop.count_saves + 1,
-      },
-      {
-        where: { id: loop.id },
-      }
-    );
+    await loop.increment("count_saves");
     res.status(200).json({
       status: "OK",
-      count_saves: loop.count_saves + 1,
+      count_saves: loop.count_saves,
       data: new_save,
     });
   } catch (error) {
@@ -79,17 +72,10 @@ const deleteSave = async (req, res) => {
     }
     await save.destroy();
     const loop = await Loop.findByPk(loop_id);
-    const rest_countSaves = await Loop.update(
-      {
-        count_saves: loop.count_saves - 1,
-      },
-      {
-        where: { id: loop.id },
-      }
-    );
+    await loop.decrement("count_saves");
     res.status(200).json({
       status: "OK",
-      count_saves: loop.count_saves - 1,
+      count_saves: loop.count_saves,
       data: [],
     });
   } catch (error) {
