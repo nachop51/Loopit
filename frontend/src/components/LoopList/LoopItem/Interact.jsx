@@ -19,7 +19,7 @@ const Interact = ({ content, filename, title, id }) => {
     const shareData = {
       title,
       text: content,
-      url: `http://www.loopit-mvp.com/l/comments/${id}`,
+      url: `http://loopit-mvp.com/l/comments/${id}`,
     };
 
     navigator.share(shareData);
