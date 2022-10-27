@@ -1,6 +1,7 @@
 const initialState = {
   loops: [],
   hasMore: true,
+  loading: true,
 };
 
 const loopReducer = (state = initialState, action) => {
@@ -25,11 +26,23 @@ const loopReducer = (state = initialState, action) => {
         ...state,
         loops: [],
         hasMore: true,
+        loading: true,
+      };
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "ENDED_LOADING":
+      return {
+        ...state,
+        loading: false,
       };
     case "SIGN_OUT":
       return {
         loops: [],
         hasMore: false,
+        loading: true,
       };
     default:
       return state;

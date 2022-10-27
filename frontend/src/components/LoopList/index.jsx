@@ -1,10 +1,10 @@
 import "./LoopList.css";
 import LoopItem from "./LoopItem";
 // import loopit from "../../api/loopit";
-import { fetchLoops, clearLoops } from "../../actions";
+import { fetchLoops } from "../../actions";
 
 import InfiniteScroll from "react-infinite-scroll-component";
-
+import MoonLoader from "react-spinners/MoonLoader";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { connect } from "react-redux";
@@ -20,42 +20,31 @@ const LoopList = ({
   children, // * children from parent
   oC = "", // * optional class
   username, // ! This is the username of the logged in user
-  clearLoops,
+  loading,
 }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    clearLoops();
-    let firstParam, secondParam;
+    let param;
     if (collection === "created") {
-      firstParam = "username";
-      if (user) {
-        secondParam = user;
-      } else {
-        secondParam = username;
-      }
+      param = user ? user : username;
     } else if (collection === "search") {
-      secondParam = search;
+      param = search;
     }
-    fetchLoops(collection, 1, firstParam, secondParam);
+    fetchLoops(collection, 1, param, true);
     setPage(2);
-  }, [collection, fetchLoops, search, user, username, clearLoops]);
+  }, [collection, fetchLoops, search, user, username]);
 
   const fetchMoreLoops = () => {
     setTimeout(() => {
       if (hasMore) {
-        let firstParam, secondParam;
+        let param;
         if (collection === "created") {
-          firstParam = "username";
-          if (user) {
-            secondParam = user;
-          } else {
-            secondParam = username;
-          }
+          param = user ? user : username;
         } else if (collection === "search") {
-          secondParam = search;
+          param = search;
         }
-        fetchLoops(collection, page, firstParam, secondParam);
+        fetchLoops(collection, page, param, false);
         setPage(page + 1);
       }
     }, 1000);
@@ -63,7 +52,7 @@ const LoopList = ({
 
   // TODO: Add a spinner instead of a skeleton.
   const skeleton = () => {
-    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
+    return [0, 1, 2, 3, 4].map((i) => {
       return (
         <div className="loop" key={i}>
           <div
@@ -86,7 +75,24 @@ const LoopList = ({
       dataLength={loops.length}
       next={fetchMoreLoops}
       hasMore={hasMore}
-      loader={skeleton()}
+      loader={
+        <div
+          className="loop"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "3rem",
+            paddingBottom: "3rem",
+          }}
+        >
+          <MoonLoader
+            color={"#3f51b5"}
+            size={50}
+            speedMultiplier={0.75}
+            aria-label="Loading Spinner"
+          />
+        </div>
+      }
     >
       {loops.map((loop) => {
         return <LoopItem collection={collection} key={loop.id} loop={loop} />;
@@ -99,7 +105,7 @@ const LoopList = ({
   return (
     <div className={"loop-list " + oC}>
       {children ? children : null}
-      {renderLoops}
+      {loading ? skeleton() : renderLoops}
     </div>
   );
 };
@@ -107,6 +113,7 @@ const LoopList = ({
 const mapStateToProps = (state) => {
   return {
     loops: state.loops.loops,
+    loading: state.loops.loading,
     hasMore: state.loops.hasMore,
     username: state.auth.username,
   };
@@ -114,5 +121,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   fetchLoops,
-  clearLoops,
 })(LoopList);

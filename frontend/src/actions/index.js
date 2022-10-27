@@ -83,7 +83,8 @@ export const fetchUser = () => async (dispatch) => {
  * @param {string} value Value to fetch from OPTIONAL
  */
 export const fetchLoops =
-  (collection, page, option, value) => async (dispatch) => {
+  (collection, page, value, newOne) => async (dispatch) => {
+    newOne && dispatch({ type: "SET_LOADING" });
     let endpoint = "";
     const params = {
       limit: 10,
@@ -104,18 +105,13 @@ export const fetchLoops =
       const response = await loopit.get(endpoint, {
         params,
       });
-
+      newOne && dispatch({ type: "CLEAR_LOOPS" });
       dispatch({ type: "FETCH_LOOPS", payload: response.data.loops });
+      newOne && dispatch({ type: "ENDED_LOADING" });
     } catch (error) {
       console.log(error);
     }
   };
-
-export const clearLoops = () => {
-  return {
-    type: "CLEAR_LOOPS",
-  };
-};
 
 export const switchTheme = () => {
   return {
