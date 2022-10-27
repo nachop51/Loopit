@@ -1,8 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-// import { useState } from "react";
-
 import useAuth from "../hooks/useAuth";
-import LoadingSpinner from "../assets/nobg.gif";
+import LoadingSpinner from "../assets/Loading.gif";
 import Logo from "./Logo";
 import Nav from "./NavBar";
 import Footer from "./Footer";
@@ -14,6 +11,8 @@ import Account from "./pages/Account";
 import Comments from "./pages/Comments";
 import Users from "./pages/Users";
 import SearchLoops from "./SearchLoops";
+
+import { Routes, Route } from "react-router-dom";
 
 const Appliaction = ({ userStatus, id }) => {
   useAuth(userStatus);

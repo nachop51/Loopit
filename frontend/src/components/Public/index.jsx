@@ -1,11 +1,11 @@
-import LoopItem from "../LoopList/LoopItem";
-import LoadingSpinner from "../../assets/nobg.gif";
+import LoadingSpinner from "../../assets/Loading.gif";
 import Logo from "../Logo";
+import LoopItem from "../LoopList/LoopItem";
 import AuthButtons from "../LandingPage/AuthButtons";
 import Footer from "../Footer";
+import loopit from "../../api/loopit";
 
 import { useEffect, useState } from "react";
-import loopit from "../../api/loopit";
 
 const Public = () => {
   const [loops, setLoops] = useState([]);

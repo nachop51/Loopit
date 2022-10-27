@@ -1,12 +1,12 @@
 import "./CreateLoop.css";
+import loopit from "../../../api/loopit";
+import LoadEditor from "../../Editor";
+
 import { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-
-import loopit from "../../../api/loopit";
-import LoadEditor from "../../Editor";
 
 const CreateLoop = ({ user_id, editorTheme }) => {
   const [language, setLanguage] = useState("javascript");

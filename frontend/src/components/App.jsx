@@ -1,15 +1,15 @@
 import "./App.css";
-import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import { connect } from "react-redux";
-
 import LandingPage from "./LandingPage/";
 import { checkUserAuth } from "../actions";
 import Appliaction from "./Appliaction";
-import LoadingSpinner from "../assets/nobg.gif";
+import LoadingSpinner from "../assets/Loading.gif";
 import ErrorPage from "./404";
 import About from "./About/";
 import Public from "./Public/";
+
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   useEffect(() => {

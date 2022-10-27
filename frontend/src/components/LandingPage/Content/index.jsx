@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
-
-// import Laptop from "../../../assets/sombra-negra-mockup-blanco.png";
-import Laptop from "../../../assets/sombra-blanca-mockup-dark.png";
-
-// import Phone from "../../../assets/mockup-mobile.png";
+import "./Content.css";
+import Laptop from "../../../assets/mockup.png";
 import Card from "./Card";
 import TitleAnimation from "./TitleAnimation";
-import "./Content.css";
+
+import { useNavigate } from "react-router-dom";
+import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
 const Content = ({ userStatus, openModal }) => {
   const navigate = useNavigate();

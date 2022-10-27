@@ -1,10 +1,10 @@
 import "./Account.css";
-import LoadingSpinner from "../../../assets/nobg.gif";
-import LoopList from "../../LoopList/";
-import { fetchUser, signOut } from "../../../actions";
 import ProfileItem from "./ProfileItem";
 import DataItem from "./DataItem";
 import EditUser from "./EditUser";
+import LoopList from "../../LoopList/";
+import LoadingSpinner from "../../../assets/Loading.gif";
+import { fetchUser, signOut } from "../../../actions";
 
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";

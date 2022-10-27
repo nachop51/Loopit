@@ -1,10 +1,10 @@
 import "./Users.css";
 import loopit from "../../../api/loopit";
 import ProfileItem from "../Account/ProfileItem";
-
-import LoadingSpinner from "../../../assets/nobg.gif";
-import { useEffect, useState } from "react";
+import LoadingSpinner from "../../../assets/Loading.gif";
 import LoopList from "../../LoopList";
+
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const User = () => {

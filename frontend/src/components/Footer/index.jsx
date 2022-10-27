@@ -1,5 +1,5 @@
 import "./Footer.css";
-import image from "../../assets/logo2.png";
+import image from "../../assets/logo.png";
 
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { Link } from "react-router-dom";

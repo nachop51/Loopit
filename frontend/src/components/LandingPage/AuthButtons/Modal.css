@@ -5,6 +5,19 @@
   transition: all 1s var(--animation-bezier);
 }
 
+.modal-animation {
+  animation: animateModal 0.5s var(--animation-bezier) forwards;
+}
+
+@keyframes animateModal {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .show {
   @apply opacity-100 visible pointer-events-auto;
 }

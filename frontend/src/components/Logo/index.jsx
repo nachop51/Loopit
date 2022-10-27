@@ -1,5 +1,5 @@
 import "./Logo.css";
-import logo from "../../assets/primary-logo.png";
+import logo from "../../assets/PrimaryLogo.png";
 import blueLogo from "../../assets/BlueLogo.png";
 import { switchTheme } from "../../actions";
 

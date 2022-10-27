@@ -1,9 +1,9 @@
 import "./AboutPage.css";
-import imgDani from "../../assets/danielle_serafim_1-min.jpg";
-import imgNacho from "../../assets/Nacho_Peralta_2.jpg";
-import imgVale from "../../assets/Vale.jpg";
-import imgMateo from "../../assets/Mateo.jpeg";
-import imgSanti from "../../assets/Santi.jpg";
+import imgDani from "../../assets/Danielle.png";
+import imgNacho from "../../assets/Nacho.png";
+import imgVale from "../../assets/Vale.png";
+import imgMateo from "../../assets/Mateo.png";
+import imgSanti from "../../assets/Santi.png";
 import Logo from "../Logo";
 import Footer from "../Footer";
 import CardAbout from "./CardAbout";
