@@ -36,7 +36,6 @@ const EditUser = ({ user, auth, isEditable, setIsEditable, updateUser }) => {
         if (editorTheme !== auth.editorTheme) params.editorTheme = editorTheme;
 
         // ^ After checking if the user has changed any of the fields, we send the request to the backend.
-        console.log(params);
         await loopit.put("/users/update", params);
         updateUser(username, email, fullname, theme, editorTheme);
         setIsEditable(false);

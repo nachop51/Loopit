@@ -25,22 +25,25 @@ const ModalUsers = ({ isOpen, closeModal, mode, id }) => {
         <h3 className="modal-users-title">{mode}</h3>
         <hr />
         <div className="users-container">
-          {users !== []
-            ? users.map((user) => (
-                <User
-                  key={`${mode} - ${user.id}`}
-                  username={user.username}
-                  time={null}
+          {console.log(users)}
+          {users ? (
+            users.map((user) => (
+              <User
+                key={`${mode} - ${user.id}`}
+                username={user.username}
+                time={null}
+              >
+                <button
+                  className="btn button-follow"
+                  onClick={() => console.log("Follow")}
                 >
-                  <button
-                    className="btn button-follow"
-                    onClick={() => console.log("Follow")}
-                  >
-                    Follow
-                  </button>
-                </User>
-              ))
-            : "Looks like no one is here yet"}
+                  Follow
+                </button>
+              </User>
+            ))
+          ) : (
+            <p>Looks like no one is here yet</p>
+          )}
         </div>
       </div>
     </div>
