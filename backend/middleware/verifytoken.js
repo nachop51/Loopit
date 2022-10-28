@@ -26,18 +26,18 @@ const verifytoken = async (req, res, next) => {
       if (!user) {
         return res.status(401).json({ error: "Access denied, invalid token" });
       }
-      // if (req.url === "/admin/add" || req.url === "/admin/delete") {
-      //   const adminOrNot = await Admin.findByPk(user_id);
-      //   if (!adminOrNot) {
-      //     return res
-      //       .status(401)
-      //       .json({ error: "Access denied, bad permissions" });
-      //   }
-      //   next();
-      // } else {
-      req.id = user_id;
-      next();
-      // }
+      if (req.url === "/admin/add" || req.url === "/admin/delete") {
+        const adminOrNot = await Admin.findByPk(user_id);
+        if (!adminOrNot) {
+          return res
+            .status(401)
+            .json({ error: "Access denied, bad permissions" });
+        }
+        next();
+      } else {
+        req.id = user_id;
+        next();
+      }
     } catch (error) {
       return res.status(401).json({ error: "Access denied, invalid token" });
     }

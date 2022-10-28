@@ -11,13 +11,20 @@ const addAdmin = async (req, res) => {
     });
   }
   try {
-    // const adminOrNot = await Admin.findByPk(req.id);
-    // if (!adminOrNot) {
-    //   return res.status(400).json({
-    //     status: "Error",
-    //     error: "Bad Request - Admin does not exist",
-    //   });
-    // }
+    const adminOrNot = await Admin.findByPk(req.id);
+    if (!adminOrNot) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - Admin does not exist",
+      });
+    }
+    const user = await User.findByPk(user_id);
+    if (!user) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User does not exist",
+      });
+    }
     const admin = await Admin.create({
       user_id: user_id,
     });
