@@ -95,7 +95,7 @@ const login = async (req, res) => {
         error: "Bad request - failed credentials",
       });
     }
-    const admin = false;
+    let admin = false;
     const adminOrNot = await Admin.findByPk(userExists.id);
     if (adminOrNot) {
       admin = true;
