@@ -3,9 +3,9 @@ import loopit from "../../../api/loopit";
 import LoopItem from "../../LoopList/LoopItem";
 import LoadEditor from "../../Editor";
 import User from "../../LoopList/LoopItem/User";
-import LoadingSpinner from "../../../assets/nobg.gif";
-import { FaCommentSlash } from "react-icons/fa";
+import LoadingSpinner from "../../../assets/Loading.gif";
 
+import { FaCommentSlash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SyntaxHighlighter from "react-syntax-highlighter";

@@ -1,4 +1,4 @@
-import LoadingSpinner from "../../assets/nobg.gif";
+import LoadingSpinner from "../../assets/Loading.gif";
 
 import { useRef } from "react";
 import Editor from "@monaco-editor/react";

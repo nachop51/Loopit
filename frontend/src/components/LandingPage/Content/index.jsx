@@ -1,6 +1,12 @@
+import "./Content.css";
+import Laptop from "../../../assets/mockup.png";
+import Card from "./Card";
+import TitleAnimation from "./TitleAnimation";
+
 import { useNavigate } from "react-router-dom";
 import { FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 
+<<<<<<< HEAD
 // import Laptop from "../../../assets/sombra-negra-mockup-blanco.png";
 import Laptop from "../../../assets/sombra-blanca-mockup-dark.png";
 
@@ -10,10 +16,13 @@ import TitleAnimation from "../../LandingPage/Content/TitleAnimation";
 import "./Content.css";
 
 const Content = () => {
+=======
+const Content = ({ userStatus, openModal }) => {
+>>>>>>> c6d9979b9f48efbc233ad9915bd57dd0607e2712
   const navigate = useNavigate();
 
-  const goApp = () => {
-    navigate("/l");
+  const goApp = (link) => {
+    navigate(link);
   };
 
   return (
@@ -28,12 +37,23 @@ const Content = () => {
             code with the world. Create a profile, upload your code, and share
             it with your friends and followers.
           </p>
-          <button
-            className="intro-text__button btn btn-animation btn-primary"
-            onClick={goApp}
-          >
-            Go to app
-          </button>
+          <div className="intro-text__button-container">
+            <button
+              className="intro-text__button btn btn-animation btn-primary"
+              onClick={() => {
+                if (userStatus) goApp("/l");
+                else openModal();
+              }}
+            >
+              Go to app
+            </button>
+            <button
+              className="intro-text__button btn btn-animation"
+              onClick={() => goApp("/public")}
+            >
+              Preview
+            </button>
+          </div>
         </article>
         <article className="intro-images">
           {/* <img className="intro-images__phone" src={Phone} alt="Phone" /> */}
@@ -45,19 +65,19 @@ const Content = () => {
         <div className="row">
           <Card
             label="Follow other programmers"
-            text="Share your code with the world and get feedback from other programmers."
+            text="Follow other programmers and see their latest loops."
           >
             <FiShare2 className="feature-icon" />
           </Card>
           <Card
             label="Easily search code"
-            text="Instantly copy code snippets to your clipboard."
+            text="Search for code by language, title, or username."
           >
             <FiCopy className="feature-icon" />
           </Card>
           <Card
             label="Save your favorite solutions"
-            text="Download the code to your computer in just one click!"
+            text="Save loops to your profile to view later."
           >
             <FiDownload className="feature-icon" />
           </Card>

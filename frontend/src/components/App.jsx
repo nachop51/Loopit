@@ -1,14 +1,15 @@
 import "./App.css";
-import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import { connect } from "react-redux";
-
 import LandingPage from "./LandingPage/";
 import { checkUserAuth } from "../actions";
 import Appliaction from "./Appliaction";
-import LoadingSpinner from "../assets/nobg.gif";
+import LoadingSpinner from "../assets/Loading.gif";
 import ErrorPage from "./404";
 import About from "./About/";
+import Public from "./Public/";
+
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 const App = ({ isSignedIn, checkUserAuth, id }) => {
   useEffect(() => {
@@ -26,12 +27,13 @@ const App = ({ isSignedIn, checkUserAuth, id }) => {
   return (
     <>
       <Routes>
-        <Route index element={<LandingPage />} />
+        <Route index element={<LandingPage userStatus={isSignedIn} />} />
         <Route
           path="l/*"
           element={<Appliaction userStatus={isSignedIn} id={id} />}
         />
         <Route path="/about" element={<About />} />
+        <Route path="/public" element={<Public />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

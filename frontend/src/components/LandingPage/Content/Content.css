@@ -33,8 +33,13 @@
   color: var(--text-color);
 }
 
+.intro-text__button-container {
+  @apply flex justify-center;
+  @apply xl:justify-start;
+}
+
 .intro-text__button {
-  @apply mx-auto mt-14 mb-14 w-2/5;
+  @apply my-14 w-2/5;
 }
 
 .intro-images {

@@ -6,8 +6,12 @@ import ModalLogIn from "./ModalLogIn";
 import ModalSignUp from "./ModalSignUp";
 import { signOut } from "../../../actions";
 
+<<<<<<< HEAD
 export const AuthButtons = ({ signOut, isSignedIn }) => {
   const [loginIsOpen, setLoginIsOpen] = useState(false);
+=======
+const AuthButtons = ({ signOut, isSignedIn, loginIsOpen, setLoginIsOpen }) => {
+>>>>>>> c6d9979b9f48efbc233ad9915bd57dd0607e2712
   const [signIsOpen, setSignIsOpen] = useState(false);
 
   if (isSignedIn === null) {

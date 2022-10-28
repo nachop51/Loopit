@@ -32,19 +32,10 @@ const addComment = async (req, res) => {
       loop_id: loop_id,
       content: content,
     });
-    const add_countComments = await Loop.update(
-      {
-        count_comments: loop.count_comments + 1,
-      },
-      {
-        where: {
-          id: loop_id,
-        },
-      }
-    );
+    await loop.increment("count_comments");
     res.status(200).json({
       status: "OK",
-      count_comments: loop.count_comments + 1,
+      count_comments: loop.count_comments,
       data: new_comment,
     });
   } catch (error) {
@@ -73,19 +64,10 @@ const deleteComment = async (req, res) => {
     }
     await comment_destroy.destroy();
     const loop = await Loop.findByPk(comment_destroy.loop_id);
-    const rest_countCommments = await Loop.update(
-      {
-        count_comments: loop.count_comments - 1,
-      },
-      {
-        where: {
-          id: comment_destroy.loop_id,
-        },
-      }
-    );
+    await loop.decrement("count_comments");
     res.status(200).json({
       status: "OK",
-      count_comments: loop.count_comments - 1,
+      count_comments: loop.count_comments,
       data: [],
     });
   } catch (error) {

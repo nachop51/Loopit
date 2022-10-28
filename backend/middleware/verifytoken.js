@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const key = process.env.key;
+const key = process.env.KEY;
 const User = require("../models/users");
 
 //verify acces token and allow or deny access to the route
@@ -8,7 +8,8 @@ const verifytoken = async (req, res, next) => {
     req.url === "/auth/login" ||
     req.url === "/auth/register" ||
     req.url === "/auth/verify" ||
-    req.url === "/auth/logout"
+    req.url === "/auth/logout" ||
+    req.url === "/loops/public"
   ) {
     next();
   } else {

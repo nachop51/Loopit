@@ -36,17 +36,10 @@ const addLike = async (req, res) => {
         error: "Bad Request - like already exists",
       });
     }
-    const add_countLike = await Loop.update(
-      { count_likes: loop.count_likes + 1 },
-      {
-        where: {
-          id: loop_id,
-        },
-      }
-    );
+    await loop.increment("count_likes");
     res.status(200).json({
       status: "OK",
-      count_likes: loop.count_likes + 1,
+      count_likes: loop.count_likes,
       data: new_like,
     });
   } catch (error) {
@@ -86,23 +79,11 @@ const deleteLike = async (req, res) => {
         loop_id: loop_id,
       },
     });
-    const num_likes = await Loop.findAll({
-      attributes: ["count_likes"],
-      where: {
-        id: loop_id,
-      },
-    });
-    const rest_countLikes = await Loop.update(
-      { count_likes: num_likes - 1 },
-      {
-        where: {
-          id: loop_id,
-        },
-      }
-    );
+    const loop = await Loop.findByPk(loop_id);
+    await loop.decrement("count_likes");
     res.status(200).json({
       status: "OK",
-      count_likes: num_likes - 1,
+      count_likes: loop.count_likes,
       data: [],
     });
   } catch (error) {

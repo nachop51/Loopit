@@ -1,17 +1,28 @@
 .loop {
   width: 95%;
-  @apply sm:w-10/12 p-4 relative rounded-2xl border-2 border-solid;
+  @apply p-4 relative rounded-2xl border-2 border-solid;
   box-shadow: var(--shadow-light);
   border-color: rgb(var(--primary-color), 0.3);
   color: var(--text-color);
   min-width: 80%;
   background-color: var(--background-color);
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.infinite-scroll-component__outerdiv {
+  @apply w-full h-full overflow-auto mt-6;
+}
+
+@media (min-width: 640px) {
+  .loop {
+    width: 85%;
+  }
 }
 
 .avatar {
-  @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none;
+  @apply rounded-full ml-3 w-10 h-10 border-2 border-solid border-white inline-block relative my-auto select-none cursor-pointer;
   z-index: 2;
-  cursor: pointer;
 }
 
 /* language + description */
@@ -37,7 +48,6 @@
   @apply py-5 px-4 rounded-md mt-2 shadow-2xl text-xs;
   @apply sm:text-sm md:text-base lg:text-base;
   background-color: #15151ee8;
-  color: rgb(255, 250, 205);
 }
 
 .loop-info-buttons {
@@ -85,4 +95,8 @@
 
 .heading-comments {
   @apply mt-4 text-base font-bold;
+}
+
+.heading-comments p {
+  @apply text-center;
 }

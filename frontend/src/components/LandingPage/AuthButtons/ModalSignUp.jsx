@@ -69,9 +69,10 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
         password: pass,
       });
       if (response.status === 200) {
-        console.log(response.data);
         logIn(response.data.id, response.data.username, response.data.theme);
-        navigate("/");
+        // setTimeout(() => {
+        // }, 5000);
+        navigate("/l");
       }
     } catch (error) {
       if (error.message.includes("Network") || error.message.includes("400")) {
@@ -96,9 +97,12 @@ const ModalForm = ({ show, closeModal, openTheOther, logIn }) => {
 
   return (
     <div className={`modal ${show ? "show" : ""}`} onClick={closeModal}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`modal-content ${show ? "modal-animation" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2>Sign Up</h2>
-        <h4>Create a new account</h4>
+        <h4>Become a looper!</h4>
 
         <Form
           onSubmit={onSubmit}

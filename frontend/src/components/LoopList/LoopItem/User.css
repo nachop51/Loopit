@@ -1,3 +1,7 @@
+.user-info {
+  @apply flex flex-row justify-between w-full;
+}
+
 .user-info_link-profile {
   @apply relative right-4;
   @apply flex no-underline;

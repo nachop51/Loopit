@@ -1,10 +1,10 @@
 import "./Users.css";
 import loopit from "../../../api/loopit";
 import ProfileItem from "../Account/ProfileItem";
-
-import LoadingSpinner from "../../../assets/nobg.gif";
-import { useEffect, useState } from "react";
+import LoadingSpinner from "../../../assets/Loading.gif";
 import LoopList from "../../LoopList";
+
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const User = () => {
@@ -63,6 +63,7 @@ const User = () => {
           loops={user.loops}
           saves={user.saves}
           username={user.personal_info.username}
+          id={user.personal_info.id}
         >
           <h3>@{user.personal_info.username}</h3>
           <h3>{user.personal_info.full_name}</h3>
@@ -74,7 +75,7 @@ const User = () => {
           </button>
         </ProfileItem>
       </div>
-      <LoopList collection="search" user={user.personal_info.username} />
+      <LoopList collection="created" user={user.personal_info.username} />
     </main>
   );
 };

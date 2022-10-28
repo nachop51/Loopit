@@ -1,6 +1,6 @@
 .aside {
   @apply hidden;
-  @apply lg:w-3/12 xl:block xl:w-3/12 2xl:block 2xl:w-2/6 sticky top-0;
+  @apply lg:w-3/12 xl:block xl:w-3/12 2xl:block 2xl:w-2/6;
 }
 
 @media (max-width: 1500px) {
@@ -14,7 +14,7 @@
 }
 
 .aside-container {
-  @apply flex flex-col rounded-sm pr-12 pt-10 mr-2 text-center items-center justify-start;
+  @apply flex flex-col rounded-sm pr-12 mr-2 text-center items-center justify-start;
   height: 90%;
   width: 100%;
   /* background-color: rgba(0, 0, 0, 0.045); */
@@ -25,7 +25,7 @@
 .item-container {
   @apply rounded-xl mb-6 font-medium shadow-2xl bg-transparent;
   border: 2px solid rgb(var(--primary-color), 0.3);
-  color: var(--text-light);
+  color: var(--text-color);
   padding: 1rem 2rem;
   width: 80%;
   box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
@@ -50,6 +50,6 @@
 }
 
 .heading-aside {
-  @apply text-2xl font-bold text-center;
+  @apply text-4xl font-bold text-center mb-10;
   color: rgb(var(--primary-color));
 }
