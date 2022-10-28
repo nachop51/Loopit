@@ -5,6 +5,7 @@ require("dotenv").config({ path: "./.env" });
 //import cors to allow cross origin resource sharing
 const cors = require("cors");
 //import routes from routes folder
+const routeAdmin = require("./routes/routeAdmins");
 const routeAuth = require("./routes/routeAuth");
 const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");

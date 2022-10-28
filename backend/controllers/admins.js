@@ -3,7 +3,7 @@ const Admin = require("../models/admins");
 const User = require("../models/users");
 
 const addAdmin = async (req, res) => {
-  const { user_id } = req.body;
+  const { user_id } = req.params;
   if (!user_id) {
     return res.status(400).json({
       status: "Error",
@@ -11,19 +11,11 @@ const addAdmin = async (req, res) => {
     });
   }
   try {
-    cont idAdmin = req.id;
-    const admin = await Admin.findByPk(idAdmin);
-    if (!admin) {
-        return res.status(400).json({
-            status: "Error",
-            error: "Bad Request - Admin does not exist",
-        });
-    }
-    const user = await User.findByPk(user_id);
-    if (!user) {
+    const adminOrNot = await Admin.findByPk(req.id);
+    if (!adminOrNot) {
       return res.status(400).json({
         status: "Error",
-        error: "Bad Request - User does not exist",
+        error: "Bad Request - Admin does not exist",
       });
     }
     const admin = await Admin.create({
@@ -33,19 +25,31 @@ const addAdmin = async (req, res) => {
       status: "OK",
       data: admin,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      error: error,
+    });
+  }
 };
 
 const deleteAdmin = async (req, res) => {
-  const { admin_id } = req.params;
-  if (!admin_id) {
+  const { user_id } = req.params;
+  if (!user_id) {
     return res.status(400).json({
       status: "Error",
       error: "Bad Request - Missing data",
     });
   }
   try {
-    const admin = await Admin.findByPk(admin_id);
+    const adminOrNot = await Admin.findByPk(req.id);
+    if (!adminOrNot) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User is not an admin",
+      });
+    }
+    const admin = await Admin.findByPk(user_id);
     if (!admin) {
       return res.status(400).json({
         status: "Error",
@@ -63,4 +67,9 @@ const deleteAdmin = async (req, res) => {
       error: error,
     });
   }
+};
+
+module.exports = {
+  addAdmin,
+  deleteAdmin,
 };
