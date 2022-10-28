@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const key = process.env.KEY;
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
+const Admin = require("../models/admins");
 
 const register = async (req, res) => {
   const { username, fullname, password, email, id } = req.body;
@@ -94,6 +95,11 @@ const login = async (req, res) => {
         error: "Bad request - failed credentials",
       });
     }
+    const admin = false;
+    const adminOrNot = await Admin.findByPk(userExists.id);
+    if (adminOrNot) {
+      admin = true;
+    }
     const token = jwt.sign(
       {
         username: userExists.username,
@@ -111,6 +117,7 @@ const login = async (req, res) => {
         status: "logged",
         id: userExists.id,
         username: userExists.username,
+        admin: admin,
         theme: userExists.theme,
         editorTheme: userExists.editorTheme,
       });
