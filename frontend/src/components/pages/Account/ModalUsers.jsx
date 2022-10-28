@@ -25,7 +25,6 @@ const ModalUsers = ({ isOpen, closeModal, mode, id }) => {
         <h3 className="modal-users-title">{mode}</h3>
         <hr />
         <div className="users-container">
-          {console.log(users)}
           {users ? (
             users.map((user) => (
               <User
