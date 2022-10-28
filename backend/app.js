@@ -58,6 +58,7 @@ app.use("/api/followers", routeFollower);
 app.use("/api/mail", routeMail);
 app.use("/api/likes", routeLike);
 app.use("/api/comments", routeComment);
+app.use("/api/admin", routeAdmin);
 //verify token
 //sync database and start server
 app.listen(3000, () => {
