@@ -29,7 +29,9 @@ const verifytoken = async (req, res, next) => {
       if (req.url === "/admin/add" || req.url === "/admin/delete") {
         const adminOrNot = await Admin.findByPk(user_id);
         if (!adminOrNot) {
-          return res.status(401).json({ error: "Access denied, permissos" });
+          return res
+            .status(401)
+            .json({ error: "Access denied, bad permissions" });
         }
         next();
       } else {
