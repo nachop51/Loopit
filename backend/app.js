@@ -5,6 +5,7 @@ require("dotenv").config({ path: "./.env" });
 //import cors to allow cross origin resource sharing
 const cors = require("cors");
 //import routes from routes folder
+const routeAdmin = require("./routes/routeAdmins");
 const routeAuth = require("./routes/routeAuth");
 const routeUser = require("./routes/routeUser");
 const routeLoop = require("./routes/routeLoops");
@@ -57,6 +58,7 @@ app.use("/api/followers", routeFollower);
 app.use("/api/mail", routeMail);
 app.use("/api/likes", routeLike);
 app.use("/api/comments", routeComment);
+app.use("/api/admin", routeAdmin);
 //verify token
 //sync database and start server
 app.listen(3000, () => {

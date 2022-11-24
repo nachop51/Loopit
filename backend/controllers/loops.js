@@ -4,6 +4,7 @@ const User = require("../models/users");
 const Save = require("../models/saves");
 const Like = require("../models/likes");
 const Comment = require("../models/comments");
+const Admin = require("../models/admins");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const { sequelize } = require("../database/db");
@@ -56,6 +57,16 @@ const deleteLoop = async (req, res) => {
     });
   }
   try {
+    const user_id = req.id;
+    const admin = await Admin.findOne({
+      where: { user_id: user_id },
+    });
+    if (!admin) {
+      return res.status(400).json({
+        status: "Error",
+        error: "Bad Request - User is not admin",
+      });
+    }
     const loop_destroy = await Loop.findByPk(id);
     if (!loop_destroy) {
       return res.status(400).json({
@@ -426,11 +437,11 @@ const loopsRandom = async (req, res) => {
       status: "OK",
       loops: loops,
     });
-  }catch(error){
+  } catch (error) {
     res.status(400).json({
       status: "Error",
       error: error,
-    })
+    });
   }
 };
 
