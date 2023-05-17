@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - KEY=${KEY}
+      - IP_DB=${IP_DB}
+      - USER_DB=${USER_DB}
+      - PASS_DB=${PASS_DB}
+      - NAME_DB=${NAME_DB}
+    command: node app.js
+
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  dbdata:

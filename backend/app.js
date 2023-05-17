@@ -39,10 +39,10 @@ const port = process.env.PORT;
 //middlewares
 //config cors for allow cross origin resource sharing for origin localhost:3001 with credentials
 app.use(
-  cors({
-    origin: "http://localhost:3001",
-    credentials: true,
-  })
+	cors({
+		origin: "http://localhost:8080",
+		credentials: true,
+	})
 );
 app.use(cookieParser());
 app.use("/api", verifytoken);
@@ -62,9 +62,9 @@ app.use("/api/admin", routeAdmin);
 //verify token
 //sync database and start server
 app.listen(3000, () => {
-  console.log(process.env.KEY);
-  sequelize.sync().then(() => {
-    console.log("base de datos creada");
-  });
-  console.log("andando");
+	console.log(process.env.KEY);
+	sequelize.sync().then(() => {
+		console.log("base de datos creada");
+	});
+	console.log("andando");
 });

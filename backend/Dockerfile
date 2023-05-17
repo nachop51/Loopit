@@ -1,10 +1,10 @@
-FROM node:16
-WORKDIR /loopit
-RUN ["cd", "backend"]
+FROM node
+
+COPY . /app
+WORKDIR /app
+
 COPY package*.json ./
+
 RUN npm install
-RUN ["cd","../frontend"]
-COPY package*.json ./
-RUN npm install
-COPY . .
-CMD ["node", "app.js"]
+
+EXPOSE 3000
